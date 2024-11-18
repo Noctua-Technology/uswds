@@ -20,7 +20,7 @@ import { attr, css, element, html, query } from "@joist/element";
     `,
   ],
 })
-export class USWDSAlertElement extends HTMLElement {
+export class USALinkElement extends HTMLElement {
   @attr()
   accessor href = "";
 

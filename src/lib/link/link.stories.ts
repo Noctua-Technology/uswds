@@ -3,7 +3,7 @@ import "./link.element.js";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
-import type { USWDSAlertElement } from "./link.element.js";
+import type { USALinkElement } from "./link.element.js";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
@@ -18,11 +18,11 @@ const meta = {
     },
   },
   args: {},
-} satisfies Meta<USWDSAlertElement>;
+} satisfies Meta<USALinkElement>;
 
 export default meta;
 
-type Story = StoryObj<USWDSAlertElement>;
+type Story = StoryObj<USALinkElement>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {

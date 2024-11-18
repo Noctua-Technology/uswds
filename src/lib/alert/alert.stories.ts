@@ -5,7 +5,7 @@ import "../icon/icon.element.js";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
-import type { USWDSAlertElement } from "./alert.element.js";
+import type { USAAlertElement } from "./alert.element.js";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
@@ -13,11 +13,11 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {},
   args: {},
-} satisfies Meta<USWDSAlertElement>;
+} satisfies Meta<USAAlertElement>;
 
 export default meta;
 
-type Story = StoryObj<USWDSAlertElement>;
+type Story = StoryObj<USAAlertElement>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {

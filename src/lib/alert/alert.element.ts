@@ -84,7 +84,7 @@ import { USAIconElement } from "../icon/icon.element";
     `,
   ],
 })
-export class USWDSAlertElement extends HTMLElement {
+export class USAAlertElement extends HTMLElement {
   @attr()
   accessor type: USAAlertType = "info";
 
