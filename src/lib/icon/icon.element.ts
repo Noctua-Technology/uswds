@@ -1,5 +1,5 @@
 import { attr, css, element, html, query } from "@joist/element";
-import { Icon } from "./icon-types";
+import { USAIcon } from "./icon-types";
 
 @element({
   tagName: "usa-icon",
@@ -27,7 +27,7 @@ import { Icon } from "./icon-types";
 })
 export class USAIconElement extends HTMLElement {
   @attr()
-  accessor icon: Icon = "accessibility_new";
+  accessor icon: USAIcon = "accessibility_new";
 
   #use = query("use");
 

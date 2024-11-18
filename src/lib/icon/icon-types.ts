@@ -260,4 +260,4 @@ export const ICON_TYPES = [
   "support",
 ] as const;
 
-export type Icon = (typeof ICON_TYPES)[number];
+export type USAIcon = (typeof ICON_TYPES)[number];

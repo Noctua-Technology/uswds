@@ -1,34 +1,98 @@
-import { css, element, html } from "@joist/element";
+import { attr, css, element, html, query } from "@joist/element";
+import { USA_ALERT_CONFIG, USAAlertType } from "./alert-types";
+import { USAIconElement } from "../icon/icon.element";
 
 @element({
   tagName: "usa-alert",
   shadow: [
     css`
       :host {
-        display: flex;
+        display: block;
         border-left: 0.5rem solid #adadad;
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
+        padding: 1rem 1.2rem;
+        color: #1b1b1b;
       }
 
       :host([type="info"]) {
         border-left-color: #00bde3;
         background-color: #e7f6f8;
-        color: #1b1b1b;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+      }
+
+      :host([type="warning"]) {
+        background-color: #faf3d1;
+        border-left-color: #ffbe2e;
+      }
+
+      :host([type="success"]) {
+        background-color: #ecf3ec;
+        border-left-color: #00a91c;
+      }
+
+      :host([type="error"]) {
+        background-color: #f4e3db;
+        border-left-color: #d54309;
+      }
+
+      :host([type="emergency"]) {
+        background-color: #9c3d10;
+        border-left-color: #9c3d10;
+        color: #fff;
+      }
+
+      :host([type="emergency"]) ::slotted(usa-link) {
+        color: #fff !important;
+      }
+
+      .alert-heading {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+      }
+
+      usa-icon {
+        margin: -0.28rem 0.75rem 0 0;
+      }
+
+      #heading::slotted(*) {
+        font-family:
+          Source Sans Pro Web,
+          Helvetica Neue,
+          Helvetica,
+          Roboto,
+          Arial,
+          sans-serif;
+        font-size: 1.33rem;
+        line-height: 0.9;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
       }
     `,
     html`
-      <span class="alert-icon"></span>
+      <div class="alert-heading">
+        <usa-icon icon="check_circle"></usa-icon>
 
-      <div class="alert-body">
-        <slot name="title"></slot>
+        <div>
+          <slot id="heading" name="heading"></slot>
+        </div>
 
-        <slot></slot>
+        <div class="spacer"></div>
+
+        <div>
+          <slot></slot>
+        </div>
       </div>
     `,
   ],
 })
-export class USWDSAlertElement extends HTMLElement {}
+export class USWDSAlertElement extends HTMLElement {
+  @attr()
+  accessor type: USAAlertType = "info";
+
+  #icon = query<USAIconElement>("usa-icon");
+
+  attributeChangedCallback() {
+    const { icon } = USA_ALERT_CONFIG[this.type];
+
+    this.#icon({ icon });
+  }
+}

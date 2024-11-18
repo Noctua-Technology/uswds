@@ -5,7 +5,12 @@ import { attr, css, element, html, query } from "@joist/element";
   shadow: [
     css`
       :host {
+        display: inline;
         color: #005ea2;
+      }
+
+      a {
+        color: inherit;
       }
     `,
     html`
