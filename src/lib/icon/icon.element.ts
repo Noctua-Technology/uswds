@@ -1,5 +1,6 @@
 import { attr, css, element, html, query } from "@joist/element";
-import { USAIcon } from "./icon-types";
+
+import { USAIcon } from "./icon-types.js";
 
 @element({
   tagName: "usa-icon",
