@@ -1,5 +1,6 @@
 import "./alert.element.js";
 import "../link/link.element.js";
+import "../icon/icon.element.js";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
