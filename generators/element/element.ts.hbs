@@ -1,0 +1,16 @@
+import { css, element, html } from "@joist/element";
+
+@element({
+  tagName: "usa-{{kebabCase name}}",
+  shadow: [
+    css`
+      :host {
+        display: inline-block;
+      }
+    `,
+    html`
+      <slot></slot>
+    `,
+  ],
+})
+export class USA{{pascalCase name}}Element extends HTMLElement { }
