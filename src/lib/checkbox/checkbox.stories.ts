@@ -13,6 +13,8 @@ const meta = {
     return html`
       <usa-checkbox>Hello World</usa-checkbox>
 
+      <hr />
+
       <br />
 
       <usa-checkbox tiled>

@@ -1,5 +1,5 @@
 {
-  "name": "@noctua/uswds",
+  "name": "@noctuatech/uswds",
   "version": "1.0.0",
   "type": "module" ,
   "main": "./target/lib.js",
