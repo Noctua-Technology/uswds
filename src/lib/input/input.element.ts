@@ -55,6 +55,9 @@ export class USATextInputElement extends HTMLElement {
   @attr()
   accessor name = "";
 
+  @attr()
+  accessor value = "";
+
   #internals = this.attachInternals();
 
   @listen("change", "input")
