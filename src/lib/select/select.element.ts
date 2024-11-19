@@ -39,8 +39,7 @@ import type { USASelecOptionElement } from "./select-option.element.js";
       usa-icon {
         position: absolute;
         right: 0.5rem;
-        top: 50%;
-        transform: translateY(-50%);
+        bottom: 12%;
         height: 1.5rem;
         width: 1.5rem;
       }
@@ -52,7 +51,13 @@ import type { USASelecOptionElement } from "./select-option.element.js";
 
       <usa-icon icon="unfold_more"></usa-icon>
 
-      <select></select>
+      <label>
+        <div class="label">
+          <slot name="label"></slot>
+        </div>
+
+        <select></select>
+      </label>
     `,
   ],
 })
