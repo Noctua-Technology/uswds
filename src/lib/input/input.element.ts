@@ -1,4 +1,4 @@
-import { css, element, html } from "@joist/element";
+import { attr, css, element, html, listen } from "@joist/element";
 
 @element({
   tagName: "usa-input",
@@ -51,4 +51,16 @@ import { css, element, html } from "@joist/element";
     `,
   ],
 })
-export class USATextInputElement extends HTMLElement {}
+export class USATextInputElement extends HTMLElement {
+  @attr()
+  accessor name = "";
+
+  #internals = this.attachInternals();
+
+  @listen("change", "input")
+  onInputChange(e: Event) {
+    if (e.target instanceof HTMLInputElement) {
+      this.#internals.setFormValue(e.target.value);
+    }
+  }
+}
