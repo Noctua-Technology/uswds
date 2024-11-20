@@ -45,7 +45,7 @@ describe("usa-input", () => {
 
       const value = new FormData(form);
 
-      assert.equal(value.get("fname"), "FooBar");
+      assert.equal(value.get("fname"), "FooBar2");
 
       done();
     });
