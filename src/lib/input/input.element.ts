@@ -1,4 +1,5 @@
-import { attr, css, element, html, listen } from "@joist/element";
+import { attr, css, element, html, listen, query, ready } from "@joist/element";
+import { effect, observe } from "@joist/observable";
 
 @element({
   tagName: "usa-input",
@@ -52,13 +53,32 @@ import { attr, css, element, html, listen } from "@joist/element";
   ],
 })
 export class USATextInputElement extends HTMLElement {
+  static formAssociated = true;
+
   @attr()
   accessor name = "";
 
   @attr()
+  accessor autocomplete: AutoFill = "on";
+
+  @attr()
+  @observe()
   accessor value = "";
 
   #internals = this.attachInternals();
+  #input = query("input");
+
+  @ready()
+  onReady() {
+    this.#internals.setFormValue(this.value);
+    this.#input({ value: this.value, autocomplete: this.autocomplete });
+  }
+
+  @effect()
+  onChange() {
+    this.#internals.setFormValue(this.value);
+    this.#input({ value: this.value, autocomplete: this.autocomplete });
+  }
 
   @listen("change", "input")
   onInputChange(e: Event) {

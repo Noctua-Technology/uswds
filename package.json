@@ -20,11 +20,35 @@
     "target"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "wireit",
+    "build": "wireit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "gen": "plop",
     "prepare": "husky"
+  },
+  "wireit": {
+    "test": {
+      "command": "wtr",
+      "dependencies": [
+        "tsc"
+      ]
+    },
+    "build": {
+      "dependencies": ["tsc"]
+    },
+    "tsc": {
+      "command": "tsc --build --pretty",
+      "clean": "if-file-deleted",
+      "files": [
+        "src/**",
+        "tsconfig.json"
+      ],
+      "output": [
+        "target/**",
+        ".tsbuildinfo"
+      ]
+    }
   },
   "author": "",
   "license": "ISC",

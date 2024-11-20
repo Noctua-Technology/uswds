@@ -10,7 +10,15 @@ const meta = {
   title: "usa-input",
   tags: ["autodocs"],
   render() {
-    return html`<usa-input>Hello World</usa-input>`;
+    return html`
+      <form>
+        <usa-input name="fname" value="Danny" autocomplete="off">
+          First name
+        </usa-input>
+
+        <button>Submit</button>
+      </form>
+    `;
   },
   argTypes: {},
   args: {},
