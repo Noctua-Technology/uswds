@@ -1,0 +1,14 @@
+import "./{{kebabCase name}}.element.js";
+
+import { assert } from "chai";
+
+import { USA{{pascalCase name}}Element } from "./{{kebabCase name}}.element.js";
+
+describe("usa-{{kebabCase name}}", () => {
+  it("should create element without crashing", (done) => {
+    const el = new USA{{pascalCase name}}Element();
+    el.innerHTML = `Hello World`;
+
+    assert(el);
+  });
+});

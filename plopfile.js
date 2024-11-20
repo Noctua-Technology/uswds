@@ -27,6 +27,11 @@ export default function (plop) {
         path: "src/lib/{{kebabCase name}}/{{kebabCase name}}.stories.ts",
         templateFile: "generators/element/stories.ts.hbs",
       },
+      {
+        type: "add",
+        path: "src/lib/{{kebabCase name}}/{{kebabCase name}}.test.ts",
+        templateFile: "generators/element/test.ts.hbs",
+      },
     ],
   });
 }
