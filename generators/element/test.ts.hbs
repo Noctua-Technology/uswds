@@ -6,6 +6,6 @@ describe("usa-{{kebabCase name}}", () => {
   it("should be accessible", async () => {
     const el = await fixture(html`<usa-{{kebabCase name}}>Hello World</usa-{{kebabCase name}}>`)
 
-    return assert.isAccessible(form);
+    return assert.isAccessible(el);
   });
 });
