@@ -1,0 +1,34 @@
+{
+   "name": "@noctuatech-uswds/testing",
+   "main": "./target/lib.js",
+   "module": "./target/lib.js",
+   "exports": {
+    ".": {
+      "import": "./target/lib.js"
+    }
+  },
+  "files": ["src", "target"],
+  "scripts": {
+    "build": "wireit"
+  },
+  "wireit": {
+    "build": {
+      "dependencies": [
+        "tsc"
+      ]
+    },
+    "tsc": {
+      "command": "tsc --build --pretty",
+      "clean": "if-file-deleted",
+      "files": [
+        "src/**",
+        "tsconfig.json",
+        "../../tsconfig.json"
+      ],
+      "output": [
+        "target/**",
+        ".tsbuildinfo"
+      ]
+    }
+  }
+}

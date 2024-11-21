@@ -133,3 +133,6 @@ dist
 target
 .wireit
 storybook-static
+*.d.ts
+*.js.map
+*.js

@@ -1,7 +1,10 @@
 {
   "name": "@noctuatech/uswds",
   "version": "1.0.0",
-  "type": "module" ,
+  "type": "module",
+  "workspaces": [
+    "packages/**"
+  ],
   "main": "./target/lib.js",
   "module": "./target/lib.js",
   "exports": {
@@ -35,7 +38,10 @@
       ]
     },
     "build": {
-      "dependencies": ["tsc", "build-storybook"]
+      "dependencies": [
+        "tsc",
+        "build-storybook"
+      ]
     },
     "build-storybook": {
       "command": "storybook build"
@@ -50,7 +56,8 @@
       "output": [
         "target/**",
         ".tsbuildinfo"
-      ]
+      ],
+      "dependencies": ["./packages/testing:build"]
     }
   },
   "author": "",
@@ -59,21 +66,20 @@
   "dependencies": {
     "@joist/di": "^4.0.0-next.13",
     "@joist/element": "^4.0.0-next.13",
-    "@joist/observable": "^4.0.0-next.13"
+    "@joist/observable": "^4.0.0-next.13",
+    "tslib": "2.8.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",
+    "@open-wc/testing": "^3.0.0-next.5",
     "@storybook/addon-essentials": "^8.4.4",
     "@storybook/blocks": "^8.4.4",
     "@storybook/test": "^8.4.4",
     "@storybook/web-components": "^8.4.4",
     "@storybook/web-components-vite": "^8.4.4",
-    "@types/chai": "^5.0.0",
     "@types/mocha": "^10.0.7",
     "@types/node": "^22.0.0",
     "@web/test-runner": "^0.19.0",
-    "@web/test-runner-puppeteer": "^0.17.0",
-    "chai": "^5.1.1",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "lit": "^3.2.1",
@@ -81,7 +87,6 @@
     "plop": "^4.0.1",
     "prettier": "^3.3.3",
     "storybook": "^8.4.4",
-    "tslib": "2.8.1",
     "typescript": "^5.6.3",
     "wireit": "^0.14.9"
   },
