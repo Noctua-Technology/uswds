@@ -132,3 +132,4 @@ dist
 *storybook.log
 target
 .wireit
+storybook-static

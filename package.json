@@ -23,7 +23,7 @@
     "test": "wireit",
     "build": "wireit",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "wireit",
     "gen": "plop",
     "prepare": "husky"
   },
@@ -35,7 +35,10 @@
       ]
     },
     "build": {
-      "dependencies": ["tsc"]
+      "dependencies": ["tsc", "build-storybook"]
+    },
+    "build-storybook": {
+      "command": "storybook build"
     },
     "tsc": {
       "command": "tsc --build --pretty",
