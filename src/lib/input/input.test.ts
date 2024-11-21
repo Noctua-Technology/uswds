@@ -1,57 +1,58 @@
 import "./input.element.js";
 
-import { assert } from "chai";
-import { USATextInputElement } from "./input.element.js";
+import { fixture, html, assert } from "@open-wc/testing";
 
 describe("usa-input", () => {
-  it("should submit form with default values", (done) => {
-    const form = document.createElement("form");
+  it("should submit form with default values", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <usa-input name="fname" value="Foo">Hello World</usa-input>
 
-    form.innerHTML = `
-      <usa-input name="fname" value="Hello">Hello World</usa-input>
-      
-      <button>Submit</button>
-    `;
+        <button>Submit</button>
+      </form>
+    `);
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+    return new Promise((resolve) => {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-      const value = new FormData(form);
+        const value = new FormData(form);
 
-      assert.equal(value.get("fname"), "Hello");
+        assert.equal(value.get("fname"), "Foo");
 
-      done();
+        resolve();
+      });
+
+      form.dispatchEvent(new Event("submit"));
     });
-
-    document.body.append(form);
-
-    form.dispatchEvent(new Event("submit"));
   });
 
-  it("should update form value as input value changed", (done) => {
-    const form = document.createElement("form");
+  it("should update form value as input value changed", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <usa-input name="fname">Hello World</usa-input>
 
-    const input = new USATextInputElement();
-    input.name = "fname";
+        <button>Submit</button>
+      </form>
+    `);
 
-    const nativeInput = input.shadowRoot!.querySelector("input")!;
-    nativeInput.value = "FooBar";
+    const checkbox = form.querySelector("usa-input")!;
+    const nativeInput = checkbox.shadowRoot!.querySelector("input")!;
+    nativeInput.value = "Bar";
     nativeInput.dispatchEvent(new Event("change"));
 
-    form.append(input);
+    return new Promise((resolve) => {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+        const value = new FormData(form);
 
-      const value = new FormData(form);
+        assert.equal(value.get("fname"), "Bar");
 
-      assert.equal(value.get("fname"), "FooBar");
+        resolve();
+      });
 
-      done();
+      form.dispatchEvent(new Event("submit"));
     });
-
-    document.body.append(form);
-
-    form.dispatchEvent(new Event("submit"));
   });
 });
