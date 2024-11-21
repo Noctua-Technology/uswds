@@ -2,6 +2,7 @@ import "./select.element.js";
 import "./select-option.element.js";
 
 import { fixture, html, assert } from "@open-wc/testing";
+import { fireEvent } from "@noctuatech-uswds/testing";
 
 describe("usa-checkbox", () => {
   it("should be accessible", async () => {
@@ -52,7 +53,8 @@ describe("usa-checkbox", () => {
     const select = form.querySelector("usa-select")!;
     const nativeSelect = select.shadowRoot!.querySelector("select")!;
     nativeSelect.value = "third";
-    nativeSelect.dispatchEvent(new Event("change"));
+
+    await fireEvent.change(nativeSelect);
 
     const value = new FormData(form);
 

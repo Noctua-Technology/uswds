@@ -1,6 +1,7 @@
 import "./input.element.js";
 
 import { fixture, html, assert } from "@open-wc/testing";
+import { fireEvent } from "@noctuatech-uswds/testing";
 
 describe("usa-input", () => {
   it("should be accessible", async () => {
@@ -37,7 +38,8 @@ describe("usa-input", () => {
     const checkbox = form.querySelector("usa-input")!;
     const nativeInput = checkbox.shadowRoot!.querySelector("input")!;
     nativeInput.value = "Bar";
-    nativeInput.dispatchEvent(new Event("change"));
+
+    await fireEvent.change(nativeInput);
 
     const value = new FormData(form);
 
