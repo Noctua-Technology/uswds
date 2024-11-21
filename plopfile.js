@@ -18,19 +18,10 @@ export default function (plop) {
     ],
     actions: [
       {
-        type: "add",
-        path: "src/lib/{{kebabCase name}}/{{kebabCase name}}.element.ts",
-        templateFile: "generators/element/element.ts.hbs",
-      },
-      {
-        type: "add",
-        path: "src/lib/{{kebabCase name}}/{{kebabCase name}}.stories.ts",
-        templateFile: "generators/element/stories.ts.hbs",
-      },
-      {
-        type: "add",
-        path: "src/lib/{{kebabCase name}}/{{kebabCase name}}.test.ts",
-        templateFile: "generators/element/test.ts.hbs",
+        type: "addMany",
+        destination: "src/lib/{{kebabCase name}}",
+        base: "generators/element",
+        templateFiles: "generators/element",
       },
     ],
   });
