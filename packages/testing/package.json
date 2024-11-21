@@ -27,7 +27,7 @@
       ],
       "output": [
         "target/**",
-        ".tsbuildinfo"
+        "tsconfig.tsbuildinfo"
       ]
     }
   }

@@ -55,7 +55,7 @@
       ],
       "output": [
         "target/**",
-        ".tsbuildinfo"
+        "tsconfig.tsbuildinfo"
       ],
       "dependencies": ["./packages/testing:build"]
     }
