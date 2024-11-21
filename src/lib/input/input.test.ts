@@ -20,19 +20,9 @@ describe("usa-input", () => {
       </form>
     `);
 
-    return new Promise((resolve) => {
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
+    const value = new FormData(form);
 
-        const value = new FormData(form);
-
-        assert.equal(value.get("fname"), "Foo");
-
-        resolve();
-      });
-
-      form.dispatchEvent(new Event("submit"));
-    });
+    assert.equal(value.get("fname"), "Foo");
   });
 
   it("should update form value as input value changed", async () => {
@@ -49,18 +39,8 @@ describe("usa-input", () => {
     nativeInput.value = "Bar";
     nativeInput.dispatchEvent(new Event("change"));
 
-    return new Promise((resolve) => {
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
+    const value = new FormData(form);
 
-        const value = new FormData(form);
-
-        assert.equal(value.get("fname"), "Bar");
-
-        resolve();
-      });
-
-      form.dispatchEvent(new Event("submit"));
-    });
+    assert.equal(value.get("fname"), "Bar");
   });
 });
