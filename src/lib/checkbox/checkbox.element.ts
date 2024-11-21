@@ -1,4 +1,4 @@
-import { attr, css, element, html, listen, query } from "@joist/element";
+import { attr, css, element, html, listen, query, ready } from "@joist/element";
 
 @element({
   tagName: "usa-checkbox",
@@ -126,6 +126,8 @@ import { attr, css, element, html, listen, query } from "@joist/element";
   ],
 })
 export class USACheckboxElement extends HTMLElement {
+  static formAssociated = true;
+
   @attr()
   accessor checked = false;
 
@@ -138,6 +140,17 @@ export class USACheckboxElement extends HTMLElement {
   #checkbox = query("input");
   #internals = this.attachInternals();
 
+  @ready()
+  onReady() {
+    const { checked, name } = this;
+
+    if (checked) {
+      this.#internals.setFormValue(this.value);
+    }
+
+    this.#checkbox({ checked, name });
+  }
+
   attributeChangedCallback() {
     const { checked, name } = this;
 
@@ -145,13 +158,13 @@ export class USACheckboxElement extends HTMLElement {
   }
 
   @listen("change", "input")
-  onCheckboxChange(e: Event) {
-    if (e.target instanceof HTMLInputElement) {
-      if (e.target.checked) {
-        this.#internals.setFormValue(this.value);
-      } else {
-        this.#internals.setFormValue(null);
-      }
+  onCheckboxChange() {
+    const checkbox = this.#checkbox();
+
+    if (checkbox.checked) {
+      this.#internals.setFormValue(this.value);
+    } else {
+      this.#internals.setFormValue(null);
     }
   }
 }
