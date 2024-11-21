@@ -1,14 +1,11 @@
 import "./{{kebabCase name}}.element.js";
 
-import { assert } from "chai";
-
-import { USA{{pascalCase name}}Element } from "./{{kebabCase name}}.element.js";
+import { fixture, html, assert } from "@open-wc/testing";
 
 describe("usa-{{kebabCase name}}", () => {
-  it("should create element without crashing", (done) => {
-    const el = new USA{{pascalCase name}}Element();
-    el.innerHTML = `Hello World`;
+  it("should be accessible", async () => {
+    const el = await fixture(html`<usa-{{kebabCase name}}>Hello World</usa-{{kebabCase name}}>`)
 
-    assert(el);
+    return assert.isAccessible(form);
   });
 });

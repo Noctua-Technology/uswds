@@ -3,6 +3,14 @@ import "./input.element.js";
 import { fixture, html, assert } from "@open-wc/testing";
 
 describe("usa-input", () => {
+  it("should be accessible", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <usa-input name="fname" value="Foo">Hello World</usa-input>
+    `);
+
+    return assert.isAccessible(form);
+  });
+
   it("should submit form with default values", async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>

@@ -3,6 +3,14 @@ import "./checkbox.element.js";
 import { fixture, html, assert } from "@open-wc/testing";
 
 describe("usa-checkbox", () => {
+  it("should be accessible", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <usa-checkbox name="fname" value="Foo">Hello World</usa-checkbox>
+    `);
+
+    return assert.isAccessible(form);
+  });
+
   it("should submit form with default values", async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
