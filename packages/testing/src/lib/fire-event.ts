@@ -1,29 +1,21 @@
 export const fireEvent = {
-  click(el: HTMLElement) {
-    return new Promise<Event>((resolve) => {
-      el.addEventListener("click", (e) => {
-        resolve(e);
-      });
-
-      el.dispatchEvent(new Event("click"));
-    });
+  click(el: HTMLElement, init?: EventInit) {
+    return dispatch(el, "click", init);
   },
-  change(el: HTMLElement) {
-    return new Promise<Event>((resolve) => {
-      el.addEventListener("change", (e) => {
-        resolve(e);
-      });
-
-      el.dispatchEvent(new Event("change"));
-    });
+  change(el: HTMLElement, init?: EventInit) {
+    return dispatch(el, "change", init);
   },
-  input(el: HTMLElement) {
-    return new Promise<Event>((resolve) => {
-      el.addEventListener("input", (e) => {
-        resolve(e);
-      });
-
-      el.dispatchEvent(new Event("input"));
-    });
+  input(el: HTMLElement, init?: EventInit) {
+    return dispatch(el, "input", init);
   },
 };
+
+function dispatch(el: HTMLElement, name: string, init?: EventInit) {
+  return new Promise<Event>((resolve) => {
+    el.addEventListener(name, (e) => {
+      resolve(e);
+    });
+
+    el.dispatchEvent(new Event(name, init));
+  });
+}
