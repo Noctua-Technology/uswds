@@ -1,5 +1,7 @@
 # USWDS
 
+An implementaiton of the US Web Design System using web components.
+
 ## Development
 
 ### Install
