@@ -2,6 +2,8 @@ import "./checkbox.element.js";
 
 import { fixture, html, assert } from "@open-wc/testing";
 
+import { fireEvent } from "@noctuatech-uswds/testing";
+
 describe("usa-checkbox", () => {
   it("should be accessible", async () => {
     const form = await fixture<HTMLFormElement>(html`
@@ -22,19 +24,11 @@ describe("usa-checkbox", () => {
       </form>
     `);
 
-    return new Promise((resolve) => {
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
+    await fireEvent.click(form.querySelector("button")!);
 
-        const value = new FormData(form);
+    const value = new FormData(form);
 
-        assert.equal(value.get("enabled"), "test");
-
-        resolve();
-      });
-
-      form.dispatchEvent(new Event("submit"));
-    });
+    assert.equal(value.get("enabled"), "test");
   });
 
   it("should update form value as input value changed", async () => {
