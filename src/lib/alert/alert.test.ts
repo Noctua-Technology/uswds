@@ -7,7 +7,7 @@ import { USA_ALERT_TYPES } from "./alert-types.js";
 describe("usa-alert", () => {
   for (let alert of USA_ALERT_TYPES) {
     it(`should be accessible: ${alert}`, async () => {
-      const form = await fixture<HTMLFormElement>(html`
+      const form = await fixture(html`
         <usa-alert type=${alert}>
           <h3 slot="heading">Status</h3>
 
