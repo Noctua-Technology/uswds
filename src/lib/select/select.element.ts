@@ -1,4 +1,4 @@
-import { attr, css, element, html, listen, query } from "@joist/element";
+import { attr, css, element, html, listen, query, ready } from "@joist/element";
 
 import type { USASelecOptionElement } from "./select-option.element.js";
 
@@ -62,6 +62,8 @@ import type { USASelecOptionElement } from "./select-option.element.js";
   ],
 })
 export class USASelectElement extends HTMLElement {
+  static formAssociated = true;
+
   @attr()
   accessor value = "";
 
@@ -70,6 +72,15 @@ export class USASelectElement extends HTMLElement {
 
   #select = query("select");
   #internals = this.attachInternals();
+
+  @ready()
+  onReady() {
+    const { value, name } = this;
+
+    this.#select({ value, name });
+
+    this.#internals.setFormValue(this.value);
+  }
 
   @listen("change", "select")
   onSelectChange(e: Event) {
