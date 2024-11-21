@@ -17,4 +17,13 @@ export const fireEvent = {
       el.dispatchEvent(new Event("change"));
     });
   },
+  input(el: HTMLElement) {
+    return new Promise<Event>((resolve) => {
+      el.addEventListener("input", (e) => {
+        resolve(e);
+      });
+
+      el.dispatchEvent(new Event("input"));
+    });
+  },
 };
