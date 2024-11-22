@@ -1,32 +1,35 @@
-import "./link.element.js";
+import "../icon/icon.element.js";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-
-import type { USALinkElement } from "./link.element.js";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
   title: "usa-link",
   tags: ["autodocs"],
-  render(args) {
-    return html`<usa-link href="${args.href}">Hello World</usa-link>`;
-  },
-  argTypes: {
-    href: {
-      type: "string",
-    },
-  },
+  argTypes: {},
   args: {},
-} satisfies Meta<USALinkElement>;
+} satisfies Meta<{}>;
 
 export default meta;
 
-type Story = StoryObj<USALinkElement>;
+type Story = StoryObj<{}>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
-  args: {
-    href: "www.google.com",
+  render() {
+    return html`<a class="usa-link" href="www.google.com">Hello World</a>`;
+  },
+};
+
+export const External: Story = {
+  render() {
+    return html`
+      <a class="usa-link" href="www.google.com">
+        Hello World
+
+        <usa-icon icon="launch"></usa-icon>
+      </a>
+    `;
   },
 };

@@ -3,6 +3,12 @@ import { effect, observe } from "@joist/observable";
 
 import { MaskableElement } from "../input-mask/maskable.element.js";
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "usa-input": USATextInputElement;
+  }
+}
+
 @element({
   tagName: "usa-input",
   shadow: [

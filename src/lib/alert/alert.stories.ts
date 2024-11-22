@@ -1,5 +1,4 @@
 import "./alert.element.js";
-import "../link/link.element.js";
 import "../icon/icon.element.js";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
@@ -27,8 +26,8 @@ export const Primary: Story = {
         <h3 slot="heading">Informative status</h3>
 
         Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-        eiusmod.
+        <a class="usa-link" href="#">consectetur adipiscing</a>&nbsp;elit, sed
+        do eiusmod.
       </usa-alert>
 
       <br />
@@ -37,7 +36,7 @@ export const Primary: Story = {
         <h3 slot="heading">Warning status</h3>
 
         Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
+        <a class="usa-link" href="#">consectetur adipiscing</a>&nbsp;elit, sed
         eiusmod.
       </usa-alert>
 
@@ -47,7 +46,7 @@ export const Primary: Story = {
         <h3 slot="heading">Success status</h3>
 
         Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
+        <a class="usa-link" href="#">consectetur adipiscing</a>&nbsp;elit, sed
         eiusmod.
       </usa-alert>
 
@@ -57,7 +56,7 @@ export const Primary: Story = {
         <h3 slot="heading">Error status</h3>
 
         Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
+        <a class="usa-link" href="#">consectetur adipiscing</a>&nbsp;elit, sed
         eiusmod.
       </usa-alert>
 
@@ -67,7 +66,7 @@ export const Primary: Story = {
         <h3 slot="heading">Emergency status</h3>
 
         Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
+        <a class="usa-link" href="#">consectetur adipiscing</a>&nbsp;elit, sed
         eiusmod.
       </usa-alert>
     `;

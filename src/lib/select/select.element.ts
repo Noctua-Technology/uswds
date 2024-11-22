@@ -2,6 +2,12 @@ import { attr, css, element, html, listen, query, ready } from "@joist/element";
 
 import type { USASelecOptionElement } from "./select-option.element.js";
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "usa-select": USASelectElement;
+  }
+}
+
 @element({
   tagName: "usa-select",
   shadow: [

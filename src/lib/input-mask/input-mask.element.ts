@@ -1,6 +1,12 @@
 import { attr, css, element, html, listen } from "@joist/element";
 import { MaskableElement } from "./maskable.element";
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "usa-input-mask": USAInputMaskElement;
+  }
+}
+
 export enum PatternChar {
   Any = "*",
   Number = "9",
