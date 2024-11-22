@@ -1,3 +1,4 @@
+import "../input/input.element.js";
 import "./input-mask.element.js";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
@@ -12,13 +13,7 @@ const meta = {
   render() {
     return html`
       <style>
-        usa-input-mask {
-          display: flex;
-          flex-direction: column;
-          max-width: 400px;
-        }
-
-        usa-input-mask input {
+        input {
           padding: 0.5rem;
           margin-bottom: 1rem;
           font-size: 1rem;
@@ -27,27 +22,21 @@ const meta = {
 
       <h2>Default</h2>
 
-      <usa-input-mask mask="(999) 999-9999">
-        <label>Phone:</label>
-        <input name="phone" placeholder="(999) 999-9999" />
-      </usa-input-mask>
+      <usa-input-mask>
+        <usa-input
+          name="phone"
+          placeholder="(999) 999-9999"
+          mask="(999) 999-9999"
+        >
+          Phone:
+        </usa-input>
 
-      <usa-input-mask mask="99/99/9999">
+        <br />
+
         <label>Date:</label>
-        <input name="date" placeholder="99/99/9999" />
-      </usa-input-mask>
+        <br />
 
-      <h2>Multiple Fields</h2>
-
-      <usa-input-mask mask="(999) 999-9999">
-        <label>Home:</label>
-        <input name="phone1" placeholder="(999) 999-9999" />
-
-        <label>Cell:</label>
-        <input name="phone2" placeholder="(999) 999-9999" />
-
-        <label>Work:</label>
-        <input name="phone3" placeholder="(999) 999-9999" />
+        <input name="date" placeholder="99/99/9999" mask="99/99/9999" />
       </usa-input-mask>
     `;
   },

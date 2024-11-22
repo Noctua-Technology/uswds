@@ -1,5 +1,7 @@
-import { attr, css, element, html, listen, query, ready } from "@joist/element";
+import { attr, css, element, html, listen, query } from "@joist/element";
 import { effect, observe } from "@joist/observable";
+
+import { MaskableElement } from "../input-mask/maskable.element.js";
 
 @element({
   tagName: "usa-input",
@@ -52,7 +54,10 @@ import { effect, observe } from "@joist/observable";
     `,
   ],
 })
-export class USATextInputElement extends HTMLElement {
+export class USATextInputElement
+  extends HTMLElement
+  implements MaskableElement
+{
   static formAssociated = true;
 
   @attr()
@@ -62,28 +67,63 @@ export class USATextInputElement extends HTMLElement {
   accessor autocomplete: AutoFill = "on";
 
   @attr()
+  accessor placeholder = "";
+
+  @attr({
+    reflect: false,
+  })
   @observe()
   accessor value = "";
 
-  #internals = this.attachInternals();
-  #input = query("input");
+  get selectionStart() {
+    return this.internalInput().selectionStart;
+  }
 
-  @ready()
-  onReady() {
-    this.#internals.setFormValue(this.value);
-    this.#input({ value: this.value, autocomplete: this.autocomplete });
+  #internals = this.attachInternals();
+
+  internalInput = query("input");
+
+  setSelectionRange(start: number, end: number) {
+    const input = this.internalInput();
+
+    input.setSelectionRange(start, end);
   }
 
   @effect()
   onChange() {
-    this.#internals.setFormValue(this.value);
-    this.#input({ value: this.value, autocomplete: this.autocomplete });
+    const input = this.internalInput();
+    input.value = this.value;
   }
 
-  @listen("change", "input")
-  onInputChange(e: Event) {
-    if (e.target instanceof HTMLInputElement) {
-      this.#internals.setFormValue(e.target.value);
+  @listen("input", (el) => el.internalInput())
+  onInputChange() {
+    const input = this.internalInput();
+
+    this.#internals.setFormValue(input.value);
+
+    this.value = input.value;
+  }
+
+  attributeChangedCallback(attr: string) {
+    const input = this.internalInput();
+
+    switch (attr) {
+      case "autocomplete":
+        input.autocomplete = this.autocomplete;
+        break;
+
+      case "placeholder":
+        input.placeholder = this.placeholder;
+        break;
+
+      case "name":
+        input.name = this.name;
+        break;
+
+      case "value":
+        input.value = this.value;
+        this.#internals.setFormValue(this.value);
+        break;
     }
   }
 }

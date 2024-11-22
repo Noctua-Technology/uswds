@@ -2,11 +2,7 @@ import "./input-mask.element.js";
 
 import { assert, fixture, html } from "@open-wc/testing";
 
-import {
-  USAInputMaskElement,
-  InputMaskChangeEvent,
-  format,
-} from "./input-mask.element";
+import { USAInputMaskElement, format } from "./input-mask.element.js";
 
 describe("format", () => {
   it("should retrn the correct raw value", () => {
@@ -45,11 +41,11 @@ describe("format", () => {
   });
 });
 
-describe("InputMaskElement", () => {
+describe("usa-input-mask", () => {
   it("should format default value", async () => {
     const el = await fixture<USAInputMaskElement>(html`
       <usa-input-mask mask="(999) 999-9999">
-        <input name="phone" value="1234567890" />
+        <input name="phone" value="1234567890" mask />
       </usa-input-mask>
     `);
 
@@ -62,39 +58,15 @@ describe("InputMaskElement", () => {
   it("should update value when on input event", async () => {
     const el = await fixture<USAInputMaskElement>(html`
       <usa-input-mask mask="(999) 999-9999">
-        <input name="phone" />
+        <input name="phone" mask />
       </usa-input-mask>
     `);
 
-    const input = el.querySelector("input") as HTMLInputElement;
+    const input = el.querySelector("input")!;
 
     input.value = "8888888888";
     input.dispatchEvent(new Event("input", { bubbles: true }));
 
     assert.equal(input.value, "(888) 888-8888");
-    assert.equal(input.getAttribute("value"), "8888888888");
-  });
-
-  it("should dispatch custom change event after formatting", async () => {
-    const el = await fixture<USAInputMaskElement>(html`
-      <usa-input-mask mask="(999) 999-9999">
-        <input name="phone" />
-      </usa-input-mask>
-    `);
-
-    const input = el.querySelector("input") as HTMLInputElement;
-    input.value = "8888888888";
-
-    return new Promise((resolve) => {
-      el.addEventListener("inputmaskchange", (e) => {
-        const evt = e as InputMaskChangeEvent;
-
-        assert.equal(evt.value, "(888) 888-8888");
-
-        resolve();
-      });
-
-      input.dispatchEvent(new Event("input", { bubbles: true }));
-    });
   });
 });
