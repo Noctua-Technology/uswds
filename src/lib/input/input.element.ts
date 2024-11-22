@@ -1,7 +1,7 @@
 import { attr, css, element, html, listen, query } from "@joist/element";
+import { effect, observe } from "@joist/observable";
 
 import { MaskableElement } from "../input-mask/maskable.element.js";
-import { effect, observe } from "@joist/observable";
 
 @element({
   tagName: "usa-input",
@@ -107,26 +107,23 @@ export class USATextInputElement
   attributeChangedCallback(attr: string) {
     const input = this.internalInput();
 
-    const changes: Record<string, Function> = {
-      autocomplete: () => {
+    switch (attr) {
+      case "autocomplete":
         input.autocomplete = this.autocomplete;
-      },
-      placeholder: () => {
+        break;
+
+      case "placeholder":
         input.placeholder = this.placeholder;
-      },
-      name: () => {
+        break;
+
+      case "name":
         input.name = this.name;
-      },
-      value: () => {
+        break;
+
+      case "value":
         input.value = this.value;
         this.#internals.setFormValue(this.value);
-      },
-    };
-
-    const changeFn = changes[attr];
-
-    if (changeFn) {
-      changeFn();
+        break;
     }
   }
 }
