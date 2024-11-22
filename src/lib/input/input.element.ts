@@ -1,4 +1,6 @@
-import { attr, css, element, html, listen, query, ready } from "@joist/element";
+import { attr, css, element, html, listen, query } from "@joist/element";
+
+import { MaskableElement } from "../input-mask/maskable.element.js";
 import { effect, observe } from "@joist/observable";
 
 @element({
@@ -52,45 +54,45 @@ import { effect, observe } from "@joist/observable";
     `,
   ],
 })
-export class USATextInputElement extends HTMLElement {
+export class USATextInputElement
+  extends HTMLElement
+  implements MaskableElement
+{
   static formAssociated = true;
 
   @attr()
-  @observe()
   accessor name = "";
 
   @attr()
-  @observe()
   accessor autocomplete: AutoFill = "on";
 
   @attr()
-  @observe()
-  accessor placeholder: AutoFill = "on";
+  accessor placeholder = "";
 
+  @attr({
+    reflect: false,
+  })
   @observe()
   accessor value = "";
 
-  selectionStart: number | null = null;
+  get selectionStart() {
+    return this.internalInput().selectionStart;
+  }
 
   #internals = this.attachInternals();
+
   internalInput = query("input");
 
   setSelectionRange(start: number, end: number) {
     const input = this.internalInput();
 
     input.setSelectionRange(start, end);
-
-    this.selectionStart = start;
-  }
-
-  @ready()
-  onReady() {
-    this.#sync();
   }
 
   @effect()
   onChange() {
-    this.#sync();
+    const input = this.internalInput();
+    input.value = this.value;
   }
 
   @listen("input", (el) => el.internalInput())
@@ -100,18 +102,31 @@ export class USATextInputElement extends HTMLElement {
     this.#internals.setFormValue(input.value);
 
     this.value = input.value;
-    this.selectionStart = input.selectionStart;
   }
 
-  #sync() {
+  attributeChangedCallback(attr: string) {
     const input = this.internalInput();
 
-    // set internal input value
-    input.value = this.value;
-    input.autocomplete = this.autocomplete;
-    input.placeholder = this.placeholder;
+    const changes: Record<string, Function> = {
+      autocomplete: () => {
+        input.autocomplete = this.autocomplete;
+      },
+      placeholder: () => {
+        input.placeholder = this.placeholder;
+      },
+      name: () => {
+        input.name = this.name;
+      },
+      value: () => {
+        input.value = this.value;
+        this.#internals.setFormValue(this.value);
+      },
+    };
 
-    // set form value
-    this.#internals.setFormValue(this.value);
+    const changeFn = changes[attr];
+
+    if (changeFn) {
+      changeFn();
+    }
   }
 }

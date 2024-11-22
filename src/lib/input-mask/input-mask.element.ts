@@ -1,4 +1,5 @@
-import { attr, css, element, html } from "@joist/element";
+import { attr, css, element, html, listen } from "@joist/element";
+import { MaskableElement } from "./maskable.element";
 
 export enum PatternChar {
   Any = "*",
@@ -57,11 +58,6 @@ export function format(value: string, pattern: string): FormattedResult {
   return { raw, formatted };
 }
 
-function applyFormatting(input: HTMLInputElement, result: FormattedResult) {
-  input.value = result.formatted;
-  input.setAttribute("value", result.raw);
-}
-
 @element({
   tagName: "usa-input-mask",
   shadow: [
@@ -77,43 +73,30 @@ export class USAInputMaskElement extends HTMLElement {
   @attr()
   accessor mask = "";
 
-  private removeInputMask: () => void = () => void 0;
-
   connectedCallback() {
-    // Format the default value
-    this.querySelectorAll<HTMLInputElement>("[masked]").forEach((input) => {
-      applyFormatting(input, format(input.value, this.mask));
-    });
+    for (let input of this.querySelectorAll<MaskableElement>("[mask]")) {
+      const { formatted } = format(input.value, this.#getMaskFor(input));
 
-    this.removeInputMask = applyInputMask(this, this.mask);
+      input.value = formatted;
+    }
   }
 
-  attributeChangedCallback() {
-    this.removeInputMask();
-
-    this.removeInputMask = applyInputMask(this, this.mask);
-  }
-}
-
-export class InputMaskChangeEvent extends Event {
-  constructor(public readonly value: string) {
-    super("inputmaskchange", { bubbles: true });
-  }
-}
-
-export function applyInputMask(container: HTMLElement, mask: string) {
-  container.addEventListener("input", onInput);
-  container.addEventListener("keydown", onKeyDown);
-
-  function onInput(e: Event) {
-    const input = e.target as HTMLInputElement;
+  @listen("input")
+  async onInput(e: Event) {
+    const input = e.target as MaskableElement;
     const selectionStart = input.selectionStart || 0;
     const prev = input.value;
+    const mask = this.#getMaskFor(input);
 
-    applyFormatting(input, format(input.value, mask));
+    const { formatted } = format(input.value, mask);
+
+    input.value = formatted;
 
     const offset = input.value.length - prev.length;
     const maskChar = mask[selectionStart - 1] as PatternChar | undefined;
+
+    // This is a hack to make sure that changes are propagated appropriately
+    await Promise.resolve();
 
     // check if the current value is not a space for characters and has an offset greater then 0
     if (maskChar && !PATTERN_CHARS.includes(maskChar) && offset > 0) {
@@ -124,12 +107,13 @@ export function applyInputMask(container: HTMLElement, mask: string) {
 
     if (prev !== input.value) {
       input.dispatchEvent(new Event("input", { bubbles: true }));
-      input.dispatchEvent(new InputMaskChangeEvent(input.value));
     }
   }
 
-  function onKeyDown(e: KeyboardEvent) {
-    const input = e.target as HTMLInputElement;
+  @listen("keydown")
+  onKeyDown(e: KeyboardEvent) {
+    const input = e.target as MaskableElement;
+    const mask = this.#getMaskFor(input);
     const patternChar = mask[input.selectionStart || 0];
 
     if (e.key.length === 1 && /^[a-z0-9]/i.test(e.key)) {
@@ -152,8 +136,7 @@ export function applyInputMask(container: HTMLElement, mask: string) {
     }
   }
 
-  return () => {
-    container.removeEventListener("input", onInput);
-    container.removeEventListener("keydown", onKeyDown);
-  };
+  #getMaskFor(input: MaskableElement) {
+    return this.mask || input.getAttribute("mask") || "";
+  }
 }

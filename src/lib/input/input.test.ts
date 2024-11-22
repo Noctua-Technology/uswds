@@ -35,11 +35,11 @@ describe("usa-input", () => {
       </form>
     `);
 
-    const checkbox = form.querySelector("usa-input")!;
-    const nativeInput = checkbox.shadowRoot!.querySelector("input")!;
+    const input = form.querySelector("usa-input")!;
+    const nativeInput = input.shadowRoot!.querySelector("input")!;
     nativeInput.value = "Bar";
 
-    await fireEvent.change(nativeInput);
+    await fireEvent.input(nativeInput);
 
     const value = new FormData(form);
 
