@@ -1,3 +1,4 @@
+import "../input/input.element.js";
 import "./input-mask.element.js";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
@@ -29,7 +30,12 @@ const meta = {
 
       <usa-input-mask mask="(999) 999-9999">
         <label>Phone:</label>
-        <input name="phone" placeholder="(999) 999-9999" />
+
+        <usa-input
+          name="phone"
+          placeholder="(999) 999-9999"
+          input-mask
+        ></usa-input>
       </usa-input-mask>
 
       <usa-input-mask mask="99/99/9999">

@@ -56,34 +56,53 @@ export class USATextInputElement extends HTMLElement {
   static formAssociated = true;
 
   @attr()
+  @observe()
   accessor name = "";
 
   @attr()
+  @observe()
   accessor autocomplete: AutoFill = "on";
 
   @attr()
   @observe()
+  accessor placeholder: AutoFill = "on";
+
+  @observe()
   accessor value = "";
 
-  #internals = this.attachInternals();
-  #input = query("input");
+  selectionStart: number | null = null;
 
-  @ready()
-  onReady() {
-    this.#internals.setFormValue(this.value);
-    this.#input({ value: this.value, autocomplete: this.autocomplete });
+  #internals = this.attachInternals();
+  internalInput = query("input");
+
+  setSelectionRange(start: number, end: number) {
+    const input = this.internalInput();
+
+    input.setSelectionRange(start, end);
+
+    this.selectionStart = start;
   }
 
   @effect()
   onChange() {
+    const input = this.internalInput();
+
+    // set internal input value
+    input.value = this.value;
+    input.autocomplete = this.autocomplete;
+    input.placeholder = this.placeholder;
+
+    // set form value
     this.#internals.setFormValue(this.value);
-    this.#input({ value: this.value, autocomplete: this.autocomplete });
   }
 
-  @listen("change", "input")
-  onInputChange(e: Event) {
-    if (e.target instanceof HTMLInputElement) {
-      this.#internals.setFormValue(e.target.value);
-    }
+  @listen("input", (el) => el.internalInput())
+  onInputChange() {
+    const input = this.internalInput();
+
+    this.#internals.setFormValue(input.value);
+
+    this.value = input.value;
+    this.selectionStart = input.selectionStart;
   }
 }

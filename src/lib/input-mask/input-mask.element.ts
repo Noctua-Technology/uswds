@@ -93,8 +93,6 @@ export class USAInputMaskElement extends HTMLElement {
   attributeChangedCallback() {
     this.removeInputMask();
 
-    this.mask = this.getAttribute("mask") || "";
-
     this.removeInputMask = applyInputMask(this, this.mask);
   }
 }

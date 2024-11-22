@@ -24,9 +24,20 @@ export class USALinkElement extends HTMLElement {
   @attr()
   accessor href = "";
 
+  @attr()
+  accessor target: "_blank" | "_parent" | "_self" | "_top" | "" = "";
+
+  @attr()
+  accessor title = "";
+
+  @attr()
+  accessor disabled = false;
+
   #anchor = query("a");
 
   attributeChangedCallback() {
-    this.#anchor({ href: this.href });
+    const { href, target, title } = this;
+
+    this.#anchor({ href, target, title });
   }
 }
