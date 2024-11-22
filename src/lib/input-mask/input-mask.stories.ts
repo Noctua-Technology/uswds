@@ -31,11 +31,7 @@ const meta = {
       <usa-input-mask mask="(999) 999-9999">
         <label>Phone:</label>
 
-        <usa-input
-          name="phone"
-          placeholder="(999) 999-9999"
-          input-mask
-        ></usa-input>
+        <usa-input name="phone" placeholder="(999) 999-9999" masked></usa-input>
       </usa-input-mask>
 
       <usa-input-mask mask="99/99/9999">

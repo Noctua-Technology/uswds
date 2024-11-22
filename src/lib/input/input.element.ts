@@ -83,17 +83,14 @@ export class USATextInputElement extends HTMLElement {
     this.selectionStart = start;
   }
 
+  @ready()
+  onReady() {
+    this.#sync();
+  }
+
   @effect()
   onChange() {
-    const input = this.internalInput();
-
-    // set internal input value
-    input.value = this.value;
-    input.autocomplete = this.autocomplete;
-    input.placeholder = this.placeholder;
-
-    // set form value
-    this.#internals.setFormValue(this.value);
+    this.#sync();
   }
 
   @listen("input", (el) => el.internalInput())
@@ -104,5 +101,17 @@ export class USATextInputElement extends HTMLElement {
 
     this.value = input.value;
     this.selectionStart = input.selectionStart;
+  }
+
+  #sync() {
+    const input = this.internalInput();
+
+    // set internal input value
+    input.value = this.value;
+    input.autocomplete = this.autocomplete;
+    input.placeholder = this.placeholder;
+
+    // set form value
+    this.#internals.setFormValue(this.value);
   }
 }

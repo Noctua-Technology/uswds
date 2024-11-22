@@ -81,11 +81,9 @@ export class USAInputMaskElement extends HTMLElement {
 
   connectedCallback() {
     // Format the default value
-    this.querySelectorAll<HTMLInputElement>("input,[input-mask]").forEach(
-      (input) => {
-        applyFormatting(input, format(input.value, this.mask));
-      }
-    );
+    this.querySelectorAll<HTMLInputElement>("[masked]").forEach((input) => {
+      applyFormatting(input, format(input.value, this.mask));
+    });
 
     this.removeInputMask = applyInputMask(this, this.mask);
   }
