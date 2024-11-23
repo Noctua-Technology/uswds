@@ -1,5 +1,11 @@
 import { attr, css, element, html, listen, query, ready } from "@joist/element";
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "usa-checkbox": USACheckboxElement;
+  }
+}
+
 @element({
   tagName: "usa-checkbox",
   shadow: [

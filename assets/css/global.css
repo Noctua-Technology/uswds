@@ -1,7 +1,42 @@
 * {
-    font-family: Public Sans Web,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  font-family:
+    Public Sans Web,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol;
 }
 
 pre * {
-    font-family: ui-monospace,Menlo,Monaco,"Roboto Mono","Oxygen Mono","Ubuntu Monospace","Source Code Pro","Droid Sans Mono","Courier New",monospace;
+  font-family: ui-monospace, Menlo, Monaco, "Roboto Mono", "Oxygen Mono",
+    "Ubuntu Monospace", "Source Code Pro", "Droid Sans Mono", "Courier New",
+    monospace;
+}
+
+/* Links */
+.usa-link {
+  color: #005ea2;
+  text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.usa-link:visited {
+  color: #54278f;
+}
+
+.usa-link usa-icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+usa-alert[type="emergency"] .usa-link {
+  color: #fff;
 }
