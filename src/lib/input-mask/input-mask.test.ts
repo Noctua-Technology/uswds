@@ -2,7 +2,8 @@ import "./input-mask.element.js";
 
 import { assert, fixture, html } from "@open-wc/testing";
 
-import { USAInputMaskElement, format } from "./input-mask.element.js";
+import { format } from "./format.js";
+import { USAInputMaskElement } from "./input-mask.element.js";
 
 describe("format", () => {
   it("should retrn the correct raw value", () => {
