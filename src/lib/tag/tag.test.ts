@@ -10,6 +10,6 @@ describe("usa-tag", () => {
       <usa-tag>Hello World</usa-tag>
     `);
 
-    return assert.equal(true, false);
+    return assert.isAccessible(tag);
   });
 });
