@@ -1,5 +1,11 @@
 import { attr, css, element, html, query } from "@joist/element";
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "usa-link": USALinkElement;
+  }
+}
+
 @element({
   tagName: "usa-link",
   shadow: [
@@ -35,9 +41,22 @@ export class USALinkElement extends HTMLElement {
 
   #anchor = query("a");
 
-  attributeChangedCallback() {
+  attributeChangedCallback(attr: string) {
+    const anchor = this.#anchor();
     const { href, target, title } = this;
 
-    this.#anchor({ href, target, title });
+    switch (attr) {
+      case "href":
+        anchor.href = href;
+        break;
+
+      case "target":
+        anchor.target = target;
+        break;
+
+      case "title":
+        anchor.target = title;
+        break;
+    }
   }
 }

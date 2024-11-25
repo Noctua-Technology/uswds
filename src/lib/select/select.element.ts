@@ -2,6 +2,12 @@ import { attr, css, element, html, listen, query, ready } from "@joist/element";
 
 import type { USASelecOptionElement } from "./select-option.element.js";
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "usa-select": USASelectElement;
+  }
+}
+
 @element({
   tagName: "usa-select",
   shadow: [
@@ -82,7 +88,7 @@ export class USASelectElement extends HTMLElement {
     this.#internals.setFormValue(this.value);
   }
 
-  @listen("change", "select")
+  @listen("change")
   onSelectChange(e: Event) {
     if (e.target instanceof HTMLSelectElement) {
       this.#internals.setFormValue(e.target.value);

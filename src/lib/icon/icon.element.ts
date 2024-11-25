@@ -2,6 +2,12 @@ import { attr, css, element, html, query } from "@joist/element";
 
 import { USAIcon } from "./icon-types.js";
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "usa-icon": USAIconElement;
+  }
+}
+
 @element({
   tagName: "usa-icon",
   shadow: [
