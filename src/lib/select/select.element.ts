@@ -42,6 +42,11 @@ declare global {
         width: 100%;
       }
 
+      select:not(:disabled):focus {
+        outline: 0.25rem solid #2491ff;
+        outline-offset: 0;
+      }
+
       usa-icon {
         position: absolute;
         right: 0.5rem;
@@ -88,10 +93,10 @@ export class USASelectElement extends HTMLElement {
   }
 
   @listen("change", "select")
-  onSelectChange(e: Event) {
-    if (e.target instanceof HTMLSelectElement) {
-      this.#internals.setFormValue(e.target.value);
-    }
+  onSelectChange() {
+    const select = this.#select();
+
+    this.#internals.setFormValue(select.value);
   }
 
   onOptionAdded(el: USASelecOptionElement) {

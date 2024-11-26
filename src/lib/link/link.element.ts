@@ -43,19 +43,18 @@ export class USALinkElement extends HTMLElement {
 
   attributeChangedCallback(attr: string) {
     const anchor = this.#anchor();
-    const { href, target, title } = this;
 
     switch (attr) {
       case "href":
-        anchor.href = href;
+        anchor.href = this.href;
         break;
 
       case "target":
-        anchor.target = target;
+        anchor.target = this.target;
         break;
 
       case "title":
-        anchor.target = title;
+        anchor.target = this.title;
         break;
     }
   }

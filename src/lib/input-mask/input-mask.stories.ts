@@ -26,6 +26,7 @@ const meta = {
         <usa-input
           name="phone"
           placeholder="(999) 999-9999"
+          autocomplete="off"
           mask="(999) 999-9999"
         >
           Phone:
@@ -36,7 +37,12 @@ const meta = {
         <label>Date:</label>
         <br />
 
-        <input name="date" placeholder="99/99/9999" mask="99/99/9999" />
+        <input
+          name="date"
+          placeholder="99/99/9999"
+          mask="99/99/9999"
+          autocomplete="off"
+        />
       </usa-input-mask>
     `;
   },
