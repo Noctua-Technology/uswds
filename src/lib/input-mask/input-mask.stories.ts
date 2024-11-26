@@ -1,6 +1,7 @@
 import "../input/input.element.js";
 import "./input-mask.element.js";
 
+import { userEvent, within, expect } from "@storybook/test";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
@@ -24,6 +25,7 @@ const meta = {
 
       <usa-input-mask>
         <usa-input
+          data-testid="usa-input"
           name="phone"
           placeholder="(999) 999-9999"
           autocomplete="off"
