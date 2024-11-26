@@ -82,28 +82,28 @@ export class USATextInputElement
   accessor value = "";
 
   get selectionStart() {
-    return this.internalInput().selectionStart;
+    return this.#input().selectionStart;
   }
 
   #internals = this.attachInternals();
 
-  internalInput = query("input");
+  #input = query("input");
 
   setSelectionRange(start: number, end: number) {
-    const input = this.internalInput();
+    const input = this.#input();
 
     input.setSelectionRange(start, end);
   }
 
   @effect()
   onChange() {
-    const input = this.internalInput();
+    const input = this.#input();
     input.value = this.value;
   }
 
-  @listen("input", (el) => el.internalInput())
+  @listen("input", "input")
   onInputChange() {
-    const input = this.internalInput();
+    const input = this.#input();
 
     this.#internals.setFormValue(input.value);
 
@@ -111,7 +111,7 @@ export class USATextInputElement
   }
 
   attributeChangedCallback(attr: string) {
-    const input = this.internalInput();
+    const input = this.#input();
 
     switch (attr) {
       case "autocomplete":
