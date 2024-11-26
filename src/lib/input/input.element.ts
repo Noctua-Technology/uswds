@@ -104,8 +104,6 @@ export class USATextInputElement
 
   @listen("input", "input")
   onInputChange() {
-    console.log("TEST");
-
     const input = this.#input();
 
     this.#internals.setFormValue(input.value);
