@@ -98,8 +98,8 @@ export class USAAlertElement extends HTMLElement {
   #icon = query<USAIconElement>("usa-icon");
 
   attributeChangedCallback() {
-    const { icon } = USA_ALERT_CONFIG[this.type];
+    const icon = this.#icon();
 
-    this.#icon({ icon });
+    icon.icon = USA_ALERT_CONFIG[this.type].icon;
   }
 }

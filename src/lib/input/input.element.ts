@@ -112,7 +112,6 @@ export class USATextInputElement
   }
 
   attributeChangedCallback(attr: string) {
-    console.log(attr);
     const input = this.#input();
 
     switch (attr) {

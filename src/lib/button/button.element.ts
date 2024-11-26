@@ -6,6 +6,16 @@ declare global {
   }
 }
 
+export const BUTTON_VARIANTS = [
+  "primary",
+  "secondary",
+  "cool",
+  "warm",
+  "outline",
+] as const;
+
+export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
+
 @element({
   tagName: "usa-button",
   shadow: [
@@ -169,6 +179,9 @@ export class USAButtonElement extends HTMLElement {
 
   @attr()
   accessor disabled = false;
+
+  @attr()
+  accessor variant: ButtonVariant = "primary";
 
   #internals = this.attachInternals();
   #button = query("button");
