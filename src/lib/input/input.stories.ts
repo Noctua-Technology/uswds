@@ -17,7 +17,7 @@ const meta = {
           First name
         </usa-input>
 
-        <usa-button>Submit</usa-button>
+        <usa-button type="submit">Submit</usa-button>
       </form>
     `;
   },
