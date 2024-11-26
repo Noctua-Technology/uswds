@@ -46,7 +46,7 @@ declare global {
         width: 100%;
       }
 
-      input:not(disabled):focus {
+      input:not(:disabled):focus {
         outline: 0.25rem solid #2491ff;
         outline-offset: 0;
       }
@@ -82,11 +82,12 @@ export class USATextInputElement
   accessor value = "";
 
   get selectionStart() {
-    return this.#input().selectionStart;
+    const { selectionStart } = this.#input();
+
+    return selectionStart;
   }
 
   #internals = this.attachInternals();
-
   #input = query("input");
 
   setSelectionRange(start: number, end: number) {
@@ -111,6 +112,7 @@ export class USATextInputElement
   }
 
   attributeChangedCallback(attr: string) {
+    console.log(attr);
     const input = this.#input();
 
     switch (attr) {

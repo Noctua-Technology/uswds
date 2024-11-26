@@ -173,6 +173,17 @@ export class USAButtonElement extends HTMLElement {
   #internals = this.attachInternals();
   #button = query("button");
 
+  @listen("keydown", () => document.body)
+  onKeyDown(e: KeyboardEvent) {
+    if (this.type === "submit") {
+      if (e.key.toUpperCase() === "ENTER") {
+        if (this.#internals.form) {
+          this.#internals.form.submit();
+        }
+      }
+    }
+  }
+
   @listen("click")
   onInternalClick() {
     const { form } = this.#internals;
@@ -188,7 +199,6 @@ export class USAButtonElement extends HTMLElement {
 
   attributeChangedCallback() {
     const button = this.#button();
-
     button.type = this.type;
     button.disabled = this.disabled;
   }

@@ -13,7 +13,7 @@ const meta = {
   render() {
     return html`
       <form>
-        <usa-input name="fname" value="Danny" autocomplete="off">
+        <usa-input name="fname" value="Danny" autocomplete="off" foo="test">
           First name
         </usa-input>
 
