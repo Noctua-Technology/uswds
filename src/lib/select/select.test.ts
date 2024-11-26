@@ -4,7 +4,7 @@ import "./select-option.element.js";
 import { fixture, html, assert } from "@open-wc/testing";
 import { fireEvent } from "@noctuatech-uswds/testing";
 
-describe("usa-checkbox", () => {
+describe("usa-select", () => {
   it("should be accessible", async () => {
     const el = await fixture<HTMLFormElement>(html`
       <usa-select name="example">

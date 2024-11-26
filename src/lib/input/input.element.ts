@@ -78,7 +78,6 @@ export class USATextInputElement
   @attr({
     reflect: false,
   })
-  @observe()
   accessor value = "";
 
   get selectionStart() {

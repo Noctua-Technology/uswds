@@ -1,4 +1,4 @@
-import { attr, css, element, html, listen, query, ready } from "@joist/element";
+import { attr, css, element, html, listen, query } from "@joist/element";
 
 import type { USASelecOptionElement } from "./select-option.element.js";
 
@@ -79,11 +79,10 @@ export class USASelectElement extends HTMLElement {
   #select = query("select");
   #internals = this.attachInternals();
 
-  @ready()
-  onReady() {
-    const { value, name } = this;
-
-    this.#select({ value, name });
+  connectedCallback() {
+    const select = this.#select();
+    select.value = this.value;
+    select.name = this.name;
 
     this.#internals.setFormValue(this.value);
   }

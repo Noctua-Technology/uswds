@@ -162,6 +162,8 @@ declare global {
   ],
 })
 export class USAButtonElement extends HTMLElement {
+  static formAssociated = true;
+
   @attr()
   accessor type: "button" | "submit" | "reset" = "button";
 

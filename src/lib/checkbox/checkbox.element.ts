@@ -1,4 +1,4 @@
-import { attr, css, element, html, listen, query, ready } from "@joist/element";
+import { attr, css, element, html, listen, query } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -146,24 +146,25 @@ export class USACheckboxElement extends HTMLElement {
   #checkbox = query("input");
   #internals = this.attachInternals();
 
-  @ready()
-  onReady() {
-    const { checked, name } = this;
+  connectedCallback() {
+    const checkbox = this.#checkbox();
 
-    if (checked) {
+    if (this.checked) {
       this.#internals.setFormValue(this.value);
     }
 
-    this.#checkbox({ checked, name });
+    checkbox.checked = this.checked;
+    checkbox.name = this.name;
   }
 
   attributeChangedCallback() {
-    const { checked, name } = this;
+    const checkbox = this.#checkbox();
 
-    this.#checkbox({ checked, name });
+    checkbox.checked = this.checked;
+    checkbox.name = this.name;
   }
 
-  @listen("change", "input")
+  @listen("change", "input[type=checkbox]")
   onCheckboxChange() {
     const checkbox = this.#checkbox();
 
