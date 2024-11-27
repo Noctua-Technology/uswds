@@ -1,4 +1,5 @@
 import "./input-mask.element.js";
+import "../input/input.element.js";
 
 import { assert, fixture, html } from "@open-wc/testing";
 
@@ -53,17 +54,49 @@ describe("usa-input-mask", () => {
     const input = el.querySelector("input")!;
 
     assert.equal(input.value, "(123) 456-7890");
-    assert.equal(input.getAttribute("value"), "1234567890");
   });
 
   it("should update value when on input event", async () => {
     const el = await fixture<USAInputMaskElement>(html`
-      <usa-input-mask mask="(999) 999-9999">
-        <input name="phone" mask />
+      <usa-input-mask>
+        <input name="phone" mask="(999) 999-9999" />
       </usa-input-mask>
     `);
 
     const input = el.querySelector("input")!;
+
+    input.value = "8888888888";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+
+    assert.equal(input.value, "(888) 888-8888");
+  });
+});
+
+describe("usa-input-mask with usa-input", () => {
+  it("should format default value", async () => {
+    const el = await fixture<USAInputMaskElement>(html`
+      <usa-input-mask mask="(999) 999-9999">
+        <usa-input name="phone" value="1234567890" id="TEST" mask></usa-input>
+      </usa-input-mask>
+    `);
+
+    const input = el.querySelector("usa-input")!;
+
+    assert.equal(input.value, "(123) 456-7890");
+  });
+
+  it("should update value when on input event", async () => {
+    const el = await fixture<USAInputMaskElement>(html`
+      <usa-input-mask>
+        <usa-input
+          name="phone"
+          value="1234567890"
+          mask="(999) 999-9999"
+        ></usa-input>
+      </usa-input-mask>
+    `);
+
+    const input = el.querySelector("usa-input")!;
 
     input.value = "8888888888";
     input.dispatchEvent(new Event("input", { bubbles: true }));

@@ -24,11 +24,11 @@ const meta = {
 
       <usa-input-mask>
         <usa-input
-          data-testid="usa-input"
           name="phone"
           placeholder="(999) 999-9999"
           autocomplete="off"
           mask="(999) 999-9999"
+          value="3042616138"
         >
           Phone:
         </usa-input>

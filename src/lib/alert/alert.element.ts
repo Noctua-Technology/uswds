@@ -95,7 +95,7 @@ export class USAAlertElement extends HTMLElement {
   @attr()
   accessor type: USAAlertType = "info";
 
-  #icon = query<USAIconElement>("usa-icon");
+  #icon = query("usa-icon");
 
   attributeChangedCallback() {
     const icon = this.#icon();
