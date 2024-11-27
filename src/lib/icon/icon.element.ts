@@ -10,7 +10,7 @@ declare global {
 
 @element({
   tagName: "usa-icon",
-  shadow: [
+  shadowDom: [
     css`
       :host {
         display: inline-block;

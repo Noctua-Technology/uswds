@@ -18,7 +18,7 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
 
 @element({
   tagName: "usa-button",
-  shadow: [
+  shadowDom: [
     css`
       :host {
         display: contents;

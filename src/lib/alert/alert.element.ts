@@ -11,7 +11,7 @@ declare global {
 
 @element({
   tagName: "usa-alert",
-  shadow: [
+  shadowDom: [
     css`
       :host {
         display: block;

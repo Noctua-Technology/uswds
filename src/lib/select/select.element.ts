@@ -10,7 +10,7 @@ declare global {
 
 @element({
   tagName: "usa-select",
-  shadow: [
+  shadowDom: [
     css`
       :host {
         display: block;

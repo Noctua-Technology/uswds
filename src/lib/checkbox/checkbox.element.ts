@@ -8,7 +8,7 @@ declare global {
 
 @element({
   tagName: "usa-checkbox",
-  shadow: [
+  shadowDom: [
     css`
       * {
         box-sizing: border-box;

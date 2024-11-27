@@ -11,7 +11,7 @@ declare global {
 
 @element({
   tagName: "usa-input",
-  shadow: [
+  shadowDom: [
     css`
       * {
         box-sizing: border-box;

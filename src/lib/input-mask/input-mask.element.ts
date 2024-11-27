@@ -11,7 +11,7 @@ declare global {
 
 @element({
   tagName: "usa-input-mask",
-  shadow: [
+  shadowDom: [
     css`
       :host {
         display: contents;

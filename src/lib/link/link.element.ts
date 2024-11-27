@@ -8,7 +8,7 @@ declare global {
 
 @element({
   tagName: "usa-link",
-  shadow: [
+  shadowDom: [
     css`
       :host {
         display: inline;

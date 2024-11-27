@@ -9,7 +9,7 @@ declare global {
 
 @element({
   tagName: "usa-select-option",
-  shadow: [
+  shadowDom: [
     css`
       :host {
         display: none;

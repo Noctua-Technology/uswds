@@ -12,7 +12,7 @@ export type TagVariant = (typeof TAG_VARIANTS)[number];
 
 @element({
   tagName: "usa-tag",
-  shadow: [
+  shadowDom: [
     css`
       :host {
         font-family:
