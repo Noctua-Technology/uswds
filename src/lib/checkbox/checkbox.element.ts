@@ -25,11 +25,6 @@ declare global {
           sans-serif;
       }
 
-      :host([tiled]) {
-        --checked-bg-color: rgba(0, 94, 162, 0.1);
-        --checked-border-color: #005ea2;
-      }
-
       :host([tiled]) label {
         background-color: #fff;
         border: 2px solid #c9c9c9;
@@ -106,8 +101,8 @@ declare global {
       }
 
       :host([tiled]) label:has(input:checked) {
-        background-color: var(--checked-bg-color);
-        border-color: var(--checked-border-color);
+        background-color: rgba(0, 94, 162, 0.1);
+        border-color: #005ea2;
       }
     `,
     html`
@@ -142,6 +137,9 @@ export class USACheckboxElement extends HTMLElement {
 
   @attr()
   accessor value = "";
+
+  @attr()
+  accessor tiled = false;
 
   #checkbox = query("input");
   #internals = this.attachInternals();

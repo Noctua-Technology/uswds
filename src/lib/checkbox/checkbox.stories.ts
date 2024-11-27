@@ -1,7 +1,10 @@
 import "./checkbox.element.js";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
+import { html, nothing } from "lit";
+
+import { ifDefined } from "lit/directives/if-defined.js";
+import { when } from "lit/directives/when.js";
 
 import type { USACheckboxElement } from "./checkbox.element.js";
 
@@ -11,25 +14,41 @@ const meta = {
   tags: ["autodocs"],
   render(args) {
     return html`
-      <usa-checkbox>Hello World</usa-checkbox>
-
-      <hr />
-
-      <br />
-
-      <usa-checkbox tiled>
+      <usa-checkbox
+        name=${args.name}
+        value=${ifDefined(args.value)}
+        checked=${ifDefined(args.checked)}
+        ?tiled=${args.tiled}
+      >
         Hello World
-
-        <span slot="description">
-          This is optional text that can be used to describe the label in more
-          detail.
-        </span>
+        ${when(
+          args.description,
+          () => html`<div slot="description">${args.description}</div>`
+        )}
       </usa-checkbox>
     `;
   },
-  argTypes: {},
-  args: {},
-} satisfies Meta<USACheckboxElement>;
+  argTypes: {
+    name: {
+      control: "text",
+    },
+    value: {
+      control: "text",
+    },
+    description: {
+      control: "text",
+    },
+    tiled: {
+      control: "boolean",
+    },
+  },
+  args: {
+    name: "toc",
+    value: "agree",
+    description: "This is a description for the value",
+    tiled: false,
+  },
+} satisfies Meta<USACheckboxElement & { description: string }>;
 
 export default meta;
 
