@@ -1,5 +1,6 @@
 import { attr, css, element } from "@joist/element";
-import { USASelectElement } from "./select.element";
+
+import { USASelectElement } from "./select.element.js";
 
 declare global {
   interface HTMLElementTagNameMap {
