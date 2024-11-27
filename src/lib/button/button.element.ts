@@ -49,7 +49,6 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
         display: inline-flex;
         font-weight: 700;
         justify-content: center;
-        margin-right: 0.5rem;
         padding: 0.75rem 1.25rem;
         text-align: center;
         text-decoration: none;
