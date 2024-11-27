@@ -1,7 +1,7 @@
 import "./checkbox.element.js";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
-import { html, nothing } from "lit";
+import { html } from "lit";
 
 import { ifDefined } from "lit/directives/if-defined.js";
 import { when } from "lit/directives/when.js";
@@ -45,7 +45,6 @@ const meta = {
   args: {
     name: "toc",
     value: "agree",
-    description: "This is a description for the value",
     tiled: false,
   },
 } satisfies Meta<USACheckboxElement & { description: string }>;

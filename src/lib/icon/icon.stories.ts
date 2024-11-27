@@ -11,18 +11,10 @@ const meta = {
   title: "usa-icon",
   tags: [],
   render(args) {
-    return html`<usa-icon icon="${args.icon}"></usa-icon>`;
+    return html`<usa-icon icon=${args.icon}></usa-icon>`;
   },
-  argTypes: {
-    icon: {
-      type: "string",
-      control: "select",
-      options: ICON_TYPES,
-    },
-  },
-  args: {
-    icon: ICON_TYPES[35],
-  },
+  argTypes: {},
+  args: {},
 } satisfies Meta<USAIconElement>;
 
 export default meta;

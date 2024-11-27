@@ -10,45 +10,27 @@ import type { USAInputMaskElement } from "./input-mask.element.js";
 const meta = {
   title: "input-mask",
   tags: ["autodocs"],
-  render() {
+  render(args) {
     return html`
-      <style>
-        input {
-          padding: 0.5rem;
-          margin-bottom: 1rem;
-          font-size: 1rem;
-        }
-      </style>
-
-      <h2>Default</h2>
-
-      <usa-input-mask>
-        <usa-input
-          name="phone"
-          placeholder="(999) 999-9999"
-          autocomplete="off"
-          mask="(999) 999-9999"
-          value="3042616138"
-        >
-          Phone:
-        </usa-input>
-
-        <br />
-
-        <label>Date:</label>
-        <br />
-
-        <input
-          name="date"
-          placeholder="99/99/9999"
-          mask="99/99/9999"
-          autocomplete="off"
-        />
-      </usa-input-mask>
+      <form>
+        <usa-input-mask>
+          <usa-input
+            name="phone"
+            placeholder=${args.mask}
+            autocomplete="off"
+            mask=${args.mask}
+            value="3042616138"
+          >
+            Phone:
+          </usa-input>
+        </usa-input-mask>
+      </form>
     `;
   },
   argTypes: {},
-  args: {},
+  args: {
+    mask: "(999) 999-9999",
+  },
 } satisfies Meta<USAInputMaskElement>;
 
 export default meta;
