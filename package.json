@@ -68,8 +68,6 @@
   "devDependencies": {
     "@open-wc/testing": "^4.0.0",
     "@storybook/addon-essentials": "^8.4.4",
-    "@storybook/blocks": "^8.4.4",
-    "@storybook/test": "^8.4.4",
     "@storybook/web-components": "^8.4.4",
     "@storybook/web-components-vite": "^8.4.4",
     "@types/mocha": "^10.0.7",
