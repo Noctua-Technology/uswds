@@ -41,6 +41,7 @@ declare global {
         display: block;
         height: 2.5rem;
         line-height: 1.3;
+        font-size: 1.06rem;
         margin-top: 0.5rem;
         padding: 0.5rem;
         width: 100%;
