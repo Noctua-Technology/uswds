@@ -13,7 +13,8 @@ declare global {
   shadowDom: [
     css`
       :host {
-        display: inline-block;
+        display: inline-flex;
+        flex-direction: column;
       }
     `,
     html`<slot></slot>`,

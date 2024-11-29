@@ -24,7 +24,6 @@ declare global {
 
       label {
         display: flex;
-        align-items: center;
         cursor: pointer;
         gap: 0.5rem;
       }

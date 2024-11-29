@@ -1,5 +1,6 @@
 import "./radio.element.js";
 import "./radio-option.element.js";
+import "../description/description.element.js";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
@@ -19,6 +20,11 @@ const meta = {
 
         <usa-radio-option value="frederick-douglass">
           Frederick Douglass
+
+          <usa-description>
+            This is optional text that can be used to describe the label in more
+            detail.
+          </usa-description>
         </usa-radio-option>
 
         <usa-radio-option value="booker-t.-washington">
