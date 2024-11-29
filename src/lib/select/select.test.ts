@@ -8,7 +8,7 @@ describe("usa-select", () => {
   it("should be accessible", async () => {
     const el = await fixture<HTMLFormElement>(html`
       <usa-select name="example">
-        <span slot="label">Hello World</span>
+        Hello World
 
         <usa-select-option value="first">First</usa-select-option>
         <usa-select-option value="second">Second</usa-select-option>
@@ -23,7 +23,7 @@ describe("usa-select", () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <usa-select name="example" value="second">
-          <span slot="label">Hello World</span>
+          Hello World
 
           <usa-select-option value="first">First</usa-select-option>
           <usa-select-option value="second">Second</usa-select-option>
@@ -41,7 +41,7 @@ describe("usa-select", () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <usa-select name="example" value="second">
-          <span slot="label">Hello World</span>
+          Hello World
 
           <usa-select-option value="first">First</usa-select-option>
           <usa-select-option value="second">Second</usa-select-option>

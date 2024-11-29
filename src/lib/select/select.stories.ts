@@ -14,7 +14,7 @@ const meta = {
   render(args) {
     return html`
       <usa-select>
-        <span slot="label">Hello World</span>
+        Hello World
 
         <usa-select-option value="first">first</usa-select-option>
         <usa-select-option value="second">second</usa-select-option>
