@@ -27,7 +27,7 @@ const meta = {
           </usa-description>
         </usa-radio-option>
 
-        <usa-radio-option value="booker-t.-washington">
+        <usa-radio-option value="booker-t-washington">
           Booker T. Washington
         </usa-radio-option>
 

@@ -17,7 +17,7 @@ describe("usa-radio", () => {
           Frederick Douglass
         </usa-radio-option>
 
-        <usa-radio-option value="booker-t.-washington">
+        <usa-radio-option value="booker-t-washington">
           Booker T. Washington
         </usa-radio-option>
 
@@ -28,6 +28,81 @@ describe("usa-radio", () => {
     `);
 
     return assert.isAccessible(radio);
+  });
+
+  it("should create local inputs for each option", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <usa-radio name="historical-figures" value="frederick-douglass">
+          <usa-radio-option value="sojourner-truth">
+            Sojourner Truth
+          </usa-radio-option>
+
+          <usa-radio-option value="frederick-douglass">
+            Frederick Douglass
+          </usa-radio-option>
+
+          <usa-radio-option value="booker-t-washington">
+            Booker T. Washington
+          </usa-radio-option>
+
+          <usa-radio-option value="george-washington-carver">
+            George Washington Carver
+          </usa-radio-option>
+        </usa-radio>
+      </form>
+    `);
+
+    const nativeInputs = form
+      .querySelector("usa-radio")!
+      .shadowRoot!.querySelectorAll("input");
+
+    assert.deepEqual(
+      Array.from(nativeInputs).map((input) => input.value),
+      [
+        "sojourner-truth",
+        "frederick-douglass",
+        "booker-t-washington",
+        "george-washington-carver",
+      ]
+    );
+  });
+
+  it("should remove inputs when options are removed", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <usa-radio name="historical-figures" value="frederick-douglass">
+          <usa-radio-option value="sojourner-truth">
+            Sojourner Truth
+          </usa-radio-option>
+
+          <usa-radio-option value="frederick-douglass">
+            Frederick Douglass
+          </usa-radio-option>
+
+          <usa-radio-option value="booker-t-washington">
+            Booker T. Washington
+          </usa-radio-option>
+
+          <usa-radio-option value="george-washington-carver">
+            George Washington Carver
+          </usa-radio-option>
+        </usa-radio>
+      </form>
+    `);
+
+    const options = form.querySelectorAll("usa-radio-option");
+
+    options[2].remove();
+
+    const nativeInputs = form
+      .querySelector("usa-radio")!
+      .shadowRoot!.querySelectorAll("input");
+
+    assert.deepEqual(
+      Array.from(nativeInputs).map((input) => input.value),
+      ["sojourner-truth", "frederick-douglass", "george-washington-carver"]
+    );
   });
 
   it("should submit form with default values", async () => {
@@ -42,7 +117,7 @@ describe("usa-radio", () => {
             Frederick Douglass
           </usa-radio-option>
 
-          <usa-radio-option value="booker-t.-washington">
+          <usa-radio-option value="booker-t-washington">
             Booker T. Washington
           </usa-radio-option>
 
@@ -75,7 +150,7 @@ describe("usa-radio", () => {
             Frederick Douglass
           </usa-radio-option>
 
-          <usa-radio-option value="booker-t.-washington">
+          <usa-radio-option value="booker-t-washington">
             Booker T. Washington
           </usa-radio-option>
 
