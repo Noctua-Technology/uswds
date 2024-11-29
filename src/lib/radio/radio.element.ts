@@ -107,16 +107,17 @@ export class USARadioElement extends HTMLElement {
   }
 
   connectedCallback() {
-    this.#internals.setFormValue(this.value);
-
     if (this.value) {
-      const input = this.shadowRoot!.querySelector<HTMLInputElement>(
-        `#${this.value}`
-      );
+      this.#internals.setFormValue(this.value);
+    }
+  }
 
-      if (input) {
-        input.checked = true;
-      }
+  attributeChangedCallback() {
+    const radios = this.#radios();
+
+    for (let radio of radios.querySelectorAll("input")) {
+      radio.checked = radio.value === this.value;
+      radio.name = this.name;
     }
   }
 
@@ -130,10 +131,7 @@ export class USARadioElement extends HTMLElement {
     input.type = "radio";
     input.name = this.name;
     input.value = el.value;
-
-    if (this.value === el.value) {
-      input.checked = true;
-    }
+    input.checked = this.value === el.value;
 
     const slot = document.createElement("slot");
     slot.name = el.value;
@@ -144,7 +142,8 @@ export class USARadioElement extends HTMLElement {
   }
 
   onOptionRemoved(el: USARadioOptionElement) {
-    const option = this.shadowRoot!.querySelector(`#${el.value}`);
+    const radios = this.#radios();
+    const option = radios.querySelector(`#${el.value}`);
 
     if (option) {
       option.remove();
