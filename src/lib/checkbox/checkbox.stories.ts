@@ -1,4 +1,5 @@
 import "./checkbox.element.js";
+import "../description/description.element.js";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
@@ -23,7 +24,7 @@ const meta = {
         Hello World
         ${when(
           args.description,
-          () => html`<div slot="description">${args.description}</div>`
+          () => html`<usa-description>${args.description}</usa-description>`
         )}
       </usa-checkbox>
     `;

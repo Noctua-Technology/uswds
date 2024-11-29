@@ -8,7 +8,7 @@ describe("usa-select", () => {
   it("should be accessible", async () => {
     const el = await fixture<HTMLFormElement>(html`
       <usa-select name="example">
-        <span slot="label">Hello World</span>
+        Hello World
 
         <usa-select-option value="first">First</usa-select-option>
         <usa-select-option value="second">Second</usa-select-option>
@@ -19,11 +19,61 @@ describe("usa-select", () => {
     return assert.isAccessible(el);
   });
 
+  it("should create local select options", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <usa-select name="example">
+          Hello World
+
+          <usa-select-option value="first">First</usa-select-option>
+          <usa-select-option value="second">Second</usa-select-option>
+          <usa-select-option value="third">Third</usa-select-option>
+        </usa-select>
+      </form>
+    `);
+
+    const nativeInputs = form
+      .querySelector("usa-select")!
+      .shadowRoot!.querySelectorAll("option");
+
+    assert.deepEqual(
+      Array.from(nativeInputs).map((input) => input.value),
+      ["first", "second", "third"]
+    );
+  });
+
+  it("should remove select options when options are removed", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <usa-select name="example">
+          Hello World
+
+          <usa-select-option value="first">First</usa-select-option>
+          <usa-select-option value="second">Second</usa-select-option>
+          <usa-select-option value="third">Third</usa-select-option>
+        </usa-select>
+      </form>
+    `);
+
+    const options = form.querySelectorAll("usa-select-option");
+
+    options[1].remove();
+
+    const nativeInputs = form
+      .querySelector("usa-select")!
+      .shadowRoot!.querySelectorAll("option");
+
+    assert.deepEqual(
+      Array.from(nativeInputs).map((input) => input.value),
+      ["first", "third"]
+    );
+  });
+
   it("should submit form with default values", async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <usa-select name="example" value="second">
-          <span slot="label">Hello World</span>
+          Hello World
 
           <usa-select-option value="first">First</usa-select-option>
           <usa-select-option value="second">Second</usa-select-option>
@@ -41,7 +91,7 @@ describe("usa-select", () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <usa-select name="example" value="second">
-          <span slot="label">Hello World</span>
+          Hello World
 
           <usa-select-option value="first">First</usa-select-option>
           <usa-select-option value="second">Second</usa-select-option>
@@ -54,7 +104,7 @@ describe("usa-select", () => {
     const nativeSelect = select.shadowRoot!.querySelector("select")!;
     nativeSelect.value = "third";
 
-    await fireEvent.change(nativeSelect);
+    await fireEvent.change(nativeSelect, { bubbles: true });
 
     const value = new FormData(form);
 

@@ -34,7 +34,6 @@ declare global {
       }
 
       label {
-        align-items: center;
         display: inline-flex;
         cursor: pointer;
         font-size: 1.06rem;
@@ -113,14 +112,6 @@ declare global {
 
         <div class="title">
           <slot></slot>
-        </div>
-
-        <div class="break"></div>
-
-        <div class="spacer"></div>
-
-        <div class="description">
-          <slot name="description"></slot>
         </div>
       </label>
     `,

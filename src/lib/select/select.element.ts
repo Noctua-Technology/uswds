@@ -56,15 +56,11 @@ declare global {
       }
     `,
     html`
-      <div hidden>
-        <slot></slot>
-      </div>
-
       <usa-icon icon="unfold_more"></usa-icon>
 
       <label>
         <div class="label">
-          <slot name="label"></slot>
+          <slot></slot>
         </div>
 
         <select></select>
@@ -92,7 +88,7 @@ export class USASelectElement extends HTMLElement {
     this.#internals.setFormValue(this.value);
   }
 
-  @listen("change", "select")
+  @listen("change")
   onSelectChange() {
     const select = this.#select();
 

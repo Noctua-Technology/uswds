@@ -39,7 +39,7 @@ describe("usa-input", () => {
     const nativeInput = input.shadowRoot!.querySelector("input")!;
     nativeInput.value = "Bar";
 
-    await fireEvent.input(nativeInput);
+    await fireEvent.input(nativeInput, { bubbles: true });
 
     const value = new FormData(form);
 
