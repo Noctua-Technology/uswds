@@ -1,17 +1,24 @@
 import { css, element, html, query } from "@joist/element";
 import { effect, observe } from "@joist/observable";
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "usa-file-input-preview": USAFileInputPreviewElement;
+  }
+}
+
 @element({
   tagName: "usa-file-input-preview",
   shadowDom: [
     css`
+      * {
+        box-sizing: border-box;
+      }
+
       :host {
         align-items: center;
-        background: #d9e8f6;
         display: flex;
         font-size: 0.87rem;
-        margin-top: 1px;
-        padding: 0.25rem 0.5rem;
         pointer-events: none;
         position: relative;
         text-align: left;
@@ -28,28 +35,68 @@ import { effect, observe } from "@joist/observable";
         object-fit: contain;
         width: 2.5rem;
       }
+
+      .preview-heading {
+        align-items: center;
+        background: #d9e8f6;
+        display: flex;
+        pointer-events: none;
+        position: relative;
+        z-index: 3;
+        font-weight: 700;
+        justify-content: space-between;
+        padding: 0.5rem;
+        text-align: left;
+      }
+
+      .preview-heading span {
+        color: #005ea2;
+        text-decoration: underline;
+        font-weight: 400;
+      }
+
+      .preview-content > * {
+        align-items: center;
+        background: #d9e8f6;
+        display: flex;
+        padding: 0.5rem;
+        width: 100%;
+        margin-top: 1px;
+      }
     `,
     html`
-      <img height="40" width="40" />
-      <span class="file-name"></span>
+      <div class="preview-heading">Selected file <span>Change file</span></div>
+
+      <div class="preview-content"></div>
     `,
   ],
 })
 export class USAFileInputPreviewElement extends HTMLElement {
   @observe()
-  accessor file: File | null = null;
+  accessor files: FileList | null = null;
 
-  #img = query("img");
-  #name = query("span");
+  #content = query(".preview-content");
 
   @effect()
   onChange() {
-    const img = this.#img();
-    const name = this.#name();
+    const content = this.#content();
 
-    if (this.file) {
-      img.src = URL.createObjectURL(this.file);
-      name.innerHTML = this.file.name;
+    if (this.files) {
+      content.innerHTML = "";
+
+      for (let file of this.files) {
+        const item = document.createElement("div");
+        item.id = file.name;
+
+        const img = new Image();
+        img.height = 40;
+        img.width = 40;
+        img.src = URL.createObjectURL(file);
+
+        item.append(img, document.createTextNode(file.name));
+
+        content.append(item);
+      }
     }
   }
 }

@@ -2,8 +2,6 @@ import "./file-input-preview.element.js";
 
 import { attr, css, element, html, listen, query } from "@joist/element";
 
-import { USAFileInputPreviewElement } from "./file-input-preview.element.js";
-
 declare global {
   interface HTMLElementTagNameMap {
     "usa-file-input": USAFileInputElement;
@@ -56,19 +54,6 @@ declare global {
         top: 0;
         width: 100%;
       }
-
-      .preview-heading {
-        align-items: center;
-        background: #d9e8f6;
-        display: flex;
-        pointer-events: none;
-        position: relative;
-        z-index: 3;
-        font-weight: 700;
-        justify-content: space-between;
-        padding: 0.5rem;
-        text-align: left;
-      }
     `,
     html`
       <label>
@@ -79,24 +64,24 @@ declare global {
           <span class="usa-file-input__choose">choose from folder</span>
         </slot>
 
-        <div class="preview-heading" style="display: none;">
-          Selected file <span class="usa-file-input__choose">Change file</span>
-        </div>
+        <usa-file-input-preview style="display: none;"></usa-file-input-preview>
       </label>
     `,
   ],
 })
 export class USAFileInputElement extends HTMLElement {
+  static formAssociated = true;
+
   @attr()
   accessor name = "";
 
   @attr()
   accessor multiple = true;
 
-  #label = query("label");
+  #internals = this.attachInternals();
   #input = query("input");
   #slot = query("slot");
-  #preview = query(".preview-heading");
+  #preview = query("usa-file-input-preview");
 
   attributeChangedCallback() {
     const input = this.#input();
@@ -106,23 +91,17 @@ export class USAFileInputElement extends HTMLElement {
 
   @listen("change")
   onChange() {
-    const label = this.#label();
     const input = this.#input();
     const slot = this.#slot();
     const preview = this.#preview();
 
+    preview.files = input.files;
+
     if (input.files && input.files.length) {
       slot.style.display = "none";
-      preview.style.display = "flex";
-
-      for (let file of input.files) {
-        const preview = new USAFileInputPreviewElement();
-        preview.file = file;
-
-        label.append(preview);
-      }
+      preview.style.display = "block";
     } else {
-      slot.style.display = "flex";
+      slot.style.display = "block";
       preview.style.display = "none";
     }
   }
