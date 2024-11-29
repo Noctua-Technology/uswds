@@ -103,7 +103,7 @@ export class USATextInputElement
     input.value = this.value;
   }
 
-  @listen("input", "input")
+  @listen("input")
   onInputChange() {
     const input = this.#input();
 

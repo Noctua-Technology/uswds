@@ -88,7 +88,7 @@ export class USASelectElement extends HTMLElement {
     this.#internals.setFormValue(this.value);
   }
 
-  @listen("change", "select")
+  @listen("change")
   onSelectChange() {
     const select = this.#select();
 

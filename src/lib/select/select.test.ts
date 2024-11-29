@@ -104,7 +104,7 @@ describe("usa-select", () => {
     const nativeSelect = select.shadowRoot!.querySelector("select")!;
     nativeSelect.value = "third";
 
-    await fireEvent.change(nativeSelect);
+    await fireEvent.change(nativeSelect, { bubbles: true });
 
     const value = new FormData(form);
 
