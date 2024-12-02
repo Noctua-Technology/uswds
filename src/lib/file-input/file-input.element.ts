@@ -19,14 +19,13 @@ declare global {
       }
 
       :host {
-        display: contents;
+        display: block;
+        max-width: 30rem;
+        position: relative;
       }
 
       label {
         display: block;
-        position: relative;
-        cursor: pointer;
-        max-width: 30rem;
       }
 
       input {
@@ -39,9 +38,10 @@ declare global {
         text-indent: -999em;
         top: 0;
         width: 100%;
+        z-index: 1;
       }
 
-      .label {
+      label slot {
         font-size: 1.06rem;
         line-height: 1.3;
         display: block;
@@ -62,20 +62,19 @@ declare global {
     `,
     html`
       <label>
-        <slot class="label"></slot>
-
+        <slot></slot>
         <input type="file" />
-
-        <div class="box">
-          <slot name="description">
-            Drag file here or <usa-link>choose from folder</usa-link>
-          </slot>
-        </div>
-
-        <usa-file-input-preview>
-          Selected file <usa-link>Change file</usa-link>
-        </usa-file-input-preview>
       </label>
+
+      <div class="box">
+        <slot name="description">
+          Drag file here or <usa-link>choose from folder</usa-link>
+        </slot>
+      </div>
+
+      <usa-file-input-preview>
+        Selected file <usa-link>Change file</usa-link>
+      </usa-file-input-preview>
     `,
   ],
 })
