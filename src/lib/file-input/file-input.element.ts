@@ -2,7 +2,7 @@ import "./file-input-preview.element.js";
 import "../link/link.element.js";
 
 import { attr, css, element, html, listen, query } from "@joist/element";
-import { observe } from "@joist/observable";
+import { effect, observe } from "@joist/observable";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -110,7 +110,8 @@ export class USAFileInputElement extends HTMLElement {
   #box = query(".box");
   #preview = query("usa-file-input-preview");
 
-  connectedCallback() {
+  @effect()
+  onChange() {
     const input = this.#input();
 
     if (this.files) {
@@ -127,7 +128,7 @@ export class USAFileInputElement extends HTMLElement {
   }
 
   @listen("change")
-  onChange() {
+  onInputChange() {
     const input = this.#input();
     const box = this.#box();
     const preview = this.#preview();
