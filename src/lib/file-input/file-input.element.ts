@@ -1,4 +1,5 @@
 import "./file-input-preview.element.js";
+import "../link/link.element.js";
 
 import { attr, css, element, html, listen, query } from "@joist/element";
 
@@ -17,26 +18,23 @@ declare global {
       }
 
       :host {
-        border: 1px dashed #adadad;
         display: block;
-        font-size: 0.93rem;
-        position: relative;
-        text-align: center;
-        width: 100%;
         max-width: 30rem;
+        position: relative;
       }
 
       label {
         display: block;
         position: relative;
+        cursor: pointer;
       }
 
-      slot {
+      slot[name="label"] {
         display: block;
-        padding: 2rem 1rem;
       }
 
-      .usa-file-input__choose {
+      span,
+      ::slotted(span) {
         color: #005ea2;
         text-decoration: underline;
         font-weight: 400;
@@ -54,17 +52,41 @@ declare global {
         top: 0;
         width: 100%;
       }
+
+      .label {
+        font-size: 1.06rem;
+        line-height: 1.3;
+        display: block;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+      }
+
+      .box {
+        border: 1px dashed #adadad;
+        display: block;
+        font-size: 0.93rem;
+        position: relative;
+        text-align: center;
+        width: 100%;
+        max-width: 30rem;
+        padding: 2rem 1rem;
+      }
     `,
     html`
       <label>
-        <input type="file" />
+        <slot class="label"></slot>
 
-        <slot>
-          <span class="usa-file-input__drag-text">Drag file here or</span>
-          <span class="usa-file-input__choose">choose from folder</span>
-        </slot>
+        <div class="box">
+          <input type="file" />
 
-        <usa-file-input-preview style="display: none;"></usa-file-input-preview>
+          <slot name="description">
+            Drag file here or <usa-link>choose from folder</usa-link>
+          </slot>
+        </div>
+
+        <usa-file-input-preview>
+          Selected file <usa-link>Change file</usa-link>
+        </usa-file-input-preview>
       </label>
     `,
   ],
@@ -78,15 +100,19 @@ export class USAFileInputElement extends HTMLElement {
   @attr()
   accessor multiple = true;
 
+  @attr()
+  accessor accept = "";
+
   #internals = this.attachInternals();
   #input = query("input");
-  #slot = query("slot");
+  #slot = query(".box");
   #preview = query("usa-file-input-preview");
 
   attributeChangedCallback() {
     const input = this.#input();
     input.name = this.name;
     input.multiple = this.multiple;
+    input.accept = this.accept;
   }
 
   @listen("change")
@@ -97,12 +123,6 @@ export class USAFileInputElement extends HTMLElement {
 
     preview.files = input.files;
 
-    if (input.files && input.files.length) {
-      slot.style.display = "none";
-      preview.style.display = "block";
-    } else {
-      slot.style.display = "block";
-      preview.style.display = "none";
-    }
+    slot.style.display = input.files ? "none" : "block";
   }
 }

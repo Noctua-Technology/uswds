@@ -16,8 +16,7 @@ declare global {
       }
 
       :host {
-        align-items: center;
-        display: flex;
+        display: none;
         font-size: 0.87rem;
         pointer-events: none;
         position: relative;
@@ -65,7 +64,9 @@ declare global {
       }
     `,
     html`
-      <div class="preview-heading">Selected file <span>Change file</span></div>
+      <slot class="preview-heading">
+        <slot></slot>
+      </slot>
 
       <div class="preview-content"></div>
     `,
@@ -77,12 +78,19 @@ export class USAFileInputPreviewElement extends HTMLElement {
 
   #content = query(".preview-content");
 
+  connectedCallback() {
+    if (this.files && this.files.length) {
+      this.style.display = "block";
+    }
+  }
+
   @effect()
   onChange() {
     const content = this.#content();
 
     if (this.files) {
       content.innerHTML = "";
+      this.style.display = "block";
 
       for (let file of this.files) {
         const item = document.createElement("div");
@@ -97,6 +105,8 @@ export class USAFileInputPreviewElement extends HTMLElement {
 
         content.append(item);
       }
+    } else {
+      this.style.display = "none";
     }
   }
 }

@@ -13,6 +13,7 @@ declare global {
       :host {
         display: inline;
         color: #005ea2;
+        text-decoration: underline;
       }
 
       a {

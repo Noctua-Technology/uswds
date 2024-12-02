@@ -10,7 +10,15 @@ const meta = {
   title: "usa-file-input",
   tags: ["autodocs"],
   render(args) {
-    return html`<usa-file-input></usa-file-input>`;
+    return html`
+      <usa-file-input>
+        Input accepts a single file
+
+        <div slot="description">
+          Drag file here or <usa-link>choose from folder</usa-link>
+        </div>
+      </usa-file-input>
+    `;
   },
   argTypes: {},
   args: {},
