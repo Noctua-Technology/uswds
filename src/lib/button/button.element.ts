@@ -202,7 +202,12 @@ export class USAButtonElement extends HTMLElement {
 
     if (form) {
       if (this.type === "submit") {
-        form.submit();
+        const btn = document.createElement("button");
+        btn.type = "submit";
+        form.append(btn);
+
+        btn.click();
+        btn.remove();
       } else if (this.type === "reset") {
         form.reset();
       }

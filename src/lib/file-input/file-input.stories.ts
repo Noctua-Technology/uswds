@@ -1,4 +1,5 @@
 import "./file-input.element.js";
+import "../button/button.element.js";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
@@ -28,7 +29,9 @@ const meta = {
           </div>
         </usa-file-input>
 
-        <button type="submit">SUBMIT</button>
+        <br />
+
+        <usa-button type="submit">SUBMIT</usa-button>
       </form>
     `;
   },
