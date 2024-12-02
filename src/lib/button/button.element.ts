@@ -1,4 +1,4 @@
-import { attr, css, element, html, listen, query, ready } from "@joist/element";
+import { attr, css, element, html, listen, query } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -189,29 +189,36 @@ export class USAButtonElement extends HTMLElement {
   onKeyDown(e: KeyboardEvent) {
     if (this.type === "submit") {
       if (e.key.toUpperCase() === "ENTER") {
-        if (this.#internals.form) {
-          this.#internals.form.submit();
-        }
+        this.#handleForm();
       }
     }
   }
 
   @listen("click")
   onInternalClick() {
-    const { form } = this.#internals;
-
-    if (form) {
-      if (this.type === "submit") {
-        form.submit();
-      } else if (this.type === "reset") {
-        form.reset();
-      }
-    }
+    this.#handleForm();
   }
 
   attributeChangedCallback() {
     const button = this.#button();
     button.type = this.type;
     button.disabled = this.disabled;
+  }
+
+  #handleForm() {
+    const { form } = this.#internals;
+
+    if (form) {
+      if (this.type === "submit") {
+        const btn = document.createElement("button");
+        btn.type = "submit";
+        form.append(btn);
+
+        btn.click();
+        btn.remove();
+      } else if (this.type === "reset") {
+        form.reset();
+      }
+    }
   }
 }
