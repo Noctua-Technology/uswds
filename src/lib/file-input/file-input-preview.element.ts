@@ -79,9 +79,7 @@ export class USAFileInputPreviewElement extends HTMLElement {
   #content = query(".preview-content");
 
   connectedCallback() {
-    if (this.files && this.files.length) {
-      this.style.display = "block";
-    }
+    this.onChange();
   }
 
   @effect()

@@ -10,14 +10,26 @@ const meta = {
   title: "usa-file-input",
   tags: ["autodocs"],
   render(args) {
-    return html`
-      <usa-file-input>
-        Input accepts a single file
+    function onSubmit(e: Event) {
+      e.preventDefault();
 
-        <div slot="description">
-          Drag file here or <usa-link>choose from folder</usa-link>
-        </div>
-      </usa-file-input>
+      const data = new FormData(e.target as HTMLFormElement);
+
+      console.log(data.getAll("upload"));
+    }
+
+    return html`
+      <form @submit=${onSubmit}>
+        <usa-file-input name="upload">
+          Input accepts a single file
+
+          <div slot="description">
+            Drag file here or <usa-link>choose from folder</usa-link>
+          </div>
+        </usa-file-input>
+
+        <button type="submit">SUBMIT</button>
+      </form>
     `;
   },
   argTypes: {},

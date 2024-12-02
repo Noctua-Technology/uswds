@@ -2,6 +2,7 @@ import "./file-input-preview.element.js";
 import "../link/link.element.js";
 
 import { attr, css, element, html, listen, query } from "@joist/element";
+import { observe } from "@joist/observable";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -103,10 +104,22 @@ export class USAFileInputElement extends HTMLElement {
   @attr()
   accessor accept = "";
 
+  @observe()
+  accessor files: FileList | null = null;
+
   #internals = this.attachInternals();
   #input = query("input");
   #slot = query(".box");
   #preview = query("usa-file-input-preview");
+
+  connectedCallback() {
+    const input = this.#input();
+
+    if (this.files) {
+      input.files = this.files;
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+  }
 
   attributeChangedCallback() {
     const input = this.#input();
@@ -123,6 +136,18 @@ export class USAFileInputElement extends HTMLElement {
 
     preview.files = input.files;
 
-    slot.style.display = input.files ? "none" : "block";
+    const formData = new FormData();
+
+    if (input.files) {
+      slot.style.display = "none";
+
+      for (let file of input.files) {
+        formData.append(this.name, file);
+      }
+    } else {
+      slot.style.display = "block";
+    }
+
+    this.#internals.setFormValue(formData);
   }
 }
