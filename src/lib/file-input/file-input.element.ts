@@ -29,17 +29,6 @@ declare global {
         max-width: 30rem;
       }
 
-      slot[name="label"] {
-        display: block;
-      }
-
-      span,
-      ::slotted(span) {
-        color: #005ea2;
-        text-decoration: underline;
-        font-weight: 400;
-      }
-
       input {
         cursor: pointer;
         height: 100%;
