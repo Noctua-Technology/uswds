@@ -16,13 +16,17 @@ declare global {
       }
 
       :host {
-        display: none;
+        display: block;
         font-size: 0.87rem;
         pointer-events: none;
         position: relative;
         text-align: left;
         word-wrap: anywhere;
         z-index: 3;
+      }
+
+      :host([hidden]) {
+        display: none;
       }
 
       img {
@@ -48,13 +52,7 @@ declare global {
         text-align: left;
       }
 
-      .preview-heading span {
-        color: #005ea2;
-        text-decoration: underline;
-        font-weight: 400;
-      }
-
-      .preview-content > * {
+      .preview-item {
         align-items: center;
         background: #d9e8f6;
         display: flex;
@@ -63,20 +61,14 @@ declare global {
         margin-top: 1px;
       }
     `,
-    html`
-      <slot class="preview-heading">
-        <slot></slot>
-      </slot>
-
-      <div class="preview-content"></div>
-    `,
+    html`<slot class="preview-heading"></slot>`,
   ],
 })
 export class USAFileInputPreviewElement extends HTMLElement {
   @observe()
   accessor files: FileList | null = null;
 
-  #content = query(".preview-content");
+  #items = new Map<string, HTMLElement>();
 
   connectedCallback() {
     this.onChange();
@@ -84,27 +76,45 @@ export class USAFileInputPreviewElement extends HTMLElement {
 
   @effect()
   onChange() {
-    const content = this.#content();
-
     if (this.files) {
-      content.innerHTML = "";
-      this.style.display = "block";
+      this.hidden = false;
+
+      let names = new Set<string>();
 
       for (let file of this.files) {
-        const item = document.createElement("div");
-        item.id = file.name;
+        names.add(file.name);
 
-        const img = new Image();
-        img.height = 40;
-        img.width = 40;
-        img.src = URL.createObjectURL(file);
+        if (!this.#items.has(file.name)) {
+          const item = document.createElement("div");
+          item.id = file.name;
+          item.className = "preview-item";
 
-        item.append(img, document.createTextNode(file.name));
+          const img = createImagePreview(file);
 
-        content.append(item);
+          item.append(img, document.createTextNode(file.name));
+
+          this.shadowRoot!.append(item);
+          this.#items.set(file.name, item);
+        }
+      }
+
+      for (let [name, item] of this.#items) {
+        if (!names.has(name)) {
+          item.remove();
+          this.#items.delete(name);
+        }
       }
     } else {
-      this.style.display = "none";
+      this.hidden = true;
     }
   }
+}
+
+function createImagePreview(file: File) {
+  const img = new Image();
+  img.height = 40;
+  img.width = 40;
+  img.src = URL.createObjectURL(file);
+
+  return img;
 }

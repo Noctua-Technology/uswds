@@ -189,15 +189,23 @@ export class USAButtonElement extends HTMLElement {
   onKeyDown(e: KeyboardEvent) {
     if (this.type === "submit") {
       if (e.key.toUpperCase() === "ENTER") {
-        if (this.#internals.form) {
-          this.#internals.form.submit();
-        }
+        this.#handleForm();
       }
     }
   }
 
   @listen("click")
   onInternalClick() {
+    this.#handleForm();
+  }
+
+  attributeChangedCallback() {
+    const button = this.#button();
+    button.type = this.type;
+    button.disabled = this.disabled;
+  }
+
+  #handleForm() {
     const { form } = this.#internals;
 
     if (form) {
@@ -212,11 +220,5 @@ export class USAButtonElement extends HTMLElement {
         form.reset();
       }
     }
-  }
-
-  attributeChangedCallback() {
-    const button = this.#button();
-    button.type = this.type;
-    button.disabled = this.disabled;
   }
 }

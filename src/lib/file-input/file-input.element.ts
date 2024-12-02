@@ -19,15 +19,14 @@ declare global {
       }
 
       :host {
-        display: block;
-        max-width: 30rem;
-        position: relative;
+        display: contents;
       }
 
       label {
         display: block;
         position: relative;
         cursor: pointer;
+        max-width: 30rem;
       }
 
       slot[name="label"] {
@@ -48,7 +47,6 @@ declare global {
         margin: 0;
         max-width: none;
         position: absolute;
-        padding: 0.5rem;
         text-indent: -999em;
         top: 0;
         width: 100%;
@@ -77,9 +75,9 @@ declare global {
       <label>
         <slot class="label"></slot>
 
-        <div class="box">
-          <input type="file" />
+        <input type="file" />
 
+        <div class="box">
           <slot name="description">
             Drag file here or <usa-link>choose from folder</usa-link>
           </slot>
@@ -109,7 +107,7 @@ export class USAFileInputElement extends HTMLElement {
 
   #internals = this.attachInternals();
   #input = query("input");
-  #slot = query(".box");
+  #box = query(".box");
   #preview = query("usa-file-input-preview");
 
   connectedCallback() {
@@ -131,7 +129,7 @@ export class USAFileInputElement extends HTMLElement {
   @listen("change")
   onChange() {
     const input = this.#input();
-    const slot = this.#slot();
+    const box = this.#box();
     const preview = this.#preview();
 
     preview.files = input.files;
@@ -139,13 +137,13 @@ export class USAFileInputElement extends HTMLElement {
     const formData = new FormData();
 
     if (input.files) {
-      slot.style.display = "none";
+      box.style.display = "none";
 
       for (let file of input.files) {
         formData.append(this.name, file);
       }
     } else {
-      slot.style.display = "block";
+      box.style.display = "block";
     }
 
     this.#internals.setFormValue(formData);
