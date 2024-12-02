@@ -34,13 +34,14 @@ describe("usa-file-input", () => {
 
     const formData = new FormData(form);
 
-    assert.deepEqual(
-      formData.getAll("upload").map((file) => {
-        if (file instanceof File) {
-          return file.name;
-        }
-      }),
-      ["first.txt", "second.txt"]
-    );
+    const fileNames = formData.getAll("upload").map((file) => {
+      if (file instanceof File) {
+        return file.name;
+      }
+
+      return "";
+    });
+
+    assert.deepEqual(fileNames, ["first.txt", "second.txt"]);
   });
 });
