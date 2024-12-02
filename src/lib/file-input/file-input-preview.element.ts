@@ -115,6 +115,7 @@ function createImagePreview(file: File) {
   img.height = 40;
   img.width = 40;
   img.src = URL.createObjectURL(file);
+  img.ariaHidden = "true";
 
   return img;
 }

@@ -6,9 +6,23 @@ import { assert, fixture, html } from "@open-wc/testing";
 import { USAFileInputPreviewElement } from "./file-input-preview.element.js";
 
 describe("usa-file-input-preview", () => {
-  it("should be accessible", async () => {
+  it("should be accessible with no files", async () => {
     const fileInputPreview = await fixture<USAFileInputPreviewElement>(html`
       <usa-file-input-preview>
+        Selected file <usa-link>Change file</usa-link>
+      </usa-file-input-preview>
+    `);
+
+    return assert.isAccessible(fileInputPreview);
+  });
+
+  it("should be accessible with files", async () => {
+    const data = new DataTransfer();
+    data.items.add(new File([], "image1.jpg"));
+    data.items.add(new File([], "image2.jpg"));
+
+    const fileInputPreview = await fixture<USAFileInputPreviewElement>(html`
+      <usa-file-input-preview .files=${data.files}>
         Selected file <usa-link>Change file</usa-link>
       </usa-file-input-preview>
     `);
