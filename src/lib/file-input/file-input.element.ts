@@ -116,7 +116,7 @@ export class USAFileInputElement extends HTMLElement {
 
     if (this.files) {
       input.files = this.files;
-      input.dispatchEvent(new Event("change", { bubbles: true }));
+      this.onInputChange();
     }
   }
 
