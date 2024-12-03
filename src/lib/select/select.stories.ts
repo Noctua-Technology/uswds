@@ -1,7 +1,3 @@
-import "./select.element.js";
-import "./select-option.element.js";
-import "../icon/icon.element.js";
-
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 

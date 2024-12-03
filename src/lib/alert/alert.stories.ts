@@ -1,7 +1,3 @@
-import "./alert.element.js";
-import "../link/link.element.js";
-import "../icon/icon.element.js";
-
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
@@ -23,53 +19,47 @@ type Story = StoryObj<USAAlertElement>;
 export const Primary: Story = {
   render() {
     return html`
-      <usa-alert type="info">
-        <h3 slot="heading">Informative status</h3>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <usa-alert type="info">
+          <h3 slot="heading">Informative status</h3>
 
-        Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-        eiusmod.
-      </usa-alert>
+          Lorem ipsum dolor sit amet,&nbsp;
+          <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
+          eiusmod.
+        </usa-alert>
 
-      <br />
+        <usa-alert type="warning">
+          <h3 slot="heading">Warning status</h3>
 
-      <usa-alert type="warning">
-        <h3 slot="heading">Warning status</h3>
+          Lorem ipsum dolor sit amet,&nbsp;
+          <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
+          eiusmod.
+        </usa-alert>
 
-        Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-        eiusmod.
-      </usa-alert>
+        <usa-alert type="success">
+          <h3 slot="heading">Success status</h3>
 
-      <br />
+          Lorem ipsum dolor sit amet,&nbsp;
+          <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
+          eiusmod.
+        </usa-alert>
 
-      <usa-alert type="success">
-        <h3 slot="heading">Success status</h3>
+        <usa-alert type="error">
+          <h3 slot="heading">Error status</h3>
 
-        Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-        eiusmod.
-      </usa-alert>
+          Lorem ipsum dolor sit amet,&nbsp;
+          <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
+          eiusmod.
+        </usa-alert>
 
-      <br />
+        <usa-alert type="emergency">
+          <h3 slot="heading">Emergency status</h3>
 
-      <usa-alert type="error">
-        <h3 slot="heading">Error status</h3>
-
-        Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-        eiusmod.
-      </usa-alert>
-
-      <br />
-
-      <usa-alert type="emergency">
-        <h3 slot="heading">Emergency status</h3>
-
-        Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-        eiusmod.
-      </usa-alert>
+          Lorem ipsum dolor sit amet,&nbsp;
+          <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
+          eiusmod.
+        </usa-alert>
+      </div>
     `;
   },
 };
