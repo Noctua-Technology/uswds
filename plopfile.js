@@ -26,7 +26,6 @@ export default function (plop) {
       {
         type: "modify",
         path: "src/define.ts",
-        unique: true,
         transform(template, { name }) {
           const kebabCase = plop.getHelper("kebabCase")(name);
           const imprt = `import "./lib/${kebabCase}/${kebabCase}.element.js"`;
@@ -36,6 +35,22 @@ export default function (plop) {
           }
 
           return `${template.trim()}\n${imprt}`;
+        },
+      },
+      {
+        type: "modify",
+        path: "src/lib.ts",
+        transform(template, { name }) {
+          const kebabCase = plop.getHelper("kebabCase")(name);
+          const pascalCase = plop.getHelper("pascalCase")(name);
+
+          const exprt = `export { USA${pascalCase}Element } from "./lib/${kebabCase}/${kebabCase}.element.js";`;
+
+          if (template.includes(exprt)) {
+            return template;
+          }
+
+          return `${template.trim()}\n${exprt}`;
         },
       },
     ],
