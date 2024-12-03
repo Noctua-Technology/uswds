@@ -23,6 +23,21 @@ export default function (plop) {
         base: "generators/element",
         templateFiles: "generators/element",
       },
+      {
+        type: "modify",
+        path: "src/define.ts",
+        unique: true,
+        transform(template, { name }) {
+          const kebabCase = plop.getHelper("kebabCase")(name);
+          const imprt = `import "./lib/${kebabCase}/${kebabCase}.element.js"`;
+
+          if (template.includes(imprt)) {
+            return template;
+          }
+
+          return `${template.trim()}\n${imprt}`;
+        },
+      },
     ],
   });
 }
