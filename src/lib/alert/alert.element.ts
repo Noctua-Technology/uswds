@@ -45,8 +45,8 @@ declare global {
         color: #fff;
       }
 
-      :host([type="emergency"]) ::slotted(usa-link) {
-        color: #fff !important;
+      :host([type="emergency"]) ::slotted(*) {
+        color: #fff;
       }
 
       .alert-heading {

@@ -1,6 +1,8 @@
 import { attr, css, element, html, query } from "@joist/element";
+import { inject, injectable } from "@joist/di";
 
 import { USAIcon } from "./icon-types.js";
+import { USAConfig } from "../config/config.element.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -32,17 +34,32 @@ declare global {
     `,
   ],
 })
+@injectable()
 export class USAIconElement extends HTMLElement {
   @attr()
   accessor icon: USAIcon = "accessibility_new";
 
   #use = query("use");
+  #config = inject(USAConfig);
+  #connected = false;
+
+  connectedCallback() {
+    this.#connected = true;
+    this.#updateIcon();
+  }
 
   attributeChangedCallback() {
+    if (this.#connected) {
+      this.#updateIcon();
+    }
+  }
+
+  #updateIcon() {
+    const config = this.#config();
     const use = this.#use();
 
     if (this.icon !== use.getAttribute("href")) {
-      use.setAttribute("href", `/assets/img/sprite.svg#${this.icon}`);
+      use.setAttribute("href", `${config.spriteSheet}#${this.icon}`);
     }
   }
 }

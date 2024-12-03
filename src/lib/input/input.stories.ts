@@ -1,6 +1,3 @@
-import "./input.element.js";
-import "../button/button.element.js";
-
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 

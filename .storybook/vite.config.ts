@@ -4,4 +4,5 @@ export default defineConfig({
   esbuild: {
     target: "es2022",
   },
+  mode: "production",
 });

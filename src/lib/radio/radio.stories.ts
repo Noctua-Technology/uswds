@@ -1,7 +1,3 @@
-import "./radio.element.js";
-import "./radio-option.element.js";
-import "../description/description.element.js";
-
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
