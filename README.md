@@ -35,38 +35,6 @@ https://designsystem.digital.gov/
     <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
     eiusmod.
   </usa-alert>
-
-  <usa-alert type="warning">
-    <h3 slot="heading">Warning status</h3>
-
-    Lorem ipsum dolor sit amet,&nbsp;
-    <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-    eiusmod.
-  </usa-alert>
-
-  <usa-alert type="success">
-    <h3 slot="heading">Success status</h3>
-
-    Lorem ipsum dolor sit amet,&nbsp;
-    <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-    eiusmod.
-  </usa-alert>
-
-  <usa-alert type="error">
-    <h3 slot="heading">Error status</h3>
-
-    Lorem ipsum dolor sit amet,&nbsp;
-    <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-    eiusmod.
-  </usa-alert>
-
-  <usa-alert type="emergency">
-    <h3 slot="heading">Emergency status</h3>
-
-    Lorem ipsum dolor sit amet,&nbsp;
-    <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-    eiusmod.
-  </usa-alert>
 </usa-config>
 ```
 
