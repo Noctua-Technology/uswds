@@ -23,7 +23,7 @@ https://designsystem.digital.gov/
   }
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/@noctuatech/uswds@latest/uswds.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@noctuatech/uswds@latest/assets/uswds.min.js"></script>
 
 <usa-config
   spritesheet="https://cdn.jsdelivr.net/npm/@noctuatech/uswds@latest/assets/img/sprite.svg"
