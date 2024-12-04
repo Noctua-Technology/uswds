@@ -14,7 +14,7 @@
   "files": [
     "src",
     "target",
-    "public"
+    "assets"
   ],
   "scripts": {
     "test": "wireit",
