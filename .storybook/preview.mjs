@@ -1,4 +1,4 @@
-import "../src/define";
+import "../src/lib/define";
 
 import * as format from "js-beautify";
 import { html } from "lit";
