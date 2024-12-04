@@ -137,4 +137,4 @@ target
 storybook-static
 *.d.ts
 *.js.map
-*.js
+assets/uswds.min.js
