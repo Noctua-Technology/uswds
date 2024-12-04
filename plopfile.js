@@ -25,7 +25,7 @@ export default function (plop) {
       },
       {
         type: "modify",
-        path: "src/define.ts",
+        path: "src/lib/define.ts",
         transform(template, { name }) {
           const kebabCase = plop.getHelper("kebabCase")(name);
           const imprt = `import "./lib/${kebabCase}/${kebabCase}.element.js"`;
