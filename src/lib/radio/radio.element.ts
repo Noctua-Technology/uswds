@@ -14,6 +14,7 @@ declare global {
     css`
       :host {
         display: block;
+        max-width: 30rem;
       }
 
       .radios {
@@ -43,6 +44,7 @@ declare global {
         width: 1.25rem;
         background: #fff;
         box-shadow: 0 0 0 2px #1b1b1b;
+        flex: 0 0 1.25rem;
       }
 
       label:has(input:checked)::before {

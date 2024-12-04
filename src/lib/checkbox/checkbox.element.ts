@@ -23,6 +23,7 @@ declare global {
           Roboto,
           Arial,
           sans-serif;
+        max-width: 30rem;
       }
 
       :host([tiled]) label {
