@@ -1,6 +1,3 @@
-import "../input/input.element.js";
-import "./input-mask.element.js";
-
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
@@ -12,19 +9,17 @@ const meta = {
   tags: ["autodocs"],
   render(args) {
     return html`
-      <form>
-        <usa-input-mask>
-          <usa-input
-            name="phone"
-            placeholder=${args.mask}
-            autocomplete="off"
-            mask=${args.mask}
-            value="3042616138"
-          >
-            Phone:
-          </usa-input>
-        </usa-input-mask>
-      </form>
+      <usa-input-mask>
+        <usa-input
+          name="phone"
+          placeholder=${args.mask}
+          autocomplete="off"
+          mask=${args.mask}
+          value="3042616138"
+        >
+          Phone:
+        </usa-input>
+      </usa-input-mask>
     `;
   },
   argTypes: {},

@@ -23,6 +23,36 @@ export default function (plop) {
         base: "generators/element",
         templateFiles: "generators/element",
       },
+      {
+        type: "modify",
+        path: "src/define.ts",
+        transform(template, { name }) {
+          const kebabCase = plop.getHelper("kebabCase")(name);
+          const imprt = `import "./lib/${kebabCase}/${kebabCase}.element.js"`;
+
+          if (template.includes(imprt)) {
+            return template;
+          }
+
+          return `${template.trim()}\n${imprt}`;
+        },
+      },
+      {
+        type: "modify",
+        path: "src/lib.ts",
+        transform(template, { name }) {
+          const kebabCase = plop.getHelper("kebabCase")(name);
+          const pascalCase = plop.getHelper("pascalCase")(name);
+
+          const exprt = `export { USA${pascalCase}Element } from "./lib/${kebabCase}/${kebabCase}.element.js";`;
+
+          if (template.includes(exprt)) {
+            return template;
+          }
+
+          return `${template.trim()}\n${exprt}`;
+        },
+      },
     ],
   });
 }

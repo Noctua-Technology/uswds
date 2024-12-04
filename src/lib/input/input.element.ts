@@ -30,6 +30,7 @@ declare global {
         display: block;
         font-weight: 400;
         max-width: 30rem;
+        margin-bottom: 1.5rem;
       }
 
       input {

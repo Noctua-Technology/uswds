@@ -17,6 +17,7 @@ declare global {
         border-left: 0.5rem solid #adadad;
         padding: 1rem 1.2rem;
         color: #1b1b1b;
+        margin-bottom: 1rem;
       }
 
       :host([type="info"]) {
@@ -45,8 +46,8 @@ declare global {
         color: #fff;
       }
 
-      :host([type="emergency"]) ::slotted(usa-link) {
-        color: #fff !important;
+      :host([type="emergency"]) ::slotted(*) {
+        color: #fff;
       }
 
       .alert-heading {

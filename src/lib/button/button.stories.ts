@@ -1,5 +1,3 @@
-import "./button.element.js";
-
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
@@ -13,9 +11,11 @@ const meta = {
     return html`
       <div style="display: inline-flex; flex-direction: column; gap: 1rem">
         ${BUTTON_VARIANTS.map(
-          (variant, i) => html`
-            <usa-button variant=${variant}>Hello World</usa-button>
-          `
+          (variant, i) =>
+            html`<usa-button variant=${variant}>Hello World</usa-button> ${i ===
+              BUTTON_VARIANTS.length - 1
+                ? ""
+                : "\n\n"}`
         )}
       </div>
     `;

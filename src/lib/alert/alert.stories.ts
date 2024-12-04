@@ -1,7 +1,3 @@
-import "./alert.element.js";
-import "../link/link.element.js";
-import "../icon/icon.element.js";
-
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
@@ -31,8 +27,6 @@ export const Primary: Story = {
         eiusmod.
       </usa-alert>
 
-      <br />
-
       <usa-alert type="warning">
         <h3 slot="heading">Warning status</h3>
 
@@ -40,8 +34,6 @@ export const Primary: Story = {
         <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
         eiusmod.
       </usa-alert>
-
-      <br />
 
       <usa-alert type="success">
         <h3 slot="heading">Success status</h3>
@@ -51,8 +43,6 @@ export const Primary: Story = {
         eiusmod.
       </usa-alert>
 
-      <br />
-
       <usa-alert type="error">
         <h3 slot="heading">Error status</h3>
 
@@ -60,8 +50,6 @@ export const Primary: Story = {
         <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
         eiusmod.
       </usa-alert>
-
-      <br />
 
       <usa-alert type="emergency">
         <h3 slot="heading">Emergency status</h3>
