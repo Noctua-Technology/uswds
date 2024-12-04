@@ -5,7 +5,7 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 export default {
   input: "target/lib/define.js",
   output: {
-    file: "public/uswds.min.js",
+    file: "assets/uswds.min.js",
     format: "iife",
   },
   plugins: [
