@@ -108,4 +108,51 @@ describe("usa-accordion", () => {
       [false, false, true]
     );
   });
+
+  it("should not close accordion not in the same group", async () => {
+    const el = await fixture(html`
+      <section>
+        <usa-accordion name="ammendment">
+          <h4 slot="heading">First Ammendment</h4>
+        </usa-accordion>
+
+        <usa-accordion name="ammendment">
+          <h4 slot="heading">Second Ammendment</h4>
+        </usa-accordion>
+
+        <usa-accordion name="anotherone">
+          <h4 slot="heading">Third Ammendment</h4>
+        </usa-accordion>
+      </section>
+    `);
+
+    const accordion = Array.from(el.querySelectorAll("usa-accordion"));
+
+    const details = accordion.map(
+      (el) => el.shadowRoot!.querySelector("details")!
+    );
+
+    const summaries = details.map((el) => el.querySelector("summary")!);
+
+    summaries[0].click();
+
+    assert.deepEqual(
+      details.map((detail) => detail.open),
+      [true, false, false]
+    );
+
+    summaries[1].click();
+
+    assert.deepEqual(
+      details.map((detail) => detail.open),
+      [false, true, false]
+    );
+
+    summaries[2].click();
+
+    assert.deepEqual(
+      details.map((detail) => detail.open),
+      [false, true, true]
+    );
+  });
 });
