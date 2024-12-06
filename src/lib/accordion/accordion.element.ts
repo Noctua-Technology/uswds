@@ -126,8 +126,8 @@ export class USAAccordionElement extends HTMLElement {
   onClick(e: Event) {
     e.preventDefault();
 
+    // force focus to the summary element
     const summary = this.#summary();
-
     summary.focus();
 
     this.dispatchEvent(new USAAccordionToggleEvent(!this.open));
