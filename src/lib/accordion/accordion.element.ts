@@ -22,6 +22,10 @@ class USAAccordionToggleEvent extends Event {
 
 @element({
   tagName: "usa-accordion",
+  shadowDomOpts: {
+    mode: "open",
+    delegatesFocus: true,
+  },
   shadowDom: [
     css`
       * {
@@ -115,7 +119,6 @@ export class USAAccordionElement extends HTMLElement {
   accessor open = false;
 
   #details = query("details");
-  #summary = query("summary");
 
   attributeChangedCallback() {
     const details = this.#details();
@@ -125,10 +128,6 @@ export class USAAccordionElement extends HTMLElement {
   @listen("click", "summary")
   onClick(e: Event) {
     e.preventDefault();
-
-    // force focus to the summary element
-    const summary = this.#summary();
-    summary.focus();
 
     this.dispatchEvent(new USAAccordionToggleEvent(!this.open));
   }
