@@ -11,3 +11,4 @@ export { USARadioOptionElement } from "./lib/radio/radio-option.element.js";
 export { USASelectElement } from "./lib/select/select.element.js";
 export { USASelecOptionElement } from "./lib/select/select-option.element.js";
 export { USATagElement } from "./lib/tag/tag.element.js";
+export { USAAccordionElement } from "./lib/accordion/accordion.element.js";
