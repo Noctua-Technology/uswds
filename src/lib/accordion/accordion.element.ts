@@ -115,6 +115,7 @@ export class USAAccordionElement extends HTMLElement {
   accessor open = false;
 
   #details = query("details");
+  #summary = query("summary");
 
   attributeChangedCallback() {
     const details = this.#details();
@@ -125,6 +126,10 @@ export class USAAccordionElement extends HTMLElement {
   onClick(e: Event) {
     e.preventDefault();
 
+    const summary = this.#summary();
+
+    summary.focus();
+
     this.dispatchEvent(new USAAccordionToggleEvent(!this.open));
   }
 
@@ -132,7 +137,7 @@ export class USAAccordionElement extends HTMLElement {
   onAccordionToggle(e: USAAccordionToggleEvent) {
     if (e.target.name === this.name) {
       this.open = e.target === this && e.open;
-    } else {
+    } else if (e.target === this) {
       this.open = e.open;
     }
   }
