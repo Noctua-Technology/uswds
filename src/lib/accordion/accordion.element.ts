@@ -29,7 +29,7 @@ class USAAccordionToggleEvent extends Event {
       }
 
       :host {
-        display: contents;
+        display: block;
       }
 
       :host(:not(:first-child)) summary {
@@ -46,9 +46,6 @@ class USAAccordionToggleEvent extends Event {
         padding: 0;
         color: #1b1b1b;
         background-color: #f0f0f0;
-        background-repeat: no-repeat;
-        background-position: right 1.25rem center;
-        background-size: 1.5rem;
         cursor: pointer;
         display: flex;
         font-weight: 700;
@@ -127,6 +124,7 @@ export class USAAccordionElement extends HTMLElement {
   @listen("click", "summary")
   onClick(e: Event) {
     e.preventDefault();
+
     this.dispatchEvent(new USAAccordionToggleEvent(!this.open));
   }
 

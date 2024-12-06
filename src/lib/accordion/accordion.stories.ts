@@ -10,7 +10,9 @@ const meta = {
   render(args) {
     return html`
       <usa-accordion id="first" name="ammendment">
-        <h4 slot="heading">First Ammendment</h4>
+        <usa-summary-heading slot="heading">
+          First Ammendment
+        </usa-summary-heading>
 
         Congress shall make no law respecting an establishment of religion, or
         prohibiting the free exercise thereof; or abridging the freedom of
