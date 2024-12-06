@@ -77,9 +77,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@joist/di": "^4.0.0-next.26",
-    "@joist/element": "^4.0.0-next.26",
-    "@joist/observable": "^4.0.0-next.26",
+    "@joist/di": "^4.0.0-next.29",
+    "@joist/element": "^4.0.0-next.29",
+    "@joist/observable": "^4.0.0-next.29",
     "tslib": "2.8.1"
   },
   "devDependencies": {
