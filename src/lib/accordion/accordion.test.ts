@@ -10,10 +10,12 @@ describe("usa-accordion", () => {
       <usa-accordion id="first" name="ammendment">
         <h4 slot="heading">First Ammendment</h4>
 
-        Congress shall make no law respecting an establishment of religion, or
-        prohibiting the free exercise thereof; or abridging the freedom of
-        speech, or of the press; or the right of the people peaceably to
-        assemble, and to petition the Government for a redress of grievances.
+        <div class="content">
+          Congress shall make no law respecting an establishment of religion, or
+          prohibiting the free exercise thereof; or abridging the freedom of
+          speech, or of the press; or the right of the people peaceably to
+          assemble, and to petition the Government for a redress of grievances.
+        </div>
       </usa-accordion>
     `);
 
@@ -25,19 +27,21 @@ describe("usa-accordion", () => {
       <usa-accordion id="first" name="ammendment">
         <h4 slot="heading">First Ammendment</h4>
 
-        Congress shall make no law respecting an establishment of religion, or
-        prohibiting the free exercise thereof; or abridging the freedom of
-        speech, or of the press; or the right of the people peaceably to
-        assemble, and to petition the Government for a redress of grievances.
+        <div class="content">
+          Congress shall make no law respecting an establishment of religion, or
+          prohibiting the free exercise thereof; or abridging the freedom of
+          speech, or of the press; or the right of the people peaceably to
+          assemble, and to petition the Government for a redress of grievances.
+        </div>
       </usa-accordion>
     `);
 
-    const details = accordion.shadowRoot!.querySelector("details")!;
-    const summary = details.querySelector("summary")!;
+    const heading = accordion.querySelector("h4")!;
+    const content = accordion.querySelector<HTMLDivElement>(".content")!;
 
-    summary.click();
+    heading.click();
 
-    assert.isTrue(details.open);
+    assert.isTrue(content.checkVisibility());
   });
 
   it("should toggle the open state when clicked", async () => {
@@ -45,21 +49,23 @@ describe("usa-accordion", () => {
       <usa-accordion id="first" name="ammendment">
         <h4 slot="heading">First Ammendment</h4>
 
-        Congress shall make no law respecting an establishment of religion, or
-        prohibiting the free exercise thereof; or abridging the freedom of
-        speech, or of the press; or the right of the people peaceably to
-        assemble, and to petition the Government for a redress of grievances.
+        <div class="content">
+          Congress shall make no law respecting an establishment of religion, or
+          prohibiting the free exercise thereof; or abridging the freedom of
+          speech, or of the press; or the right of the people peaceably to
+          assemble, and to petition the Government for a redress of grievances.
+        </div>
       </usa-accordion>
     `);
 
-    const details = accordion.shadowRoot!.querySelector("details")!;
-    const summary = details.querySelector("summary")!;
+    const heading = accordion.querySelector("h4")!;
+    const content = accordion.querySelector<HTMLDivElement>(".content")!;
 
-    assert.isFalse(details.open);
+    assert.isFalse(content.checkVisibility());
 
-    summary.click();
+    heading.click();
 
-    assert.isTrue(details.open);
+    assert.isTrue(content.checkVisibility());
   });
 
   it("should only allow a single accordion in a group to be open", async () => {
@@ -67,44 +73,42 @@ describe("usa-accordion", () => {
       <section>
         <usa-accordion name="ammendment">
           <h4 slot="heading">First Ammendment</h4>
+          <div class="content">Content for First</div>
         </usa-accordion>
 
         <usa-accordion name="ammendment">
           <h4 slot="heading">Second Ammendment</h4>
+          <div class="content">Content for Second</div>
         </usa-accordion>
 
         <usa-accordion name="ammendment">
           <h4 slot="heading">Third Ammendment</h4>
+          <div class="content">Content for Third</div>
         </usa-accordion>
       </section>
     `);
 
-    const accordion = Array.from(el.querySelectorAll("usa-accordion"));
+    const headings = el.querySelectorAll("h4");
+    const content = Array.from(el.querySelectorAll<HTMLDivElement>(".content"));
 
-    const details = accordion.map(
-      (el) => el.shadowRoot!.querySelector("details")!
-    );
-
-    const summaries = details.map((el) => el.querySelector("summary")!);
-
-    summaries[0].click();
+    headings[0].click();
 
     assert.deepEqual(
-      details.map((detail) => detail.open),
+      content.map((el) => el.checkVisibility()),
       [true, false, false]
     );
 
-    summaries[1].click();
+    headings[1].click();
 
     assert.deepEqual(
-      details.map((detail) => detail.open),
+      content.map((el) => el.checkVisibility()),
       [false, true, false]
     );
 
-    summaries[2].click();
+    headings[2].click();
 
     assert.deepEqual(
-      details.map((detail) => detail.open),
+      content.map((el) => el.checkVisibility()),
       [false, false, true]
     );
   });
@@ -114,44 +118,42 @@ describe("usa-accordion", () => {
       <section>
         <usa-accordion name="ammendment">
           <h4 slot="heading">First Ammendment</h4>
+          <div class="content">Content for First</div>
         </usa-accordion>
 
         <usa-accordion name="ammendment">
           <h4 slot="heading">Second Ammendment</h4>
+          <div class="content">Content for Second</div>
         </usa-accordion>
 
-        <usa-accordion name="anotherone">
+        <usa-accordion name="different">
           <h4 slot="heading">Third Ammendment</h4>
+          <div class="content">Content for Third</div>
         </usa-accordion>
       </section>
     `);
 
-    const accordion = Array.from(el.querySelectorAll("usa-accordion"));
+    const headings = el.querySelectorAll("h4");
+    const content = Array.from(el.querySelectorAll<HTMLDivElement>(".content"));
 
-    const details = accordion.map(
-      (el) => el.shadowRoot!.querySelector("details")!
-    );
-
-    const summaries = details.map((el) => el.querySelector("summary")!);
-
-    summaries[0].click();
+    headings[0].click();
 
     assert.deepEqual(
-      details.map((detail) => detail.open),
+      content.map((el) => el.checkVisibility()),
       [true, false, false]
     );
 
-    summaries[1].click();
+    headings[1].click();
 
     assert.deepEqual(
-      details.map((detail) => detail.open),
+      content.map((el) => el.checkVisibility()),
       [false, true, false]
     );
 
-    summaries[2].click();
+    headings[2].click();
 
     assert.deepEqual(
-      details.map((detail) => detail.open),
+      content.map((el) => el.checkVisibility()),
       [false, true, true]
     );
   });
