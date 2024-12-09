@@ -12,3 +12,4 @@ export { USASelectElement } from "./lib/select/select.element.js";
 export { USASelecOptionElement } from "./lib/select/select-option.element.js";
 export { USATagElement } from "./lib/tag/tag.element.js";
 export { USAAccordionElement } from "./lib/accordion/accordion.element.js";
+export { USASideNavElement } from "./lib/side-nav/side-nav.element.js";

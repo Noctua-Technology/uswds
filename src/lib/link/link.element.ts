@@ -11,13 +11,14 @@ declare global {
   shadowDom: [
     css`
       :host {
-        display: inline;
+        display: inline-flex;
         color: #005ea2;
         text-decoration: underline;
       }
 
       a {
         color: inherit;
+        text-decoration: inherit;
       }
     `,
     html`
