@@ -14,36 +14,36 @@ const meta = {
           <usa-link href="#">Current Page</usa-link>
 
           <usa-side-nav-item slot="children">
-            <usa-link href="#">Child Link</usa-link>
+            <usa-link href="#">Child</usa-link>
           </usa-side-nav-item>
 
           <usa-side-nav-item slot="children" current>
-            <usa-link href="#">Child Link</usa-link>
+            <usa-link href="#">Child</usa-link>
 
             <usa-side-nav-item slot="children">
-              <usa-link href="#">Child Link</usa-link>
+              <usa-link href="#">Grandchild</usa-link>
             </usa-side-nav-item>
 
             <usa-side-nav-item slot="children" current>
-              <usa-link href="#">Child Link</usa-link>
+              <usa-link href="#">Grandchild</usa-link>
             </usa-side-nav-item>
 
             <usa-side-nav-item slot="children">
-              <usa-link href="#">Child Link</usa-link>
+              <usa-link href="#">Grandchild</usa-link>
             </usa-side-nav-item>
           </usa-side-nav-item>
 
           <usa-side-nav-item slot="children">
-            <usa-link href="#">Child Link</usa-link>
+            <usa-link href="#">Child</usa-link>
           </usa-side-nav-item>
         </usa-side-nav-item>
 
         <usa-side-nav-item>
-          <usa-link href="#">Parent Link</usa-link>
+          <usa-link href="#">Parent</usa-link>
         </usa-side-nav-item>
 
         <usa-side-nav-item>
-          <usa-link href="#">Parent Link</usa-link>
+          <usa-link href="#">Parent</usa-link>
         </usa-side-nav-item>
       </usa-side-nav>
     `;
