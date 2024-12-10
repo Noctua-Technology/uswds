@@ -112,9 +112,7 @@ class USAAccordionToggleEvent extends Event {
   ],
 })
 export class USAAccordionElement extends HTMLElement {
-  @attr({
-    observed: false,
-  })
+  @attr()
   accessor name = "";
 
   @attr()

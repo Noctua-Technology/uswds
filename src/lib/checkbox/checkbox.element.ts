@@ -127,9 +127,7 @@ export class USACheckboxElement extends HTMLElement {
   @attr()
   accessor name = "";
 
-  @attr({
-    observed: false,
-  })
+  @attr()
   accessor value = "";
 
   @attr({
