@@ -11,12 +11,14 @@ declare global {
   shadowDom: [
     css`
       :host {
+        --usa-nav-item-padding-left: 2rem;
+
         display: block;
         border-top: 1px solid #e6e6e6;
       }
 
       .side-nav-item {
-        display: block;
+        display: flex;
         padding: 0.5rem 1rem;
         text-decoration: none;
         position: relative;
@@ -31,6 +33,10 @@ declare global {
         color: #5c5c5c;
         text-decoration: none;
         display: block;
+      }
+
+      :host(:hover) ::slotted(*) {
+        color: #005ea2;
       }
 
       :host([current]) ::slotted(*:not(usa-side-nav-item)) {
@@ -50,12 +56,8 @@ declare global {
         left: 0;
       }
 
-      :host(:hover) ::slotted(*) {
-        color: #005ea2;
-      }
-
       :host([slot="children"]) .side-nav-item {
-        padding-left: var(--usa-nav-item-padding-left, 2rem);
+        padding-left: var(--usa-nav-item-padding-left);
       }
 
       :host([slot="children"]) ::slotted(usa-side-nav-item) {
