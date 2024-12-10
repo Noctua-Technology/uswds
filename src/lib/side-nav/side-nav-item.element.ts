@@ -11,29 +11,34 @@ declare global {
   shadowDom: [
     css`
       :host {
+        display: block;
         border-top: 1px solid #e6e6e6;
+      }
+
+      .side-nav-item {
         display: block;
         padding: 0.5rem 1rem;
         text-decoration: none;
         position: relative;
       }
 
-      :host(:last-child) {
-        border-bottom: 1px solid #e6e6e6;
+      .side-nav-item:hover {
+        background-color: #f0f0f0;
+        color: #005ea2;
       }
 
       ::slotted(*) {
         color: #5c5c5c;
         text-decoration: none;
-        display: flex;
+        display: block;
       }
 
-      :host([current]) ::slotted(*) {
+      :host([current]) ::slotted(*:not(usa-side-nav-item)) {
         color: #005ea2;
         font-weight: 700;
       }
 
-      :host([current])::after {
+      :host([current]) .side-nav-item::after {
         background-color: #005ea2;
         border-radius: 99rem;
         content: "";
@@ -45,16 +50,29 @@ declare global {
         left: 0;
       }
 
-      :host(:hover) {
-        background-color: #f0f0f0;
-        color: #005ea2;
-      }
-
       :host(:hover) ::slotted(*) {
         color: #005ea2;
       }
+
+      :host([slot="children"]) .side-nav-item {
+        padding-left: var(--usa-nav-item-padding-left, 2rem);
+      }
+
+      :host([slot="children"]) ::slotted(usa-side-nav-item) {
+        --usa-nav-item-padding-left: 3rem;
+      }
+
+      :host([slot="children"]) .side-nav-item::after {
+        display: none;
+      }
     `,
-    html`<slot></slot>`,
+    html`
+      <div class="side-nav-item">
+        <slot></slot>
+      </div>
+
+      <slot name="children"></slot>
+    `,
   ],
 })
 export class USASideNavItemElement extends HTMLElement {

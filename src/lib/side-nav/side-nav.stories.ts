@@ -12,6 +12,30 @@ const meta = {
       <usa-side-nav>
         <usa-side-nav-item current>
           <usa-link href="#">Current Page</usa-link>
+
+          <usa-side-nav-item slot="children">
+            <usa-link href="#">Child Link</usa-link>
+          </usa-side-nav-item>
+
+          <usa-side-nav-item slot="children" current>
+            <usa-link href="#">Child Link</usa-link>
+
+            <usa-side-nav-item slot="children">
+              <usa-link href="#">Child Link</usa-link>
+            </usa-side-nav-item>
+
+            <usa-side-nav-item slot="children" current>
+              <usa-link href="#">Child Link</usa-link>
+            </usa-side-nav-item>
+
+            <usa-side-nav-item slot="children">
+              <usa-link href="#">Child Link</usa-link>
+            </usa-side-nav-item>
+          </usa-side-nav-item>
+
+          <usa-side-nav-item slot="children">
+            <usa-link href="#">Child Link</usa-link>
+          </usa-side-nav-item>
         </usa-side-nav-item>
 
         <usa-side-nav-item>
