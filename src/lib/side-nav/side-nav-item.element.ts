@@ -33,6 +33,7 @@ declare global {
         color: #5c5c5c;
         text-decoration: none;
         display: block;
+        width: 100%;
       }
 
       :host(:hover) ::slotted(*) {

@@ -19,6 +19,7 @@ declare global {
       a {
         color: inherit;
         text-decoration: inherit;
+        display: inherit;
       }
     `,
     html`
