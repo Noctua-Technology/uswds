@@ -79,6 +79,8 @@ declare global {
   ],
 })
 export class USASideNavItemElement extends HTMLElement {
-  @attr()
+  @attr({
+    observed: false,
+  })
   accessor current = false;
 }

@@ -127,10 +127,14 @@ export class USACheckboxElement extends HTMLElement {
   @attr()
   accessor name = "";
 
-  @attr()
+  @attr({
+    observed: false,
+  })
   accessor value = "";
 
-  @attr()
+  @attr({
+    observed: false,
+  })
   accessor tiled = false;
 
   #checkbox = query("input");

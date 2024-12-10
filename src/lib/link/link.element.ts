@@ -39,7 +39,9 @@ export class USALinkElement extends HTMLElement {
   @attr()
   accessor title = "";
 
-  @attr()
+  @attr({
+    observed: false,
+  })
   accessor disabled = false;
 
   #anchor = query("a");

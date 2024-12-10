@@ -92,7 +92,9 @@ export class USARadioElement extends HTMLElement {
   @attr()
   accessor name = "";
 
-  @attr()
+  @attr({
+    observed: false,
+  })
   accessor tiled = false;
 
   #radios = query(".radios");
