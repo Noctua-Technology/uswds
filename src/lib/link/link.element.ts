@@ -11,13 +11,15 @@ declare global {
   shadowDom: [
     css`
       :host {
-        display: inline;
+        display: inline-flex;
         color: #005ea2;
         text-decoration: underline;
       }
 
       a {
         color: inherit;
+        text-decoration: inherit;
+        display: inherit;
       }
     `,
     html`
@@ -37,7 +39,9 @@ export class USALinkElement extends HTMLElement {
   @attr()
   accessor title = "";
 
-  @attr()
+  @attr({
+    observed: false,
+  })
   accessor disabled = false;
 
   #anchor = query("a");
