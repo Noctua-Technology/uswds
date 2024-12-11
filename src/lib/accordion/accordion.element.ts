@@ -59,6 +59,10 @@ class USAAccordionToggleEvent extends Event {
         width: 100%;
       }
 
+      summary::-webkit-details-marker {
+        display: none;
+      }
+
       slot[name="heading"] {
         display: block;
         flex: 1 1 auto;

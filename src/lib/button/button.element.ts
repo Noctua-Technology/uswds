@@ -179,9 +179,7 @@ export class USAButtonElement extends HTMLElement {
   @attr()
   accessor disabled = false;
 
-  @attr({
-    observed: false,
-  })
+  @attr()
   accessor variant: ButtonVariant = "primary";
 
   #internals = this.attachInternals();
