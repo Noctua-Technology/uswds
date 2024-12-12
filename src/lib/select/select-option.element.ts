@@ -20,16 +20,11 @@ export class USASelecOptionElement extends HTMLElement {
   @attr()
   accessor value = "";
 
-  get id(): string {
-    return this.value.split(" ").join("-").toLowerCase();
-  }
-
   readonly option = document.createElement("option");
 
   attributeChangedCallback() {
     this.option.textContent = this.textContent;
     this.option.value = this.value;
-    this.option.id = this.id;
   }
 
   connectedCallback() {

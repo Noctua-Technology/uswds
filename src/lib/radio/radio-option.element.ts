@@ -28,24 +28,27 @@ export class USARadioOptionElement extends HTMLElement {
   @attr()
   accessor checked = false;
 
-  radio = document.createElement("label");
-  input = document.createElement("input");
-  slotEl = document.createElement("slot");
+  readonly radio = document.createElement("label");
+
+  readonly #input = document.createElement("input");
+  readonly #slotEl = document.createElement("slot");
 
   constructor() {
     super();
 
-    this.input.type = "radio";
+    this.#input.type = "radio";
 
-    this.radio.append(this.input, this.slotEl);
+    this.radio.append(this.#input, this.#slotEl);
   }
 
   attributeChangedCallback() {
     this.slot = this.value;
-    this.input.name = this.name;
-    this.input.value = this.value;
-    this.slotEl.name = this.value;
-    this.input.checked = this.checked;
+
+    this.#input.name = this.name;
+    this.#input.value = this.value;
+    this.#input.checked = this.checked;
+
+    this.#slotEl.name = this.value;
   }
 
   connectedCallback() {
