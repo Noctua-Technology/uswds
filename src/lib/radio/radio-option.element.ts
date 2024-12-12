@@ -1,10 +1,8 @@
 import { attr, css, element, html } from "@joist/element";
 
-import { USARadioElement } from "./radio.element.js";
-
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-radio-option": USARadioElement;
+    "usa-radio-option": USARadioOptionElement;
   }
 }
 
@@ -24,23 +22,39 @@ export class USARadioOptionElement extends HTMLElement {
   @attr()
   accessor value = "";
 
-  #parent: USARadioElement | null = null;
+  @attr()
+  accessor name = "";
+
+  @attr()
+  accessor checked = false;
+
+  radio = document.createElement("label");
+  input = document.createElement("input");
+  slotEl = document.createElement("slot");
+
+  constructor() {
+    super();
+
+    this.input.type = "radio";
+
+    this.radio.append(this.input, this.slotEl);
+  }
 
   attributeChangedCallback() {
     this.slot = this.value;
+    this.input.name = this.name;
+    this.input.value = this.value;
+    this.slotEl.name = this.value;
+    this.input.checked = this.checked;
   }
 
   connectedCallback() {
-    if (this.parentElement instanceof USARadioElement) {
-      this.#parent = this.parentElement;
-
-      this.parentElement.onOptionAdded(this);
-    }
+    this.dispatchEvent(
+      new Event("usa::radio::option::added", { bubbles: true })
+    );
   }
 
   disconnectedCallback() {
-    if (this.#parent) {
-      this.#parent.onOptionRemoved(this);
-    }
+    this.radio.remove();
   }
 }

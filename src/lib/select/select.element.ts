@@ -1,6 +1,6 @@
 import { attr, css, element, html, listen, query } from "@joist/element";
 
-import type { USASelecOptionElement } from "./select-option.element.js";
+import { USASelecOptionElement } from "./select-option.element.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -95,27 +95,13 @@ export class USASelectElement extends HTMLElement {
     this.#internals.setFormValue(select.value);
   }
 
-  onOptionAdded(el: USASelecOptionElement) {
-    const option = document.createElement("option");
-    option.value = el.value;
-    option.innerHTML = el.innerHTML;
-    option.id = this.#createId(el.value);
+  @listen("usa::select::option::added")
+  onOptionAdded(e: Event) {
+    if (e.target instanceof USASelecOptionElement) {
+      e.stopPropagation();
 
-    const select = this.#select();
-
-    select.append(option);
-  }
-
-  onOptionRemoved(el: USASelecOptionElement) {
-    const select = this.#select();
-    const option = select.querySelector(`#${this.#createId(el.value)}`);
-
-    if (option) {
-      option.remove();
+      const select = this.#select();
+      select.append(e.target.option);
     }
-  }
-
-  #createId(val: string) {
-    return val.split(" ").join("-").toLowerCase();
   }
 }

@@ -1,7 +1,5 @@
 import { attr, css, element } from "@joist/element";
 
-import { USASelectElement } from "./select.element.js";
-
 declare global {
   interface HTMLElementTagNameMap {
     "usa-select-option": USASelecOptionElement;
@@ -22,19 +20,25 @@ export class USASelecOptionElement extends HTMLElement {
   @attr()
   accessor value = "";
 
-  #parent: USASelectElement | null = null;
+  get id(): string {
+    return this.value.split(" ").join("-").toLowerCase();
+  }
+
+  readonly option = document.createElement("option");
+
+  attributeChangedCallback() {
+    this.option.textContent = this.textContent;
+    this.option.value = this.value;
+    this.option.id = this.id;
+  }
 
   connectedCallback() {
-    if (this.parentElement instanceof USASelectElement) {
-      this.#parent = this.parentElement;
-
-      this.parentElement.onOptionAdded(this);
-    }
+    this.dispatchEvent(
+      new Event("usa::select::option::added", { bubbles: true })
+    );
   }
 
   disconnectedCallback() {
-    if (this.#parent) {
-      this.#parent.onOptionRemoved(this);
-    }
+    this.option.remove();
   }
 }

@@ -1,6 +1,6 @@
 import { attr, css, element, html, listen, query } from "@joist/element";
 
-import type { USARadioOptionElement } from "./radio-option.element.js";
+import { USARadioOptionElement } from "./radio-option.element.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -13,14 +13,10 @@ declare global {
   shadowDom: [
     css`
       :host {
-        display: block;
-        max-width: 30rem;
-      }
-
-      .radios {
         display: flex;
         flex-direction: column;
         gap: 1rem;
+        max-width: 30rem;
       }
 
       label {
@@ -59,7 +55,7 @@ declare global {
         outline-offset: 0.25rem;
       }
 
-      :host([tiled]) .radios {
+      :host([tiled]) {
         gap: 0.5rem;
       }
 
@@ -76,11 +72,7 @@ declare global {
         border-color: #005ea2;
       }
     `,
-    html`
-      <slot></slot>
-
-      <div class="radios"></div>
-    `,
+    html`<slot></slot>`,
   ],
 })
 export class USARadioElement extends HTMLElement {
@@ -97,7 +89,10 @@ export class USARadioElement extends HTMLElement {
   })
   accessor tiled = false;
 
-  #radios = query(".radios");
+  get shadow() {
+    return this.shadowRoot!;
+  }
+
   #internals = this.attachInternals();
 
   @listen("change")
@@ -117,40 +112,21 @@ export class USARadioElement extends HTMLElement {
   }
 
   attributeChangedCallback() {
-    const radios = this.#radios();
-
-    for (let radio of radios.querySelectorAll("input")) {
+    for (let radio of this.shadow.querySelectorAll("usa-radio-option")) {
       radio.checked = radio.value === this.value;
       radio.name = this.name;
     }
   }
 
-  onOptionAdded(el: USARadioOptionElement) {
-    const radios = this.#radios();
+  @listen("usa::radio::option::added", (el) => el)
+  onOptionAdded(e: Event) {
+    if (e.target instanceof USARadioOptionElement) {
+      e.stopPropagation();
 
-    const radioLabel = document.createElement("label");
-    radioLabel.id = el.value;
+      e.target.checked = e.target.value === this.value;
+      e.target.name = this.name;
 
-    const input = document.createElement("input");
-    input.type = "radio";
-    input.name = this.name;
-    input.value = el.value;
-    input.checked = this.value === el.value;
-
-    const slot = document.createElement("slot");
-    slot.name = el.value;
-
-    radioLabel.append(input, slot);
-
-    radios.append(radioLabel);
-  }
-
-  onOptionRemoved(el: USARadioOptionElement) {
-    const radios = this.#radios();
-    const option = radios.querySelector(`#${el.value}`);
-
-    if (option) {
-      option.remove();
+      this.shadow.append(e.target.radio);
     }
   }
 }
