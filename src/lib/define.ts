@@ -11,6 +11,7 @@ import "./input-mask/input-mask.element.js";
 import "./link/link.element.js";
 import "./radio/radio.element.js";
 import "./radio/radio-option.element.js";
+import "./select/select.element.js";
 import "./select/select-option.element.js";
 import "./tag/tag.element.js";
 import "./accordion/accordion.element.js";
