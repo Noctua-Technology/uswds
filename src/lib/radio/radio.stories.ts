@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
 import type { USARadioElement } from "./radio.element.js";
+import { when } from "lit/directives/when.js";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
@@ -9,18 +10,23 @@ const meta = {
   tags: ["autodocs"],
   render(args) {
     return html`
-      <usa-radio name="historical-figures" value="frederick-douglass" tiled>
+      <usa-radio
+        name="historical-figures"
+        value="frederick-douglass"
+        ?tiled=${args.tiled}
+      >
+        <legend>Select one historical figure</legend>
+
         <usa-radio-option value="sojourner-truth">
           Sojourner Truth
         </usa-radio-option>
 
         <usa-radio-option value="frederick-douglass">
           Frederick Douglass
-
-          <usa-description>
-            This is optional text that can be used to describe the label in more
-            detail.
-          </usa-description>
+          ${when(
+            args.description,
+            () => html`<usa-description>${args.description}</usa-description>`
+          )}
         </usa-radio-option>
 
         <usa-radio-option value="booker-t-washington">
@@ -34,8 +40,12 @@ const meta = {
     `;
   },
   argTypes: {},
-  args: {},
-} satisfies Meta<USARadioElement>;
+  args: {
+    tiled: true,
+    description:
+      "This is optional text that can be used to describe the label in more detail.",
+  },
+} satisfies Meta<USARadioElement & { description: string }>;
 
 export default meta;
 

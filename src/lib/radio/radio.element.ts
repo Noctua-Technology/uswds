@@ -1,4 +1,4 @@
-import { attr, css, element, html, listen, query } from "@joist/element";
+import { attr, css, element, html, listen } from "@joist/element";
 
 import { USARadioOptionElement } from "./radio-option.element.js";
 
@@ -71,8 +71,16 @@ declare global {
         background-color: rgba(0, 94, 162, 0.1);
         border-color: #005ea2;
       }
+
+      slot {
+        display: flex;
+      }
+
+      slot#main {
+        margin-bottom: 0.5rem;
+      }
     `,
-    html`<slot></slot>`,
+    html`<slot id="main"></slot>`,
   ],
 })
 export class USARadioElement extends HTMLElement {

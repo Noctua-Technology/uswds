@@ -6,20 +6,6 @@ declare global {
   }
 }
 
-class USAAccordionToggleEvent extends Event {
-  open;
-
-  get target() {
-    return super.target as USAAccordionElement;
-  }
-
-  constructor(open: boolean) {
-    super("usa::accordion::toggle", { bubbles: true });
-
-    this.open = open;
-  }
-}
-
 @element({
   tagName: "usa-accordion",
   shadowDomOpts: {
@@ -143,5 +129,19 @@ export class USAAccordionElement extends HTMLElement {
     } else if (e.target === this) {
       this.open = e.open;
     }
+  }
+}
+
+class USAAccordionToggleEvent extends Event {
+  open;
+
+  get target() {
+    return super.target as USAAccordionElement;
+  }
+
+  constructor(open: boolean) {
+    super("usa::accordion::toggle", { bubbles: true });
+
+    this.open = open;
   }
 }
