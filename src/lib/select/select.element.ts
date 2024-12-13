@@ -1,6 +1,6 @@
 import { attr, css, element, html, listen, query } from "@joist/element";
 
-import { USASelecOptionElement } from "./select-option.element.js";
+import type { USASelecOptionElement } from "./select-option.element.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -97,11 +97,11 @@ export class USASelectElement extends HTMLElement {
 
   @listen("usa::select::option::added")
   onOptionAdded(e: Event) {
-    if (e.target instanceof USASelecOptionElement) {
-      e.stopPropagation();
+    const target = e.target as USASelecOptionElement;
 
-      const select = this.#select();
-      select.append(e.target.option);
-    }
+    e.stopPropagation();
+
+    const select = this.#select();
+    select.append(target.option);
   }
 }

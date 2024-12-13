@@ -1,6 +1,6 @@
 import { attr, css, element, html, listen } from "@joist/element";
 
-import { USARadioOptionElement } from "./radio-option.element.js";
+import type { USARadioOptionElement } from "./radio-option.element.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -128,13 +128,13 @@ export class USARadioElement extends HTMLElement {
 
   @listen("usa::radio::option::added", (el) => el)
   onOptionAdded(e: Event) {
-    if (e.target instanceof USARadioOptionElement) {
-      e.stopPropagation();
+    e.stopPropagation();
 
-      e.target.checked = e.target.value === this.value;
-      e.target.name = this.name;
+    const target = e.target as USARadioOptionElement;
 
-      this.shadow.append(e.target.radio);
-    }
+    target.checked = target.value === this.value;
+    target.name = this.name;
+
+    this.shadow.append(target.radio);
   }
 }
