@@ -1,6 +1,6 @@
 {
   "name": "@noctuatech/uswds",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "type": "module",
   "workspaces": [
     "packages/**"
@@ -42,7 +42,12 @@
     "preview": {
       "command": "browser-sync start --server --files \"target/**\" \"index.html\"",
       "service": true,
-      "dependencies": [{ "script": "tsc", "cascade": false}]
+      "dependencies": [
+        {
+          "script": "tsc",
+          "cascade": false
+        }
+      ]
     },
     "build-storybook": {
       "command": "storybook build"
