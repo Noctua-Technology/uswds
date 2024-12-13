@@ -1,4 +1,4 @@
-import { attr, css, element } from "@joist/element";
+import { attr, css, element, html, listen } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -14,6 +14,7 @@ declare global {
         display: none;
       }
     `,
+    html`<slot></slot>`,
   ],
 })
 export class USASelecOptionElement extends HTMLElement {
@@ -23,7 +24,6 @@ export class USASelecOptionElement extends HTMLElement {
   readonly option = document.createElement("option");
 
   attributeChangedCallback() {
-    this.option.textContent = this.textContent;
     this.option.value = this.value;
   }
 
@@ -31,6 +31,11 @@ export class USASelecOptionElement extends HTMLElement {
     this.dispatchEvent(
       new Event("usa::select::option::added", { bubbles: true })
     );
+  }
+
+  @listen("slotchange")
+  onSlotChange() {
+    this.option.textContent = this.textContent;
   }
 
   disconnectedCallback() {
