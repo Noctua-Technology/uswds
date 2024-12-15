@@ -95,7 +95,7 @@
   },
   "devDependencies": {
     "@open-wc/testing": "^4.0.0",
-    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",
     "@storybook/addon-essentials": "^8.4.4",
     "@storybook/web-components": "^8.4.4",
