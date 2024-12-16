@@ -12,10 +12,6 @@ npm i @noctuatech/uswds
 
 ```html
 <style>
-  body:has(:not(:defined)) {
-    display: none;
-  }
-
   * {
     font-family:
       Source Sans Pro Web,
