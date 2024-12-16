@@ -14,5 +14,5 @@ export { USATagElement } from "./lib/tag/tag.element.js";
 export { USAAccordionElement } from "./lib/accordion/accordion.element.js";
 export { USASideNavElement } from "./lib/side-nav/side-nav.element.js";
 export { USAStepIndicatorElement } from "./lib/step-indicator/step-indicator.element.js";
-export { USAStepIndicatorStepElement } from "./lib/step-indicator/step-indicator-step/step-indicator-step.element.js";
+export { USAStepIndicatorStepElement } from "./lib/step-indicator/step/step-indicator-step.element.js";
 export { USAStepIndicatorNumElement } from "./lib/step-indicator/step-indicator-num/step-indicator-num.element.js";

@@ -2,12 +2,12 @@ import { css, element, html } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-step-indicator-step": USAStepIndicatorStepElement;
+    "usa-step": USAStepIndicatorStepElement;
   }
 }
 
 @element({
-  tagName: "usa-step-indicator-step",
+  tagName: "usa-step",
   shadowDom: [
     css`
       :host {

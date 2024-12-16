@@ -10,29 +10,29 @@ const meta = {
   render(args) {
     return html`
       <usa-step-indicator>
-        <usa-step-indicator-step state="complete" counter>
+        <usa-step state="complete" ?counter=${args.counter}>
           Personal information
-        </usa-step-indicator-step>
+        </usa-step>
 
-        <usa-step-indicator-step state="complete" counter>
+        <usa-step state="complete" ?counter=${args.counter}>
           Household status
-        </usa-step-indicator-step>
+        </usa-step>
 
-        <usa-step-indicator-step state="current" counter>
+        <usa-step state="current" ?counter=${args.counter}>
           Supporting documents
-        </usa-step-indicator-step>
+        </usa-step>
 
-        <usa-step-indicator-step counter>Signature</usa-step-indicator-step>
+        <usa-step ?counter=${args.counter}>Signature</usa-step>
 
-        <usa-step-indicator-step counter
-          >Review and submit
-        </usa-step-indicator-step>
+        <usa-step ?counter=${args.counter}>Review and submit</usa-step>
       </usa-step-indicator>
     `;
   },
   argTypes: {},
-  args: {},
-} satisfies Meta<USAStepIndicatorElement>;
+  args: {
+    counter: true,
+  },
+} satisfies Meta<USAStepIndicatorElement & { counter: boolean }>;
 
 export default meta;
 

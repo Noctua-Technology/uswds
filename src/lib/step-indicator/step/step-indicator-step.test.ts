@@ -4,10 +4,10 @@ import { fixture, html, assert } from "@open-wc/testing";
 
 import { USAStepIndicatorStepElement } from "./step-indicator-step.element.js";
 
-describe("usa-step-indicator-step", () => {
+describe("usa-step", () => {
   it("should be accessible", async () => {
     const stepIndicatorStep = await fixture<USAStepIndicatorStepElement>(html`
-      <usa-step-indicator-step>Hello World</usa-step-indicator-step>
+      <usa-step>Hello World</usa-step>
     `);
 
     return assert.isAccessible(stepIndicatorStep);
