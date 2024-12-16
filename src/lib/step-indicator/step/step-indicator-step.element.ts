@@ -91,7 +91,7 @@ declare global {
       }
 
       :host([counter]:last-child):before {
-        display: none;
+        width: 0;
       }
     `,
     html`
