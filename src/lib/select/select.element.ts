@@ -25,6 +25,7 @@ declare global {
         position: relative;
         width: 100%;
         max-width: 30rem;
+        margin-bottom: 1.5rem;
       }
 
       select {

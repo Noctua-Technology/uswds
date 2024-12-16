@@ -26,6 +26,11 @@
         display: none;
       }
 
+      body {
+        padding: 0;
+        margin: 0;
+      }
+
       * {
         font-family:
           Source Sans Pro Web,
@@ -38,17 +43,43 @@
         box-sizing: border-box;
       }
 
+      header {
+        align-items: center;
+        display: flex;
+        background-color: #252f3e;
+        padding: 1rem 2rem;
+        color: #fff;
+        margin-bottom: 2rem;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 1.25rem;
+      }
+
+      header img {
+        height: 1.5rem;
+        width: 1.5rem;
+        margin-right: 1rem;
+      }
+
       main {
         display: flex;
-        gap: 2rem;
+        gap: 3rem;
       }
     </style>
 
-    <script type="module" src="/target/lib/define.js"></script>
+    <!-- <script type="module" src="/target/lib/define.js"></script> -->
 
-    <!-- <script src="/assets/uswds.min.js"></script> -->
+    <script src="/assets/uswds.min.js"></script>
 
     <usa-config spritesheet="/assets/img/sprite.svg">
+      <header>
+        <img src="/assets/img/4c-lg-on-black.svg" aria-hidden="true" />
+
+        <h1>U.S. Web Design System (USWDS)</h1>
+      </header>
+
       <main>
         <section>
           <usa-side-nav>
@@ -92,6 +123,24 @@
 
         <section>
           <form>
+            <usa-input name="fname" placeholder="First name">
+              First name
+            </usa-input>
+
+            <usa-input name="lname" placeholder="Last name">
+              Last name
+            </usa-input>
+
+            <usa-input-mask>
+              <usa-input
+                name="phone"
+                placeholder="(999) 999-9999"
+                mask="(999) 999-9999"
+              >
+                Last name
+              </usa-input>
+            </usa-input-mask>
+
             <usa-select name="select" value="first">
               Hello World
 
@@ -101,9 +150,6 @@
               <usa-select-option value="third">third</usa-select-option>
               <usa-select-option value="fourth">fourth</usa-select-option>
             </usa-select>
-
-            <br />
-            <br />
 
             <usa-radio name="historical-figures" tiled>
               <legend>Select one historical figure</legend>
@@ -130,6 +176,17 @@
               </usa-radio-option>
             </usa-radio>
 
+            <usa-file-input name="upload">
+              Input accepts a single file
+
+              <div slot="description">
+                Drag file here or <usa-link>choose from folder</usa-link>
+              </div>
+            </usa-file-input>
+
+            <usa-checkbox>I agree to the terms and conditions</usa-checkbox>
+
+            <br />
             <br />
 
             <usa-button type="submit">Submit</usa-button>

@@ -17,6 +17,7 @@ declare global {
         flex-direction: column;
         gap: 1rem;
         max-width: 30rem;
+        margin-bottom: 1.5rem;
       }
 
       label {
@@ -74,10 +75,6 @@ declare global {
 
       slot {
         display: flex;
-      }
-
-      slot#main {
-        margin-bottom: 0.5rem;
       }
     `,
     html`<slot id="main"></slot>`,

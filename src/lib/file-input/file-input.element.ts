@@ -22,6 +22,7 @@ declare global {
         display: block;
         max-width: 30rem;
         position: relative;
+        margin-bottom: 1.5rem;
       }
 
       label {
