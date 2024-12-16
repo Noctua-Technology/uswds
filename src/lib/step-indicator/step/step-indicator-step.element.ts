@@ -90,6 +90,12 @@ declare global {
         box-sizing: border-box;
       }
 
+      :host([counter="small"]):after {
+        height: 1.5rem;
+        width: 1.5rem;
+        font-size: 0.93rem;
+      }
+
       :host([counter]:last-child):before {
         width: 0;
       }

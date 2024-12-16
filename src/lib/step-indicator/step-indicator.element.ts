@@ -14,7 +14,8 @@ declare global {
         display: flex;
         gap: 2px;
         counter-reset: usa-step-indicator;
-        margin-top: 1rem;
+        padding-top: 1rem;
+        margin-bottom: 1rem;
       }
     `,
     html`<slot></slot>`,

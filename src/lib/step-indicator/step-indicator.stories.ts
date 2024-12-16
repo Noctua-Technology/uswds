@@ -10,33 +10,38 @@ const meta = {
   render(args) {
     return html`
       <usa-step-indicator>
-        <usa-step state="complete" ?counter=${args.counter}>
+        <usa-step state="complete" counter=${args.counter}>
           Personal information
         </usa-step>
 
-        <usa-step state="complete" ?counter=${args.counter}>
+        <usa-step state="complete" counter=${args.counter}>
           Household status
         </usa-step>
 
-        <usa-step state="current" ?counter=${args.counter}>
+        <usa-step state="current" counter=${args.counter}>
           Supporting documents
         </usa-step>
 
-        <usa-step ?counter=${args.counter}>Signature</usa-step>
+        <usa-step counter=${args.counter}>Signature</usa-step>
 
-        <usa-step ?counter=${args.counter}>Review and submit</usa-step>
+        <usa-step counter=${args.counter}>Review and submit</usa-step>
       </usa-step-indicator>
     `;
   },
-  argTypes: {},
-  args: {
-    counter: true,
+  argTypes: {
+    counter: {
+      control: "select",
+      options: ["on", "small"],
+    },
   },
-} satisfies Meta<USAStepIndicatorElement & { counter: boolean }>;
+  args: {
+    counter: "on",
+  },
+} satisfies Meta<USAStepIndicatorElement & { counter: string }>;
 
 export default meta;
 
-type Story = StoryObj<USAStepIndicatorElement & { counter: boolean }>;
+type Story = StoryObj<USAStepIndicatorElement>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
