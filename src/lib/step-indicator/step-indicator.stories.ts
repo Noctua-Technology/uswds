@@ -36,7 +36,7 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<USAStepIndicatorElement>;
+type Story = StoryObj<USAStepIndicatorElement & { counter: boolean }>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
