@@ -16,3 +16,5 @@ import "./select/select-option.element.js";
 import "./tag/tag.element.js";
 import "./accordion/accordion.element.js";
 import "./side-nav/side-nav.element.js";
+import "./step-indicator/step-indicator.element.js";
+import "./step-indicator/step/step-indicator-step.element.js";
