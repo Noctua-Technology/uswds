@@ -9,19 +9,21 @@ const meta = {
   tags: ["autodocs"],
   render() {
     return html`
-      <usa-modal open>
+      <usa-button modal-target="mymodal">Open Modal</usa-button>
+
+      <usa-modal id="mymodal">
         <usa-modal-close></usa-modal-close>
 
         <usa-modal-heading>
           Are you sure you want to continue?
         </usa-modal-heading>
 
-        <usa-input autofocus placeholder="foo@email.com">
+        <usa-input placeholder="foo@email.com" autofocus>
           Enter your email to continue
         </usa-input>
 
-        <usa-button action="confirm">Yes I am sure</usa-button>
-        <usa-button action="cancel" variant="outline">Cancel</usa-button>
+        <usa-button modal-action="confirm">Yes I am sure</usa-button>
+        <usa-button modal-action="cancel" variant="outline">Cancel</usa-button>
       </usa-modal>
     `;
   },

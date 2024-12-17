@@ -48,6 +48,8 @@ declare global {
   ],
 })
 export class USAModalCloseElement extends HTMLElement {
-  @attr()
-  accessor action = "close";
+  @attr({
+    name: "modal-action",
+  })
+  accessor modalAction = "close";
 }

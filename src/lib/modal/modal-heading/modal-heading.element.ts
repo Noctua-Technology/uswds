@@ -25,6 +25,7 @@ declare global {
       h2 {
         margin-top: 0;
         line-height: 1.4;
+        font-size: 1.45rem;
       }
     `,
     html`

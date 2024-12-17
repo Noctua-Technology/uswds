@@ -10,6 +10,10 @@ declare global {
   tagName: "usa-modal",
   shadowDom: [
     css`
+      * {
+        box-sizing: border-box;
+      }
+
       :host {
         display: contents;
       }
@@ -73,10 +77,21 @@ export class USAModalElement extends HTMLElement {
     dialog.close();
   }
 
-  @listen("click", (host) => host)
-  onClose(e: Event) {
+  @listen("click", () => document.body)
+  onGlobalModalAction(e: Event) {
     if (e.target instanceof Element) {
-      const action = e.target.getAttribute("action");
+      const modalTarget = e.target.getAttribute("modal-target");
+
+      if (modalTarget === this.id) {
+        this.openModal();
+      }
+    }
+  }
+
+  @listen("click", (host) => host)
+  onModalAction(e: Event) {
+    if (e.target instanceof Element) {
+      const action = e.target.getAttribute("modal-action");
 
       switch (action) {
         case "confirm":
