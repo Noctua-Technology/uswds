@@ -41,7 +41,7 @@ declare global {
       }
     `,
     html`
-      <button>
+      <button aria-label="close modal">
         <usa-icon icon="close"></usa-icon>
       </button>
     `,

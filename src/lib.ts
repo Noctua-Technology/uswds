@@ -17,4 +17,4 @@ export { USAStepIndicatorElement } from "./lib/step-indicator/step-indicator.ele
 export { USAStepIndicatorStepElement } from "./lib/step-indicator/step/step-indicator-step.element.js";
 export { USAModalElement } from "./lib/modal/modal.element.js";
 export { USAModalCloseElement } from "./lib/modal/modal-close/modal-close.element.js";
-export { USAModalHeadingElement } from "./lib/modal-heading/modal-heading.element.js";
+export { USAModalHeadingElement } from "./lib/modal/modal-heading/modal-heading.element.js";

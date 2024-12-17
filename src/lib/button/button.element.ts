@@ -1,4 +1,4 @@
-import { attr, css, element, html, listen, query } from "@joist/element";
+import { attr, css, element, html, listen, query, ready } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -193,6 +193,12 @@ export class USAButtonElement extends HTMLElement {
 
   #internals = this.attachInternals();
   #button = query("button");
+
+  @ready()
+  onReady() {
+    const input = this.#button();
+    input.autofocus = this.autofocus;
+  }
 
   @listen("keydown", () => document.body)
   onKeyDown(e: KeyboardEvent) {

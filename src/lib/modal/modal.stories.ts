@@ -12,7 +12,11 @@ const meta = {
       <usa-modal open>
         <usa-modal-close></usa-modal-close>
 
-        <usa-input placeholder="fname">Hello World</usa-input>
+        <usa-modal-heading>
+          Are you sure you want to continue?
+        </usa-modal-heading>
+
+        <usa-input placeholder="fname" autofocus>Hello World</usa-input>
 
         <p>Greetings, one and all!</p>
 
