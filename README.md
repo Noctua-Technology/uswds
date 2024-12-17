@@ -23,10 +23,10 @@ npm i @noctuatech/uswds
   }
 </style>
 
-<script src="/node_modules/@noctuatech/uswds@latest/assets/uswds.min.js"></script>
+<script src="/node_modules/@noctuatech/uswds/assets/uswds.min.js"></script>
 
 <usa-config
-  spritesheet="/node_modules/@noctuatech/uswds@latest/assets/img/sprite.svg"
+  spritesheet="/node_modules/@noctuatech/uswds/assets/img/sprite.svg"
 >
   <usa-alert type="info">
     <h3 slot="heading">Informative status</h3>
