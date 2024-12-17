@@ -18,6 +18,10 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
 
 @element({
   tagName: "usa-button",
+  shadowDomOpts: {
+    mode: "open",
+    delegatesFocus: true,
+  },
   shadowDom: [
     css`
       :host {
@@ -181,6 +185,11 @@ export class USAButtonElement extends HTMLElement {
 
   @attr()
   accessor variant: ButtonVariant = "primary";
+
+  @attr()
+  accessor value = "";
+
+  accessor tabIndex = 0;
 
   #internals = this.attachInternals();
   #button = query("button");

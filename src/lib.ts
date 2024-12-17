@@ -15,3 +15,6 @@ export { USAAccordionElement } from "./lib/accordion/accordion.element.js";
 export { USASideNavElement } from "./lib/side-nav/side-nav.element.js";
 export { USAStepIndicatorElement } from "./lib/step-indicator/step-indicator.element.js";
 export { USAStepIndicatorStepElement } from "./lib/step-indicator/step/step-indicator-step.element.js";
+export { USAModalElement } from "./lib/modal/modal.element.js";
+export { USAModalCloseElement } from "./lib/modal/modal-close/modal-close.element.js";
+export { USAModalHeadingElement } from "./lib/modal-heading/modal-heading.element.js";
