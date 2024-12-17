@@ -7,7 +7,7 @@ import type { USAModalElement } from "./modal.element.js";
 const meta = {
   title: "usa-modal",
   tags: ["autodocs"],
-  render(args) {
+  render() {
     return html`
       <usa-modal open>
         <usa-modal-close></usa-modal-close>
@@ -16,13 +16,12 @@ const meta = {
           Are you sure you want to continue?
         </usa-modal-heading>
 
-        <usa-input placeholder="fname" autofocus>Hello World</usa-input>
+        <usa-input autofocus placeholder="foo@email.com">
+          Enter your email to continue
+        </usa-input>
 
-        <p>Greetings, one and all!</p>
-
-        <form method="dialog">
-          <usa-button type="submit">OK</usa-button>
-        </form>
+        <usa-button action="confirm">Yes I am sure</usa-button>
+        <usa-button action="cancel" variant="outline">Cancel</usa-button>
       </usa-modal>
     `;
   },

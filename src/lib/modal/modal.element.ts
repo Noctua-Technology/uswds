@@ -73,6 +73,24 @@ export class USAModalElement extends HTMLElement {
     dialog.close();
   }
 
-  @listen("usa::modal::close")
-  onClose() {}
+  @listen("click", (host) => host)
+  onClose(e: Event) {
+    if (e.target instanceof Element) {
+      const action = e.target.getAttribute("action");
+
+      switch (action) {
+        case "confirm":
+          this.closeModal();
+          break;
+
+        case "cancel":
+          this.closeModal();
+          break;
+
+        case "close":
+          this.closeModal();
+          break;
+      }
+    }
+  }
 }

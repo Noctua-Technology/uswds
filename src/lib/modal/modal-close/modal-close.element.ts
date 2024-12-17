@@ -1,4 +1,4 @@
-import { css, element, html } from "@joist/element";
+import { attr, css, element, html } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -47,4 +47,7 @@ declare global {
     `,
   ],
 })
-export class USAModalCloseElement extends HTMLElement {}
+export class USAModalCloseElement extends HTMLElement {
+  @attr()
+  accessor action = "close";
+}
