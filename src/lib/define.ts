@@ -18,3 +18,6 @@ import "./accordion/accordion.element.js";
 import "./side-nav/side-nav.element.js";
 import "./step-indicator/step-indicator.element.js";
 import "./step-indicator/step/step-indicator-step.element.js";
+import "./modal/modal.element.js";
+import "./modal/modal-close/modal-close.element.js";
+import "./modal/modal-heading/modal-heading.element.js";
