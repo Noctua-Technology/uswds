@@ -9,7 +9,9 @@ const preview = {
       source: {
         transform(input) {
           return format.html(
-            input.replace("<usa-config>", "").replace("</usa-config>", ""),
+            input
+              .replace('<usa-config spritesheet="./img/sprite.svg">', "")
+              .replace("</usa-config>", ""),
             {
               indent_size: 2,
               wrap_attributes: "force-expand-multiline",
