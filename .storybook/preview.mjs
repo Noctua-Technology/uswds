@@ -29,7 +29,7 @@ const preview = {
   decorators: [
     (story) => {
       return html`
-        <usa-config spritesheet="/img/sprite.svg">${story()}</usa-config>
+        <usa-config spritesheet="./img/sprite.svg">${story()}</usa-config>
       `;
     },
   ],
