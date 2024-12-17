@@ -31,15 +31,20 @@ declare global {
 
       input {
         cursor: pointer;
-        height: 100%;
         left: 0;
         margin: 0;
         max-width: none;
         position: absolute;
         text-indent: -999em;
-        top: 0;
         width: 100%;
         z-index: 1;
+        bottom: 0;
+        top: 1.85rem;
+      }
+
+      input:focus {
+        outline: 0.25rem solid #2491ff;
+        outline-offset: 0;
       }
 
       label slot {
@@ -52,13 +57,15 @@ declare global {
 
       .box {
         border: 1px dashed #adadad;
-        display: block;
+        display: flex;
         font-size: 0.93rem;
         position: relative;
         text-align: center;
         width: 100%;
         max-width: 30rem;
-        padding: 2rem 1rem;
+        height: 5.2rem;
+        align-items: center;
+        justify-content: center;
       }
     `,
     html`
@@ -67,7 +74,7 @@ declare global {
         <input type="file" />
       </label>
 
-      <div class="box">
+      <div class="box" tabindex="0">
         <slot name="description">
           Drag file here or <usa-link>choose from folder</usa-link>
         </slot>

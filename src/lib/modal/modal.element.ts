@@ -51,14 +51,6 @@ export class USAModalElement extends HTMLElement {
 
   #dialog = query("dialog");
 
-  attributeChangedCallback() {
-    if (this.isConnected && this.open) {
-      this.openModal();
-    } else {
-      this.closeModal();
-    }
-  }
-
   connectedCallback() {
     if (this.open) {
       this.openModal();

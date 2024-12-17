@@ -26,8 +26,6 @@ const meta = {
           </div>
         </usa-file-input>
 
-        <br />
-
         <usa-button type="submit">SUBMIT</usa-button>
       </form>
     `;
