@@ -74,7 +74,7 @@ declare global {
         <input type="file" />
       </label>
 
-      <div class="box" tabindex="0">
+      <div class="box">
         <slot name="description">
           Drag file here or <usa-link>choose from folder</usa-link>
         </slot>
@@ -133,14 +133,14 @@ export class USAFileInputElement extends HTMLElement {
 
     const formData = new FormData();
 
-    if (input.files) {
+    if (input.files && input.files.length) {
       box.style.display = "none";
 
       for (let file of input.files) {
         formData.append(this.name, file);
       }
     } else {
-      box.style.display = "block";
+      box.style.display = "flex";
     }
 
     this.#internals.setFormValue(formData);
