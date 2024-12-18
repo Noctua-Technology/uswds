@@ -39,7 +39,7 @@ declare global {
         width: 100%;
         z-index: 1;
         bottom: 0;
-        top: 1.85rem;
+        top: 0;
       }
 
       input:focus {
@@ -67,22 +67,29 @@ declare global {
         align-items: center;
         justify-content: center;
       }
+
+      .container {
+        position: relative;
+      }
     `,
     html`
       <label>
         <slot></slot>
-        <input type="file" />
+
+        <div class="container">
+          <input type="file" />
+
+          <div class="box">
+            <slot name="description">
+              Drag file here or <usa-link>choose from folder</usa-link>
+            </slot>
+          </div>
+
+          <usa-file-input-preview>
+            Selected file <usa-link>Change file</usa-link>
+          </usa-file-input-preview>
+        </div>
       </label>
-
-      <div class="box">
-        <slot name="description">
-          Drag file here or <usa-link>choose from folder</usa-link>
-        </slot>
-      </div>
-
-      <usa-file-input-preview>
-        Selected file <usa-link>Change file</usa-link>
-      </usa-file-input-preview>
     `,
   ],
 })
