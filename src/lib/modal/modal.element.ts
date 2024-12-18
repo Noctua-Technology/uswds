@@ -30,7 +30,6 @@ declare global {
         padding-left: 4rem;
         padding-right: 4rem;
         padding-bottom: 2rem;
-        position: relative;
         width: 100%;
       }
 
