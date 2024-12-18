@@ -4,12 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@joist/di": "/node_modules/@joist/di/target/lib.js",
+          "@joist/di/": "/node_modules/@joist/di/target/lib/",
+          "@joist/element": "/node_modules/@joist/element/target/lib.js",
+          "@joist/element/": "/node_modules/@joist/element/target/lib/",
+          "@joist/observable": "/node_modules/@joist/observable/target/lib.js",
+          "@joist/observable/": "/node_modules/@joist/observable/target/lib/",
+          "tslib": "/node_modules/tslib/tslib.es6.js"
+        }
+      }
+    </script>
   </head>
 
   <body>
     <style>
       body:has(:not(:defined)) {
         display: none;
+      }
+
+      body {
+        padding: 0;
+        margin: 0;
       }
 
       * {
@@ -20,53 +39,203 @@
           Roboto,
           Arial,
           sans-serif;
+
+        box-sizing: border-box;
+      }
+
+      header {
+        align-items: center;
+        display: flex;
+        background-color: #252f3e;
+        padding: 1rem 2rem;
+        color: #fff;
+      }
+
+      header span {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+
+      header img {
+        height: 1.5rem;
+        width: 1.5rem;
+        margin-right: 1rem;
+      }
+
+      main {
+        padding: 0 2rem 2rem 2rem;
+      }
+
+      .content {
+        display: flex;
+        gap: 3rem;
+      }
+
+      .content section:last-child {
+        flex-grow: 1;
       }
     </style>
 
-    <script src="https://cdn.jsdelivr.net/npm/@noctuatech/uswds@latest/assets/uswds.min.js"></script>
+    <script type="module" src="/target/lib/define.js"></script>
 
-    <usa-config
-      spritesheet="https://cdn.jsdelivr.net/npm/@noctuatech/uswds@latest/assets/img/sprite.svg"
-    >
-      <usa-alert type="info">
-        <h3 slot="heading">Informative status</h3>
+    <!-- <script src="/assets/uswds.min.js"></script> -->
 
-        Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-        eiusmod.
-      </usa-alert>
+    <usa-config spritesheet="/assets/img/sprite.svg">
+      <header>
+        <img src="/assets/img/4c-lg-on-black.svg" aria-hidden="true" />
 
-      <usa-alert type="warning">
-        <h3 slot="heading">Warning status</h3>
+        <span>U.S. Web Design System (USWDS)</span>
+      </header>
 
-        Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-        eiusmod.
-      </usa-alert>
+      <main>
+        <h1>Components</h1>
 
-      <usa-alert type="success">
-        <h3 slot="heading">Success status</h3>
+        <div class="content">
+          <section>
+            <usa-side-nav>
+              <usa-side-nav-item current>
+                <usa-link href="#">Current Page</usa-link>
 
-        Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-        eiusmod.
-      </usa-alert>
+                <usa-side-nav-item slot="children">
+                  <usa-link href="#">Child</usa-link>
+                </usa-side-nav-item>
 
-      <usa-alert type="error">
-        <h3 slot="heading">Error status</h3>
+                <usa-side-nav-item slot="children" current>
+                  <usa-link href="#">Child</usa-link>
 
-        Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-        eiusmod.
-      </usa-alert>
+                  <usa-side-nav-item slot="children">
+                    <usa-link href="#">Grandchild</usa-link>
+                  </usa-side-nav-item>
 
-      <usa-alert type="emergency">
-        <h3 slot="heading">Emergency status</h3>
+                  <usa-side-nav-item slot="children" current>
+                    <usa-link href="#">Grandchild</usa-link>
+                  </usa-side-nav-item>
 
-        Lorem ipsum dolor sit amet,&nbsp;
-        <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
-        eiusmod.
-      </usa-alert>
+                  <usa-side-nav-item slot="children">
+                    <usa-link href="#">Grandchild</usa-link>
+                  </usa-side-nav-item>
+                </usa-side-nav-item>
+
+                <usa-side-nav-item slot="children">
+                  <usa-link href="#">Child</usa-link>
+                </usa-side-nav-item>
+              </usa-side-nav-item>
+
+              <usa-side-nav-item>
+                <usa-link href="#">Parent</usa-link>
+              </usa-side-nav-item>
+
+              <usa-side-nav-item>
+                <usa-link href="#">Parent</usa-link>
+              </usa-side-nav-item>
+            </usa-side-nav>
+          </section>
+
+          <section>
+            <usa-alert type="info">
+              <h3 slot="heading">Informative status</h3>
+
+              Lorem ipsum dolor sit amet,&nbsp;
+              <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit,
+              sed do eiusmod.
+            </usa-alert>
+
+            <usa-alert type="warning">
+              <h3 slot="heading">Warning status</h3>
+
+              Lorem ipsum dolor sit amet,&nbsp;
+              <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit,
+              sed do eiusmod.
+            </usa-alert>
+
+            <form>
+              <usa-input name="fname" placeholder="First name">
+                First name
+              </usa-input>
+
+              <usa-input name="lname" placeholder="Last name">
+                Last name
+              </usa-input>
+
+              <usa-input-mask>
+                <usa-input
+                  name="phone"
+                  placeholder="(999) 999-9999"
+                  mask="(999) 999-9999"
+                >
+                  Last name
+                </usa-input>
+              </usa-input-mask>
+
+              <usa-select name="select" value="first">
+                Hello World
+
+                <usa-select-option>-Select One -</usa-select-option>
+                <usa-select-option value="first">first</usa-select-option>
+                <usa-select-option value="second">second</usa-select-option>
+                <usa-select-option value="third">third</usa-select-option>
+                <usa-select-option value="fourth">fourth</usa-select-option>
+              </usa-select>
+
+              <usa-radio name="historical-figures" tiled>
+                <legend>Select one historical figure</legend>
+
+                <usa-radio-option value="sojourner-truth">
+                  Sojourner Truth
+                </usa-radio-option>
+
+                <usa-radio-option value="frederick-douglass">
+                  Frederick Douglass
+
+                  <usa-description>
+                    This is optional text that can be used to describe the label
+                    in more detail.
+                  </usa-description>
+                </usa-radio-option>
+
+                <usa-radio-option value="booker-t-washington">
+                  Booker T. Washington
+                </usa-radio-option>
+
+                <usa-radio-option value="george-washington-carver">
+                  George Washington Carver
+                </usa-radio-option>
+              </usa-radio>
+
+              <usa-file-input name="upload">
+                Input accepts a single file
+
+                <div slot="description">
+                  Drag file here or <usa-link>choose from folder</usa-link>
+                </div>
+              </usa-file-input>
+
+              <usa-checkbox>I agree to the terms and conditions</usa-checkbox>
+
+              <br />
+              <br />
+
+              <usa-button modal-target="mymodal">Submit</usa-button>
+            </form>
+          </section>
+        </div>
+      </main>
+
+      <usa-modal id="mymodal">
+        <usa-modal-close></usa-modal-close>
+
+        <usa-modal-heading>
+          Are you sure you want to continue?
+        </usa-modal-heading>
+
+        <usa-input placeholder="foo@email.com" autofocus>
+          Enter your email to continue
+        </usa-input>
+
+        <usa-button modal-action="confirm">Yes I am sure</usa-button>
+        <usa-button modal-action="cancel" variant="outline">Cancel</usa-button>
+      </usa-modal>
     </usa-config>
   </body>
 </html>

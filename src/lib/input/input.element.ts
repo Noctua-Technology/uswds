@@ -1,4 +1,4 @@
-import { attr, css, element, html, listen, query } from "@joist/element";
+import { attr, css, element, html, listen, query, ready } from "@joist/element";
 import { effect, observe } from "@joist/observable";
 
 import { MaskableElement } from "../input-mask/maskable.element.js";
@@ -11,6 +11,10 @@ declare global {
 
 @element({
   tagName: "usa-input",
+  shadowDomOpts: {
+    mode: "open",
+    delegatesFocus: true,
+  },
   shadowDom: [
     css`
       * {
@@ -18,13 +22,6 @@ declare global {
       }
 
       :host {
-        font-family:
-          Source Sans Pro Web,
-          Helvetica Neue,
-          Helvetica,
-          Roboto,
-          Arial,
-          sans-serif;
         font-size: 1.06rem;
         line-height: 1.3;
         display: block;
@@ -96,6 +93,12 @@ export class USATextInputElement
     const input = this.#input();
 
     input.setSelectionRange(start, end);
+  }
+
+  @ready()
+  onReady() {
+    const input = this.#input();
+    input.autofocus = this.autofocus;
   }
 
   @effect()

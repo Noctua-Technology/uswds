@@ -22,6 +22,7 @@ declare global {
         display: block;
         max-width: 30rem;
         position: relative;
+        margin-bottom: 1.5rem;
       }
 
       label {
@@ -30,15 +31,20 @@ declare global {
 
       input {
         cursor: pointer;
-        height: 100%;
         left: 0;
         margin: 0;
         max-width: none;
         position: absolute;
         text-indent: -999em;
-        top: 0;
         width: 100%;
         z-index: 1;
+        bottom: 0;
+        top: 1.85rem;
+      }
+
+      input:focus {
+        outline: 0.25rem solid #2491ff;
+        outline-offset: 0;
       }
 
       label slot {
@@ -51,13 +57,15 @@ declare global {
 
       .box {
         border: 1px dashed #adadad;
-        display: block;
+        display: flex;
         font-size: 0.93rem;
         position: relative;
         text-align: center;
         width: 100%;
         max-width: 30rem;
-        padding: 2rem 1rem;
+        height: 5.2rem;
+        align-items: center;
+        justify-content: center;
       }
     `,
     html`
@@ -125,14 +133,14 @@ export class USAFileInputElement extends HTMLElement {
 
     const formData = new FormData();
 
-    if (input.files) {
+    if (input.files && input.files.length) {
       box.style.display = "none";
 
       for (let file of input.files) {
         formData.append(this.name, file);
       }
     } else {
-      box.style.display = "block";
+      box.style.display = "flex";
     }
 
     this.#internals.setFormValue(formData);

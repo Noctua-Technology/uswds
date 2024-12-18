@@ -1,6 +1,6 @@
 {
   "name": "@noctuatech/uswds",
-  "version": "0.0.4",
+  "version": "0.0.8",
   "type": "module",
   "workspaces": [
     "packages/**"
@@ -19,6 +19,7 @@
   "scripts": {
     "test": "wireit",
     "build": "wireit",
+    "preview": "wireit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "wireit",
     "gen": "plop",
@@ -36,6 +37,16 @@
         "tsc",
         "build-storybook",
         "rollup"
+      ]
+    },
+    "preview": {
+      "command": "browser-sync start --server --files \"target/**\" \"index.html\"",
+      "service": true,
+      "dependencies": [
+        {
+          "script": "tsc",
+          "cascade": false
+        }
       ]
     },
     "build-storybook": {
@@ -84,14 +95,16 @@
   },
   "devDependencies": {
     "@open-wc/testing": "^4.0.0",
-    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",
     "@storybook/addon-essentials": "^8.4.4",
     "@storybook/web-components": "^8.4.4",
     "@storybook/web-components-vite": "^8.4.4",
     "@types/mocha": "^10.0.7",
     "@types/node": "^22.0.0",
+    "@uswds/uswds": "^3.10.0",
     "@web/test-runner": "^0.19.0",
+    "browser-sync": "^3.0.3",
     "husky": "^9.0.11",
     "js-beautify": "^1.15.1",
     "lint-staged": "^15.2.2",

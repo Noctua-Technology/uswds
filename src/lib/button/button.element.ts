@@ -1,4 +1,4 @@
-import { attr, css, element, html, listen, query } from "@joist/element";
+import { attr, css, element, html, listen, query, ready } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -18,6 +18,10 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
 
 @element({
   tagName: "usa-button",
+  shadowDomOpts: {
+    mode: "open",
+    delegatesFocus: true,
+  },
   shadowDom: [
     css`
       :host {
@@ -182,8 +186,19 @@ export class USAButtonElement extends HTMLElement {
   @attr()
   accessor variant: ButtonVariant = "primary";
 
+  @attr()
+  accessor value = "";
+
+  accessor tabIndex = 0;
+
   #internals = this.attachInternals();
   #button = query("button");
+
+  @ready()
+  onReady() {
+    const input = this.#button();
+    input.autofocus = this.autofocus;
+  }
 
   @listen("keydown", () => document.body)
   onKeyDown(e: KeyboardEvent) {

@@ -76,7 +76,7 @@ export class USAFileInputPreviewElement extends HTMLElement {
 
   @effect()
   onChange() {
-    if (this.files) {
+    if (this.files && this.files.length) {
       this.hidden = false;
 
       let names = new Set<string>();
