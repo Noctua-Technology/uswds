@@ -1,6 +1,6 @@
 {
   "name": "@noctuatech/uswds",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "type": "module",
   "workspaces": [
     "packages/**"
@@ -28,7 +28,9 @@
   "wireit": {
     "prepare": {
       "command": "husky",
-      "dependencies": ["copy_icons"]
+      "dependencies": [
+        "copy_icons"
+      ]
     },
     "test": {
       "command": "wtr",
@@ -90,7 +92,9 @@
     },
     "copy_icons": {
       "command": "cp -r node_modules/@uswds/uswds/dist/img/usa-icons/ assets/usa-icons/",
-      "files": ["node_modules/@uswds/uswds/dist/img/usa-icons/**"],
+      "files": [
+        "node_modules/@uswds/uswds/dist/img/usa-icons/**"
+      ],
       "output": [
         "assets/usa-icon/**"
       ]
