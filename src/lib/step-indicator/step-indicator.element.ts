@@ -1,4 +1,4 @@
-import { css, element, html } from "@joist/element";
+import { attr, css, element, html } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -22,5 +22,6 @@ declare global {
   ],
 })
 export class USAStepIndicatorElement extends HTMLElement {
-  role = "list";
+  @attr()
+  accessor role = "list";
 }

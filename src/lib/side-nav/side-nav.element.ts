@@ -1,4 +1,4 @@
-import { css, element, html } from "@joist/element";
+import { css, element, html, attr } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -21,5 +21,6 @@ declare global {
   ],
 })
 export class USASideNavElement extends HTMLElement {
-  role = "navigation";
+  @attr()
+  accessor role = "navigation";
 }

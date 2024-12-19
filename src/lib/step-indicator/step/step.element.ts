@@ -113,7 +113,8 @@ export class USAStepIndicatorStepElement extends HTMLElement {
   @attr()
   accessor state: "complete" | "current" | "" = "";
 
-  role = "listitem";
+  @attr()
+  accessor role = "listitem";
 
   @attrChanged("state")
   onStateAttrChanged() {
