@@ -11,10 +11,10 @@
     ".": "./target/lib.js",
     "./*": "./target/lib/*"
   },
-  "files/**": [
+  "files": [
     "src",
-    "target/**",
-    "assets/**"
+    "target",
+    "assets"
   ],
   "scripts": {
     "test": "wireit",
