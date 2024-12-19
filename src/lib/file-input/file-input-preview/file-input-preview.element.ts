@@ -61,14 +61,23 @@ declare global {
         margin-top: 1px;
       }
     `,
-    html`<slot class="preview-heading"></slot>`,
+    html`
+      <template>
+        <div class="preview-item">
+          <img height="40" width="40" aria-hidden="true" />
+        </div>
+      </template>
+
+      <slot class="preview-heading"></slot>
+    `,
   ],
 })
 export class USAFileInputPreviewElement extends HTMLElement {
   @observe()
   accessor files: FileList | null = null;
 
-  #items = new Map<string, HTMLElement>();
+  #items = new Map<string, Element>();
+  #template = query("template");
 
   connectedCallback() {
     this.onChange();
@@ -76,6 +85,8 @@ export class USAFileInputPreviewElement extends HTMLElement {
 
   @effect()
   onChange() {
+    const template = this.#template();
+
     if (this.files && this.files.length) {
       this.hidden = false;
 
@@ -85,13 +96,15 @@ export class USAFileInputPreviewElement extends HTMLElement {
         names.add(file.name);
 
         if (!this.#items.has(file.name)) {
-          const item = document.createElement("div");
+          const clone = template.content.cloneNode(true);
+          const item = clone.childNodes[1] as Element;
+
           item.id = file.name;
-          item.className = "preview-item";
 
-          const img = createImagePreview(file);
+          const img = item.querySelector("img")!;
+          img.src = URL.createObjectURL(file);
 
-          item.append(img, document.createTextNode(file.name));
+          item.append(document.createTextNode(file.name));
 
           this.shadowRoot!.append(item);
           this.#items.set(file.name, item);
@@ -108,14 +121,4 @@ export class USAFileInputPreviewElement extends HTMLElement {
       this.hidden = true;
     }
   }
-}
-
-function createImagePreview(file: File) {
-  const img = new Image();
-  img.height = 40;
-  img.width = 40;
-  img.src = URL.createObjectURL(file);
-  img.ariaHidden = "true";
-
-  return img;
 }

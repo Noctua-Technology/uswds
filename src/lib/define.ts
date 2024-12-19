@@ -4,7 +4,7 @@ import "./button/button.element.js";
 import "./checkbox/checkbox.element.js";
 import "./description/description.element.js";
 import "./file-input/file-input.element.js";
-import "./file-input/file-input-preview.element.js";
+import "./file-input/file-input-preview/file-input-preview.element.js";
 import "./icon/icon.element.js";
 import "./input/input.element.js";
 import "./input-mask/input-mask.element.js";

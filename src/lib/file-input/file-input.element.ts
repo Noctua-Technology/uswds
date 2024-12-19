@@ -1,6 +1,3 @@
-import "./file-input-preview.element.js";
-import "../link/link.element.js";
-
 import { attr, css, element, html, listen, query } from "@joist/element";
 import { effect, observe } from "@joist/observable";
 
