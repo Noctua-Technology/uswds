@@ -1,5 +1,5 @@
 import "./file-input-preview.element.js";
-import "../link/link.element.js";
+import "../../link/link.element.js";
 
 import { assert, fixture, html } from "@open-wc/testing";
 
@@ -43,7 +43,7 @@ describe("usa-file-input-preview", () => {
 
     const previewItems = Array.from(
       shadowRoot!.querySelectorAll(".preview-item")
-    ).map((item) => item.textContent);
+    ).map((item) => item.textContent?.trim());
 
     assert.deepEqual(previewItems, ["image1.jpg", "image2.jpg"]);
   });
@@ -69,7 +69,7 @@ describe("usa-file-input-preview", () => {
 
     const previewItems = Array.from(
       fileInputPreview.shadowRoot!.querySelectorAll(".preview-item")
-    ).map((item) => item.textContent);
+    ).map((item) => item.textContent?.trim());
 
     assert.deepEqual(previewItems, ["image1.jpg"]);
   });

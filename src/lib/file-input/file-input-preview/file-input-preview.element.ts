@@ -97,16 +97,16 @@ export class USAFileInputPreviewElement extends HTMLElement {
 
         if (!this.#items.has(file.name)) {
           const clone = template.content.cloneNode(true);
-          const item = clone.childNodes[1] as Element;
 
+          const item = clone.childNodes[1] as Element;
           item.id = file.name;
+          item.append(document.createTextNode(file.name));
 
           const img = item.querySelector("img")!;
           img.src = URL.createObjectURL(file);
 
-          item.append(document.createTextNode(file.name));
-
           this.shadowRoot!.append(item);
+
           this.#items.set(file.name, item);
         }
       }
