@@ -47,7 +47,7 @@ declare global {
         outline-offset: 0;
       }
 
-      label slot {
+      label slot.label {
         font-size: 1.06rem;
         line-height: 1.3;
         display: block;
@@ -74,7 +74,7 @@ declare global {
     `,
     html`
       <label>
-        <slot></slot>
+        <slot class="label"></slot>
 
         <div class="container">
           <input type="file" />

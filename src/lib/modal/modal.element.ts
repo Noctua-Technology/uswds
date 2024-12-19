@@ -1,4 +1,4 @@
-import { attr, css, element, html, listen, query } from "@joist/element";
+import { css, element, html, listen, query } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -45,16 +45,9 @@ declare global {
   ],
 })
 export class USAModalElement extends HTMLElement {
-  @attr()
-  accessor open = false;
+  modalAction: null | string = null;
 
   #dialog = query("dialog");
-
-  connectedCallback() {
-    if (this.open) {
-      this.openModal();
-    }
-  }
 
   openModal() {
     const dialog = this.#dialog();
@@ -82,21 +75,11 @@ export class USAModalElement extends HTMLElement {
   @listen("click", (host) => host)
   onModalAction(e: Event) {
     if (e.target instanceof Element) {
-      const action = e.target.getAttribute("modal-action");
+      this.modalAction = e.target.getAttribute("modal-action");
 
-      switch (action) {
-        case "confirm":
-          this.closeModal();
-          break;
+      this.closeModal();
 
-        case "cancel":
-          this.closeModal();
-          break;
-
-        case "close":
-          this.closeModal();
-          break;
-      }
+      this.dispatchEvent(new Event("usa::modal::close"));
     }
   }
 }
