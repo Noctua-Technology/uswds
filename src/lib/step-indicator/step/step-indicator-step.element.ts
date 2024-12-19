@@ -1,4 +1,4 @@
-import { attr, css, element, html } from "@joist/element";
+import { attr, attrChanged, css, element, html } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -50,23 +50,11 @@ declare global {
         text-align: left;
       }
 
-      :host([counter][state="complete"])::after {
-        background-color: #162e51;
-        box-shadow: 0 0 0 0.25rem #fff;
-        color: #fff;
-      }
-
-      :host([counter][state="current"])::after {
-        background-color: #005ea2;
-        box-shadow: 0 0 0 0.25rem #fff;
-        color: #fff;
-      }
-
       :host([counter]) .label {
         margin-top: 1.5rem;
       }
 
-      :host([counter]):after {
+      :host([counter]) .counter:after {
         content: counter(usa-step-indicator);
         height: 2.5rem;
         border-radius: 99rem;
@@ -90,7 +78,19 @@ declare global {
         box-sizing: border-box;
       }
 
-      :host([counter="small"]):after {
+      :host([counter][state="complete"]) .counter::after {
+        background-color: #162e51;
+        box-shadow: 0 0 0 0.25rem #fff;
+        color: #fff;
+      }
+
+      :host([counter][state="current"]) .counter::after {
+        background-color: #005ea2;
+        box-shadow: 0 0 0 0.25rem #fff;
+        color: #fff;
+      }
+
+      :host([counter="small"]) .counter:after {
         height: 1.5rem;
         width: 1.5rem;
         font-size: 0.93rem;
@@ -101,6 +101,8 @@ declare global {
       }
     `,
     html`
+      <div class="counter" aria-hidden="true"></div>
+
       <div class="label">
         <slot></slot>
       </div>
@@ -111,10 +113,11 @@ export class USAStepIndicatorStepElement extends HTMLElement {
   @attr()
   accessor state: "complete" | "current" | "" = "";
 
-  role = "listeitem";
+  role = "listitem";
 
-  attributeChangedCallback() {
-    if (this.state === "complete") {
+  @attrChanged("state")
+  onStateAttrChanged() {
+    if (this.state === "current") {
       this.ariaCurrent = "step";
     }
   }
