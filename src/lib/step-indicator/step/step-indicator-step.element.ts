@@ -1,4 +1,4 @@
-import { css, element, html } from "@joist/element";
+import { attr, css, element, html } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -107,4 +107,15 @@ declare global {
     `,
   ],
 })
-export class USAStepIndicatorStepElement extends HTMLElement {}
+export class USAStepIndicatorStepElement extends HTMLElement {
+  @attr()
+  accessor state: "complete" | "current" | "" = "";
+
+  role = "listeitem";
+
+  attributeChangedCallback() {
+    if (this.state === "complete") {
+      this.ariaCurrent = "step";
+    }
+  }
+}
