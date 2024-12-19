@@ -23,8 +23,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "wireit",
     "gen": "plop",
-    "prepare": "husky",
-    "prepublish": "npm run build"
+    "prepare": "husky"
   },
   "wireit": {
     "test": {
@@ -89,9 +88,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@joist/di": "^4.0.0-next.32",
-    "@joist/element": "^4.0.0-next.32",
-    "@joist/observable": "^4.0.0-next.32",
+    "@joist/di": "^4.0.0-next.34",
+    "@joist/element": "^4.0.0-next.34",
+    "@joist/observable": "^4.0.0-next.34",
     "tslib": "2.8.1"
   },
   "devDependencies": {
