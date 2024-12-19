@@ -1,5 +1,5 @@
 import "./select.element.js";
-import "./select-option.element.js";
+import "./select-option/select-option.element.js";
 
 import { fixture, html, assert } from "@open-wc/testing";
 import { fireEvent } from "@noctuatech-uswds/testing";

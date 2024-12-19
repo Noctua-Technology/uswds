@@ -1,4 +1,4 @@
-import "./radio.element.js";
+import "../radio.element.js";
 import "./radio-option.element.js";
 
 import { assert, fixture, html } from "@open-wc/testing";

@@ -1,5 +1,6 @@
 import "../link/link.element.js";
 import "./side-nav.element.js";
+import "./side-nav-item/side-nav-item.element.js";
 
 import { fixture, html, assert } from "@open-wc/testing";
 

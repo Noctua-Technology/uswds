@@ -1,5 +1,3 @@
-import "./side-nav-item.element.js";
-
 import { css, element, html } from "@joist/element";
 
 declare global {

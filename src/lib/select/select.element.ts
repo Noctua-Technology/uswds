@@ -1,6 +1,6 @@
 import { attr, css, element, html, listen, query } from "@joist/element";
 
-import type { USASelecOptionElement } from "./select-option.element.js";
+import type { USASelecOptionElement } from "./select-option/select-option.element.js";
 
 declare global {
   interface HTMLElementTagNameMap {

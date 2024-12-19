@@ -1,6 +1,6 @@
 import { attr, css, element, html, listen } from "@joist/element";
 
-import type { USARadioOptionElement } from "./radio-option.element.js";
+import type { USARadioOptionElement } from "./radio-option/radio-option.element.js";
 
 declare global {
   interface HTMLElementTagNameMap {
