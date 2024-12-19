@@ -1,4 +1,5 @@
 import "./step-indicator.element.js";
+import "./step/step.element.js";
 
 import { fixture, html, assert } from "@open-wc/testing";
 

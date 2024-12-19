@@ -22,4 +22,6 @@ declare global {
     html`<slot></slot>`,
   ],
 })
-export class USASideNavElement extends HTMLElement {}
+export class USASideNavElement extends HTMLElement {
+  role = "navigation";
+}
