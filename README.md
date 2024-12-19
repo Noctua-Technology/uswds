@@ -25,9 +25,7 @@ npm i @noctuatech/uswds
 
 <script src="/node_modules/@noctuatech/uswds/assets/uswds.min.js"></script>
 
-<usa-config
-  spritesheet="/node_modules/@noctuatech/uswds/assets/img/sprite.svg"
->
+<usa-config icon-path="/node_modules/@noctuatech/uswds/assets/usa-icons/">
   <usa-alert type="info">
     <h3 slot="heading">Informative status</h3>
 

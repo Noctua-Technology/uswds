@@ -1,4 +1,4 @@
-import { attr, css, element, html, query } from "@joist/element";
+import { attr, css, element } from "@joist/element";
 import { inject, injectable } from "@joist/di";
 
 import { USAIcon } from "./icon-types.js";
@@ -9,6 +9,8 @@ declare global {
     "usa-icon": USAIconElement;
   }
 }
+
+export const ICON_CACHE: Map<string, Promise<string>> = new Map();
 
 @element({
   tagName: "usa-icon",
@@ -27,11 +29,6 @@ declare global {
         width: 100%;
       }
     `,
-    html`
-      <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
-        <use></use>
-      </svg>
-    `,
   ],
 })
 @injectable()
@@ -39,7 +36,9 @@ export class USAIconElement extends HTMLElement {
   @attr()
   accessor icon: USAIcon = "accessibility_new";
 
-  #use = query("use");
+  ariaHidden: string | null = "true";
+
+  #shadow = this.attachShadow({ mode: "open" });
   #config = inject(USAConfig);
   #connected = false;
 
@@ -54,12 +53,25 @@ export class USAIconElement extends HTMLElement {
     }
   }
 
-  #updateIcon() {
-    const config = this.#config();
-    const use = this.#use();
+  async #updateIcon() {
+    this.#shadow.innerHTML = await this.fetchIcon();
+  }
 
-    if (this.icon !== use.getAttribute("href")) {
-      use.setAttribute("href", `${config.spriteSheet}#${this.icon}`);
+  async fetchIcon() {
+    const cached = ICON_CACHE.get(this.icon);
+
+    if (cached) {
+      return cached;
     }
+
+    const config = this.#config();
+
+    const svg = fetch(`${config.iconPath}/${this.icon}.svg`).then((res) =>
+      res.text()
+    );
+
+    ICON_CACHE.set(this.icon, svg);
+
+    return svg;
   }
 }

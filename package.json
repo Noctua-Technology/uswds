@@ -23,9 +23,13 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "wireit",
     "gen": "plop",
-    "prepare": "husky"
+    "prepare": "wireit"
   },
   "wireit": {
+    "prepare": {
+      "command": "husky",
+      "dependencies": ["copy_icons"]
+    },
     "test": {
       "command": "wtr",
       "dependencies": [
@@ -36,7 +40,8 @@
       "dependencies": [
         "tsc",
         "build-storybook",
-        "rollup"
+        "rollup",
+        "copy_icons"
       ]
     },
     "preview": {
@@ -81,6 +86,13 @@
           "script": "tsc",
           "cascade": false
         }
+      ]
+    },
+    "copy_icons": {
+      "command": "cp -r node_modules/@uswds/uswds/dist/img/usa-icons/ assets/usa-icons/",
+      "files": ["node_modules/@uswds/uswds/dist/img/usa-icons/**"],
+      "output": [
+        "assets/usa-icon/**"
       ]
     }
   },

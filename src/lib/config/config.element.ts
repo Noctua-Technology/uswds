@@ -2,7 +2,7 @@ import { inject, injectable, Injector } from "@joist/di";
 import { attr, css, element, html } from "@joist/element";
 
 export class USAConfig {
-  spriteSheet = "";
+  iconPath = "";
 }
 
 @element({
@@ -18,8 +18,10 @@ export class USAConfig {
 })
 @injectable()
 export class USAConfigElement extends HTMLElement implements USAConfig {
-  @attr()
-  accessor spriteSheet = "/assets/img/sprite.svg";
+  @attr({
+    name: "icon-path",
+  })
+  accessor iconPath = "/assets/usa-icons/";
 
   #injector = inject(Injector);
 

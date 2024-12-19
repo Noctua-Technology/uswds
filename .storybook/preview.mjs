@@ -10,7 +10,7 @@ const preview = {
         transform(input) {
           return format.html(
             input
-              .replace('<usa-config spritesheet="./img/sprite.svg">', "")
+              .replace('<usa-config icon-path="./usa-icons/">', "")
               .replace("</usa-config>", ""),
             {
               indent_size: 2,
@@ -31,7 +31,7 @@ const preview = {
   decorators: [
     (story) => {
       return html`
-        <usa-config spritesheet="./img/sprite.svg">${story()}</usa-config>
+        <usa-config icon-path="./usa-icons/">${story()}</usa-config>
       `;
     },
   ],
