@@ -23,7 +23,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "wireit",
     "gen": "plop",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepublish": "npm run build"
   },
   "wireit": {
     "test": {
