@@ -5,13 +5,18 @@ const config: StorybookConfig = {
   addons: ["@storybook/addon-essentials"],
   framework: {
     name: "@storybook/web-components-vite",
-    options: {
-      builder: {
-        viteConfigPath: "./.storybook/vite.config.ts",
-      },
-    },
+    options: {},
   },
   staticDirs: [{ from: "../assets", to: "/assets" }],
+  async viteFinal(config) {
+    config.base = "/uswds/";
+    config.mode = "production";
+    config.esbuild = {
+      target: "es2022",
+    };
+
+    return config;
+  },
 };
 
 export default config;

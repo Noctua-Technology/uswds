@@ -10,7 +10,7 @@ const preview = {
         transform(input) {
           return format.html(
             input
-              .replace('<usa-config icon-path="./assets/usa-icons/">', "")
+              .replace('<usa-config icon-path="/uswds/assets/usa-icons/">', "")
               .replace("</usa-config>", ""),
             {
               indent_size: 2,
@@ -31,7 +31,7 @@ const preview = {
   decorators: [
     (story) => {
       return html`
-        <usa-config icon-path="./assets/usa-icons/">${story()}</usa-config>
+        <usa-config icon-path="/uswds/assets/usa-icons/">${story()}</usa-config>
       `;
     },
   ],
