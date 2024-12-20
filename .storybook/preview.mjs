@@ -31,7 +31,7 @@ const preview = {
   decorators: [
     (story) => {
       return html`
-        <usa-config icon-path="./usa-icons/">${story()}</usa-config>
+        <usa-config icon-path="./assets/usa-icons/">${story()}</usa-config>
       `;
     },
   ],
