@@ -23,6 +23,23 @@ declare global {
         position: relative;
         border-radius: 0.25rem;
       }
+
+      :host([variant="flag"]) {
+        padding-left: 15rem;
+      }
+
+      :host([variant="flag"]) ::slotted(usa-card-media) {
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        width: 15rem;
+      }
+
+      :host([variant="flag"]) ::slotted(usa-card-media[variant="inset"]) {
+        padding-bottom: 1.5rem;
+        padding-right: 0;
+      }
     `,
     html`<slot></slot>`,
   ],
@@ -30,4 +47,7 @@ declare global {
 export class USACardElement extends HTMLElement {
   @attr()
   accessor role = "listitem";
+
+  @attr()
+  accessor variant: "default" | "flag" = "default";
 }

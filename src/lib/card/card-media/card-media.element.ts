@@ -17,6 +17,7 @@ declare global {
         background-color: #f0f0f0;
         position: relative;
         overflow: hidden;
+        box-sizing: border-box;
       }
 
       :host([variant="inset"]) {

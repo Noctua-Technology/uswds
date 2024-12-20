@@ -7,6 +7,17 @@ import type { USACardElement } from "./card.element.js";
 const meta = {
   title: "usa-card",
   tags: ["autodocs"],
+
+  argTypes: {},
+  args: {},
+} satisfies Meta<USACardElement>;
+
+export default meta;
+
+type Story = StoryObj<USACardElement>;
+
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const Primary: Story = {
   render() {
     return html`
       <usa-card-group>
@@ -79,15 +90,46 @@ const meta = {
       </usa-card-group>
     `;
   },
-  argTypes: {},
-  args: {},
-} satisfies Meta<USACardElement>;
+};
 
-export default meta;
+export const Flag: Story = {
+  render() {
+    return html`
+      <usa-card-group variant="flag">
+        <usa-card variant="flag">
+          <usa-card-media>
+            <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
+          </usa-card-media>
 
-type Story = StoryObj<USACardElement>;
+          <usa-card-header>Card with media</usa-card-header>
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Primary: Story = {
-  args: {},
+          <usa-card-body>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
+            earum tenetur quo cupiditate, eaque qui officia recusandae.
+          </usa-card-body>
+
+          <usa-card-footer>
+            <usa-button>Visit Florida Keys</usa-button>
+          </usa-card-footer>
+        </usa-card>
+
+        <usa-card variant="flag">
+          <usa-card-media variant="inset">
+            <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
+          </usa-card-media>
+
+          <usa-card-header>Card with media</usa-card-header>
+
+          <usa-card-body>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
+            earum tenetur quo cupiditate, eaque qui officia recusandae.
+          </usa-card-body>
+
+          <usa-card-footer>
+            <usa-button>Visit Florida Keys</usa-button>
+          </usa-card-footer>
+        </usa-card>
+      </usa-card-group>
+    `;
+  },
 };

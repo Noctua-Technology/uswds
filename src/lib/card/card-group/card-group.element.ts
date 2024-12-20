@@ -16,6 +16,10 @@ declare global {
         gap: 1rem;
         margin-bottom: 1rem;
       }
+
+      :host([variant="flag"]) {
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      }
     `,
     html`<slot></slot>`,
   ],
