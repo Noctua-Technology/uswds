@@ -65,17 +65,27 @@
         margin-right: 1rem;
       }
 
-      main {
-        padding: 0 2rem 2rem 2rem;
-      }
-
       .content {
         display: flex;
-        gap: 3rem;
+        /* gap: 3rem; */
       }
 
       .content section:last-child {
         flex-grow: 1;
+      }
+
+      h1 {
+        background: #f3f3f3;
+        padding: 1rem 2rem 1rem 2rem;
+        margin: 0;
+      }
+
+      usa-side-nav {
+        margin: 1rem;
+      }
+
+      main section:last-child {
+        margin: 0 1rem 1rem 1rem;
       }
     </style>
 
@@ -89,10 +99,10 @@
       <span>U.S. Web Design System (USWDS)</span>
     </header>
 
+    <h1>Components</h1>
+
     <usa-config icon-path="/assets/usa-icons">
       <main>
-        <h1>Components</h1>
-
         <div class="content">
           <section>
             <usa-side-nav>
@@ -135,6 +145,8 @@
           </section>
 
           <section>
+            <h2>Sub Heading</h2>
+
             <usa-alert type="info">
               <h2 slot="heading">Informative status</h2>
 
@@ -150,6 +162,63 @@
               <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit,
               sed do eiusmod.
             </usa-alert>
+
+            <usa-card-group>
+              <usa-card>
+                <usa-card-header>Card</usa-card-header>
+
+                <usa-card-body>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Facilis earum tenetur quo cupiditate, eaque qui officia
+                  recusandae.
+                </usa-card-body>
+
+                <usa-card-footer>
+                  <usa-button>Visit Florida Keys</usa-button>
+                </usa-card-footer>
+              </usa-card>
+
+              <usa-card>
+                <usa-card-media>
+                  <img
+                    src="/assets/img/built-to-grow--alt.jpg"
+                    alt="A placeholder image"
+                  />
+                </usa-card-media>
+
+                <usa-card-header>Card with media</usa-card-header>
+
+                <usa-card-body>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Facilis earum tenetur quo cupiditate, eaque qui officia
+                  recusandae.
+                </usa-card-body>
+
+                <usa-card-footer>
+                  <usa-button>Visit Florida Keys</usa-button>
+                </usa-card-footer>
+              </usa-card>
+
+              <usa-card>
+                <usa-card-header>Media with heaer first</usa-card-header>
+
+                <usa-card-media>
+                  <img
+                    src="/assets/img/built-to-grow--alt.jpg"
+                    alt="A placeholder image"
+                  />
+                </usa-card-media>
+
+                <usa-card-body>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Tempore possimus similique nemo odit doloremque laudantium?
+                </usa-card-body>
+
+                <usa-card-footer>
+                  <usa-button>Visit Florida Keys</usa-button>
+                </usa-card-footer>
+              </usa-card>
+            </usa-card-group>
 
             <form>
               <usa-input
