@@ -14,7 +14,7 @@ declare global {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 1rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
       }
     `,
     html`<slot></slot>`,
