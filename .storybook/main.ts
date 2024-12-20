@@ -12,6 +12,13 @@ const config: StorybookConfig = {
     },
   },
   staticDirs: ["../assets"],
+  async viteFinal(config, { configType }) {
+    if (configType === "PRODUCTION") {
+      config.base = "/uswds";
+    }
+
+    return config;
+  },
 };
 
 export default config;
