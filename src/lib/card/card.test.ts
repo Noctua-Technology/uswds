@@ -3,7 +3,7 @@ import "./card-body/card-body.element.js";
 import "./card-footer/card-footer.element.js";
 import "./card-group/card-group.element.js";
 import "./card-header/card-header.element.js";
-import "./card-img/card-img.element.js";
+import "./card-media/card-media.element.js";
 
 import { fixture, html, assert } from "@open-wc/testing";
 
@@ -14,9 +14,9 @@ describe("usa-card", () => {
     const card = await fixture<USACardElement>(html`
       <usa-card-group>
         <usa-card>
-          <usa-card-img>
+          <usa-card-media>
             <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
-          </usa-card-img>
+          </usa-card-media>
 
           <usa-card-header>Card with media</usa-card-header>
 

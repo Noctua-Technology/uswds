@@ -24,9 +24,9 @@ const meta = {
         </usa-card>
 
         <usa-card>
-          <usa-card-img>
+          <usa-card-media>
             <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
-          </usa-card-img>
+          </usa-card-media>
 
           <usa-card-header>Card with media</usa-card-header>
 
@@ -43,9 +43,9 @@ const meta = {
         <usa-card>
           <usa-card-header>Media with heaer first</usa-card-header>
 
-          <usa-card-img>
+          <usa-card-media>
             <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
-          </usa-card-img>
+          </usa-card-media>
 
           <usa-card-body>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
@@ -58,9 +58,9 @@ const meta = {
         </usa-card>
 
         <usa-card>
-          <usa-card-img variant="inset">
+          <usa-card-media variant="inset">
             <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
-          </usa-card-img>
+          </usa-card-media>
 
           <usa-card-header>Inset media</usa-card-header>
 

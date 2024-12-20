@@ -27,5 +27,5 @@ export { USACardElement } from "./lib/card/card.element.js";
 export { USACardHeaderElement } from "./lib/card/card-header/card-header.element.js";
 export { USACardBodyElement } from "./lib/card/card-body/card-body.element.js";
 export { USACardFooterElement } from "./lib/card/card-footer/card-footer.element.js";
-export { USACardImgElement } from "./lib/card/card-img/card-img.element.js";
+export { USACardImgElement } from "./lib/card/card-media/card-media.element.js";
 export { USACardGroupElement } from "./lib/card/card-group/card-group.element.js";

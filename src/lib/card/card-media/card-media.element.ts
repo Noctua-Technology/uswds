@@ -2,12 +2,12 @@ import { attr, css, element, html } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-card-img": USACardImgElement;
+    "usa-card-media": USACardImgElement;
   }
 }
 
 @element({
-  tagName: "usa-card-img",
+  tagName: "usa-card-media",
   shadowDom: [
     css`
       :host {
