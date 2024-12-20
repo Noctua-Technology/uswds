@@ -1,4 +1,4 @@
-import { css, element, html } from "@joist/element";
+import { attr, css, element, html } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -24,7 +24,10 @@ declare global {
         border-radius: 0.25rem;
       }
     `,
-    html` <slot></slot> `,
+    html`<slot></slot>`,
   ],
 })
-export class USACardElement extends HTMLElement {}
+export class USACardElement extends HTMLElement {
+  @attr()
+  accessor role = "listitem";
+}

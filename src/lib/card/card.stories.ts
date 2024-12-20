@@ -25,10 +25,7 @@ const meta = {
 
         <usa-card>
           <usa-card-img>
-            <img
-              src="https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg"
-              alt="A placeholder image"
-            />
+            <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
           </usa-card-img>
 
           <usa-card-header>Card with media</usa-card-header>
@@ -47,10 +44,7 @@ const meta = {
           <usa-card-header>Media with heaer first</usa-card-header>
 
           <usa-card-img>
-            <img
-              src="https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg"
-              alt="A placeholder image"
-            />
+            <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
           </usa-card-img>
 
           <usa-card-body>
@@ -65,10 +59,7 @@ const meta = {
 
         <usa-card>
           <usa-card-img variant="inset">
-            <img
-              src="https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg"
-              alt="A placeholder image"
-            />
+            <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
           </usa-card-img>
 
           <usa-card-header>Inset media</usa-card-header>
