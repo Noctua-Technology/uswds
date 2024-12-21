@@ -10,8 +10,6 @@ declare global {
   }
 }
 
-export const ICON_CACHE: Map<string, Promise<string>> = new Map();
-
 @element({
   tagName: "usa-icon",
   shadowDom: [
@@ -58,13 +56,12 @@ export class USAIconElement extends HTMLElement {
   }
 
   async fetchIcon() {
-    const cached = ICON_CACHE.get(this.icon);
+    const config = this.#config();
+    const cached = config.iconCache.get(this.icon);
 
     if (cached) {
       return cached;
     }
-
-    const config = this.#config();
 
     const svg = fetch(`${config.iconPath}${this.icon}.svg`).then((res) => {
       switch (res.status) {
@@ -75,7 +72,7 @@ export class USAIconElement extends HTMLElement {
       return "";
     });
 
-    ICON_CACHE.set(this.icon, svg);
+    config.iconCache.set(this.icon, svg);
 
     return svg;
   }
