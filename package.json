@@ -91,7 +91,7 @@
       ]
     },
     "copy_icons": {
-      "command": "cp -r node_modules/@uswds/uswds/dist/img/usa-icons/ assets/usa-icons/",
+      "command": "cp -a node_modules/@uswds/uswds/dist/img/usa-icons/. assets/usa-icons/",
       "files": [
         "node_modules/@uswds/uswds/dist/img/usa-icons/**"
       ],
