@@ -66,9 +66,14 @@ export class USAIconElement extends HTMLElement {
 
     const config = this.#config();
 
-    const svg = fetch(`${config.iconPath}${this.icon}.svg`).then((res) =>
-      res.text()
-    );
+    const svg = fetch(`${config.iconPath}${this.icon}.svg`).then((res) => {
+      switch (res.status) {
+        case 200:
+          return res.text();
+      }
+
+      return "";
+    });
 
     ICON_CACHE.set(this.icon, svg);
 
