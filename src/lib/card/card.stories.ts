@@ -36,7 +36,7 @@ export const Primary: Story = {
 
         <usa-card>
           <usa-card-media>
-            <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
+            <img src="./img/built-to-grow--alt.jpg" alt="A placeholder image" />
           </usa-card-media>
 
           <usa-card-header>Card with media</usa-card-header>
@@ -55,7 +55,7 @@ export const Primary: Story = {
           <usa-card-header>Media with heaer first</usa-card-header>
 
           <usa-card-media>
-            <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
+            <img src="./img/built-to-grow--alt.jpg" alt="A placeholder image" />
           </usa-card-media>
 
           <usa-card-body>
@@ -70,7 +70,7 @@ export const Primary: Story = {
 
         <usa-card>
           <usa-card-media variant="inset">
-            <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
+            <img src="./img/built-to-grow--alt.jpg" alt="A placeholder image" />
           </usa-card-media>
 
           <usa-card-header>Inset media</usa-card-header>
@@ -98,7 +98,7 @@ export const Flag: Story = {
       <usa-card-group variant="flag">
         <usa-card variant="flag">
           <usa-card-media>
-            <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
+            <img src="./img/built-to-grow--alt.jpg" alt="A placeholder image" />
           </usa-card-media>
 
           <usa-card-header>Card with media</usa-card-header>
@@ -115,7 +115,7 @@ export const Flag: Story = {
 
         <usa-card variant="flag">
           <usa-card-media variant="inset">
-            <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
+            <img src="./img/built-to-grow--alt.jpg" alt="A placeholder image" />
           </usa-card-media>
 
           <usa-card-header>Card with media</usa-card-header>

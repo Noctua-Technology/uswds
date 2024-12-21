@@ -8,8 +8,11 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: ["../assets"],
-  async viteFinal(config) {
-    config.base = "/uswds/";
+  async viteFinal(config, { configType }) {
+    if (configType === "PRODUCTION") {
+      config.base = "/uswds/";
+    }
+
     config.mode = "production";
     config.esbuild = {
       target: "es2022",
