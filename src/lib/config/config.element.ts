@@ -1,10 +1,11 @@
-import { inject, injectable, Injector, Provider } from "@joist/di";
+import { inject, injectable, injected, Injector, Provider } from "@joist/di";
 import { attr, css, element, html, ready } from "@joist/element";
 
 export class USAConfig {
   iconPath: string = "";
 }
 
+@injectable()
 @element({
   tagName: "usa-config",
   shadowDom: [
@@ -16,7 +17,6 @@ export class USAConfig {
     html`<slot></slot>`,
   ],
 })
-@injectable()
 export class USAConfigElement extends HTMLElement {
   @attr({
     name: "icon-path",
@@ -25,8 +25,8 @@ export class USAConfigElement extends HTMLElement {
 
   #injector = inject(Injector);
 
-  @ready()
-  onReady() {
+  @injected()
+  onInjected() {
     const { providers } = this.#injector();
     const config = this;
 

@@ -1,5 +1,5 @@
 import { attr, css, element } from "@joist/element";
-import { inject, injectable } from "@joist/di";
+import { inject, injectable, injected } from "@joist/di";
 
 import { USAIcon } from "./icon-types.js";
 import { IconService } from "../services/icon.service.js";
@@ -37,19 +37,20 @@ export class USAIconElement extends HTMLElement {
   ariaHidden: string | null = "true";
 
   #icon = inject(IconService);
-  #connected = false;
+  #injected = false;
 
   get #shadow() {
     return this.shadowRoot!;
   }
 
-  connectedCallback() {
-    this.#connected = true;
+  @injected()
+  onInjected() {
+    this.#injected = true;
     this.#updateIcon();
   }
 
   attributeChangedCallback() {
-    if (this.#connected) {
+    if (this.#injected) {
       this.#updateIcon();
     }
   }
