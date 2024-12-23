@@ -1,8 +1,8 @@
 import { Injector } from "@joist/di";
+import { assert } from "@open-wc/testing";
 
 import { HttpService } from "./http.service.js";
 import { IconService } from "./icon.service.js";
-import { assert } from "@open-wc/testing";
 
 describe("IconService", () => {
   it("should fetch icon if not in cache", async () => {

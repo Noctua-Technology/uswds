@@ -16,7 +16,9 @@ export class IconService {
     const cached = this.#iconCache.get(icon);
 
     if (cached) {
-      return cached.then((res) => res.content.firstChild!.cloneNode(true));
+      return cached.then((res) => {
+        return res.content.firstElementChild!.cloneNode(true);
+      });
     }
 
     const svg = http
@@ -38,6 +40,8 @@ export class IconService {
 
     this.#iconCache.set(icon, svg);
 
-    return svg.then((res) => res.content.firstChild!.cloneNode(true));
+    return svg.then((res) => {
+      return res.content.firstElementChild!.cloneNode(true);
+    });
   }
 }
