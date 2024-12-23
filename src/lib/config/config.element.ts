@@ -27,10 +27,10 @@ export class USAConfigElement extends HTMLElement {
 
   @ready()
   onReady() {
-    const injector = this.#injector();
+    const { providers } = this.#injector();
     const config = this;
 
-    injector.providers.push({
+    const usaConfig: Provider<USAConfig> = {
       provide: USAConfig,
       factory() {
         return {
@@ -39,6 +39,8 @@ export class USAConfigElement extends HTMLElement {
           },
         };
       },
-    });
+    };
+
+    providers.push(usaConfig);
   }
 }
