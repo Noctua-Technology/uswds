@@ -5,13 +5,13 @@ import { USAConfig } from "../config/config.element.js";
 
 @injectable()
 export class IconService {
-  #http = inject(HttpService);
   #config = inject(USAConfig);
+  #http = inject(HttpService);
   #iconCache: Map<string, Promise<HTMLTemplateElement>> = new Map();
 
   async getIcon(icon: string): Promise<Node> {
-    const http = this.#http();
     const config = this.#config();
+    const http = this.#http();
 
     const cached = this.#iconCache.get(icon);
 
