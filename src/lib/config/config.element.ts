@@ -1,9 +1,8 @@
 import { inject, injectable, Injector } from "@joist/di";
-import { attr, css, element, html } from "@joist/element";
+import { attr, css, element, html, ready } from "@joist/element";
 
 export class USAConfig {
-  iconPath = "";
-  iconCache: Map<string, Promise<string>> = new Map();
+  iconPath: string = "";
 }
 
 @element({
@@ -24,11 +23,10 @@ export class USAConfigElement extends HTMLElement implements USAConfig {
   })
   accessor iconPath = "/assets/usa-icons/";
 
-  iconCache: Map<string, Promise<string>> = new Map();
-
   #injector = inject(Injector);
 
-  connectedCallback() {
+  @ready()
+  onReady() {
     const { providers } = this.#injector();
 
     providers.push({ provide: USAConfig, factory: () => this });

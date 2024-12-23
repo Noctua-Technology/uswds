@@ -2,6 +2,7 @@ import { attr, css, element } from "@joist/element";
 import { inject, injectable } from "@joist/di";
 
 import { USAIcon } from "./icon-types.js";
+import { IconService } from "../services/icon.service.js";
 import { USAConfig } from "../config/config.element.js";
 
 declare global {
@@ -36,9 +37,12 @@ export class USAIconElement extends HTMLElement {
 
   ariaHidden: string | null = "true";
 
-  #shadow = this.attachShadow({ mode: "open" });
-  #config = inject(USAConfig);
+  #icon = inject(IconService);
   #connected = false;
+
+  get #shadow() {
+    return this.shadowRoot!;
+  }
 
   connectedCallback() {
     this.#connected = true;
@@ -52,28 +56,8 @@ export class USAIconElement extends HTMLElement {
   }
 
   async #updateIcon() {
-    this.#shadow.innerHTML = await this.fetchIcon();
-  }
+    const icon = this.#icon();
 
-  async fetchIcon() {
-    const config = this.#config();
-    const cached = config.iconCache.get(this.icon);
-
-    if (cached) {
-      return cached;
-    }
-
-    const svg = fetch(`${config.iconPath}${this.icon}.svg`).then((res) => {
-      switch (res.status) {
-        case 200:
-          return res.text();
-      }
-
-      return "";
-    });
-
-    config.iconCache.set(this.icon, svg);
-
-    return svg;
+    this.#shadow.append(await icon.getIcon(this.icon));
   }
 }
