@@ -1,5 +1,5 @@
-import { inject, injectable } from "@joist/di";
-import { attr, css, element, html } from "@joist/element";
+import { inject, injectable, Injector } from "@joist/di";
+import { attr, css, element, html, ready } from "@joist/element";
 
 export class USAConfig {
   iconPath: string = "";
@@ -23,11 +23,21 @@ export class USAConfigElement extends HTMLElement {
   })
   accessor iconPath = "/assets/usa-icons/";
 
-  #config = inject(USAConfig);
+  #injector = inject(Injector);
 
-  connectedCallback() {
-    const config = this.#config();
+  get #config(): USAConfig {
+    return {
+      iconPath: this.iconPath,
+    };
+  }
 
-    config.iconPath = this.iconPath;
+  @ready()
+  onReady() {
+    const injector = this.#injector();
+
+    injector.providers.push({
+      provide: USAConfig,
+      factory: () => this.#config,
+    });
   }
 }
