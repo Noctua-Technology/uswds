@@ -3,7 +3,6 @@ import { inject, injectable } from "@joist/di";
 
 import { USAIcon } from "./icon-types.js";
 import { IconService } from "../services/icon.service.js";
-import { USAConfig } from "../config/config.element.js";
 
 declare global {
   interface HTMLElementTagNameMap {
