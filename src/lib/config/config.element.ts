@@ -1,9 +1,8 @@
-import { inject, injectable, Injector } from "@joist/di";
-import { attr, css, element, html } from "@joist/element";
+import { inject, injectable, Injector, Provider } from "@joist/di";
+import { attr, css, element, html, ready } from "@joist/element";
 
 export class USAConfig {
-  iconPath = "";
-  iconCache: Map<string, Promise<string>> = new Map();
+  iconPath: string = "";
 }
 
 @element({
@@ -18,19 +17,30 @@ export class USAConfig {
   ],
 })
 @injectable()
-export class USAConfigElement extends HTMLElement implements USAConfig {
+export class USAConfigElement extends HTMLElement {
   @attr({
     name: "icon-path",
   })
   accessor iconPath = "/assets/usa-icons/";
 
-  iconCache: Map<string, Promise<string>> = new Map();
-
   #injector = inject(Injector);
 
-  connectedCallback() {
+  @ready()
+  onReady() {
     const { providers } = this.#injector();
+    const config = this;
 
-    providers.push({ provide: USAConfig, factory: () => this });
+    const usaConfig: Provider<USAConfig> = {
+      provide: USAConfig,
+      factory() {
+        return {
+          get iconPath() {
+            return config.iconPath;
+          },
+        };
+      },
+    };
+
+    providers.push(usaConfig);
   }
 }
