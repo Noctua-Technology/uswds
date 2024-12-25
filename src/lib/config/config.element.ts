@@ -5,7 +5,9 @@ export class USAConfig {
   iconPath: string = "";
 }
 
-@injectable()
+@injectable({
+  name: "usa-config-injector",
+})
 @element({
   tagName: "usa-config",
   shadowDom: [
@@ -29,11 +31,9 @@ export class USAConfigElement extends HTMLElement {
   onInjected() {
     const { providers } = this.#injector();
 
-    const usaConfig: Provider<USAConfig> = {
+    providers.push({
       provide: USAConfig,
       factory: () => this,
-    };
-
-    providers.push(usaConfig);
+    });
   }
 }
