@@ -8,17 +8,19 @@ describe("IconService", () => {
   it("should fetch icon if not in cache", async () => {
     let callCount = 0;
 
-    const app = new Injector([
-      {
-        provide: HttpService,
-        use: class extends HttpService {
-          async fetch(): Promise<Response> {
-            callCount++;
-            return new Response("<svg></svg>");
-          }
+    const app = new Injector({
+      providers: [
+        {
+          provide: HttpService,
+          use: class extends HttpService {
+            async fetch(): Promise<Response> {
+              callCount++;
+              return new Response("<svg></svg>");
+            }
+          },
         },
-      },
-    ]);
+      ],
+    });
 
     const icon = app.inject(IconService);
 
@@ -31,17 +33,19 @@ describe("IconService", () => {
   it("should not fetch new icon if the icon is found in the cache", async () => {
     let callCount = 0;
 
-    const app = new Injector([
-      {
-        provide: HttpService,
-        use: class extends HttpService {
-          async fetch(): Promise<Response> {
-            callCount++;
-            return new Response("<svg></svg>");
-          }
+    const app = new Injector({
+      providers: [
+        {
+          provide: HttpService,
+          use: class extends HttpService {
+            async fetch(): Promise<Response> {
+              callCount++;
+              return new Response("<svg></svg>");
+            }
+          },
         },
-      },
-    ]);
+      ],
+    });
 
     const icon = app.inject(IconService);
 
