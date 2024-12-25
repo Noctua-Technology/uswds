@@ -28,17 +28,10 @@ export class USAConfigElement extends HTMLElement {
   @injected()
   onInjected() {
     const { providers } = this.#injector();
-    const config = this;
 
     const usaConfig: Provider<USAConfig> = {
       provide: USAConfig,
-      factory() {
-        return {
-          get iconPath() {
-            return config.iconPath;
-          },
-        };
-      },
+      factory: () => this,
     };
 
     providers.push(usaConfig);
