@@ -1,5 +1,5 @@
-import { inject, injectable, injected, Injector, Provider } from "@joist/di";
-import { attr, css, element, html, ready } from "@joist/element";
+import { injectable, injected, Injector } from "@joist/di";
+import { attr, css, element, html } from "@joist/element";
 
 export class USAConfig {
   iconPath: string = "";
@@ -25,13 +25,9 @@ export class USAConfigElement extends HTMLElement {
   })
   accessor iconPath = "/assets/usa-icons/";
 
-  #injector = inject(Injector);
-
   @injected()
-  onInjected() {
-    const { providers } = this.#injector();
-
-    providers.push({
+  onInjected(i: Injector) {
+    i.providers.push({
       provide: USAConfig,
       factory: () => this,
     });
