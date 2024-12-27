@@ -15,7 +15,6 @@ const meta = {
           placeholder=${args.mask}
           autocomplete="off"
           mask=${args.mask}
-          value="3042616138"
         >
           Phone:
         </usa-input>

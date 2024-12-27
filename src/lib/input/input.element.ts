@@ -80,20 +80,14 @@ export class USATextInputElement
   @observe()
   accessor value = "";
 
-  get selectionStart() {
-    const { selectionStart } = this.#input();
+  @observe()
+  accessor selectionStart: number | null = null;
 
-    return selectionStart;
-  }
+  @observe()
+  accessor selectionEnd: number | null = null;
 
   #internals = this.attachInternals();
   #input = query("input");
-
-  setSelectionRange(start: number, end: number) {
-    const input = this.#input();
-
-    input.setSelectionRange(start, end);
-  }
 
   @ready()
   onReady() {
@@ -104,16 +98,21 @@ export class USATextInputElement
   @effect()
   onChange() {
     const input = this.#input();
+
     input.value = this.value;
+    input.selectionStart = this.selectionStart;
+    input.selectionEnd = this.selectionEnd;
   }
 
   @listen("input")
   onInputChange() {
     const input = this.#input();
 
-    this.#internals.setFormValue(input.value);
-
     this.value = input.value;
+    this.selectionStart = input.selectionStart;
+    this.selectionEnd = input.selectionEnd;
+
+    this.#internals.setFormValue(input.value);
   }
 
   attributeChangedCallback(attr: string) {

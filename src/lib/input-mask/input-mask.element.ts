@@ -46,14 +46,13 @@ export class USAInputMaskElement extends HTMLElement {
     const offset = input.value.length - prev.length;
     const maskChar = mask[selectionStart - 1] as PatternChar | undefined;
 
-    // This is a hack to make sure that changes are propagated appropriately
-    await Promise.resolve();
-
     // check if the current value is not a space for characters and has an offset greater then 0
     if (maskChar && !PATTERN_CHARS.includes(maskChar) && offset > 0) {
-      input.setSelectionRange(selectionStart + offset, selectionStart + offset);
+      input.selectionStart = selectionStart + offset;
+      input.selectionEnd = selectionStart + offset;
     } else {
-      input.setSelectionRange(selectionStart, selectionStart);
+      input.selectionStart = selectionStart;
+      input.selectionEnd = selectionStart;
     }
 
     if (prev !== input.value) {
