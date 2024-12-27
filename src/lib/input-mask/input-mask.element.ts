@@ -33,7 +33,7 @@ export class USAInputMaskElement extends HTMLElement {
   }
 
   @listen("input")
-  async onInput(e: Event) {
+  onInput(e: Event) {
     const input = e.target as MaskableElement;
     const selectionStart = input.selectionStart || 0;
     const prev = input.value;
@@ -53,10 +53,6 @@ export class USAInputMaskElement extends HTMLElement {
     } else {
       input.selectionStart = selectionStart;
       input.selectionEnd = selectionStart;
-    }
-
-    if (prev !== input.value) {
-      input.dispatchEvent(new Event("input", { bubbles: true }));
     }
   }
 

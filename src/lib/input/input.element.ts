@@ -102,6 +102,8 @@ export class USATextInputElement
     input.value = this.value;
     input.selectionStart = this.selectionStart;
     input.selectionEnd = this.selectionEnd;
+
+    this.#internals.setFormValue(input.value);
   }
 
   @listen("input")
@@ -111,8 +113,6 @@ export class USATextInputElement
     this.value = input.value;
     this.selectionStart = input.selectionStart;
     this.selectionEnd = input.selectionEnd;
-
-    this.#internals.setFormValue(input.value);
   }
 
   attributeChangedCallback(attr: string) {
