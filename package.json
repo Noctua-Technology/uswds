@@ -104,9 +104,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@joist/di": "^4.0.0-next.37",
-    "@joist/element": "^4.0.0-next.37",
-    "@joist/observable": "^4.0.0-next.37",
+    "@joist/di": "^4.0.0-next.39",
+    "@joist/element": "^4.0.0-next.39",
+    "@joist/observable": "^4.0.0-next.39",
     "tslib": "2.8.1"
   },
   "devDependencies": {

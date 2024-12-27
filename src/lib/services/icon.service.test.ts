@@ -10,15 +10,17 @@ describe("IconService", () => {
 
     const app = new Injector({
       providers: [
-        {
-          provide: HttpService,
-          use: class extends HttpService {
-            async fetch(): Promise<Response> {
-              callCount++;
-              return new Response("<svg></svg>");
-            }
+        [
+          HttpService,
+          {
+            use: class extends HttpService {
+              async fetch(): Promise<Response> {
+                callCount++;
+                return new Response("<svg></svg>");
+              }
+            },
           },
-        },
+        ],
       ],
     });
 
@@ -35,15 +37,17 @@ describe("IconService", () => {
 
     const app = new Injector({
       providers: [
-        {
-          provide: HttpService,
-          use: class extends HttpService {
-            async fetch(): Promise<Response> {
-              callCount++;
-              return new Response("<svg></svg>");
-            }
+        [
+          HttpService,
+          {
+            use: class extends HttpService {
+              async fetch(): Promise<Response> {
+                callCount++;
+                return new Response("<svg></svg>");
+              }
+            },
           },
-        },
+        ],
       ],
     });
 
