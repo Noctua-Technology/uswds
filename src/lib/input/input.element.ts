@@ -51,19 +51,28 @@ declare global {
         outline-offset: 0;
       }
 
+      slot[name="detail"]::slotted(*) {
+        color: #757575;
+      }
+
+      slot[name="detail"]::slotted(usa-icon) {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+
       slot[name="detail"] {
         display: block;
         position: absolute;
-        bottom: 0;
+        bottom: 0.21rem;
         left: 0.5rem;
       }
 
       :host([detail="pfx"]) input {
-        padding-left: 2.75rem;
+        padding-left: 2.5rem;
       }
 
       :host([detail="sfx"]) input {
-        padding-right: 2.75rem;
+        padding-right: 2.5rem;
       }
 
       :host([detail="sfx"]) slot[name="detail"] {
