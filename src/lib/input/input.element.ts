@@ -28,6 +28,7 @@ declare global {
         font-weight: 400;
         max-width: 30rem;
         margin-bottom: 1.5rem;
+        position: relative;
       }
 
       input {
@@ -49,9 +50,31 @@ declare global {
         outline: 0.25rem solid #2491ff;
         outline-offset: 0;
       }
+
+      slot[name="detail"] {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0.5rem;
+      }
+
+      :host([detail="pfx"]) input {
+        padding-left: 2.75rem;
+      }
+
+      :host([detail="sfx"]) input {
+        padding-right: 2.75rem;
+      }
+
+      :host([detail="sfx"]) slot[name="detail"] {
+        right: 0.5rem;
+        left: auto;
+      }
     `,
     html`
       <label>
+        <slot name="detail"></slot>
+
         <slot></slot>
 
         <input />
@@ -73,6 +96,11 @@ export class USATextInputElement
 
   @attr()
   accessor placeholder = "";
+
+  @attr({
+    observed: false,
+  })
+  accessor detail: "pfx" | "sfx" | "" = "";
 
   @attr({
     reflect: false,

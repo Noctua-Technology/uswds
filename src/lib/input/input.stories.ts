@@ -10,7 +10,9 @@ const meta = {
   render() {
     return html`
       <form>
-        <usa-input name="fname" value="Danny" autocomplete="off">
+        <usa-input name="fname" value="Danny" autocomplete="off" detail="pfx">
+          <usa-icon icon="credit_card" slot="detail"></usa-icon>
+
           First name
         </usa-input>
 
