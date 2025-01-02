@@ -106,6 +106,9 @@ export class USATextInputElement
   @attr()
   accessor placeholder = "";
 
+  @attr()
+  accessor required = false;
+
   @attr({
     observed: false,
   })
@@ -132,6 +135,10 @@ export class USATextInputElement
     input.autofocus = this.autofocus;
   }
 
+  connectedCallback() {
+    this.#syncFormState();
+  }
+
   @effect()
   onChange() {
     const input = this.#input();
@@ -140,7 +147,7 @@ export class USATextInputElement
     input.selectionStart = this.selectionStart;
     input.selectionEnd = this.selectionEnd;
 
-    this.#internals.setFormValue(input.value);
+    this.#syncFormState();
   }
 
   @listen("input")
@@ -170,8 +177,21 @@ export class USATextInputElement
 
       case "value":
         input.value = this.value;
-        this.#internals.setFormValue(this.value);
+
+        this.#syncFormState();
         break;
+    }
+  }
+
+  #syncFormState() {
+    const input = this.#input();
+
+    this.#internals.setFormValue(input.value);
+
+    if (this.required && !input.value) {
+      this.#internals.setValidity({ valueMissing: true }, "Required", input);
+    } else {
+      this.#internals.setValidity({});
     }
   }
 }

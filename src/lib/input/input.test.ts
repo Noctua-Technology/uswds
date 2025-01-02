@@ -45,4 +45,16 @@ describe("usa-input", () => {
 
     assert.equal(value.get("fname"), "Bar");
   });
+
+  it("should not submit when not valid", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <usa-input name="fname" required>Hello World</usa-input>
+
+        <button>Submit</button>
+      </form>
+    `);
+
+    assert.equal(form.checkValidity(), false);
+  });
 });

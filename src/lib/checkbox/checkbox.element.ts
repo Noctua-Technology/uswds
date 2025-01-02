@@ -130,6 +130,9 @@ export class USACheckboxElement extends HTMLElement {
   @attr()
   accessor value = "";
 
+  @attr()
+  accessor required = false;
+
   @attr({
     observed: false,
   })
@@ -141,12 +144,10 @@ export class USACheckboxElement extends HTMLElement {
   connectedCallback() {
     const checkbox = this.#checkbox();
 
-    if (this.checked) {
-      this.#internals.setFormValue(this.value);
-    }
-
     checkbox.checked = this.checked;
     checkbox.name = this.name;
+
+    this.#syncFormState();
   }
 
   attributeChangedCallback() {
@@ -154,16 +155,31 @@ export class USACheckboxElement extends HTMLElement {
 
     checkbox.checked = this.checked;
     checkbox.name = this.name;
+
+    this.#syncFormState();
   }
 
   @listen("change", "input[type=checkbox]")
   onCheckboxChange() {
+    const checkbox = this.#checkbox();
+    this.checked = checkbox.checked;
+
+    this.#syncFormState();
+  }
+
+  #syncFormState() {
     const checkbox = this.#checkbox();
 
     if (checkbox.checked) {
       this.#internals.setFormValue(this.value);
     } else {
       this.#internals.setFormValue(null);
+    }
+
+    if (this.required && !checkbox.checked) {
+      this.#internals.setValidity({ valueMissing: true }, "Required", checkbox);
+    } else {
+      this.#internals.setValidity({});
     }
   }
 }

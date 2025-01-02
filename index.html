@@ -24,8 +24,12 @@
 
   <body>
     <style>
-      body:has(:not(:defined)) {
-        display: none;
+      :not(:defined) {
+        visibility: hidden;
+      }
+
+      usa-config {
+        display: contents;
       }
 
       body {
@@ -43,26 +47,6 @@
           sans-serif;
 
         box-sizing: border-box;
-      }
-
-      header {
-        align-items: center;
-        display: flex;
-        background-color: #252f3e;
-        padding: 1rem 2rem;
-        color: #fff;
-      }
-
-      header span {
-        margin: 0;
-        font-size: 1.25rem;
-        font-weight: bold;
-      }
-
-      header img {
-        height: 1.5rem;
-        width: 1.5rem;
-        margin-right: 1rem;
       }
 
       .content {
@@ -89,14 +73,34 @@
       }
     </style>
 
-    <script type="module" src="/target/lib/define.js"></script>
-
-    <!-- <script src="/assets/uswds.min.js" async></script> -->
-
     <header>
-      <img src="/assets/img/4c-lg-on-black.svg" aria-hidden="true" />
+      <template shadowrootmode="open">
+        <style>
+          :host {
+            align-items: center;
+            display: flex;
+            background-color: #252f3e;
+            padding: 1rem 2rem;
+            color: #fff;
+          }
 
-      <span>U.S. Web Design System (USWDS)</span>
+          span {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: bold;
+          }
+
+          img {
+            height: 1.5rem;
+            width: 1.5rem;
+            margin-right: 1rem;
+          }
+        </style>
+
+        <img src="/assets/img/4c-lg-on-black.svg" aria-hidden="true" />
+
+        <span>U.S. Web Design System (USWDS)</span>
+      </template>
     </header>
 
     <h1>Components</h1>
@@ -104,7 +108,7 @@
     <usa-config icon-path="/assets/usa-icons/">
       <main>
         <div class="content">
-          <section>
+          <!-- <section>
             <usa-side-nav>
               <usa-side-nav-item current>
                 <usa-link href="#">Current Page</usa-link>
@@ -142,7 +146,7 @@
                 <usa-link href="#">Parent</usa-link>
               </usa-side-nav-item>
             </usa-side-nav>
-          </section>
+          </section> -->
 
           <section>
             <h2>Sub Heading</h2>
@@ -155,13 +159,13 @@
               sed do eiusmod.
             </usa-alert>
 
-            <usa-alert type="warning">
+            <!-- <usa-alert type="warning">
               <h2 slot="heading">Warning status</h2>
 
               Lorem ipsum dolor sit amet,&nbsp;
               <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit,
               sed do eiusmod.
-            </usa-alert>
+            </usa-alert> -->
 
             <usa-card-group>
               <usa-card>
@@ -220,11 +224,14 @@
               </usa-card>
             </usa-card-group>
 
+            <h2>Get in touch</h2>
+
             <form>
               <usa-input
                 name="fname"
                 placeholder="First name"
                 autocomplete="off"
+                required
               >
                 First name
               </usa-input>
@@ -296,7 +303,7 @@
               <br />
               <br />
 
-              <usa-button modal-target="mymodal">Submit</usa-button>
+              <usa-button type="submit">Submit</usa-button>
             </form>
           </section>
         </div>
@@ -317,5 +324,9 @@
         <usa-button modal-action="cancel" variant="outline">Cancel</usa-button>
       </usa-modal>
     </usa-config>
+
+    <!-- <script type="module" src="/target/lib/define.js"></script> -->
+
+    <script src="/assets/uswds.min.js" async></script>
   </body>
 </html>

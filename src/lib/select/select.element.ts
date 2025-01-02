@@ -78,6 +78,9 @@ export class USASelectElement extends HTMLElement {
   @attr()
   accessor name = "";
 
+  @attr()
+  accessor required = false;
+
   #select = query("select");
   #internals = this.attachInternals();
 
@@ -86,14 +89,16 @@ export class USASelectElement extends HTMLElement {
     select.value = this.value;
     select.name = this.name;
 
-    this.#internals.setFormValue(this.value);
+    this.#syncFormState();
   }
 
   @listen("change")
   onSelectChange() {
     const select = this.#select();
 
-    this.#internals.setFormValue(select.value);
+    this.value = select.value;
+
+    this.#syncFormState();
   }
 
   @listen("usa::select::option::added")
@@ -104,5 +109,19 @@ export class USASelectElement extends HTMLElement {
 
     const select = this.#select();
     select.append(target.option);
+  }
+
+  #syncFormState() {
+    this.#internals.setFormValue(this.value);
+
+    if (this.required && !this.value) {
+      this.#internals.setValidity(
+        { valueMissing: true },
+        "Required",
+        this.#select()
+      );
+    } else {
+      this.#internals.setValidity({});
+    }
   }
 }

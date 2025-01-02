@@ -44,4 +44,18 @@ describe("usa-checkbox", () => {
 
     assert.equal(value.get("enabled"), "test");
   });
+
+  it("should not submit when not valid", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <usa-checkbox name="enabled" value="test" required>
+          Hello World
+        </usa-checkbox>
+
+        <button>Submit</button>
+      </form>
+    `);
+
+    assert.equal(form.checkValidity(), false);
+  });
 });
