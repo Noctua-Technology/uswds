@@ -84,17 +84,14 @@ export class USARadioOptionElement extends HTMLElement {
       this.name = parent.getAttribute("name") ?? this.name;
       this.checked = parent.getAttribute("value") === this.value;
 
-      const label = this.#label();
-
       if (parent.shadowRoot) {
-        parent.shadowRoot.append(label);
+        parent.shadowRoot.append(this.#label());
       }
     }
   }
 
   disconnectedCallback() {
-    const label = this.#label();
-    label.remove();
+    this.#label().remove();
 
     this.#observer.disconnect();
   }
