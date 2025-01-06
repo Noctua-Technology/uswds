@@ -114,7 +114,7 @@ export class USARadioElement extends HTMLElement {
 
   attributeChangedCallback() {
     for (const radio of this.querySelectorAll("usa-radio-option")) {
-      radio.checked = radio.value === this.value;
+      radio.checked = radio.getAttribute("value") === this.value;
       radio.name = this.name;
     }
   }

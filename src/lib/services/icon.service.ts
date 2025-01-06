@@ -17,7 +17,11 @@ export class IconService {
 
     if (cached) {
       return cached.then((res) => {
-        return res.content.firstElementChild?.cloneNode(true);
+        if (!res.content.firstElementChild) {
+          throw Error("cached value is not valid");
+        }
+
+        return res.content.firstElementChild.cloneNode(true);
       });
     }
 
@@ -41,7 +45,11 @@ export class IconService {
     this.#iconCache.set(icon, svg);
 
     return svg.then((res) => {
-      return res.content.firstElementChild?.cloneNode(true);
+      if (!res.content.firstElementChild) {
+        throw Error("ICON is not valid");
+      }
+
+      return res.content.firstElementChild.cloneNode(true);
     });
   }
 }

@@ -53,9 +53,9 @@ describe("usa-radio", () => {
       </form>
     `);
 
-    const nativeInputs = form
-      .querySelector("usa-radio")
-      ?.shadowRoot?.querySelectorAll("input");
+    const nativeInputs =
+      form.querySelector("usa-radio")?.shadowRoot?.querySelectorAll("input") ??
+      [];
 
     assert.deepEqual(
       Array.from(nativeInputs).map((input) => input.value),
@@ -95,9 +95,9 @@ describe("usa-radio", () => {
 
     options[2].remove();
 
-    const nativeInputs = form
-      .querySelector("usa-radio")
-      ?.shadowRoot?.querySelectorAll("input");
+    const nativeInputs =
+      form.querySelector("usa-radio")?.shadowRoot?.querySelectorAll("input") ??
+      [];
 
     assert.deepEqual(
       Array.from(nativeInputs).map((input) => input.value),
@@ -130,9 +130,9 @@ describe("usa-radio", () => {
 
     const value = new FormData(form);
 
-    const nativeInputs = form
-      .querySelector("usa-radio")
-      ?.shadowRoot?.querySelectorAll("input");
+    const nativeInputs =
+      form.querySelector("usa-radio")?.shadowRoot?.querySelectorAll("input") ??
+      [];
 
     assert.equal(nativeInputs[1].checked, true);
     assert.equal(value.get("historical-figures"), "frederick-douglass");
@@ -161,9 +161,9 @@ describe("usa-radio", () => {
       </form>
     `);
 
-    const nativeInputs = form
-      .querySelector("usa-radio")
-      ?.shadowRoot?.querySelectorAll("input");
+    const nativeInputs =
+      form.querySelector("usa-radio")?.shadowRoot?.querySelectorAll("input") ??
+      [];
 
     nativeInputs[3].click();
 

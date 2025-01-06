@@ -42,7 +42,7 @@ describe("usa-file-input-preview", () => {
     `);
 
     const previewItems = Array.from(
-      shadowRoot?.querySelectorAll(".preview-item"),
+      shadowRoot?.querySelectorAll(".preview-item") ?? [],
     ).map((item) => item.textContent?.trim());
 
     assert.deepEqual(previewItems, ["image1.jpg", "image2.jpg"]);
@@ -68,7 +68,7 @@ describe("usa-file-input-preview", () => {
     await Promise.resolve();
 
     const previewItems = Array.from(
-      fileInputPreview.shadowRoot?.querySelectorAll(".preview-item"),
+      fileInputPreview.shadowRoot?.querySelectorAll(".preview-item") ?? [],
     ).map((item) => item.textContent?.trim());
 
     assert.deepEqual(previewItems, ["image1.jpg"]);
@@ -86,7 +86,7 @@ describe("usa-file-input-preview", () => {
     `);
 
     const [first, second] = Array.from(
-      shadowRoot?.querySelectorAll<HTMLImageElement>(".preview-item img"),
+      shadowRoot?.querySelectorAll<HTMLImageElement>(".preview-item img") ?? [],
     ).map((item) => item.src.substring(29));
 
     // we are just testing that the two hashes are in fact different

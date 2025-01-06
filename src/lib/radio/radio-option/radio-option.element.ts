@@ -30,7 +30,6 @@ export class USARadioOptionElement extends HTMLElement {
   accessor checked = false;
 
   readonly radio = document.createElement("label");
-
   readonly #input = document.createElement("input");
   readonly #slotEl = document.createElement("slot");
 
