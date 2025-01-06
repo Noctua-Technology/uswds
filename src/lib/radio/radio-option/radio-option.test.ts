@@ -3,7 +3,7 @@ import "./radio-option.element.js";
 
 import { assert, fixture, html } from "@open-wc/testing";
 
-import { USARadioOptionElement } from "./radio-option.element.js";
+import type { USARadioOptionElement } from "./radio-option.element.js";
 
 describe("usa-radio-option", () => {
   it("should map value to slot", async () => {

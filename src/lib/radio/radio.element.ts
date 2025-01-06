@@ -1,7 +1,5 @@
 import { attr, css, element, html, listen } from "@joist/element";
 
-import type { USARadioOptionElement } from "./radio-option/radio-option.element.js";
-
 declare global {
   interface HTMLElementTagNameMap {
     "usa-radio": USARadioElement;
@@ -77,7 +75,7 @@ declare global {
         display: flex;
       }
     `,
-    html`<slot id="main"></slot>`,
+    html`<slot></slot>`,
   ],
 })
 export class USARadioElement extends HTMLElement {
@@ -93,10 +91,6 @@ export class USARadioElement extends HTMLElement {
     observed: false,
   })
   accessor tiled = false;
-
-  get shadow() {
-    return this.shadowRoot!;
-  }
 
   #internals = this.attachInternals();
 
@@ -114,24 +108,5 @@ export class USARadioElement extends HTMLElement {
     if (this.value) {
       this.#internals.setFormValue(this.value);
     }
-  }
-
-  attributeChangedCallback() {
-    for (let radio of this.shadow.querySelectorAll("usa-radio-option")) {
-      radio.checked = radio.value === this.value;
-      radio.name = this.name;
-    }
-  }
-
-  @listen("usa::radio::option::added", (el) => el)
-  onOptionAdded(e: Event) {
-    e.stopPropagation();
-
-    const target = e.target as USARadioOptionElement;
-
-    target.checked = target.value === this.value;
-    target.name = this.name;
-
-    this.shadow.append(target.radio);
   }
 }

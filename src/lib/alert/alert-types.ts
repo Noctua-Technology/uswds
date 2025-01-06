@@ -1,4 +1,4 @@
-import { USAIcon } from "../icon/icon-types.js";
+import type { USAIcon } from "../icon/icon-types.js";
 
 export const USA_ALERT_TYPES = [
   "info",

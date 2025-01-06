@@ -1,6 +1,6 @@
 import { attr, css, element, html, query } from "@joist/element";
 
-import { USA_ALERT_CONFIG, USAAlertType } from "./alert-types.js";
+import { type USAAlertType, USA_ALERT_CONFIG } from "./alert-types.js";
 
 declare global {
   interface HTMLElementTagNameMap {

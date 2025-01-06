@@ -23,7 +23,7 @@ export function format(value: string, pattern: string): FormattedResult {
   let count = 0;
   let formatted = "";
 
-  for (var i = 0; i < pattern.length; i++) {
+  for (let i = 0; i < pattern.length; i++) {
     const patternChar = pattern[i];
     const char = chars[count];
 

@@ -1,6 +1,6 @@
 import "./checkbox.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
 describe("usa-checkbox", () => {
   it("should be accessible", async () => {
@@ -36,9 +36,12 @@ describe("usa-checkbox", () => {
       </form>
     `);
 
-    const checkbox = form.querySelector("usa-checkbox")!;
-    const nativeInput = checkbox.shadowRoot!.querySelector("input")!;
-    nativeInput.click();
+    const checkbox = form.querySelector("usa-checkbox");
+    const nativeInput = checkbox?.shadowRoot?.querySelector("input");
+
+    if (nativeInput) {
+      nativeInput.click();
+    }
 
     const value = new FormData(form);
 

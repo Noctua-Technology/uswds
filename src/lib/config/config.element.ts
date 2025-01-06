@@ -1,8 +1,8 @@
-import { created, injectable, Injector } from "@joist/di";
+import { type Injector, created, injectable } from "@joist/di";
 import { attr, css, element, html } from "@joist/element";
 
 export class USAConfig {
-  iconPath: string = "";
+  iconPath = "";
 }
 
 @injectable({

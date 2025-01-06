@@ -1,9 +1,9 @@
 import "./radio.element.js";
 import "./radio-option/radio-option.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
-import { USARadioElement } from "./radio.element.js";
+import type { USARadioElement } from "./radio.element.js";
 
 describe("usa-radio", () => {
   it("should be accessible", async () => {
@@ -53,9 +53,9 @@ describe("usa-radio", () => {
       </form>
     `);
 
-    const nativeInputs = form
-      .querySelector("usa-radio")!
-      .shadowRoot!.querySelectorAll("input");
+    const nativeInputs =
+      form.querySelector("usa-radio")?.shadowRoot?.querySelectorAll("input") ??
+      [];
 
     assert.deepEqual(
       Array.from(nativeInputs).map((input) => input.value),
@@ -64,7 +64,7 @@ describe("usa-radio", () => {
         "frederick-douglass",
         "booker-t-washington",
         "george-washington-carver",
-      ]
+      ],
     );
   });
 
@@ -95,13 +95,13 @@ describe("usa-radio", () => {
 
     options[2].remove();
 
-    const nativeInputs = form
-      .querySelector("usa-radio")!
-      .shadowRoot!.querySelectorAll("input");
+    const nativeInputs =
+      form.querySelector("usa-radio")?.shadowRoot?.querySelectorAll("input") ??
+      [];
 
     assert.deepEqual(
       Array.from(nativeInputs).map((input) => input.value),
-      ["sojourner-truth", "frederick-douglass", "george-washington-carver"]
+      ["sojourner-truth", "frederick-douglass", "george-washington-carver"],
     );
   });
 
@@ -130,9 +130,9 @@ describe("usa-radio", () => {
 
     const value = new FormData(form);
 
-    const nativeInputs = form
-      .querySelector("usa-radio")!
-      .shadowRoot!.querySelectorAll("input");
+    const nativeInputs =
+      form.querySelector("usa-radio")?.shadowRoot?.querySelectorAll("input") ??
+      [];
 
     assert.equal(nativeInputs[1].checked, true);
     assert.equal(value.get("historical-figures"), "frederick-douglass");
@@ -161,9 +161,9 @@ describe("usa-radio", () => {
       </form>
     `);
 
-    const nativeInputs = form
-      .querySelector("usa-radio")!
-      .shadowRoot!.querySelectorAll("input");
+    const nativeInputs =
+      form.querySelector("usa-radio")?.shadowRoot?.querySelectorAll("input") ??
+      [];
 
     nativeInputs[3].click();
 

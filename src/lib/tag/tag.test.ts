@@ -1,8 +1,8 @@
 import "./tag.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
-import { USATagElement } from "./tag.element.js";
+import type { USATagElement } from "./tag.element.js";
 
 describe("usa-tag", () => {
   it("should be accessible", async () => {

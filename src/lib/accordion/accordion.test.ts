@@ -1,8 +1,8 @@
 import "./accordion.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
-import { USAAccordionElement } from "./accordion.element.js";
+import type { USAAccordionElement } from "./accordion.element.js";
 
 describe("usa-accordion", () => {
   it("should be accessible", async () => {
@@ -36,12 +36,12 @@ describe("usa-accordion", () => {
       </usa-accordion>
     `);
 
-    const heading = accordion.querySelector("h4")!;
-    const content = accordion.querySelector<HTMLDivElement>(".content")!;
+    const heading = accordion.querySelector("h4");
+    const content = accordion.querySelector<HTMLDivElement>(".content");
 
-    heading.click();
+    heading?.click();
 
-    assert.isTrue(content.checkVisibility());
+    assert.isTrue(content?.checkVisibility());
   });
 
   it("should toggle the open state when clicked", async () => {
@@ -58,12 +58,12 @@ describe("usa-accordion", () => {
       </usa-accordion>
     `);
 
-    const heading = accordion.querySelector("h4")!;
-    const content = accordion.querySelector<HTMLDivElement>(".content")!;
+    const heading = accordion.querySelector("h4");
+    const content = accordion.querySelector<HTMLDivElement>(".content");
 
-    assert.isFalse(content.checkVisibility());
+    assert.isFalse(content?.checkVisibility());
 
-    heading.click();
+    heading?.click();
 
     assert.isTrue(content.checkVisibility());
   });
@@ -95,21 +95,21 @@ describe("usa-accordion", () => {
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
-      [true, false, false]
+      [true, false, false],
     );
 
     headings[1].click();
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
-      [false, true, false]
+      [false, true, false],
     );
 
     headings[2].click();
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
-      [false, false, true]
+      [false, false, true],
     );
   });
 
@@ -140,21 +140,21 @@ describe("usa-accordion", () => {
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
-      [true, false, false]
+      [true, false, false],
     );
 
     headings[1].click();
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
-      [false, true, false]
+      [false, true, false],
     );
 
     headings[2].click();
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
-      [false, true, true]
+      [false, true, true],
     );
   });
 });

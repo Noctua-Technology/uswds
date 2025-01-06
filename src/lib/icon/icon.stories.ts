@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
-import type { USAIconElement } from "./icon.element.js";
 import { ICON_TYPES } from "./icon-types.js";
+import type { USAIconElement } from "./icon.element.js";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
@@ -24,7 +24,7 @@ export const AllIcons: Story = {
     async function copyIcon(icon: string) {
       try {
         await navigator.clipboard.writeText(
-          `<usa-icon icon=${icon}></usa-icon>`
+          `<usa-icon icon=${icon}></usa-icon>`,
         );
         alert(`copied markup for ${icon}`);
       } catch (err) {
@@ -43,7 +43,7 @@ export const AllIcons: Story = {
 
             ${icon}
           </button>
-        `
+        `,
       )}`}
     </div>`;
   },

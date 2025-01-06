@@ -8,7 +8,7 @@ const meta = {
   title: "usa-summary-box",
   tags: ["autodocs"],
   render(args) {
-    return html` <usa-summary-box> Hello World </usa-summary-box>`;
+    return html`<usa-summary-box> Hello World </usa-summary-box>`;
   },
   argTypes: {},
   args: {},

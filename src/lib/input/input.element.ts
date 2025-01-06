@@ -1,7 +1,7 @@
 import { attr, css, element, html, listen, query, ready } from "@joist/element";
 import { effect, observe } from "@joist/observable";
 
-import { MaskableElement } from "../input-mask/maskable.element.js";
+import type { MaskableElement } from "../input-mask/maskable.element.js";
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -2,9 +2,9 @@ import "../link/link.element.js";
 import "./side-nav.element.js";
 import "./side-nav-item/side-nav-item.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
-import { USASideNavElement } from "./side-nav.element.js";
+import type { USASideNavElement } from "./side-nav.element.js";
 
 describe("usa-side-nav", () => {
   it("should be accessible", async () => {
@@ -96,16 +96,16 @@ describe("usa-side-nav", () => {
 
     assert.equal(
       getComputedStyle(items[1]).getPropertyValue(
-        "--usa-nav-item-padding-left"
+        "--usa-nav-item-padding-left",
       ),
-      "2rem"
+      "2rem",
     );
 
     assert.equal(
       getComputedStyle(items[3]).getPropertyValue(
-        "--usa-nav-item-padding-left"
+        "--usa-nav-item-padding-left",
       ),
-      "3rem"
+      "3rem",
     );
   });
 });
