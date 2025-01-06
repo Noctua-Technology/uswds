@@ -83,16 +83,24 @@ export class USAFileInputPreviewElement extends HTMLElement {
     this.onChange();
   }
 
+  get shadow() {
+    if (!this.shadowRoot) {
+      throw new Error("no shadow root");
+    }
+
+    return this.shadowRoot;
+  }
+
   @effect()
   onChange() {
     const template = this.#template();
 
-    if (this.files && this.files.length) {
+    if (this.files?.length) {
       this.hidden = false;
 
-      let names = new Set<string>();
+      const names = new Set<string>();
 
-      for (let file of this.files) {
+      for (const file of this.files) {
         names.add(file.name);
 
         if (!this.#items.has(file.name)) {
@@ -102,16 +110,19 @@ export class USAFileInputPreviewElement extends HTMLElement {
           item.id = file.name;
           item.append(document.createTextNode(file.name));
 
-          const img = item.querySelector("img")!;
-          img.src = URL.createObjectURL(file);
+          const img = item.querySelector("img");
 
-          this.shadowRoot!.append(item);
+          if (img) {
+            img.src = URL.createObjectURL(file);
+          }
+
+          this.shadow.append(item);
 
           this.#items.set(file.name, item);
         }
       }
 
-      for (let [name, item] of this.#items) {
+      for (const [name, item] of this.#items) {
         if (!names.has(name)) {
           item.remove();
           this.#items.delete(name);

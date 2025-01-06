@@ -21,7 +21,7 @@ const meta = {
         Hello World
         ${when(
           args.description,
-          () => html`<usa-description>${args.description}</usa-description>`
+          () => html`<usa-description>${args.description}</usa-description>`,
         )}
       </usa-checkbox>
     `;

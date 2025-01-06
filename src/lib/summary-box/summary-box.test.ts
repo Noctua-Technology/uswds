@@ -1,8 +1,8 @@
 import "./summary-box.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
-import { USASummaryBoxElement } from "./summary-box.element.js";
+import type { USASummaryBoxElement } from "./summary-box.element.js";
 
 describe("usa-summary-box", () => {
   it("should be accessible", async () => {

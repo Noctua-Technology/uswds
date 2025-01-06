@@ -1,8 +1,8 @@
 import "./select.element.js";
 import "./select-option/select-option.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
 import { fireEvent } from "@noctuatech-uswds/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
 describe("usa-select", () => {
   it("should be accessible", async () => {
@@ -33,12 +33,12 @@ describe("usa-select", () => {
     `);
 
     const nativeInputs = form
-      .querySelector("usa-select")!
-      .shadowRoot!.querySelectorAll("option");
+      .querySelector("usa-select")
+      ?.shadowRoot?.querySelectorAll("option");
 
     assert.deepEqual(
-      Array.from(nativeInputs).map((input) => input.value),
-      ["first", "second", "third"]
+      Array.from(nativeInputs ?? []).map((input) => input.value),
+      ["first", "second", "third"],
     );
   });
 
@@ -60,12 +60,12 @@ describe("usa-select", () => {
     options[1].remove();
 
     const nativeInputs = form
-      .querySelector("usa-select")!
-      .shadowRoot!.querySelectorAll("option");
+      .querySelector("usa-select")
+      ?.shadowRoot?.querySelectorAll("option");
 
     assert.deepEqual(
-      Array.from(nativeInputs).map((input) => input.value),
-      ["first", "third"]
+      Array.from(nativeInputs ?? []).map((input) => input.value),
+      ["first", "third"],
     );
   });
 
@@ -100,11 +100,14 @@ describe("usa-select", () => {
       </form>
     `);
 
-    const select = form.querySelector("usa-select")!;
-    const nativeSelect = select.shadowRoot!.querySelector("select")!;
-    nativeSelect.value = "third";
+    const select = form.querySelector("usa-select");
+    const nativeSelect = select?.shadowRoot?.querySelector("select");
 
-    await fireEvent.change(nativeSelect, { bubbles: true });
+    if (nativeSelect) {
+      nativeSelect.value = "third";
+
+      await fireEvent.change(nativeSelect, { bubbles: true });
+    }
 
     const value = new FormData(form);
 

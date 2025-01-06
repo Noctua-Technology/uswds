@@ -11,13 +11,6 @@ declare global {
   shadowDom: [
     css`
       :host {
-        font-family:
-          Source Sans Pro Web,
-          Helvetica Neue,
-          Helvetica,
-          Roboto,
-          Arial,
-          sans-serif;
         font-size: 1.06rem;
         line-height: 1.5;
         color: #1b1b1b;

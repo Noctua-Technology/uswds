@@ -1,8 +1,8 @@
 import "./config.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
-import { USAConfigElement } from "./config.element.js";
+import type { USAConfigElement } from "./config.element.js";
 
 describe("usa-config", () => {
   it("should be accessible", async () => {

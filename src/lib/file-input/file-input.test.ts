@@ -1,8 +1,8 @@
 import "./file-input.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
-import { USAFileInputElement } from "./file-input.element.js";
+import type { USAFileInputElement } from "./file-input.element.js";
 
 describe("usa-file-input", () => {
   it("should be accessible", async () => {

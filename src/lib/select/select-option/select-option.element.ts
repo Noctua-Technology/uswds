@@ -29,7 +29,7 @@ export class USASelecOptionElement extends HTMLElement {
 
   connectedCallback() {
     this.dispatchEvent(
-      new Event("usa::select::option::added", { bubbles: true })
+      new Event("usa::select::option::added", { bubbles: true }),
     );
   }
 

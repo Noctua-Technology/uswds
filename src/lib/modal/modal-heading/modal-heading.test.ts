@@ -1,8 +1,8 @@
 import "./modal-heading.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
-import { USAModalHeadingElement } from "./modal-heading.element.js";
+import type { USAModalHeadingElement } from "./modal-heading.element.js";
 
 describe("usa-modal-heading", () => {
   it("should be accessible", async () => {

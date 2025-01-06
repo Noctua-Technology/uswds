@@ -1,9 +1,9 @@
 import "./step-indicator.element.js";
 import "./step/step.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
-import { USAStepIndicatorElement } from "./step-indicator.element.js";
+import type { USAStepIndicatorElement } from "./step-indicator.element.js";
 
 describe("usa-step-indicator", () => {
   it("should be accessible", async () => {

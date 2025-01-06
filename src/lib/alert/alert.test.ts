@@ -1,11 +1,11 @@
 import "./alert.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
 import { USA_ALERT_TYPES } from "./alert-types.js";
 
 describe("usa-alert", () => {
-  for (let alert of USA_ALERT_TYPES) {
+  for (const alert of USA_ALERT_TYPES) {
     it(`should be accessible: ${alert}`, async () => {
       const form = await fixture(html`
         <usa-alert type=${alert}>

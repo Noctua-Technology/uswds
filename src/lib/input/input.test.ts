@@ -1,7 +1,7 @@
 import "./input.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
 import { fireEvent } from "@noctuatech-uswds/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
 describe("usa-input", () => {
   it("should be accessible", async () => {
@@ -35,11 +35,14 @@ describe("usa-input", () => {
       </form>
     `);
 
-    const input = form.querySelector("usa-input")!;
-    const nativeInput = input.shadowRoot!.querySelector("input")!;
-    nativeInput.value = "Bar";
+    const input = form.querySelector("usa-input");
+    const nativeInput = input?.shadowRoot?.querySelector("input");
 
-    await fireEvent.input(nativeInput, { bubbles: true });
+    if (nativeInput) {
+      nativeInput.value = "Bar";
+
+      await fireEvent.input(nativeInput, { bubbles: true });
+    }
 
     const value = new FormData(form);
 
