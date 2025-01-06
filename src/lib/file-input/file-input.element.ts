@@ -137,10 +137,10 @@ export class USAFileInputElement extends HTMLElement {
 
     const formData = new FormData();
 
-    if (input.files && input.files.length) {
+    if (input.files?.length) {
       box.style.display = "none";
 
-      for (let file of input.files) {
+      for (const file of input.files) {
         formData.append(this.name, file);
       }
     } else {

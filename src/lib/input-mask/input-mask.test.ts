@@ -4,7 +4,7 @@ import "../input/input.element.js";
 import { assert, fixture, html } from "@open-wc/testing";
 
 import { format } from "./format.js";
-import { USAInputMaskElement } from "./input-mask.element.js";
+import type { USAInputMaskElement } from "./input-mask.element.js";
 
 describe("format", () => {
   it("should retrn the correct raw value", () => {
@@ -51,9 +51,9 @@ describe("usa-input-mask", () => {
       </usa-input-mask>
     `);
 
-    const input = el.querySelector("input")!;
+    const input = el.querySelector("input");
 
-    assert.equal(input.value, "(123) 456-7890");
+    assert.equal(input?.value, "(123) 456-7890");
   });
 
   it("should update value when on input event", async () => {
@@ -63,12 +63,14 @@ describe("usa-input-mask", () => {
       </usa-input-mask>
     `);
 
-    const input = el.querySelector("input")!;
+    const input = el.querySelector("input");
 
-    input.value = "8888888888";
-    input.dispatchEvent(new Event("input", { bubbles: true }));
+    if (input) {
+      input.value = "8888888888";
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+    }
 
-    assert.equal(input.value, "(888) 888-8888");
+    assert.equal(input?.value, "(888) 888-8888");
   });
 });
 
@@ -80,9 +82,9 @@ describe("usa-input-mask with usa-input", () => {
       </usa-input-mask>
     `);
 
-    const input = el.querySelector("usa-input")!;
+    const input = el.querySelector("usa-input");
 
-    assert.equal(input.value, "(123) 456-7890");
+    assert.equal(input?.value, "(123) 456-7890");
   });
 
   it("should update value when on input event", async () => {
@@ -96,11 +98,13 @@ describe("usa-input-mask with usa-input", () => {
       </usa-input-mask>
     `);
 
-    const input = el.querySelector("usa-input")!;
+    const input = el.querySelector("usa-input");
 
-    input.value = "8888888888";
-    input.dispatchEvent(new Event("input", { bubbles: true }));
+    if (input) {
+      input.value = "8888888888";
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+    }
 
-    assert.equal(input.value, "(888) 888-8888");
+    assert.equal(input?.value, "(888) 888-8888");
   });
 });

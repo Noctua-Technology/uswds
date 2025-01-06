@@ -1,8 +1,8 @@
 import "./modal-close.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
-import { USAModalCloseElement } from "./modal-close.element.js";
+import type { USAModalCloseElement } from "./modal-close.element.js";
 
 describe("usa-modal-close", () => {
   it("should be accessible", async () => {

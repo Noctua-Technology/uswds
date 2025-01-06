@@ -1,7 +1,7 @@
 import { inject, injectable } from "@joist/di";
 
-import { HttpService } from "./http.service.js";
 import { USAConfig } from "../config/config.element.js";
+import { HttpService } from "./http.service.js";
 
 @injectable()
 export class IconService {
@@ -17,7 +17,7 @@ export class IconService {
 
     if (cached) {
       return cached.then((res) => {
-        return res.content.firstElementChild!.cloneNode(true);
+        return res.content.firstElementChild?.cloneNode(true);
       });
     }
 
@@ -41,7 +41,7 @@ export class IconService {
     this.#iconCache.set(icon, svg);
 
     return svg.then((res) => {
-      return res.content.firstElementChild!.cloneNode(true);
+      return res.content.firstElementChild?.cloneNode(true);
     });
   }
 }

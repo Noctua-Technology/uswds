@@ -1,7 +1,7 @@
 import { attr, css, element, html, listen } from "@joist/element";
 
-import { MaskableElement } from "./maskable.element.js";
-import { format, PATTERN_CHARS, PatternChar, REG_EXPS } from "./format.js";
+import { PATTERN_CHARS, PatternChar, REG_EXPS, format } from "./format.js";
+import type { MaskableElement } from "./maskable.element.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -25,7 +25,7 @@ export class USAInputMaskElement extends HTMLElement {
   accessor mask = "";
 
   connectedCallback() {
-    for (let input of this.querySelectorAll<MaskableElement>("[mask]")) {
+    for (const input of this.querySelectorAll<MaskableElement>("[mask]")) {
       const { formatted } = format(input.value, this.#getMaskFor(input));
 
       input.value = formatted;

@@ -1,8 +1,8 @@
 import "./description.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
-import { USADescriptionElement } from "./description.element.js";
+import type { USADescriptionElement } from "./description.element.js";
 
 describe("usa-description", () => {
   it("should be accessible", async () => {

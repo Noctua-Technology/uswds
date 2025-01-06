@@ -2,9 +2,9 @@ import "./modal.element.js";
 import "./modal-heading/modal-heading.element.js";
 import "./modal-close/modal-close.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
-import { USAModalElement } from "./modal.element.js";
+import type { USAModalElement } from "./modal.element.js";
 
 describe("usa-modal", () => {
   it("should be accessible", async () => {

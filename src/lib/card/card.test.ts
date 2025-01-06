@@ -5,9 +5,9 @@ import "./card-group/card-group.element.js";
 import "./card-header/card-header.element.js";
 import "./card-media/card-media.element.js";
 
-import { fixture, html, assert } from "@open-wc/testing";
+import { assert, fixture, html } from "@open-wc/testing";
 
-import { USACardElement } from "./card.element.js";
+import type { USACardElement } from "./card.element.js";
 
 describe("usa-card", () => {
   it("should be accessible", async () => {

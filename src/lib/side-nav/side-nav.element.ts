@@ -1,4 +1,4 @@
-import { css, element, html, attr } from "@joist/element";
+import { attr, css, element, html } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {

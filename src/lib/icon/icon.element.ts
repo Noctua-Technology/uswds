@@ -1,8 +1,8 @@
-import { attr, css, element } from "@joist/element";
 import { inject, injectable, injected } from "@joist/di";
+import { attr, css, element } from "@joist/element";
 
-import { USAIcon } from "./icon-types.js";
 import { IconService } from "../services/icon.service.js";
+import type { USAIcon } from "./icon-types.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -39,10 +39,6 @@ export class USAIconElement extends HTMLElement {
   #icon = inject(IconService);
   #injected = false;
 
-  get #shadow() {
-    return this.shadowRoot!;
-  }
-
   @injected()
   onInjected() {
     this.#injected = true;
@@ -58,6 +54,8 @@ export class USAIconElement extends HTMLElement {
   async #updateIcon() {
     const icon = this.#icon();
 
-    this.#shadow.append(await icon.getIcon(this.icon));
+    if (this.shadowRoot) {
+      this.shadowRoot.append(await icon.getIcon(this.icon));
+    }
   }
 }

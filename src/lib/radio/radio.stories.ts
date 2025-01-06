@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
-import type { USARadioElement } from "./radio.element.js";
 import { when } from "lit/directives/when.js";
+import type { USARadioElement } from "./radio.element.js";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
@@ -25,7 +25,7 @@ const meta = {
           Frederick Douglass
           ${when(
             args.description,
-            () => html`<usa-description>${args.description}</usa-description>`
+            () => html`<usa-description>${args.description}</usa-description>`,
           )}
         </usa-radio-option>
 

@@ -12,10 +12,9 @@ const meta = {
       <div style="display: inline-flex; flex-direction: column; gap: 1rem">
         ${BUTTON_VARIANTS.map(
           (variant, i) =>
-            html`<usa-button variant=${variant}>Hello World</usa-button> ${i ===
-              BUTTON_VARIANTS.length - 1
-                ? ""
-                : "\n\n"}`
+            html`<usa-button variant=${variant}>Hello World</usa-button> ${
+              i === BUTTON_VARIANTS.length - 1 ? "" : "\n\n"
+            }`,
         )}
       </div>
     `;

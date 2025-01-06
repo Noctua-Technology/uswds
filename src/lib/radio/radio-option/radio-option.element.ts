@@ -54,7 +54,7 @@ export class USARadioOptionElement extends HTMLElement {
 
   connectedCallback() {
     this.dispatchEvent(
-      new Event("usa::radio::option::added", { bubbles: true })
+      new Event("usa::radio::option::added", { bubbles: true }),
     );
   }
 

@@ -94,10 +94,6 @@ export class USARadioElement extends HTMLElement {
   })
   accessor tiled = false;
 
-  get shadow() {
-    return this.shadowRoot!;
-  }
-
   #internals = this.attachInternals();
 
   @listen("change")
@@ -117,7 +113,7 @@ export class USARadioElement extends HTMLElement {
   }
 
   attributeChangedCallback() {
-    for (let radio of this.shadow.querySelectorAll("usa-radio-option")) {
+    for (const radio of this.querySelectorAll("usa-radio-option")) {
       radio.checked = radio.value === this.value;
       radio.name = this.name;
     }
@@ -132,6 +128,6 @@ export class USARadioElement extends HTMLElement {
     target.checked = target.value === this.value;
     target.name = this.name;
 
-    this.shadow.append(target.radio);
+    this.shadowRoot?.append(target.radio);
   }
 }
