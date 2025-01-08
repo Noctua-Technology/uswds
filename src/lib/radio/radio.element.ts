@@ -1,4 +1,4 @@
-import { attr, css, element, html, listen } from "@joist/element";
+import { attr, css, element, html, listen, query } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -22,12 +22,11 @@ declare global {
         display: flex;
         cursor: pointer;
         gap: 0.5rem;
+        position: relative;
       }
 
       input {
         position: absolute;
-        left: -999em;
-        right: auto;
       }
 
       label::before {
@@ -40,6 +39,8 @@ declare global {
         background: #fff;
         box-shadow: 0 0 0 2px #1b1b1b;
         flex: 0 0 1.25rem;
+        position: relative;
+        z-index: 1000;
       }
 
       label:has(input:checked)::before {
@@ -75,7 +76,11 @@ declare global {
         display: flex;
       }
     `,
-    html`<slot></slot>`,
+    html`
+      <slot name="legend" tabindex="-1"></slot>
+
+      <slot></slot>
+    `,
   ],
 })
 export class USARadioElement extends HTMLElement {
@@ -87,26 +92,53 @@ export class USARadioElement extends HTMLElement {
   @attr()
   accessor name = "";
 
+  @attr()
+  accessor required = false;
+
   @attr({
     observed: false,
   })
   accessor tiled = false;
 
   #internals = this.attachInternals();
+  #legend = query("slot[name='legend']");
+  #anchor: HTMLElement | null = null;
 
   @listen("change")
   onChange(e: Event) {
     if (e.target instanceof HTMLInputElement) {
       if (e.target.checked) {
         this.value = e.target.value;
-        this.#internals.setFormValue(e.target.value);
+
+        this.#syncFormState();
       }
     }
   }
 
   connectedCallback() {
-    if (this.value) {
-      this.#internals.setFormValue(this.value);
+    this.#syncFormState();
+  }
+
+  addRadioOption(el: HTMLElement) {
+    this.shadowRoot?.append(el);
+
+    if (this.#anchor === null) {
+      this.#anchor = el.querySelector("input");
+    }
+
+    this.#syncFormState();
+  }
+
+  #syncFormState() {
+    this.#internals.setFormValue(this.value);
+    this.#internals.setValidity({});
+
+    if (this.required && !this.value) {
+      this.#internals.setValidity(
+        { valueMissing: true },
+        "Please select an option if you want to proceed",
+        this.#anchor ?? this.#legend(),
+      );
     }
   }
 }

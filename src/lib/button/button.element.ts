@@ -168,7 +168,7 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
       }
     `,
     html`
-      <button class="usa-button">
+      <button class="usa-button" tabindex="0">
         <slot></slot>
       </button>
     `,

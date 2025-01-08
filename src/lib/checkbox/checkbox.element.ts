@@ -16,14 +16,8 @@ declare global {
 
       :host {
         display: inline-block;
-        font-family:
-          Source Sans Pro Web,
-          Helvetica Neue,
-          Helvetica,
-          Roboto,
-          Arial,
-          sans-serif;
         max-width: 30rem;
+        position: relative;
       }
 
       :host([tiled]) label {
@@ -71,11 +65,7 @@ declare global {
       }
 
       input {
-        height: 0;
-        width: 0;
         position: absolute;
-        left: -999em;
-        right: auto;
       }
 
       input:focus + .checkbox {
@@ -107,7 +97,7 @@ declare global {
     `,
     html`
       <label>
-        <input type="checkbox" />
+        <input type="checkbox" tabindex="0"/>
 
         <div class="checkbox"></div>
 
@@ -139,6 +129,7 @@ export class USACheckboxElement extends HTMLElement {
   accessor tiled = false;
 
   #checkbox = query("input");
+
   #internals = this.attachInternals();
 
   connectedCallback() {
@@ -177,7 +168,11 @@ export class USACheckboxElement extends HTMLElement {
     }
 
     if (this.required && !checkbox.checked) {
-      this.#internals.setValidity({ valueMissing: true }, "Required", checkbox);
+      this.#internals.setValidity(
+        { valueMissing: true },
+        "Please check this box if you want to proceed",
+        this.#checkbox(),
+      );
     } else {
       this.#internals.setValidity({});
     }

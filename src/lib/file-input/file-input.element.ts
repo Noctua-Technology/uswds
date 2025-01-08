@@ -74,7 +74,7 @@ declare global {
         <slot class="label"></slot>
 
         <div class="container">
-          <input type="file" />
+          <input type="file" tabindex="0"/>
 
           <div class="box">
             <slot name="description">

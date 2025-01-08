@@ -151,10 +151,12 @@
           <section>
             <h2>Sub Heading</h2>
 
+
             <usa-alert type="info">
               <h2 slot="heading">Informative status</h2>
 
               Lorem ipsum dolor sit amet,&nbsp;
+              
               <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit,
               sed do eiusmod.
             </usa-alert>
@@ -231,7 +233,6 @@
                 name="fname"
                 placeholder="First name"
                 autocomplete="off"
-                required
               >
                 First name
               </usa-input>
@@ -255,7 +256,7 @@
                 </usa-input>
               </usa-input-mask>
 
-              <usa-select name="select" value="first">
+              <usa-select name="select" value="second">
                 Hello World
 
                 <usa-select-option>-Select One -</usa-select-option>
@@ -265,8 +266,8 @@
                 <usa-select-option value="fourth">fourth</usa-select-option>
               </usa-select>
 
-              <usa-radio name="historical-figures" tiled>
-                <legend>Select one historical figure</legend>
+              <usa-radio name="historical-figures" tiled required>
+                <legend slot="legend">Select one historical figure</legend>
 
                 <usa-radio-option value="sojourner-truth">
                   Sojourner Truth
@@ -298,7 +299,7 @@
                 </div>
               </usa-file-input>
 
-              <usa-checkbox>I agree to the terms and conditions</usa-checkbox>
+              <usa-checkbox name="tac" required>I agree to the terms and conditions</usa-checkbox>
 
               <br />
               <br />

@@ -1,4 +1,5 @@
 import { attr, css, element, html, listen } from "@joist/element";
+import { USASelectElement } from "../select.element.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -23,14 +24,29 @@ export class USASelecOptionElement extends HTMLElement {
 
   readonly option = document.createElement("option");
 
+  #observer = new MutationObserver((records) => {
+    for (const { target } of records) {
+      if (target instanceof USASelectElement) {
+        this.option.selected = target.value === this.value;
+      }
+    }
+  });
+
   attributeChangedCallback() {
     this.option.value = this.value;
   }
 
   connectedCallback() {
-    this.dispatchEvent(
-      new Event("usa::select::option::added", { bubbles: true }),
-    );
+    if (this.parentElement instanceof USASelectElement) {
+      this.#observer.observe(this.parentElement, {
+        attributes: true,
+        attributeFilter: ["value"],
+      });
+
+      this.option.selected = this.parentElement.value === this.value;
+
+      this.parentElement.addOption(this.option);
+    }
   }
 
   @listen("slotchange")
@@ -39,6 +55,8 @@ export class USASelecOptionElement extends HTMLElement {
   }
 
   disconnectedCallback() {
+    this.#observer.disconnect();
+
     this.option.remove();
   }
 }

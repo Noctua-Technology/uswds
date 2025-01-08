@@ -28,7 +28,9 @@ export class USAInputMaskElement extends HTMLElement {
     for (const input of this.querySelectorAll<MaskableElement>("[mask]")) {
       const { formatted } = format(input.value, this.#getMaskFor(input));
 
-      input.value = formatted;
+      if (formatted) {
+        input.value = formatted;
+      }
     }
   }
 

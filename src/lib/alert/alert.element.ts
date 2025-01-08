@@ -10,6 +10,10 @@ declare global {
 
 @element({
   tagName: "usa-alert",
+  shadowDomOpts: {
+    mode: "open",
+    delegatesFocus: true,
+  },
   shadowDom: [
     css`
       :host {

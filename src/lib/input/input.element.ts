@@ -1,5 +1,5 @@
 import { attr, css, element, html, listen, query, ready } from "@joist/element";
-import { effect, observe } from "@joist/observable";
+import { type Changes, effect, observe } from "@joist/observable";
 
 import type { MaskableElement } from "../input-mask/maskable.element.js";
 
@@ -86,7 +86,7 @@ declare global {
 
         <slot></slot>
 
-        <input />
+        <input tabindex="0" />
       </label>
     `,
   ],
@@ -140,12 +140,18 @@ export class USATextInputElement
   }
 
   @effect()
-  onChange() {
+  onChange(changes: Changes<this>) {
     const input = this.#input();
 
     input.value = this.value;
-    input.selectionStart = this.selectionStart;
-    input.selectionEnd = this.selectionEnd;
+
+    if (changes.has("selectionStart")) {
+      input.selectionStart = this.selectionStart;
+    }
+
+    if (changes.has("selectionEnd")) {
+      input.selectionEnd = this.selectionEnd;
+    }
 
     this.#syncFormState();
   }
@@ -173,12 +179,6 @@ export class USATextInputElement
 
       case "name":
         input.name = this.name;
-        break;
-
-      case "value":
-        input.value = this.value;
-
-        this.#syncFormState();
         break;
     }
   }

@@ -1,7 +1,5 @@
 import { attr, css, element, html, listen, query } from "@joist/element";
 
-import type { USASelecOptionElement } from "./select-option/select-option.element.js";
-
 declare global {
   interface HTMLElementTagNameMap {
     "usa-select": USASelectElement;
@@ -92,6 +90,14 @@ export class USASelectElement extends HTMLElement {
     this.#syncFormState();
   }
 
+  attributeChangedCallback() {
+    const select = this.#select();
+    select.value = this.value;
+    select.name = this.name;
+
+    this.#syncFormState();
+  }
+
   @listen("change")
   onSelectChange() {
     const select = this.#select();
@@ -101,27 +107,22 @@ export class USASelectElement extends HTMLElement {
     this.#syncFormState();
   }
 
-  @listen("usa::select::option::added")
-  onOptionAdded(e: Event) {
-    const target = e.target as USASelecOptionElement;
-
-    e.stopPropagation();
-
+  addOption(option: HTMLOptionElement) {
     const select = this.#select();
-    select.append(target.option);
+
+    select.append(option);
   }
 
   #syncFormState() {
     this.#internals.setFormValue(this.value);
+    this.#internals.setValidity({});
 
     if (this.required && !this.value) {
       this.#internals.setValidity(
         { valueMissing: true },
-        "Required",
-        this.#select()
+        "Please select an option",
+        this.#select(),
       );
-    } else {
-      this.#internals.setValidity({});
     }
   }
 }

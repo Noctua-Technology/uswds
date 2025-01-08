@@ -1,5 +1,7 @@
 import { attr, css, element, html, query } from "@joist/element";
 
+import { USARadioElement } from "../radio.element.js";
+
 declare global {
   interface HTMLElementTagNameMap {
     "usa-radio-option": USARadioOptionElement;
@@ -19,7 +21,7 @@ declare global {
     html`
       <!-- This label will be moved to the shadow dom of its parent -->
       <label>
-        <input type="radio" />
+        <input type="radio" tabindex="0" />
         <slot name="reserved"></slot>
       </label>
 
@@ -31,27 +33,23 @@ export class USARadioOptionElement extends HTMLElement {
   @attr()
   accessor value = "";
 
-  @attr()
-  accessor name = "";
-
-  @attr()
-  accessor checked = false;
-
   #label = query("label");
   #input = query("input");
   #slot = query("slot");
 
   #observer = new MutationObserver((records) => {
     for (const { target, attributeName } of records) {
-      if (target instanceof Element) {
+      if (target instanceof USARadioElement) {
+        const input = this.#input();
+
         switch (attributeName) {
           case "value": {
-            this.checked = target.getAttribute("value") === this.value;
+            input.checked = target.value === this.value;
             break;
           }
 
           case "name": {
-            this.name = target.getAttribute("name") ?? this.name;
+            input.name = target.name;
             break;
           }
         }
@@ -60,33 +58,28 @@ export class USARadioOptionElement extends HTMLElement {
   });
 
   attributeChangedCallback() {
+    this.slot = this.value;
+
     const input = this.#input();
     const slot = this.#slot();
 
-    this.slot = this.value;
-
-    input.name = this.name;
-    input.value = this.value;
-    input.checked = this.checked;
-
     slot.name = this.value;
+    input.value = this.value;
   }
 
   connectedCallback() {
-    const parent = this.parentElement;
-
-    if (parent) {
-      this.#observer.observe(parent, {
+    if (this.parentElement instanceof USARadioElement) {
+      this.#observer.observe(this.parentElement, {
         attributes: true,
         attributeFilter: ["value", "name"],
       });
 
-      this.name = parent.getAttribute("name") ?? this.name;
-      this.checked = parent.getAttribute("value") === this.value;
+      const input = this.#input();
 
-      if (parent.shadowRoot) {
-        parent.shadowRoot.append(this.#label());
-      }
+      input.name = this.parentElement.name ?? "";
+      input.checked = this.parentElement.value === this.value;
+
+      this.parentElement.addRadioOption(this.#label());
     }
   }
 
