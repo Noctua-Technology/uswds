@@ -15,13 +15,6 @@ export type TagVariant = (typeof TAG_VARIANTS)[number];
   shadowDom: [
     css`
       :host {
-        font-family:
-          Source Sans Pro Web,
-          Helvetica Neue,
-          Helvetica,
-          Roboto,
-          Arial,
-          sans-serif;
         font-size: 0.93rem;
         color: #fff;
         text-transform: uppercase;

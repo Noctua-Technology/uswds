@@ -12,13 +12,6 @@ declare global {
     css`
       :host {
         display: block;
-        font-family:
-          Source Sans Pro Web,
-          Helvetica Neue,
-          Helvetica,
-          Roboto,
-          Arial,
-          sans-serif;
         line-height: 1.3;
         position: relative;
         width: 100%;

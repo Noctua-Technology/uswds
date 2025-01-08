@@ -30,13 +30,6 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
 
       .usa-button {
         box-sizing: border-box;
-        font-family:
-          Source Sans Pro Web,
-          Helvetica Neue,
-          Helvetica,
-          Roboto,
-          Arial,
-          sans-serif;
         font-size: 1.06rem;
         line-height: 0.9;
         color: white;
