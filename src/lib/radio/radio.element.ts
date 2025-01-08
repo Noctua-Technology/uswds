@@ -77,7 +77,7 @@ declare global {
       }
     `,
     html`
-      <slot name="legend" tabindex="-1"></slot>
+      <slot name="legend" id="legend" tabindex="-1"></slot>
 
       <slot></slot>
     `,
@@ -101,8 +101,7 @@ export class USARadioElement extends HTMLElement {
   accessor tiled = false;
 
   #internals = this.attachInternals();
-  #legend = query("slot[name='legend']");
-  #anchor: HTMLElement | null = null;
+  #legend = query("#legend");
 
   @listen("change")
   onChange(e: Event) {
@@ -122,10 +121,6 @@ export class USARadioElement extends HTMLElement {
   addRadioOption(el: HTMLElement) {
     this.shadowRoot?.append(el);
 
-    if (this.#anchor === null) {
-      this.#anchor = el.querySelector("input");
-    }
-
     this.#syncFormState();
   }
 
@@ -134,10 +129,12 @@ export class USARadioElement extends HTMLElement {
     this.#internals.setValidity({});
 
     if (this.required && !this.value) {
+      const input = this.shadowRoot?.querySelector("input");
+
       this.#internals.setValidity(
         { valueMissing: true },
         "Please select an option if you want to proceed",
-        this.#anchor ?? this.#legend(),
+        input ?? this.#legend(),
       );
     }
   }

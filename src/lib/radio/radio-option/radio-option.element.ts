@@ -38,21 +38,12 @@ export class USARadioOptionElement extends HTMLElement {
   #slot = query("slot");
 
   #observer = new MutationObserver((records) => {
-    for (const { target, attributeName } of records) {
+    for (const { target } of records) {
       if (target instanceof USARadioElement) {
         const input = this.#input();
 
-        switch (attributeName) {
-          case "value": {
-            input.checked = target.value === this.value;
-            break;
-          }
-
-          case "name": {
-            input.name = target.name;
-            break;
-          }
-        }
+        input.checked = target.value === this.value;
+        input.name = target.name;
       }
     }
   });
