@@ -30,13 +30,6 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
 
       .usa-button {
         box-sizing: border-box;
-        font-family:
-          Source Sans Pro Web,
-          Helvetica Neue,
-          Helvetica,
-          Roboto,
-          Arial,
-          sans-serif;
         font-size: 1.06rem;
         line-height: 0.9;
         color: white;
@@ -168,7 +161,7 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
       }
     `,
     html`
-      <button class="usa-button">
+      <button class="usa-button" tabindex="0">
         <slot></slot>
       </button>
     `,

@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="This is the description" />
 
-    <title>Document</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="This is the description" />
 
-    <script type="importmap">
+  <title>Document</title>
+
+  <script type="importmap">
       {
         "imports": {
           "@joist/di": "/node_modules/@joist/di/target/lib.js",
@@ -20,231 +21,221 @@
         }
       }
     </script>
-  </head>
+</head>
 
-  <body>
-    <style>
-      body:has(:not(:defined)) {
-        display: none;
-      }
+<body>
+  <style>
+    :not(:defined) {
+      visibility: hidden;
+    }
 
-      body {
-        padding: 0;
-        margin: 0;
-      }
+    usa-config {
+      display: contents;
+    }
 
-      * {
-        font-family:
-          Source Sans Pro Web,
-          Helvetica Neue,
-          Helvetica,
-          Roboto,
-          Arial,
-          sans-serif;
+    body {
+      padding: 0;
+      margin: 0;
+    }
 
-        box-sizing: border-box;
-      }
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
 
-      header {
-        align-items: center;
-        display: flex;
-        background-color: #252f3e;
-        padding: 1rem 2rem;
-        color: #fff;
-      }
+    * {
+      font-family:
+        Source Sans Pro Web,
+        Helvetica Neue,
+        Helvetica,
+        Roboto,
+        Arial,
+        sans-serif;
 
-      header span {
-        margin: 0;
-        font-size: 1.25rem;
-        font-weight: bold;
-      }
+      box-sizing: border-box;
+    }
 
-      header img {
-        height: 1.5rem;
-        width: 1.5rem;
-        margin-right: 1rem;
-      }
+    .content {
+      display: flex;
+      /* gap: 3rem; */
+    }
 
-      .content {
-        display: flex;
-        /* gap: 3rem; */
-      }
+    .content section:last-child {
+      flex-grow: 1;
+    }
 
-      .content section:last-child {
-        flex-grow: 1;
-      }
+    h1 {
+      background: #f3f3f3;
+      padding: 1rem 2rem 1rem 2rem;
+      margin: 0;
+    }
 
-      h1 {
-        background: #f3f3f3;
-        padding: 1rem 2rem 1rem 2rem;
-        margin: 0;
-      }
+    usa-side-nav {
+      margin: 1rem;
+    }
 
-      usa-side-nav {
-        margin: 1rem;
-      }
+    main section:last-child {
+      margin: 0 1rem 1rem 1rem;
+    }
+  </style>
 
-      main section:last-child {
-        margin: 0 1rem 1rem 1rem;
-      }
-    </style>
+  <header>
+    <template shadowrootmode="open">
+      <style>
+        :host {
+          align-items: center;
+          display: flex;
+          background-color: #252f3e;
+          padding: 1rem 2rem;
+          color: #fff;
+        }
 
-    <header>
+        span {
+          margin: 0;
+          font-size: 1.25rem;
+          font-weight: bold;
+        }
+
+        img {
+          height: 1.5rem;
+          width: 1.5rem;
+          margin-right: 1rem;
+        }
+      </style>
+
       <img src="/assets/img/4c-lg-on-black.svg" aria-hidden="true" />
 
       <span>U.S. Web Design System (USWDS)</span>
-    </header>
+    </template>
+  </header>
 
-    <h1>Components</h1>
+  <h1>Components</h1>
 
-    <usa-config icon-path="/assets/usa-icons/">
-      <main>
-        <div class="content">
-          <section>
-            <usa-side-nav>
-              <usa-side-nav-item current>
-                <usa-link href="#">Current Page</usa-link>
+  <usa-config icon-path="/assets/usa-icons/">
+    <main>
+      <div class="content">
+        <section>
+          <h2>Sub Heading</h2>
 
-                <usa-side-nav-item slot="children">
-                  <usa-link href="#">Child</usa-link>
-                </usa-side-nav-item>
+          <usa-alert type="info">
+            <h2 slot="heading">Informative status</h2>
 
-                <usa-side-nav-item slot="children" current>
-                  <usa-link href="#">Child</usa-link>
+            Lorem ipsum dolor sit amet,&nbsp;
+
+            <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit,
+            sed do eiusmod.
+          </usa-alert>
+
+          <usa-card-group>
+            <usa-card>
+              <usa-card-header>Card</usa-card-header>
+
+              <usa-card-body>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Facilis earum tenetur quo cupiditate, eaque qui officia
+                recusandae.
+              </usa-card-body>
+
+              <usa-card-footer>
+                <usa-button>Visit Florida Keys</usa-button>
+              </usa-card-footer>
+            </usa-card>
+
+            <usa-card>
+              <usa-card-media>
+                <img src="/assets/img/built-to-grow--alt.jpg" alt="A placeholder image" />
+              </usa-card-media>
+
+              <usa-card-header>Card with media</usa-card-header>
+
+              <usa-card-body>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Facilis earum tenetur quo cupiditate, eaque qui officia
+                recusandae.
+              </usa-card-body>
+
+              <usa-card-footer>
+                <usa-button>Visit Florida Keys</usa-button>
+              </usa-card-footer>
+            </usa-card>
+
+            <usa-card>
+              <usa-card-header>Media with heaer first</usa-card-header>
+
+              <usa-card-media>
+                <img src="/assets/img/built-to-grow--alt.jpg" alt="A placeholder image" />
+              </usa-card-media>
+
+              <usa-card-body>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Tempore possimus similique nemo odit doloremque laudantium?
+              </usa-card-body>
+
+              <usa-card-footer>
+                <usa-button>Visit Florida Keys</usa-button>
+              </usa-card-footer>
+            </usa-card>
+          </usa-card-group>
+
+          <h2>Get in touch</h2>
+
+          <div style="display: flex; gap: 2rem;">
+            <div>
+              <usa-side-nav>
+                <usa-side-nav-item current>
+                  <usa-link href="#">Current Page</usa-link>
 
                   <usa-side-nav-item slot="children">
-                    <usa-link href="#">Grandchild</usa-link>
+                    <usa-link href="#">Child</usa-link>
                   </usa-side-nav-item>
 
                   <usa-side-nav-item slot="children" current>
-                    <usa-link href="#">Grandchild</usa-link>
+                    <usa-link href="#">Child</usa-link>
+
+                    <usa-side-nav-item slot="children">
+                      <usa-link href="#">Grandchild</usa-link>
+                    </usa-side-nav-item>
+
+                    <usa-side-nav-item slot="children" current>
+                      <usa-link href="#">Grandchild</usa-link>
+                    </usa-side-nav-item>
+
+                    <usa-side-nav-item slot="children">
+                      <usa-link href="#">Grandchild</usa-link>
+                    </usa-side-nav-item>
                   </usa-side-nav-item>
 
                   <usa-side-nav-item slot="children">
-                    <usa-link href="#">Grandchild</usa-link>
+                    <usa-link href="#">Child</usa-link>
                   </usa-side-nav-item>
                 </usa-side-nav-item>
 
-                <usa-side-nav-item slot="children">
-                  <usa-link href="#">Child</usa-link>
+                <usa-side-nav-item>
+                  <usa-link href="#">Parent</usa-link>
                 </usa-side-nav-item>
-              </usa-side-nav-item>
 
-              <usa-side-nav-item>
-                <usa-link href="#">Parent</usa-link>
-              </usa-side-nav-item>
-
-              <usa-side-nav-item>
-                <usa-link href="#">Parent</usa-link>
-              </usa-side-nav-item>
-            </usa-side-nav>
-          </section>
-
-          <section>
-            <h2>Sub Heading</h2>
-
-            <usa-alert type="info">
-              <h2 slot="heading">Informative status</h2>
-
-              Lorem ipsum dolor sit amet,&nbsp;
-              <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit,
-              sed do eiusmod.
-            </usa-alert>
-
-            <usa-alert type="warning">
-              <h2 slot="heading">Warning status</h2>
-
-              Lorem ipsum dolor sit amet,&nbsp;
-              <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit,
-              sed do eiusmod.
-            </usa-alert>
-
-            <usa-card-group>
-              <usa-card>
-                <usa-card-header>Card</usa-card-header>
-
-                <usa-card-body>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Facilis earum tenetur quo cupiditate, eaque qui officia
-                  recusandae.
-                </usa-card-body>
-
-                <usa-card-footer>
-                  <usa-button>Visit Florida Keys</usa-button>
-                </usa-card-footer>
-              </usa-card>
-
-              <usa-card>
-                <usa-card-media>
-                  <img
-                    src="/assets/img/built-to-grow--alt.jpg"
-                    alt="A placeholder image"
-                  />
-                </usa-card-media>
-
-                <usa-card-header>Card with media</usa-card-header>
-
-                <usa-card-body>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Facilis earum tenetur quo cupiditate, eaque qui officia
-                  recusandae.
-                </usa-card-body>
-
-                <usa-card-footer>
-                  <usa-button>Visit Florida Keys</usa-button>
-                </usa-card-footer>
-              </usa-card>
-
-              <usa-card>
-                <usa-card-header>Media with heaer first</usa-card-header>
-
-                <usa-card-media>
-                  <img
-                    src="/assets/img/built-to-grow--alt.jpg"
-                    alt="A placeholder image"
-                  />
-                </usa-card-media>
-
-                <usa-card-body>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Tempore possimus similique nemo odit doloremque laudantium?
-                </usa-card-body>
-
-                <usa-card-footer>
-                  <usa-button>Visit Florida Keys</usa-button>
-                </usa-card-footer>
-              </usa-card>
-            </usa-card-group>
+                <usa-side-nav-item>
+                  <usa-link href="#">Parent</usa-link>
+                </usa-side-nav-item>
+              </usa-side-nav>
+            </div>
 
             <form>
-              <usa-input
-                name="fname"
-                placeholder="First name"
-                autocomplete="off"
-              >
+              <usa-input name="fname" placeholder="First name" autocomplete="off">
                 First name
               </usa-input>
 
-              <usa-input
-                name="lname"
-                placeholder="Last name"
-                autocomplete="off"
-              >
+              <usa-input name="lname" placeholder="Last name" autocomplete="off">
                 Last name
               </usa-input>
 
               <usa-input-mask>
-                <usa-input
-                  name="phone"
-                  placeholder="(999) 999-9999"
-                  mask="(999) 999-9999"
-                  autocomplete="off"
-                >
+                <usa-input name="phone" placeholder="(999) 999-9999" mask="(999) 999-9999" autocomplete="off">
                   Phone number
                 </usa-input>
               </usa-input-mask>
 
-              <usa-select name="select" value="first">
+              <usa-select name="select">
                 Hello World
 
                 <usa-select-option>-Select One -</usa-select-option>
@@ -254,8 +245,8 @@
                 <usa-select-option value="fourth">fourth</usa-select-option>
               </usa-select>
 
-              <usa-radio name="historical-figures" tiled>
-                <legend>Select one historical figure</legend>
+              <usa-radio name="historical-figures" tiled required>
+                <legend slot="legend">Select one historical figure</legend>
 
                 <usa-radio-option value="sojourner-truth">
                   Sojourner Truth
@@ -287,35 +278,37 @@
                 </div>
               </usa-file-input>
 
-              <usa-checkbox>I agree to the terms and conditions</usa-checkbox>
+              <usa-checkbox name="tac" required>I agree to the terms and conditions</usa-checkbox>
 
               <br />
               <br />
 
-              <usa-button modal-target="mymodal">Submit</usa-button>
+              <usa-button type="submit">Submit</usa-button>
             </form>
-          </section>
-        </div>
-      </main>
+          </div>
+        </section>
+      </div>
+    </main>
 
-      <usa-modal id="mymodal">
-        <usa-modal-close></usa-modal-close>
+    <usa-modal id="mymodal">
+      <usa-modal-close></usa-modal-close>
 
-        <usa-modal-heading>
-          Are you sure you want to continue?
-        </usa-modal-heading>
+      <usa-modal-heading>
+        Are you sure you want to continue?
+      </usa-modal-heading>
 
-        <usa-input placeholder="foo@email.com" autofocus>
-          Enter your email to continue
-        </usa-input>
+      <usa-input placeholder="foo@email.com" autofocus>
+        Enter your email to continue
+      </usa-input>
 
-        <usa-button modal-action="confirm">Yes I am sure</usa-button>
-        <usa-button modal-action="cancel" variant="outline">Cancel</usa-button>
-      </usa-modal>
-    </usa-config>
+      <usa-button modal-action="confirm">Yes I am sure</usa-button>
+      <usa-button modal-action="cancel" variant="outline">Cancel</usa-button>
+    </usa-modal>
+  </usa-config>
 
-    <script type="module" src="/target/lib/define.js"></script>
+  <script type="module" src="/target/lib/define.js"></script>
 
-    <!-- <script src="/assets/uswds.min.js" async></script> -->
-  </body>
+  <!-- <script src="/assets/uswds.min.js" async></script> -->
+</body>
+
 </html>

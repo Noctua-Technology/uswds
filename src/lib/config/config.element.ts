@@ -6,7 +6,7 @@ export class USAConfig {
 }
 
 @injectable({
-  name: "USAConfigElement",
+  name: "usa-config-injector",
 })
 @element({
   tagName: "usa-config",

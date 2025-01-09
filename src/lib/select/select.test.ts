@@ -113,4 +113,20 @@ describe("usa-select", () => {
 
     assert.equal(value.get("example"), "third");
   });
+
+  it("should not submit when not valid", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <usa-select name="example" required>
+          Hello World
+
+          <usa-select-option value="first">First</usa-select-option>
+          <usa-select-option value="second">Second</usa-select-option>
+          <usa-select-option value="third">Third</usa-select-option>
+        </usa-select>
+      </form>
+    `);
+
+    assert.equal(form.checkValidity(), false);
+  });
 });

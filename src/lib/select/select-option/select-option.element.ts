@@ -1,5 +1,8 @@
 import { attr, css, element, html, listen } from "@joist/element";
 
+import { inject, injectable, injected } from "@joist/di";
+import { SELECT_CONTEXT } from "../context.js";
+
 declare global {
   interface HTMLElementTagNameMap {
     "usa-select-option": USASelecOptionElement;
@@ -17,20 +20,37 @@ declare global {
     html`<slot></slot>`,
   ],
 })
+@injectable()
 export class USASelecOptionElement extends HTMLElement {
   @attr()
   accessor value = "";
 
   readonly option = document.createElement("option");
 
+  #select = inject(SELECT_CONTEXT);
+
+  #observer = new MutationObserver(() => {
+    const { value } = this.#select();
+
+    this.option.selected = value === this.value;
+  });
+
   attributeChangedCallback() {
     this.option.value = this.value;
   }
 
-  connectedCallback() {
-    this.dispatchEvent(
-      new Event("usa::select::option::added", { bubbles: true }),
-    );
+  @injected()
+  onInjected() {
+    const select = this.#select();
+
+    this.option.selected = select.value === this.value;
+
+    select.addSelectOption(this.option);
+
+    this.#observer.observe(select, {
+      attributes: true,
+      attributeFilter: ["value"],
+    });
   }
 
   @listen("slotchange")
@@ -39,6 +59,8 @@ export class USASelecOptionElement extends HTMLElement {
   }
 
   disconnectedCallback() {
+    this.#observer.disconnect();
+
     this.option.remove();
   }
 }

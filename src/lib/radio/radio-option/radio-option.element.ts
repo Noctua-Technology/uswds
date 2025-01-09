@@ -1,11 +1,17 @@
 import { attr, css, element, html, query } from "@joist/element";
 
+import { inject, injectable, injected } from "@joist/di";
+import { RADIO_CTX } from "../context.js";
+
 declare global {
   interface HTMLElementTagNameMap {
     "usa-radio-option": USARadioOptionElement;
   }
 }
 
+@injectable({
+  name: "usa-radio-option-ctx",
+})
 @element({
   tagName: "usa-radio-option",
   shadowDom: [
@@ -19,7 +25,7 @@ declare global {
     html`
       <!-- This label will be moved to the shadow dom of its parent -->
       <label>
-        <input type="radio" />
+        <input type="radio" tabindex="0" />
         <slot name="reserved"></slot>
       </label>
 
@@ -31,32 +37,17 @@ export class USARadioOptionElement extends HTMLElement {
   @attr()
   accessor value = "";
 
-  @attr()
-  accessor name = "";
-
-  @attr()
-  accessor checked = false;
-
   #label = query("label");
   #input = query("input");
   #slot = query("slot");
+  #radio = inject(RADIO_CTX);
 
-  #observer = new MutationObserver((records) => {
-    for (const { target, attributeName } of records) {
-      if (target instanceof Element) {
-        switch (attributeName) {
-          case "value": {
-            this.checked = target.getAttribute("value") === this.value;
-            break;
-          }
+  #observer = new MutationObserver(() => {
+    const input = this.#input();
+    const radio = this.#radio();
 
-          case "name": {
-            this.name = target.getAttribute("name") ?? this.name;
-            break;
-          }
-        }
-      }
-    }
+    input.name = radio.name;
+    input.checked = radio.value === this.value;
   });
 
   attributeChangedCallback() {
@@ -65,36 +56,27 @@ export class USARadioOptionElement extends HTMLElement {
 
     this.slot = this.value;
 
-    input.name = this.name;
-    input.value = this.value;
-    input.checked = this.checked;
-
     slot.name = this.value;
+    input.value = this.value;
   }
 
-  connectedCallback() {
-    const parent = this.parentElement;
+  @injected()
+  onInjected() {
+    const input = this.#input();
+    const radio = this.#radio();
 
-    if (parent) {
-      this.#observer.observe(parent, {
-        attributes: true,
-        attributeFilter: ["value", "name"],
-      });
+    radio.addRadioOption(this.#label());
 
-      this.name = parent.getAttribute("name") ?? this.name;
-      this.checked = parent.getAttribute("value") === this.value;
+    input.name = radio.name;
+    input.checked = radio.value === this.value;
 
-      const label = this.#label();
-
-      if (parent.shadowRoot) {
-        parent.shadowRoot.append(label);
-      }
-    }
+    this.#observer.observe(radio, {
+      attributeFilter: ["value", "name"],
+    });
   }
 
   disconnectedCallback() {
-    const label = this.#label();
-    label.remove();
+    this.#label().remove();
 
     this.#observer.disconnect();
   }

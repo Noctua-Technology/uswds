@@ -1,5 +1,5 @@
 import { attr, css, element, html, listen, query, ready } from "@joist/element";
-import { effect, observe } from "@joist/observable";
+import { type Changes, effect, observe } from "@joist/observable";
 
 import type { MaskableElement } from "../input-mask/maskable.element.js";
 
@@ -86,7 +86,7 @@ declare global {
 
         <slot></slot>
 
-        <input />
+        <input tabindex="0" />
       </label>
     `,
   ],
@@ -105,6 +105,9 @@ export class USATextInputElement
 
   @attr()
   accessor placeholder = "";
+
+  @attr()
+  accessor required = false;
 
   @attr({
     observed: false,
@@ -132,15 +135,25 @@ export class USATextInputElement
     input.autofocus = this.autofocus;
   }
 
+  connectedCallback() {
+    this.#syncFormState();
+  }
+
   @effect()
-  onChange() {
+  onChange(changes: Changes<this>) {
     const input = this.#input();
 
     input.value = this.value;
-    input.selectionStart = this.selectionStart;
-    input.selectionEnd = this.selectionEnd;
 
-    this.#internals.setFormValue(input.value);
+    if (changes.has("selectionStart")) {
+      input.selectionStart = this.selectionStart;
+    }
+
+    if (changes.has("selectionEnd")) {
+      input.selectionEnd = this.selectionEnd;
+    }
+
+    this.#syncFormState();
   }
 
   @listen("input")
@@ -167,11 +180,18 @@ export class USATextInputElement
       case "name":
         input.name = this.name;
         break;
+    }
+  }
 
-      case "value":
-        input.value = this.value;
-        this.#internals.setFormValue(this.value);
-        break;
+  #syncFormState() {
+    const input = this.#input();
+
+    this.#internals.setFormValue(input.value);
+
+    if (this.required && !input.value) {
+      this.#internals.setValidity({ valueMissing: true }, "Required", input);
+    } else {
+      this.#internals.setValidity({});
     }
   }
 }
