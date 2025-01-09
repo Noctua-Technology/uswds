@@ -1,6 +1,6 @@
 {
   "name": "@noctuatech/uswds",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "type": "module",
   "workspaces": ["packages/**"],
   "main": "./target/lib.js",
