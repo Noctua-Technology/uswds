@@ -1,4 +1,5 @@
 import { attr, css, element, html, listen, query } from "@joist/element";
+import type { RadioContextRequestEvent } from "./context.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -112,6 +113,13 @@ export class USARadioElement extends HTMLElement {
         this.#syncFormState();
       }
     }
+  }
+
+  @listen("radio-context-request", (host) => host)
+  onRadioContextRequested(e: RadioContextRequestEvent) {
+    e.stopPropagation();
+
+    e.callback(this, () => {});
   }
 
   connectedCallback() {

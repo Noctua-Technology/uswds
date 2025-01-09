@@ -1,6 +1,6 @@
 import { attr, css, element, html, query } from "@joist/element";
 
-import { USARadioElement } from "../radio.element.js";
+import { type RadioContainer, RadioContextRequestEvent } from "../context.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -36,41 +36,45 @@ export class USARadioOptionElement extends HTMLElement {
   #label = query("label");
   #input = query("input");
   #slot = query("slot");
+  #radio: RadioContainer | null = null;
 
-  #observer = new MutationObserver((records) => {
-    for (const { target } of records) {
-      if (target instanceof USARadioElement) {
-        const input = this.#input();
+  #observer = new MutationObserver(() => {
+    if (this.#radio) {
+      const input = this.#input();
 
-        input.checked = target.value === this.value;
-        input.name = target.name;
-      }
+      input.name = this.#radio.name;
+      input.checked = this.#radio.value === this.value;
     }
   });
 
   attributeChangedCallback() {
-    this.slot = this.value;
-
     const input = this.#input();
     const slot = this.#slot();
+
+    this.slot = this.value;
 
     slot.name = this.value;
     input.value = this.value;
   }
 
   connectedCallback() {
-    if (this.parentElement instanceof USARadioElement) {
-      this.#observer.observe(this.parentElement, {
-        attributes: true,
+    const input = this.#input();
+
+    this.dispatchEvent(
+      new RadioContextRequestEvent((radio) => {
+        this.#radio = radio;
+      }),
+    );
+
+    if (this.#radio) {
+      this.#radio.addRadioOption(this.#label());
+
+      input.name = this.#radio.name;
+      input.checked = this.#radio.value === this.value;
+
+      this.#observer.observe(this.#radio, {
         attributeFilter: ["value", "name"],
       });
-
-      const input = this.#input();
-
-      input.name = this.parentElement.name ?? "";
-      input.checked = this.parentElement.value === this.value;
-
-      this.parentElement.addRadioOption(this.#label());
     }
   }
 
