@@ -18,6 +18,30 @@ declare global {
         counter-increment: usa-step-indicator;
       }
 
+      :host([counter]):after {
+        content: counter(usa-step-indicator);
+        height: 2.5rem;
+        border-radius: 99rem;
+        width: 2.5rem;
+        background-color: #fff;
+        box-shadow:
+          inset 0 0 0 0.25rem #919191,
+          0 0 0 0.25rem #fff;
+        color: #5c5c5c;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        left: 0;
+        line-height: 0.9;
+        padding: calc((2.5rem - 2ex * 0.9) * 0.5);
+        position: absolute;
+        z-index: 100;
+        top: 0;
+        transform: translateY(-40%);
+        box-sizing: border-box;
+      }
+
       :host([state="complete"]) {
         color: #162e51;
       }
@@ -54,43 +78,19 @@ declare global {
         margin-top: 1.5rem;
       }
 
-      :host([counter]) .counter:after {
-        content: counter(usa-step-indicator);
-        height: 2.5rem;
-        border-radius: 99rem;
-        width: 2.5rem;
-        background-color: #fff;
-        box-shadow:
-          inset 0 0 0 0.25rem #919191,
-          0 0 0 0.25rem #fff;
-        color: #5c5c5c;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        left: 0;
-        line-height: 0.9;
-        padding: calc((2.5rem - 2ex * 0.9) * 0.5);
-        position: absolute;
-        z-index: 100;
-        top: 0;
-        transform: translateY(-40%);
-        box-sizing: border-box;
-      }
-
-      :host([counter][state="complete"]) .counter::after {
+      :host([counter][state="complete"]):after {
         background-color: #162e51;
         box-shadow: 0 0 0 0.25rem #fff;
         color: #fff;
       }
 
-      :host([counter][state="current"]) .counter::after {
+      :host([counter][state="current"]):after {
         background-color: #005ea2;
         box-shadow: 0 0 0 0.25rem #fff;
         color: #fff;
       }
 
-      :host([counter="small"]) .counter:after {
+      :host([counter="small"]):after {
         height: 1.5rem;
         width: 1.5rem;
         font-size: 0.93rem;
@@ -101,8 +101,6 @@ declare global {
       }
     `,
     html`
-      <div class="counter" aria-hidden="true"></div>
-
       <div class="label">
         <slot></slot>
       </div>

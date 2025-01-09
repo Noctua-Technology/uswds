@@ -13,7 +13,7 @@ declare global {
       :host {
         display: flex;
         gap: 2px;
-        counter-reset: usa-step-indicator;
+        counter-reset: usa-step-indicator 0;
         padding-top: 1rem;
         margin-bottom: 1rem;
       }
