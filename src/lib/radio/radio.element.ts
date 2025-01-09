@@ -1,5 +1,7 @@
+import { type Injector, created, injectable } from "@joist/di";
 import { attr, css, element, html, listen, query } from "@joist/element";
-import type { RadioContextRequestEvent } from "./context.js";
+
+import { RADIO_CTX } from "./context.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -7,6 +9,9 @@ declare global {
   }
 }
 
+@injectable({
+  name: "usa-radio-ctx",
+})
 @element({
   tagName: "usa-radio",
   shadowDom: [
@@ -104,22 +109,9 @@ export class USARadioElement extends HTMLElement {
   #internals = this.attachInternals();
   #legend = query("#legend");
 
-  @listen("change")
-  onChange(e: Event) {
-    if (e.target instanceof HTMLInputElement) {
-      if (e.target.checked) {
-        this.value = e.target.value;
-
-        this.#syncFormState();
-      }
-    }
-  }
-
-  @listen("radio-context-request", (host) => host)
-  onRadioContextRequested(e: RadioContextRequestEvent) {
-    e.stopPropagation();
-
-    e.callback(this, () => {});
+  @created()
+  onRadioCreated(i: Injector) {
+    i.providers.set(RADIO_CTX, { factory: () => this });
   }
 
   connectedCallback() {
@@ -130,6 +122,17 @@ export class USARadioElement extends HTMLElement {
     this.shadowRoot?.append(el);
 
     this.#syncFormState();
+  }
+
+  @listen("change")
+  onChange(e: Event) {
+    if (e.target instanceof HTMLInputElement) {
+      if (e.target.checked) {
+        this.value = e.target.value;
+
+        this.#syncFormState();
+      }
+    }
   }
 
   #syncFormState() {

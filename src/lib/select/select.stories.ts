@@ -9,7 +9,7 @@ const meta = {
   tags: ["autodocs"],
   render(args) {
     return html`
-      <usa-select>
+      <usa-select value="third">
         Hello World
 
         <usa-select-option value="first">first</usa-select-option>

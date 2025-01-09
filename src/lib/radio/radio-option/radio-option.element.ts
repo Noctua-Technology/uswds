@@ -1,6 +1,7 @@
 import { attr, css, element, html, query } from "@joist/element";
 
-import { type RadioContainer, RadioContextRequestEvent } from "../context.js";
+import { inject, injectable, injected } from "@joist/di";
+import { RADIO_CTX } from "../context.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -8,6 +9,9 @@ declare global {
   }
 }
 
+@injectable({
+  name: "usa-radio-option-ctx",
+})
 @element({
   tagName: "usa-radio-option",
   shadowDom: [
@@ -36,15 +40,14 @@ export class USARadioOptionElement extends HTMLElement {
   #label = query("label");
   #input = query("input");
   #slot = query("slot");
-  #radio: RadioContainer | null = null;
+  #radio = inject(RADIO_CTX);
 
   #observer = new MutationObserver(() => {
-    if (this.#radio) {
-      const input = this.#input();
+    const input = this.#input();
+    const radio = this.#radio();
 
-      input.name = this.#radio.name;
-      input.checked = this.#radio.value === this.value;
-    }
+    input.name = radio.name;
+    input.checked = radio.value === this.value;
   });
 
   attributeChangedCallback() {
@@ -57,25 +60,19 @@ export class USARadioOptionElement extends HTMLElement {
     input.value = this.value;
   }
 
-  connectedCallback() {
+  @injected()
+  onInjected() {
     const input = this.#input();
+    const radio = this.#radio();
 
-    this.dispatchEvent(
-      new RadioContextRequestEvent((radio) => {
-        this.#radio = radio;
-      }),
-    );
+    radio.addRadioOption(this.#label());
 
-    if (this.#radio) {
-      this.#radio.addRadioOption(this.#label());
+    input.name = radio.name;
+    input.checked = radio.value === this.value;
 
-      input.name = this.#radio.name;
-      input.checked = this.#radio.value === this.value;
-
-      this.#observer.observe(this.#radio, {
-        attributeFilter: ["value", "name"],
-      });
-    }
+    this.#observer.observe(radio, {
+      attributeFilter: ["value", "name"],
+    });
   }
 
   disconnectedCallback() {
