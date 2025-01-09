@@ -1,7 +1,7 @@
-import { type Injector, created, injectable } from "@joist/di";
+import { injectable } from "@joist/di";
 import { attr, css, element, html, listen, query } from "@joist/element";
 
-import { SELECT_CONTEXT } from "./context.js";
+import { SELECT_CONTEXT, type SelectContainer } from "./context.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -9,6 +9,10 @@ declare global {
   }
 }
 
+@injectable({
+  name: "usa-select-ctx",
+  provideSelfAs: [SELECT_CONTEXT],
+})
 @element({
   tagName: "usa-select",
   shadowDom: [
@@ -63,8 +67,7 @@ declare global {
     `,
   ],
 })
-@injectable()
-export class USASelectElement extends HTMLElement {
+export class USASelectElement extends HTMLElement implements SelectContainer {
   static formAssociated = true;
 
   @attr()
@@ -93,11 +96,6 @@ export class USASelectElement extends HTMLElement {
     select.name = this.name;
 
     this.#syncFormState();
-  }
-
-  @created()
-  onCreated(injector: Injector) {
-    injector.providers.set(SELECT_CONTEXT, { factory: () => this });
   }
 
   @listen("change")

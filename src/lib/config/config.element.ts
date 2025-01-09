@@ -1,4 +1,4 @@
-import { type Injector, created, injectable } from "@joist/di";
+import { injectable } from "@joist/di";
 import { attr, css, element, html } from "@joist/element";
 
 export class USAConfig {
@@ -6,7 +6,8 @@ export class USAConfig {
 }
 
 @injectable({
-  name: "usa-config-injector",
+  name: "usa-config-ctx",
+  provideSelfAs: [USAConfig],
 })
 @element({
   tagName: "usa-config",
@@ -24,9 +25,4 @@ export class USAConfigElement extends HTMLElement {
     name: "icon-path",
   })
   accessor iconPath = "/assets/usa-icons/";
-
-  @created()
-  onInjectorCreated({ providers }: Injector) {
-    providers.set(USAConfig, { factory: () => this });
-  }
 }

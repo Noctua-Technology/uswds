@@ -1,7 +1,7 @@
-import { type Injector, created, injectable } from "@joist/di";
+import { injectable } from "@joist/di";
 import { attr, css, element, html, listen, query } from "@joist/element";
 
-import { RADIO_CTX } from "./context.js";
+import { RADIO_CTX, type RadioContainer } from "./context.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -11,6 +11,7 @@ declare global {
 
 @injectable({
   name: "usa-radio-ctx",
+  provideSelfAs: [RADIO_CTX],
 })
 @element({
   tagName: "usa-radio",
@@ -89,7 +90,7 @@ declare global {
     `,
   ],
 })
-export class USARadioElement extends HTMLElement {
+export class USARadioElement extends HTMLElement implements RadioContainer {
   static formAssociated = true;
 
   @attr()
@@ -108,11 +109,6 @@ export class USARadioElement extends HTMLElement {
 
   #internals = this.attachInternals();
   #legend = query("#legend");
-
-  @created()
-  onRadioCreated(i: Injector) {
-    i.providers.set(RADIO_CTX, { factory: () => this });
-  }
 
   connectedCallback() {
     this.#syncFormState();
