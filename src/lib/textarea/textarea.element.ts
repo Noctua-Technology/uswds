@@ -1,5 +1,5 @@
 import { attr, css, element, html, listen, query, ready } from "@joist/element";
-import { type Changes, effect, observe } from "@joist/observable";
+import { effect, observe } from "@joist/observable";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -9,10 +9,6 @@ declare global {
 
 @element({
   tagName: "usa-textarea",
-  shadowDomOpts: {
-    mode: "open",
-    delegatesFocus: true,
-  },
   shadowDom: [
     css`
       * {
@@ -27,61 +23,35 @@ declare global {
         max-width: 30rem;
         margin-bottom: 1.5rem;
         position: relative;
+        height: calc(6lh + .5rem);
       }
 
       textarea {
-        border-width: 1px;
-        border-color: #5c5c5c;
-        border-style: solid;
+        font-family: inherit;
+        font-size: inherit;
         border-radius: 0;
         color: #1b1b1b;
         display: block;
-        height: 2.5rem;
-        line-height: 1.3;
-        font-size: 1.06rem;
-        margin-top: 0.5rem;
-        padding: 0.5rem;
+        margin-top: .5rem;
+        max-width: 30rem;
+        padding: .5rem;
+        border-width: 1px;
+        border-color: #5c5c5c;
+        border-style: solid;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
         width: 100%;
+        height: 100%;
       }
 
       textarea:not(:disabled):focus {
         outline: 0.25rem solid #2491ff;
         outline-offset: 0;
       }
-
-      slot[name="detail"]::slotted(*) {
-        color: #757575;
-      }
-
-      slot[name="detail"]::slotted(usa-icon) {
-        width: 1.5rem;
-        height: 1.5rem;
-      }
-
-      slot[name="detail"] {
-        display: block;
-        position: absolute;
-        bottom: 0.21rem;
-        left: 0.5rem;
-      }
-
-      :host([detail="pfx"]) input {
-        padding-left: 2.5rem;
-      }
-
-      :host([detail="sfx"]) input {
-        padding-right: 2.5rem;
-      }
-
-      :host([detail="sfx"]) slot[name="detail"] {
-        right: 0.5rem;
-        left: auto;
-      }
     `,
     html`
       <label>
-        <slot name="detail"></slot>
-
         <slot></slot>
 
         <textarea></textarea>
@@ -105,11 +75,6 @@ export class USATextareaElement extends HTMLElement {
   accessor required = false;
 
   @attr({
-    observed: false,
-  })
-  accessor detail: "pfx" | "sfx" | "" = "";
-
-  @attr({
     reflect: false,
   })
   @observe()
@@ -129,7 +94,7 @@ export class USATextareaElement extends HTMLElement {
   }
 
   @effect()
-  onChange(changes: Changes<this>) {
+  onChange() {
     const input = this.#input();
 
     input.value = this.value;
