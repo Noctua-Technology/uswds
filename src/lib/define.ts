@@ -29,3 +29,4 @@ import "./card/card-body/card-body.element.js";
 import "./card/card-footer/card-footer.element.js";
 import "./card/card-media/card-media.element.js";
 import "./card/card-group/card-group.element.js";
+import "./textarea/textarea.element.js";
