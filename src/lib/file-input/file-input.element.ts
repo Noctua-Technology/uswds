@@ -1,5 +1,4 @@
 import { attr, css, element, html, listen, query } from "@joist/element";
-import { effect, observe } from "@joist/observable";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -102,23 +101,22 @@ export class USAFileInputElement extends HTMLElement {
   @attr()
   accessor accept = "";
 
-  @observe()
-  accessor files: FileList | null = null;
+  get files() {
+    const input = this.#input();
+    return input.files;
+  }
+
+  set files(list: FileList | null) {
+    const input = this.#input();
+    input.files = list;
+
+    this.onInputChange();
+  }
 
   #internals = this.attachInternals();
   #input = query("input");
   #box = query(".box");
   #preview = query("usa-file-input-preview");
-
-  @effect()
-  onChange() {
-    const input = this.#input();
-
-    if (this.files) {
-      input.files = this.files;
-      this.onInputChange();
-    }
-  }
 
   attributeChangedCallback() {
     const input = this.#input();
