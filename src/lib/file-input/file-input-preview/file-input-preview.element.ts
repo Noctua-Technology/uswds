@@ -104,9 +104,14 @@ export class USAFileInputPreviewElement extends HTMLElement {
         names.add(file.name);
 
         if (!this.#items.has(file.name)) {
-          const clone = template.content.cloneNode(true);
+          const clone = template.content.cloneNode(true) as DocumentFragment;
 
-          const item = clone.childNodes[1] as Element;
+          const item = clone.firstElementChild;
+
+          if (!item) {
+            throw new Error("SOMETHING HAS GONE VERY WRONG");
+          }
+
           item.id = file.name;
           item.append(document.createTextNode(file.name));
 
