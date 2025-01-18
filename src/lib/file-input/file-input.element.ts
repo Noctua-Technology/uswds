@@ -148,5 +148,7 @@ export class USAFileInputElement extends HTMLElement {
     }
 
     this.#internals.setFormValue(formData);
+
+    this.dispatchEvent(new Event("change"));
   }
 }
