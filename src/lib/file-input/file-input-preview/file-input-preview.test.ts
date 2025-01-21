@@ -76,8 +76,8 @@ describe("usa-file-input-preview", () => {
 
   it("should create preview images for each file", async () => {
     const data = new DataTransfer();
-    data.items.add(new File(["Image1"], "image1.jpg"));
-    data.items.add(new File(["Image2"], "image2.jpg"));
+    data.items.add(new File(["Image1"], "image1.jpg", { type: "image/jpg" }));
+    data.items.add(new File(["Image2"], "image2.jpg", { type: "image/jpg" }));
 
     const { shadowRoot } = await fixture<USAFileInputPreviewElement>(html`
       <usa-file-input-preview .files=${data.files}>
