@@ -1,4 +1,5 @@
 import { attr, css, element, html, listen, query } from "@joist/element";
+import { effect, observe } from "@joist/observable";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -51,6 +52,10 @@ declare global {
         margin-bottom: 0.5rem;
       }
 
+      :host([dragenter]) .box {
+        border-color: #2491ff;
+      }
+
       .box {
         border: 1px dashed #adadad;
         display: flex;
@@ -101,15 +106,8 @@ export class USAFileInputElement extends HTMLElement {
   @attr()
   accessor accept = "";
 
-  get files() {
-    return this.#input().files;
-  }
-
-  set files(list: FileList | null) {
-    this.#input().files = list;
-
-    this.#syncFormState();
-  }
+  @observe()
+  accessor files: FileList | null = null;
 
   #internals = this.attachInternals();
   #input = query("input");
@@ -123,26 +121,24 @@ export class USAFileInputElement extends HTMLElement {
     input.accept = this.accept;
   }
 
-  @listen("change")
-  onInputChange() {
-    this.#syncFormState();
-
-    this.dispatchEvent(new Event("change"));
-  }
-
-  #syncFormState() {
+  @effect()
+  onChange() {
     const input = this.#input();
     const box = this.#box();
     const preview = this.#preview();
 
-    preview.files = input.files;
+    if (input.files !== this.files) {
+      input.files = this.files;
+    }
+
+    preview.files = this.files;
 
     const formData = new FormData();
 
-    if (input.files?.length) {
+    if (this.files?.length) {
       box.style.display = "none";
 
-      for (const file of input.files) {
+      for (const file of this.files) {
         formData.append(this.name, file);
       }
     } else {
@@ -150,5 +146,47 @@ export class USAFileInputElement extends HTMLElement {
     }
 
     this.#internals.setFormValue(formData);
+  }
+
+  @listen("change")
+  onInputChange() {
+    const input = this.#input();
+
+    this.files = input.files;
+
+    this.dispatchEvent(new Event("change"));
+  }
+
+  @listen("dragenter")
+  onDragEnter(e: DragEvent) {
+    this.setAttribute("dragenter", "");
+  }
+
+  @listen("dragleave")
+  onDragLeave(e: DragEvent) {
+    this.removeAttribute("dragenter");
+  }
+
+  @listen("drop")
+  onDrop(e: DragEvent) {
+    this.removeAttribute("dragenter");
+
+    if (e.dataTransfer?.items) {
+      e.preventDefault();
+
+      const data = new DataTransfer();
+
+      for (const item of e.dataTransfer.items) {
+        if (item.kind === "file") {
+          const file = item.getAsFile();
+
+          if (file) {
+            data.items.add(file);
+          }
+        }
+      }
+
+      this.files = data.files;
+    }
   }
 }
