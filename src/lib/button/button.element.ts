@@ -195,10 +195,12 @@ export class USAButtonElement extends HTMLElement {
 
   @listen("keydown", () => document.body)
   onKeyDown(e: KeyboardEvent) {
-    if (this.type === "submit") {
-      if (e.key.toUpperCase() === "ENTER") {
-        this.#handleForm();
-      }
+    if (
+      this.type === "submit" &&
+      e.key.toUpperCase() === "ENTER" &&
+      !e.shiftKey
+    ) {
+      this.#handleForm();
     }
   }
 

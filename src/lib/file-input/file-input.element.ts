@@ -52,7 +52,7 @@ declare global {
         margin-bottom: 0.5rem;
       }
 
-      :host([dragenter]) .box {
+      :host(.dragenter) .box {
         border-color: #2491ff;
       }
 
@@ -158,18 +158,18 @@ export class USAFileInputElement extends HTMLElement {
   }
 
   @listen("dragenter")
-  onDragEnter(e: DragEvent) {
-    this.setAttribute("dragenter", "");
+  onDragEnter() {
+    this.classList.add("dragenter");
   }
 
   @listen("dragleave")
-  onDragLeave(e: DragEvent) {
-    this.removeAttribute("dragenter");
+  onDragLeave() {
+    this.classList.remove("dragenter");
   }
 
   @listen("drop")
   onDrop(e: DragEvent) {
-    this.removeAttribute("dragenter");
+    this.classList.remove("dragenter");
 
     if (e.dataTransfer?.items) {
       e.preventDefault();
