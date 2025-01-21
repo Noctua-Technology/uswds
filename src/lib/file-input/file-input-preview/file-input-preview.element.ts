@@ -64,7 +64,8 @@ declare global {
     html`
       <template>
         <div class="preview-item">
-          <img height="40" width="40" aria-hidden="true" />
+          <img height="40" width="40" aria-hidden="true" style="display: none" />
+          <usa-icon icon="file_present" style="display: none"></usa-icon>
         </div>
       </template>
 
@@ -116,9 +117,17 @@ export class USAFileInputPreviewElement extends HTMLElement {
           item.append(document.createTextNode(file.name));
 
           const img = item.querySelector("img");
+          const icon = item.querySelector("usa-icon");
 
-          if (img) {
+          if (!img || !icon) {
+            throw Error("Something went very wrong");
+          }
+
+          if (file.type.startsWith("image")) {
+            img.style.display = "block";
             img.src = URL.createObjectURL(file);
+          } else {
+            icon.style.display = "block";
           }
 
           this.shadow.append(item);

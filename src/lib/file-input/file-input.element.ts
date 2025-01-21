@@ -102,15 +102,13 @@ export class USAFileInputElement extends HTMLElement {
   accessor accept = "";
 
   get files() {
-    const input = this.#input();
-    return input.files;
+    return this.#input().files;
   }
 
   set files(list: FileList | null) {
-    const input = this.#input();
-    input.files = list;
+    this.#input().files = list;
 
-    this.onInputChange();
+    this.#syncFormState();
   }
 
   #internals = this.attachInternals();
@@ -127,6 +125,12 @@ export class USAFileInputElement extends HTMLElement {
 
   @listen("change")
   onInputChange() {
+    this.#syncFormState();
+
+    this.dispatchEvent(new Event("change"));
+  }
+
+  #syncFormState() {
     const input = this.#input();
     const box = this.#box();
     const preview = this.#preview();
@@ -146,7 +150,5 @@ export class USAFileInputElement extends HTMLElement {
     }
 
     this.#internals.setFormValue(formData);
-
-    this.dispatchEvent(new Event("change"));
   }
 }

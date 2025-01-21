@@ -3,19 +3,9 @@ import type { StorybookConfig } from "@storybook/web-components-vite";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
-  addons: [
-    path.resolve(
-      import.meta.dirname,
-      "../node_modules",
-      "@storybook/addon-essentials",
-    ),
-  ],
+  addons: ["@storybook/addon-essentials"],
   framework: {
-    name: path.resolve(
-      import.meta.dirname,
-      "../node_modules",
-      "@storybook/web-components-vite",
-    ),
+    name: "@storybook/web-components-vite",
     options: {},
   },
   staticDirs: ["../assets"],
