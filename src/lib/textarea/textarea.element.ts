@@ -98,7 +98,9 @@ export class USATextareaElement extends HTMLElement {
   onChange() {
     const input = this.#input();
 
-    input.value = this.value;
+    if (input.value !== this.value) {
+      input.value = this.value;
+    }
 
     this.#syncFormState();
   }
