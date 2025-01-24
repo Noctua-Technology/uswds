@@ -1,9 +1,9 @@
 {
-   "name": "@noctuatech-uswds/testing",
-   "type": "module",
-   "main": "./target/lib.js",
-   "module": "./target/lib.js",
-   "exports": {
+  "name": "@noctuatech-uswds/testing",
+  "type": "module",
+  "main": "./target/lib.js",
+  "module": "./target/lib.js",
+  "exports": {
     ".": "./target/lib.js"
   },
   "files": ["src", "target"],
@@ -12,22 +12,13 @@
   },
   "wireit": {
     "build": {
-      "dependencies": [
-        "tsc"
-      ]
+      "dependencies": ["tsc"]
     },
     "tsc": {
       "command": "tsc --build --pretty",
       "clean": "if-file-deleted",
-      "files": [
-        "src/**",
-        "tsconfig.json",
-        "../../tsconfig.json"
-      ],
-      "output": [
-        "target/**",
-        "tsconfig.tsbuildinfo"
-      ]
+      "files": ["src/**", "tsconfig.json", "../../tsconfig.json"],
+      "output": ["target/**", "tsconfig.tsbuildinfo"]
     }
   }
 }

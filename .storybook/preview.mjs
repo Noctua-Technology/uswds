@@ -16,7 +16,7 @@ const preview = {
               indent_size: 2,
               wrap_attributes: "force-expand-multiline",
               wrap_attributes_min_attrs: 4,
-            }
+            },
           );
         },
       },
