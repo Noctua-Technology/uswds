@@ -135,6 +135,24 @@ export class USATextInputElement
     input.autofocus = this.autofocus;
   }
 
+  attributeChangedCallback(attr: string) {
+    const input = this.#input();
+
+    switch (attr) {
+      case "autocomplete":
+        input.autocomplete = this.autocomplete;
+        break;
+
+      case "placeholder":
+        input.placeholder = this.placeholder;
+        break;
+
+      case "name":
+        input.name = this.name;
+        break;
+    }
+  }
+
   connectedCallback() {
     this.#syncFormState();
   }
@@ -183,24 +201,6 @@ export class USATextInputElement
     this.value = input.value;
     this.selectionStart = input.selectionStart;
     this.selectionEnd = input.selectionEnd;
-  }
-
-  attributeChangedCallback(attr: string) {
-    const input = this.#input();
-
-    switch (attr) {
-      case "autocomplete":
-        input.autocomplete = this.autocomplete;
-        break;
-
-      case "placeholder":
-        input.placeholder = this.placeholder;
-        break;
-
-      case "name":
-        input.name = this.name;
-        break;
-    }
   }
 
   #syncFormState() {
