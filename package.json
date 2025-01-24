@@ -29,7 +29,13 @@
       "dependencies": ["tsc"]
     },
     "build": {
-      "dependencies": ["tsc", "build-storybook", "rollup", "copy_icons"]
+      "dependencies": [
+        "tsc",
+        "build-storybook",
+        "rollup",
+        "copy_icons",
+        "./website:build"
+      ]
     },
     "preview": {
       "command": "browser-sync start --server --files \"target/**\" \"index.html\"",
