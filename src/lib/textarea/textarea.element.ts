@@ -1,4 +1,13 @@
-import { attr, css, element, html, listen, query, ready } from "@joist/element";
+import {
+  attr,
+  attrChanged,
+  css,
+  element,
+  html,
+  listen,
+  query,
+  ready,
+} from "@joist/element";
 import { effect, observe } from "@joist/observable";
 
 declare global {
@@ -107,27 +116,15 @@ export class USATextareaElement extends HTMLElement {
 
   @listen("input")
   onInputChange() {
-    const input = this.#input();
-
-    this.value = input.value;
+    this.value = this.#input().value;
   }
 
-  attributeChangedCallback(attr: string) {
-    const input = this.#input();
-
-    switch (attr) {
-      case "autocomplete":
-        input.autocomplete = this.autocomplete;
-        break;
-
-      case "placeholder":
-        input.placeholder = this.placeholder;
-        break;
-
-      case "name":
-        input.name = this.name;
-        break;
-    }
+  attributeChangedCallback() {
+    this.#input({
+      name: this.name,
+      placeholder: this.placeholder,
+      autocomplete: this.autocomplete,
+    });
   }
 
   #syncFormState() {
