@@ -115,23 +115,18 @@ export class USAFileInputElement extends HTMLElement {
   #preview = query("usa-file-input-preview");
 
   attributeChangedCallback() {
-    const input = this.#input();
-    input.name = this.name;
-    input.multiple = this.multiple;
-    input.accept = this.accept;
+    this.#input({
+      name: this.name,
+      multiple: this.multiple,
+      accept: this.accept,
+    });
   }
 
   @effect()
   onChange() {
-    const input = this.#input();
+    const input = this.#input({ files: this.files });
     const box = this.#box();
-    const preview = this.#preview();
-
-    if (input.files !== this.files) {
-      input.files = this.files;
-    }
-
-    preview.files = this.files;
+    const preview = this.#preview({ files: this.files });
 
     const formData = new FormData();
 

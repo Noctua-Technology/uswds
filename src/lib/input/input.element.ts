@@ -127,26 +127,15 @@ export class USATextInputElement
 
   @ready()
   onReady() {
-    const input = this.#input();
-    input.autofocus = this.autofocus;
+    this.#input({ autofocus: this.autofocus });
   }
 
-  attributeChangedCallback(attr: string) {
-    const input = this.#input();
-
-    switch (attr) {
-      case "autocomplete":
-        input.autocomplete = this.autocomplete;
-        break;
-
-      case "placeholder":
-        input.placeholder = this.placeholder;
-        break;
-
-      case "name":
-        input.name = this.name;
-        break;
-    }
+  attributeChangedCallback() {
+    this.#input({
+      autocomplete: this.autocomplete,
+      placeholder: this.placeholder,
+      name: this.name,
+    });
   }
 
   connectedCallback() {

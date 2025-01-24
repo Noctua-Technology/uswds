@@ -189,8 +189,7 @@ export class USAButtonElement extends HTMLElement {
 
   @ready()
   onReady() {
-    const input = this.#button();
-    input.autofocus = this.autofocus;
+    this.#button({ autofocus: this.autofocus });
   }
 
   @listen("click")
@@ -199,9 +198,7 @@ export class USAButtonElement extends HTMLElement {
   }
 
   attributeChangedCallback() {
-    const button = this.#button();
-    button.type = this.type;
-    button.disabled = this.disabled;
+    this.#button({ type: this.type, disabled: this.disabled });
   }
 
   #handleForm() {
@@ -209,15 +206,19 @@ export class USAButtonElement extends HTMLElement {
 
     if (form) {
       if (this.type === "submit") {
-        const btn = document.createElement("button");
-        btn.type = "submit";
-        form.append(btn);
-
-        btn.click();
-        btn.remove();
+        this.#submit(form);
       } else if (this.type === "reset") {
         form.reset();
       }
     }
+  }
+
+  #submit(form: HTMLFormElement) {
+    const btn = document.createElement("button");
+    btn.type = "submit";
+    form.append(btn);
+
+    btn.click();
+    btn.remove();
   }
 }

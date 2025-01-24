@@ -83,17 +83,13 @@ export class USASelectElement extends HTMLElement implements SelectContainer {
   #internals = this.attachInternals();
 
   connectedCallback() {
-    const select = this.#select();
-    select.value = this.value;
-    select.name = this.name;
+    this.#select({ value: this.value, name: this.name });
 
     this.#syncFormState();
   }
 
   attributeChangedCallback() {
-    const select = this.#select();
-    select.value = this.value;
-    select.name = this.name;
+    this.#select({ value: this.value, name: this.name });
 
     this.#syncFormState();
   }
