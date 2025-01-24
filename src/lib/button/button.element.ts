@@ -28,7 +28,7 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
         display: contents;
       }
 
-      .usa-button {
+      button {
         box-sizing: border-box;
         font-size: 1.06rem;
         line-height: 0.9;
@@ -54,114 +54,114 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
       }
 
       @media all and (min-width: 30em) {
-        .usa-button {
+        button {
           width: auto;
         }
       }
 
-      .usa-button:visited {
+      button:visited {
         color: white;
       }
 
-      .usa-button:hover {
+      button:hover {
         color: white;
         background-color: #1a4480;
         border-bottom: 0;
         text-decoration: none;
       }
 
-      .usa-button:active {
+      button:active {
         color: white;
         background-color: #162e51;
       }
 
-      .usa-button:not([disabled]):focus {
+      button:not([disabled]):focus {
         outline-offset: 0.25rem;
       }
 
-      .usa-button:disabled {
+      button:disabled {
         color: #454545;
         background-color: #c9c9c9;
         cursor: not-allowed;
         opacity: 1;
       }
 
-      .usa-button:disabled:hover,
-      .usa-button:disabled:active,
-      .usa-button:disabled:focus {
+      button:disabled:hover,
+      button:disabled:active,
+      button:disabled:focus {
         color: #454545;
         background-color: #c9c9c9;
       }
 
-      .usa-button:focus {
+      button:focus {
         outline: 0.25rem solid #2491ff;
         outline-offset: 0;
       }
 
       /** Secondary */
-      :host([variant="secondary"]) .usa-button {
+      :host([variant="secondary"]) button {
         color: #fff;
         background-color: #d83933;
       }
 
-      :host([variant="secondary"]) .usa-button:hover {
+      :host([variant="secondary"]) button:hover {
         background-color: #b50909;
       }
 
-      :host([variant="secondary"]) .usa-button:active {
+      :host([variant="secondary"]) button:active {
         background-color: #8b0a03;
       }
 
       /** cool */
-      :host([variant="cool"]) .usa-button {
+      :host([variant="cool"]) button {
         color: #1b1b1b;
         background-color: #00bde3;
       }
 
-      :host([variant="cool"]) .usa-button:hover {
+      :host([variant="cool"]) button:hover {
         background-color: #28a0cb;
       }
 
-      :host([variant="cool"]) .usa-button:active {
+      :host([variant="cool"]) button:active {
         color: #fff;
         background-color: #07648d;
       }
 
       /** warm */
-      :host([variant="warm"]) .usa-button {
+      :host([variant="warm"]) button {
         color: #1b1b1b;
         background-color: #fa9441;
       }
 
-      :host([variant="warm"]) .usa-button:hover {
+      :host([variant="warm"]) button:hover {
         color: #fff;
         background-color: #c05600;
       }
 
-      :host([variant="warm"]) .usa-button:active {
+      :host([variant="warm"]) button:active {
         color: #fff;
         background-color: #775540;
       }
 
       /** outline */
-      :host([variant="outline"]) .usa-button {
+      :host([variant="outline"]) button {
         background-color: transparent;
         box-shadow: inset 0 0 0 2px #005ea2;
         color: #005ea2;
       }
 
-      :host([variant="outline"]) .usa-button:hover {
+      :host([variant="outline"]) button:hover {
         box-shadow: inset 0 0 0 2px #1a4480;
         color: #1a4480;
       }
 
-      :host([variant="outline"]) .usa-button:active {
+      :host([variant="outline"]) button:active {
         box-shadow: inset 0 0 0 2px #162e51;
         color: #162e51;
       }
     `,
     html`
-      <button class="usa-button" tabindex="0">
+      <button tabindex="0">
         <slot></slot>
       </button>
     `,
@@ -191,17 +191,6 @@ export class USAButtonElement extends HTMLElement {
   onReady() {
     const input = this.#button();
     input.autofocus = this.autofocus;
-  }
-
-  @listen("keydown", () => document.body)
-  onKeyDown(e: KeyboardEvent) {
-    if (
-      this.type === "submit" &&
-      e.key.toUpperCase() === "ENTER" &&
-      !e.shiftKey
-    ) {
-      this.#handleForm();
-    }
   }
 
   @listen("click")

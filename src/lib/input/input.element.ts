@@ -158,6 +158,24 @@ export class USATextInputElement
     this.#syncFormState();
   }
 
+  @listen("keydown")
+  onKeyDown(e: KeyboardEvent) {
+    const form = this.#internals.form;
+
+    if (form) {
+      const hasModifier = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey;
+
+      if (e.key.toUpperCase() === "ENTER" && !hasModifier) {
+        // this makes sure that the user has a chance to cancel the event before submitting
+        setTimeout(() => {
+          if (!e.defaultPrevented && !e.isComposing) {
+            form.submit();
+          }
+        });
+      }
+    }
+  }
+
   @listen("input")
   onInputChange() {
     const input = this.#input();
