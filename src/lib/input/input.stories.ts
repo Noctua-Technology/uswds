@@ -9,7 +9,13 @@ const meta = {
   tags: ["autodocs"],
   render() {
     return html`
-      <form @submit=${(e: Event) => e.preventDefault()}>
+      <form @submit=${(e: Event) => {
+        e.preventDefault();
+
+        console.log(
+          Array.from(new FormData(e.target as HTMLFormElement).entries()),
+        );
+      }}>
         <usa-input name="fname" value="Danny" autocomplete="off" detail="pfx">
           <usa-icon icon="credit_card" slot="detail"></usa-icon>
 
