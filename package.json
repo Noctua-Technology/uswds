@@ -2,7 +2,7 @@
   "name": "@noctuatech/uswds",
   "version": "0.0.30",
   "type": "module",
-  "workspaces": ["packages/**"],
+  "workspaces": ["packages/**", "website"],
   "main": "./target/lib.js",
   "module": "./target/lib.js",
   "exports": {
