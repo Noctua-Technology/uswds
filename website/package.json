@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx @11ty/eleventy --serve --incremental --config eleventy.dev.js",
+    "build": "npx @11ty/eleventy --config eleventy.prod.js"
   },
   "repository": {
     "type": "git",
@@ -12,7 +13,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/deebloo/blog/issues"
   },

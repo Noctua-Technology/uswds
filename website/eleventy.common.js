@@ -6,10 +6,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/CNAME");
   eleventyConfig.addPassthroughCopy("./node_modules/@noctuatech/uswds/**/*");
 
-  eleventyConfig.addGlobalData(
-    "jsFiles",
-    fs.readdirSync("./src/_includes/js/").map((file) => `js/${file}`),
-  );
+  // eleventyConfig.addGlobalData(
+  //   "jsFiles",
+  //   fs.readdirSync("./src/_includes/js/").map((file) => `js/${file}`),
+  // );
 
   return {
     dir: {
