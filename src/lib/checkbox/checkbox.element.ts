@@ -133,19 +133,13 @@ export class USACheckboxElement extends HTMLElement {
   #internals = this.attachInternals();
 
   connectedCallback() {
-    const checkbox = this.#checkbox();
-
-    checkbox.checked = this.checked;
-    checkbox.name = this.name;
+    this.#checkbox({ checked: this.checked, name: this.name });
 
     this.#syncFormState();
   }
 
   attributeChangedCallback() {
-    const checkbox = this.#checkbox();
-
-    checkbox.checked = this.checked;
-    checkbox.name = this.name;
+    this.#checkbox({ checked: this.checked, name: this.name });
 
     this.#syncFormState();
   }

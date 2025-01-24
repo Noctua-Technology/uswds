@@ -1,13 +1,4 @@
-import {
-  attr,
-  attrChanged,
-  css,
-  element,
-  html,
-  listen,
-  query,
-  ready,
-} from "@joist/element";
+import { attr, css, element, html, listen, query, ready } from "@joist/element";
 import { effect, observe } from "@joist/observable";
 
 declare global {
@@ -105,11 +96,9 @@ export class USATextareaElement extends HTMLElement {
 
   @effect()
   onChange() {
-    const input = this.#input();
-
-    if (input.value !== this.value) {
-      input.value = this.value;
-    }
+    this.#input({
+      value: this.value,
+    });
 
     this.#syncFormState();
   }

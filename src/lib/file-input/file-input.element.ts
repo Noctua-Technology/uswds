@@ -124,9 +124,10 @@ export class USAFileInputElement extends HTMLElement {
 
   @effect()
   onChange() {
-    const input = this.#input({ files: this.files });
+    this.#input({ files: this.files });
+    this.#preview({ files: this.files });
+
     const box = this.#box();
-    const preview = this.#preview({ files: this.files });
 
     const formData = new FormData();
 
