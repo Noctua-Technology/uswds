@@ -11,10 +11,6 @@ declare global {
 
 @element({
   tagName: "usa-input",
-  shadowDomOpts: {
-    mode: "open",
-    delegatesFocus: true,
-  },
   shadowDom: [
     css`
       * {
@@ -187,7 +183,12 @@ export class USATextInputElement
         // this makes sure that the user has a chance to cancel the event before submitting
         setTimeout(() => {
           if (!e.defaultPrevented && !e.isComposing) {
-            form.submit();
+            const btn = document.createElement("button");
+            btn.type = "submit";
+            form.append(btn);
+
+            btn.click();
+            btn.remove();
           }
         });
       }
