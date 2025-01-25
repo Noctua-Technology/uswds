@@ -16,7 +16,7 @@ declare global {
         margin-top: 0.5rem;
       }
     `,
-    html` <slot></slot> `,
+    html`<slot></slot>`,
   ],
 })
 export class USADescriptionElement extends HTMLElement {}

@@ -1,4 +1,4 @@
-import { attr, css, element, html, listen } from "@joist/element";
+import { attr, css, element, html, listen, queryAll } from "@joist/element";
 
 import { PATTERN_CHARS, PatternChar, REG_EXPS, format } from "./format.js";
 import type { MaskableElement } from "./maskable.element.js";
@@ -24,8 +24,10 @@ export class USAInputMaskElement extends HTMLElement {
   @attr()
   accessor mask = "";
 
+  #maskables = queryAll<MaskableElement>("[mask]", this);
+
   connectedCallback() {
-    for (const input of this.querySelectorAll<MaskableElement>("[mask]")) {
+    for (const input of this.#maskables()) {
       const { formatted } = format(input.value, this.#getMaskFor(input));
 
       if (formatted) {

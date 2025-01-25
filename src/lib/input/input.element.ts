@@ -144,11 +144,9 @@ export class USATextInputElement
 
   @effect()
   onChange(changes: Changes<this>) {
-    const input = this.#input();
-
-    if (input.value !== this.value) {
-      input.value = this.value;
-    }
+    const input = this.#input({
+      value: this.value,
+    });
 
     if (changes.has("selectionStart")) {
       input.selectionStart = this.selectionStart;

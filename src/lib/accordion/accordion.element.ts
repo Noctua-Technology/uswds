@@ -1,4 +1,5 @@
 import { attr, css, element, html, listen, query } from "@joist/element";
+import { USAAccordionToggleEvent } from "./events.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -111,8 +112,7 @@ export class USAAccordionElement extends HTMLElement {
   #details = query("details");
 
   attributeChangedCallback() {
-    const details = this.#details();
-    details.open = this.open;
+    this.#details({ open: this.open });
   }
 
   @listen("click", "summary")
@@ -129,19 +129,5 @@ export class USAAccordionElement extends HTMLElement {
     } else if (e.target === this) {
       this.open = e.open;
     }
-  }
-}
-
-class USAAccordionToggleEvent extends Event {
-  open;
-
-  get target() {
-    return super.target as USAAccordionElement;
-  }
-
-  constructor(open: boolean) {
-    super("usa::accordion::toggle", { bubbles: true });
-
-    this.open = open;
   }
 }

@@ -43,32 +43,31 @@ export class USARadioOptionElement extends HTMLElement {
   #radio = inject(RADIO_CTX);
 
   #observer = new MutationObserver(() => {
-    const input = this.#input();
     const radio = this.#radio();
 
-    input.name = radio.name;
-    input.checked = radio.value === this.value;
+    this.#input({
+      name: radio.name,
+      checked: radio.value === this.value,
+    });
   });
 
   attributeChangedCallback() {
-    const input = this.#input();
-    const slot = this.#slot();
+    this.#input({ value: this.value });
+    this.#slot({ name: this.value });
 
     this.slot = this.value;
-
-    slot.name = this.value;
-    input.value = this.value;
   }
 
   @injected()
   onInjected() {
-    const input = this.#input();
     const radio = this.#radio();
 
     radio.addRadioOption(this.#label());
 
-    input.name = radio.name;
-    input.checked = radio.value === this.value;
+    this.#input({
+      name: radio.name,
+      checked: radio.value === this.value,
+    });
 
     this.#observer.observe(radio, {
       attributeFilter: ["value", "name"],

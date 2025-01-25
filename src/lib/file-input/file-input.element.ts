@@ -131,14 +131,12 @@ export class USAFileInputElement extends HTMLElement {
 
     const formData = new FormData();
 
-    if (this.files?.length) {
-      box.style.display = "none";
+    box.style.display = this.files?.length ? "none" : "flex";
 
+    if (this.files?.length) {
       for (const file of this.files) {
         formData.append(this.name, file);
       }
-    } else {
-      box.style.display = "flex";
     }
 
     this.#internals.setFormValue(formData);
