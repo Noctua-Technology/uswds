@@ -23,7 +23,7 @@ npm i @noctuatech/uswds
   }
 </style>
 
-<script src="/node_modules/@noctuatech/uswds/assets/uswds.min.js"></script>
+<script type="module" src="https://esm.sh/@noctuatech/uswds@latest"></script>
 
 <usa-config icon-path="/node_modules/@noctuatech/uswds/assets/usa-icons/">
   <usa-alert type="info">
@@ -33,6 +33,18 @@ npm i @noctuatech/uswds
     <usa-link href="#">consectetur adipiscing</usa-link>&nbsp;elit, sed do
     eiusmod.
   </usa-alert>
+  
+  <form>
+    <usa-input name="username">
+      First name
+    </usa-input>
+
+    <usa-input name="password">
+      Last name
+    </usa-input>
+
+    <usa-button type="submit">Submit</usa-button>
+  </form>
 </usa-config>
 ```
 
