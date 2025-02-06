@@ -16,7 +16,7 @@ const meta = {
 
         console.log(Array.from(data.entries()));
       }}>
-        <usa-input name="fname" value="Danny" autocomplete="off" detail="pfx">
+        <usa-input name="fname" autocomplete="off" detail="pfx">
           <usa-icon icon="credit_card" slot="detail"></usa-icon>
 
           First name

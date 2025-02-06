@@ -105,6 +105,9 @@ export class USATextInputElement
   @attr()
   accessor required = false;
 
+  @attr()
+  accessor type: "text" | "password" | "number" = "text";
+
   @attr({
     observed: false,
   })
@@ -135,6 +138,7 @@ export class USATextInputElement
       autocomplete: this.autocomplete,
       placeholder: this.placeholder,
       name: this.name,
+      type: this.type,
     });
   }
 
