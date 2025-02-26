@@ -18,6 +18,10 @@ declare global {
   shadowDom: [
     css`
       :host {
+        --usa-radio-active-color: #005ea2;
+        --usa-radio-tiled-bg: rgba(0, 94, 162, 0.1);
+        --usa-radio-focus-color: #2491ff;
+
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -51,14 +55,14 @@ declare global {
       }
 
       label:has(input:checked)::before {
-        background-color: #005ea2;
+        background-color: var(--usa-radio-active-color);
         box-shadow:
-          0 0 0 2px #005ea2,
+          0 0 0 2px var(--usa-radio-active-color),
           inset 0 0 0 2px #fff;
       }
 
       label:has(input:focus)::before {
-        outline: 0.25rem solid #2491ff;
+        outline: 0.25rem solid var(--usa-radio-focus-color);
         outline-offset: 0.25rem;
       }
 
@@ -75,8 +79,8 @@ declare global {
       }
 
       :host([tiled]) label:has(input:checked) {
-        background-color: rgba(0, 94, 162, 0.1);
-        border-color: #005ea2;
+        background-color: var(--usa-radio-tiled-bg);
+        border-color: var(--usa-radio-active-color);
       }
 
       slot {
