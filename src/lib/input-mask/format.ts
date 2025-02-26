@@ -1,10 +1,6 @@
-export enum PatternChar {
-  Any = "*",
-  Number = "9",
-  Letter = "A",
-}
+export const PATTERN_CHARS = ["*", "9", "A"] as const;
 
-export const PATTERN_CHARS = Object.values(PatternChar);
+export type PatternChar = (typeof PATTERN_CHARS)[number];
 
 export const REG_EXPS = {
   Letters: /^[a-z]/i,
@@ -28,24 +24,26 @@ export function format(value: string, pattern: string): FormattedResult {
     const char = chars[count];
 
     if (char && patternChar) {
-      if (patternChar === PatternChar.Any) {
-        // Any letter or number
-        formatted += char;
-        count++;
-      } else if (patternChar === PatternChar.Number) {
-        // Numbers only
-        if (/^[0-9]/i.test(char)) {
+      if (isPatternChar(patternChar)) {
+        if (patternChar === "*") {
+          // Any letter or number
           formatted += char;
-        }
+          count++;
+        } else if (patternChar === "9") {
+          // Numbers only
+          if (/^[0-9]/i.test(char)) {
+            formatted += char;
+          }
 
-        count++;
-      } else if (patternChar === PatternChar.Letter) {
-        // Letters only
-        if (/^[a-z]/i.test(char)) {
-          formatted += char;
-        }
+          count++;
+        } else if (patternChar === "A") {
+          // Letters only
+          if (/^[a-z]/i.test(char)) {
+            formatted += char;
+          }
 
-        count++;
+          count++;
+        }
       } else {
         formatted += patternChar;
       }
@@ -53,4 +51,8 @@ export function format(value: string, pattern: string): FormattedResult {
   }
 
   return { raw, formatted };
+}
+
+export function isPatternChar(char: unknown): char is PatternChar {
+  return PATTERN_CHARS.some((c) => char === c);
 }

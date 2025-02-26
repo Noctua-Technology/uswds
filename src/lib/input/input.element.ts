@@ -1,5 +1,5 @@
 import { attr, css, element, html, listen, query, ready } from "@joist/element";
-import { type Changes, effect, observe } from "@joist/observable";
+import { effect, observe } from "@joist/observable";
 
 import type { MaskableElement } from "../input-mask/maskable.element.js";
 
@@ -134,12 +134,9 @@ export class USATextInputElement
   }
 
   attributeChangedCallback() {
-    this.#input({
-      autocomplete: this.autocomplete,
-      placeholder: this.placeholder,
-      name: this.name,
-      type: this.type,
-    });
+    const { autocomplete, placeholder, name, type } = this;
+
+    this.#input({ autocomplete, placeholder, name, type });
   }
 
   connectedCallback() {
@@ -147,18 +144,10 @@ export class USATextInputElement
   }
 
   @effect()
-  onChange(changes: Changes<this>) {
-    const input = this.#input({
-      value: this.value,
-    });
+  onChange() {
+    const { value, selectionStart, selectionEnd } = this;
 
-    if (changes.has("selectionStart")) {
-      input.selectionStart = this.selectionStart;
-    }
-
-    if (changes.has("selectionEnd")) {
-      input.selectionEnd = this.selectionEnd;
-    }
+    this.#input({ value, selectionStart, selectionEnd });
 
     this.#syncFormState();
   }
