@@ -18,11 +18,13 @@ declare global {
       :host {
         font-size: 1.06rem;
         line-height: 1.3;
-        display: block;
+        display: flex;
+        flex-direction: column;
         font-weight: 400;
         margin-bottom: 1.5rem;
         max-width: 30rem;
         position: relative;
+        height: 9lh;
       }
 
       textarea {
@@ -41,8 +43,8 @@ declare global {
         -moz-appearance: none;
         appearance: none;
         width: 100%;
-        height: var(--usa-textarea-height, 7lh);
         resize: none;
+        flex-grow: 1;
       }
 
       textarea:not(:disabled):focus {
