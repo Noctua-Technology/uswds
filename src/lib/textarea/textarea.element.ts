@@ -20,10 +20,9 @@ declare global {
         line-height: 1.3;
         display: block;
         font-weight: 400;
-        max-width: 30rem;
         margin-bottom: 1.5rem;
+        max-width: 30rem;
         position: relative;
-        height: calc(6lh + .5rem);
       }
 
       textarea {
@@ -42,7 +41,7 @@ declare global {
         -moz-appearance: none;
         appearance: none;
         width: 100%;
-        height: 100%;
+        height: var(--usa-textarea-height, 7lh);
         resize: none;
       }
 
@@ -52,11 +51,11 @@ declare global {
       }
     `,
     html`
-      <label>
+      <label for="textarea">
         <slot></slot>
-
-        <textarea></textarea>
       </label>
+      
+      <textarea id="textarea"></textarea>
     `,
   ],
 })
