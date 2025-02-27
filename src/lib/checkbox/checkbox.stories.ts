@@ -17,6 +17,7 @@ const meta = {
         value=${ifDefined(args.value)}
         checked=${ifDefined(args.checked)}
         ?tiled=${args.tiled}
+        ?disabled=${args.disabled}
       >
         Hello World
         ${when(
@@ -44,6 +45,7 @@ const meta = {
     name: "toc",
     value: "agree",
     tiled: false,
+    disabled: false,
   },
 } satisfies Meta<USACheckboxElement & { description: string }>;
 

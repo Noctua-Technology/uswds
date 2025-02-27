@@ -54,6 +54,16 @@ declare global {
         box-shadow: 0 0 0 2px #005ea2;
       }
 
+      :host([disabled]) .checkbox {
+        background-color: #fff;
+        box-shadow: 0 0 0 2px #757575;
+      }
+
+      :host([disabled]) label {
+        color: #757575;
+        cursor: not-allowed;
+      }
+      
       input:checked + .checkbox::after {
         content: " ";
         display: block;
@@ -82,12 +92,6 @@ declare global {
       .break {
         flex-basis: 100%;
         height: 0;
-      }
-
-      .spacer {
-        height: 1.25rem;
-        width: 1.25rem;
-        margin-right: 0.75rem;
       }
 
       :host([tiled]) label:has(input:checked) {
@@ -123,6 +127,9 @@ export class USACheckboxElement extends HTMLElement {
   @attr()
   accessor required = false;
 
+  @attr()
+  accessor disabled = false;
+
   @attr({
     observed: false,
   })
@@ -133,13 +140,21 @@ export class USACheckboxElement extends HTMLElement {
   #internals = this.attachInternals();
 
   connectedCallback() {
-    this.#checkbox({ checked: this.checked, name: this.name });
+    this.#checkbox({
+      checked: this.checked,
+      name: this.name,
+      disabled: this.disabled,
+    });
 
     this.#syncFormState();
   }
 
   attributeChangedCallback() {
-    this.#checkbox({ checked: this.checked, name: this.name });
+    this.#checkbox({
+      checked: this.checked,
+      name: this.name,
+      disabled: this.disabled,
+    });
 
     this.#syncFormState();
   }

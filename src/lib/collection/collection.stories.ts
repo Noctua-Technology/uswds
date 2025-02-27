@@ -38,7 +38,7 @@ const meta = {
           </h4>
 
           <div slot="description">
-            In honor of National Women’s Small Business Month, we’ve partnered with SBA’s Office of Government Contracting and Business Development and Office of Program Performance, Analysis, and Evaluation to highlight the Women-Owned Small Businesses (WOSBs) data dashboard!
+            In honor of National Women's Small Business Month, we've partnered with SBA's Office of Government Contracting and Business Development and Office of Program Performance, Analysis, and Evaluation to highlight the Women-Owned Small Businesses (WOSBs) data dashboard!
           </div>
         </usa-collection-item>
 
@@ -48,10 +48,9 @@ const meta = {
           <h4 slot="heading">
             <usa-link href="#">Women-owned small business dashboard</usa-link>
           </h4>
-
-
+          
           <div slot="description">
-            In honor of National Women’s Small Business Month, we’ve partnered with SBA’s Office of Government Contracting and Business Development and Office of Program Performance, Analysis, and Evaluation to highlight the Women-Owned Small Businesses (WOSBs) data dashboard!
+            In honor of National Women's Small Business Month, we've partnered with SBA's Office of Government Contracting and Business Development and Office of Program Performance, Analysis, and Evaluation to highlight the Women-Owned Small Businesses (WOSBs) data dashboard!
           </div>
         </usa-collection-item>
       </usa-collection>
