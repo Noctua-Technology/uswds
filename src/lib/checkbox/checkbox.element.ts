@@ -105,7 +105,7 @@ declare global {
       }
 
       :host([tiled]) label:has(input:checked:is(:disabled)) {
-        background-color: #f3f3f3;
+        background-color: #fff;
         border-color: #757575;
       }
     `,
