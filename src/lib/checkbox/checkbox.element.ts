@@ -103,6 +103,11 @@ declare global {
         background-color: rgba(0, 94, 162, 0.1);
         border-color: #005ea2;
       }
+
+      :host([tiled]) label:has(input:checked:is(:disabled)) {
+        background-color: #f3f3f3;
+        border-color: #757575;
+      }
     `,
     html`
       <label>
