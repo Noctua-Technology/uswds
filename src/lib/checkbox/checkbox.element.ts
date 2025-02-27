@@ -49,19 +49,24 @@ declare global {
         margin-right: 0.75rem;
       }
 
-      input:checked + .checkbox {
-        background-color: #005ea2;
-        box-shadow: 0 0 0 2px #005ea2;
+      input:disabled + .checkbox {
+        background-color: #fff;
+        box-shadow: 0 0 0 2px #757575;
       }
 
-      :host([disabled]) .checkbox {
-        background-color: #fff;
+      input:disabled:is(:checked) + .checkbox {
+        background-color: #757575;
         box-shadow: 0 0 0 2px #757575;
       }
 
       :host([disabled]) label {
         color: #757575;
         cursor: not-allowed;
+      }
+
+      input:checked + .checkbox {
+        background-color: #005ea2;
+        box-shadow: 0 0 0 2px #005ea2;
       }
       
       input:checked + .checkbox::after {
