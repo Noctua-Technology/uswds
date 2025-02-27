@@ -30,3 +30,5 @@ export { USACardFooterElement } from "./lib/card/card-footer/card-footer.element
 export { USACardImgElement } from "./lib/card/card-media/card-media.element.js";
 export { USACardGroupElement } from "./lib/card/card-group/card-group.element.js";
 export { USATextareaElement } from "./lib/textarea/textarea.element.js";
+export { USACollectionElement } from "./lib/collection/collection.element.js";
+export { USACollectionItemElement } from "./lib/collection/collection-item/collection-item.element.js";

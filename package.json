@@ -90,8 +90,6 @@
     "wireit": "^0.14.9"
   },
   "lint-staged": {
-    "*": [
-      "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
-    ]
+    "*": ["biome check --write --no-errors-on-unmatched"]
   }
 }
