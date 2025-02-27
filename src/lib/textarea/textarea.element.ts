@@ -25,6 +25,7 @@ declare global {
         max-width: 30rem;
         position: relative;
         height: 9lh;
+        gap: 0.5rem;
       }
 
       textarea {
@@ -33,7 +34,6 @@ declare global {
         border-radius: 0;
         color: #1b1b1b;
         display: block;
-        margin-top: .5rem;
         max-width: 30rem;
         padding: .5rem;
         border-width: 1px;
@@ -97,9 +97,7 @@ export class USATextareaElement extends HTMLElement {
 
   @effect()
   onChange() {
-    this.#input({
-      value: this.value,
-    });
+    this.#input({ value: this.value });
 
     this.#syncFormState();
   }
@@ -110,11 +108,9 @@ export class USATextareaElement extends HTMLElement {
   }
 
   attributeChangedCallback() {
-    this.#input({
-      name: this.name,
-      placeholder: this.placeholder,
-      autocomplete: this.autocomplete,
-    });
+    const { name, placeholder, autocomplete } = this;
+
+    this.#input({ name, placeholder, autocomplete });
   }
 
   #syncFormState() {

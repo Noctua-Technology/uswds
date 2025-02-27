@@ -65,13 +65,6 @@ declare global {
       }
 
       #heading::slotted(*) {
-        font-family:
-          Source Sans Pro Web,
-          Helvetica Neue,
-          Helvetica,
-          Roboto,
-          Arial,
-          sans-serif;
         font-size: 1.33rem;
         line-height: 0.9;
         margin-top: 0;
