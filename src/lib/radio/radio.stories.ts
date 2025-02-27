@@ -12,7 +12,7 @@ const meta = {
     return html`
       <usa-radio
         name="historical-figures"
-        value="george-washington-carver"
+        value="frederick-douglass"
         ?tiled=${args.tiled}
       >
         <legend>Select one historical figure</legend>
