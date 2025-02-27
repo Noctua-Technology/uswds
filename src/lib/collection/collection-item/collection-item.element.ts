@@ -44,8 +44,8 @@ declare global {
           <slot name="description"></slot>
         </div>
 
-        <div class="meta">
-          <slot name="meta"></slot>
+        <div class="slots">
+          <slot name="tags"></slot>
         </div>
       </div>
     `,

@@ -18,6 +18,10 @@ const meta = {
           <div slot="description">
             Today, the Administration announces the winners of the Gears of Government President’s Award. This program recognizes the contributions of individuals and teams across the federal workforce who make a profound difference in the lives of the American people.
           </div>
+
+          <usa-tag slot="tags">NEW</usa-tag>
+          <usa-tag slot="tags">PMA</usa-tag>
+          <usa-tag slot="tags">OMB</usa-tag>
         </usa-collection-item>
 
         <usa-collection-item>
@@ -30,6 +34,10 @@ const meta = {
           <div slot="description">
             Today, the Administration announces the winners of the Gears of Government President’s Award. This program recognizes the contributions of individuals and teams across the federal workforce who make a profound difference in the lives of the American people.
           </div>
+
+          <usa-tag slot="tags">NEW</usa-tag>
+          <usa-tag slot="tags">PMA</usa-tag>
+          <usa-tag slot="tags">OMB</usa-tag>
         </usa-collection-item>
 
         <usa-collection-item>
@@ -40,6 +48,10 @@ const meta = {
           <div slot="description">
             In honor of National Women's Small Business Month, we've partnered with SBA's Office of Government Contracting and Business Development and Office of Program Performance, Analysis, and Evaluation to highlight the Women-Owned Small Businesses (WOSBs) data dashboard!
           </div>
+
+          <usa-tag slot="tags">NEW</usa-tag>
+          <usa-tag slot="tags">PMA</usa-tag>
+          <usa-tag slot="tags">OMB</usa-tag>
         </usa-collection-item>
 
         <usa-collection-item>
@@ -52,6 +64,10 @@ const meta = {
           <div slot="description">
             In honor of National Women's Small Business Month, we've partnered with SBA's Office of Government Contracting and Business Development and Office of Program Performance, Analysis, and Evaluation to highlight the Women-Owned Small Businesses (WOSBs) data dashboard!
           </div>
+
+          <usa-tag slot="tags">NEW</usa-tag>
+          <usa-tag slot="tags">PMA</usa-tag>
+          <usa-tag slot="tags">OMB</usa-tag>
         </usa-collection-item>
       </usa-collection>
     `;
