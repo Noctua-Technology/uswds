@@ -37,6 +37,9 @@ export class USARadioOptionElement extends HTMLElement {
   @attr()
   accessor value = "";
 
+  @attr()
+  accessor disabled = false;
+
   #label = query("label");
   #input = query("input");
   #slot = query("slot");
@@ -52,7 +55,7 @@ export class USARadioOptionElement extends HTMLElement {
   });
 
   attributeChangedCallback() {
-    this.#input({ value: this.value });
+    this.#input({ value: this.value, disabled: this.disabled });
     this.#slot({ name: this.value });
 
     this.slot = this.value;
@@ -60,16 +63,16 @@ export class USARadioOptionElement extends HTMLElement {
 
   @injected()
   onInjected() {
-    const radio = this.#radio();
+    const radioCtx = this.#radio();
 
-    radio.addRadioOption(this.#label());
+    radioCtx.addRadioOption(this.#label());
 
     this.#input({
-      name: radio.name,
-      checked: radio.value === this.value,
+      name: radioCtx.name,
+      checked: radioCtx.value === this.value,
     });
 
-    this.#observer.observe(radio, {
+    this.#observer.observe(radioCtx, {
       attributeFilter: ["value", "name"],
     });
   }

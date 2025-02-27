@@ -61,6 +61,23 @@ declare global {
           inset 0 0 0 2px #fff;
       }
 
+      label:has(input:checked:is(:disabled))::before {
+        background-color: #757575;
+        box-shadow:
+          0 0 0 2px #757575,
+          inset 0 0 0 2px #fff;
+      }
+
+      label:has(input:disabled) {
+        cursor: not-allowed;
+        color: #757575 !important;
+      }
+
+      label:has(input:disabled)::before {
+        background-color: #fff;
+        box-shadow: 0 0 0 2px #757575;
+      }
+      
       label:has(input:focus)::before {
         outline: 0.25rem solid var(--usa-radio-focus-color);
         outline-offset: 0.25rem;
@@ -81,6 +98,11 @@ declare global {
       :host([tiled]) label:has(input:checked) {
         background-color: var(--usa-radio-tiled-bg);
         border-color: var(--usa-radio-active-color);
+      }
+
+      :host([tiled]) label:has(input:checked:is(:disabled)) {
+        background-color: #fff;
+        border-color: #757575;
       }
 
       slot {

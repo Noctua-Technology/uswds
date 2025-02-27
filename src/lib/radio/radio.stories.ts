@@ -12,7 +12,7 @@ const meta = {
     return html`
       <usa-radio
         name="historical-figures"
-        value="frederick-douglass"
+        value="george-washington-carver"
         ?tiled=${args.tiled}
       >
         <legend>Select one historical figure</legend>
@@ -23,17 +23,14 @@ const meta = {
 
         <usa-radio-option value="frederick-douglass">
           Frederick Douglass
-          ${when(
-            args.description,
-            () => html`<usa-description>${args.description}</usa-description>`,
-          )}
+          <usa-description>This is optional text that can be used to describe the label in more detail.</usa-description>
         </usa-radio-option>
 
         <usa-radio-option value="booker-t-washington">
           Booker T. Washington
         </usa-radio-option>
 
-        <usa-radio-option value="george-washington-carver">
+        <usa-radio-option value="george-washington-carver" disabled>
           George Washington Carver
         </usa-radio-option>
       </usa-radio>
@@ -42,8 +39,6 @@ const meta = {
   argTypes: {},
   args: {
     tiled: true,
-    description:
-      "This is optional text that can be used to describe the label in more detail.",
   },
 } satisfies Meta<USARadioElement & { description: string }>;
 
