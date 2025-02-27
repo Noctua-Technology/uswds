@@ -16,6 +16,7 @@ const meta = {
               i === BUTTON_VARIANTS.length - 1 ? "" : "\n\n"
             }`,
         )}
+        <usa-button disabled>Disabled</usa-button>
       </div>
     `;
   },
