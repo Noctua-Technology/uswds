@@ -32,7 +32,7 @@
       "dependencies": ["tsc", "build-storybook", "copy_icons"]
     },
     "preview": {
-      "command": "browser-sync start --server --files \"target/**\" \"index.html\"",
+      "command": "serve",
       "service": true,
       "dependencies": [
         {
@@ -78,13 +78,13 @@
     "@types/node": "^22.0.0",
     "@uswds/uswds": "^3.10.0",
     "@web/test-runner": "^0.20.0",
-    "browser-sync": "^3.0.3",
     "husky": "^9.0.11",
     "js-beautify": "^1.15.1",
     "lint-staged": "^15.2.2",
     "lit": "^3.2.1",
     "mocha": "^11.0.0",
     "plop": "^4.0.1",
+    "serve": "^14.2.4",
     "storybook": "^8.6.0",
     "typescript": "^5.8.0-beta",
     "wireit": "^0.14.9"
