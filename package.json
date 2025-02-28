@@ -32,7 +32,7 @@
       "dependencies": ["tsc", "build-storybook", "copy_icons"]
     },
     "preview": {
-      "command": "serve",
+      "command": "eleventy --serve",
       "service": true,
       "dependencies": [
         {
@@ -67,6 +67,7 @@
     "tslib": "2.8.1"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
     "@biomejs/biome": "1.9.4",
     "@open-wc/testing": "^4.0.0",
     "@rollup/plugin-node-resolve": "^16.0.0",
@@ -84,7 +85,6 @@
     "lit": "^3.2.1",
     "mocha": "^11.0.0",
     "plop": "^4.0.1",
-    "serve": "^14.2.4",
     "storybook": "^8.6.0",
     "typescript": "^5.8.0-beta",
     "wireit": "^0.14.9"
