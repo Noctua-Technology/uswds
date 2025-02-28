@@ -32,3 +32,4 @@ export { USACardGroupElement } from "./lib/card/card-group/card-group.element.js
 export { USATextareaElement } from "./lib/textarea/textarea.element.js";
 export { USACollectionElement } from "./lib/collection/collection.element.js";
 export { USACollectionItemElement } from "./lib/collection/collection-item/collection-item.element.js";
+export { USACheckboxGroupElement } from "./lib/checkbox/checkbox-group/checkbox-group.element.js";

@@ -33,7 +33,7 @@ declare global {
         cursor: pointer;
         font-size: 1.06rem;
         line-height: 1.3;
-        flex-wrap: wrap;
+        width: 100%;
       }
 
       .checkbox {
@@ -43,7 +43,8 @@ declare global {
         align-items: center;
         justify-content: center;
         height: 1.25rem;
-        width: 1.25rem;
+        min-width: 1.25rem;
+        max-width: 1.25rem;
         border-radius: 2px;
         position: relative;
         margin-right: 0.75rem;
