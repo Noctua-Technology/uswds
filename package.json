@@ -15,7 +15,7 @@
     "build": "wireit",
     "preview": "wireit",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "wireit",
+    "build_storybook": "wireit",
     "gen": "plop",
     "prepare": "wireit"
   },
@@ -29,7 +29,7 @@
       "dependencies": ["tsc"]
     },
     "build": {
-      "dependencies": ["tsc", "build-storybook", "copy_icons", "build-website"]
+      "dependencies": ["tsc", "build_storybook", "copy_icons", "build_website"]
     },
     "preview": {
       "command": "eleventy --serve --incremental",
@@ -41,10 +41,10 @@
         }
       ]
     },
-    "build-storybook": {
-      "command": "storybook build"
+    "build_storybook": {
+      "command": "storybook build -o _site/storybook"
     },
-    "build-website": {
+    "build_website": {
       "command": "eleventy"
     },
     "tsc": {

@@ -1,4 +1,3 @@
-import path from "node:path";
 import type { StorybookConfig } from "@storybook/web-components-vite";
 
 const config: StorybookConfig = {
