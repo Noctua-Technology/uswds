@@ -29,10 +29,10 @@
       "dependencies": ["tsc"]
     },
     "build": {
-      "dependencies": ["tsc", "build-storybook", "copy_icons"]
+      "dependencies": ["tsc", "build-storybook", "copy_icons", "build-website"]
     },
     "preview": {
-      "command": "eleventy --serve",
+      "command": "eleventy --serve --incremental",
       "service": true,
       "dependencies": [
         {
@@ -44,11 +44,13 @@
     "build-storybook": {
       "command": "storybook build"
     },
+    "build-website": {
+      "command": "eleventy"
+    },
     "tsc": {
       "command": "tsc --build --pretty",
       "clean": "if-file-deleted",
       "files": ["src/**", "tsconfig.json"],
-      "output": ["target/**", "tsconfig.tsbuildinfo"],
       "dependencies": ["./packages/testing:build"]
     },
     "copy_icons": {
@@ -86,7 +88,7 @@
     "mocha": "^11.0.0",
     "plop": "^4.0.1",
     "storybook": "^8.6.0",
-    "typescript": "^5.8.0-beta",
+    "typescript": "^5.8.0",
     "wireit": "^0.14.9"
   },
   "lint-staged": {

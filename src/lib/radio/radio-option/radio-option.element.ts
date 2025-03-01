@@ -43,15 +43,12 @@ export class USARadioOptionElement extends HTMLElement {
   #label = query("label");
   #input = query("input");
   #slot = query("slot");
-  #radio = inject(RADIO_CTX);
+  #radioCtx = inject(RADIO_CTX);
 
   #observer = new MutationObserver(() => {
-    const radio = this.#radio();
+    const { name, value } = this.#radioCtx();
 
-    this.#input({
-      name: radio.name,
-      checked: radio.value === this.value,
-    });
+    this.#input({ name, checked: value === this.value });
   });
 
   attributeChangedCallback() {
@@ -63,7 +60,7 @@ export class USARadioOptionElement extends HTMLElement {
 
   @injected()
   onInjected() {
-    const radioCtx = this.#radio();
+    const radioCtx = this.#radioCtx();
 
     radioCtx.addRadioOption(this.#label());
 

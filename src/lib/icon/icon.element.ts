@@ -29,7 +29,9 @@ declare global {
     `,
   ],
 })
-@injectable()
+@injectable({
+  name: "usa-icon-ctx",
+})
 export class USAIconElement extends HTMLElement {
   @attr()
   accessor icon: USAIcon = "accessibility_new";
@@ -45,9 +47,11 @@ export class USAIconElement extends HTMLElement {
     this.#updateIcon();
   }
 
-  attributeChangedCallback() {
+  attributeChangedCallback(_: string, newVal: string, oldVal: string) {
     if (this.#injected) {
-      this.#updateIcon();
+      if (newVal !== oldVal) {
+        this.#updateIcon();
+      }
     }
   }
 
@@ -55,7 +59,13 @@ export class USAIconElement extends HTMLElement {
     const icon = this.#icon();
 
     if (this.shadowRoot) {
-      this.shadowRoot.append(await icon.getIcon(this.icon));
+      const currentIcon = await icon.getIcon(this.icon);
+
+      if (this.shadowRoot.firstElementChild) {
+        this.shadowRoot.firstElementChild.replaceWith(currentIcon);
+      } else {
+        this.shadowRoot.append(currentIcon);
+      }
     }
   }
 }
