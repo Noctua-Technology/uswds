@@ -1,4 +1,8 @@
+import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
+
 export default function (eleventyConfig) {
+  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
+
   eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
 
   eleventyConfig.addPassthroughCopy("target/**");
