@@ -45,7 +45,7 @@
       "command": "storybook build -o _site/storybook"
     },
     "build_website": {
-      "command": "eleventy"
+      "command": "eleventy --pathprefix=/uswds/"
     },
     "tsc": {
       "command": "tsc --build --pretty",
