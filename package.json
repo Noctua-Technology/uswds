@@ -29,23 +29,19 @@
       "dependencies": ["tsc"]
     },
     "build": {
-      "dependencies": ["tsc", "build_storybook", "copy_icons", "build_website"]
+      "dependencies": ["build_storybook", "build_website"]
     },
     "preview": {
-      "command": "eleventy --serve --incremental",
+      "command": "eleventy --serve --incremental --quiet",
       "service": true,
-      "dependencies": [
-        {
-          "script": "tsc",
-          "cascade": false
-        }
-      ]
+      "dependencies": [{ "script": "tsc", "cascade": false }]
     },
     "build_storybook": {
       "command": "storybook build -o _site/storybook"
     },
     "build_website": {
-      "command": "eleventy --pathprefix=uswds"
+      "command": "eleventy --pathprefix=uswds",
+      "dependencies": ["tsc", "copy_icons"]
     },
     "tsc": {
       "command": "tsc --build --pretty",
@@ -72,8 +68,6 @@
     "@11ty/eleventy": "^3.0.0",
     "@biomejs/biome": "1.9.4",
     "@open-wc/testing": "^4.0.0",
-    "@rollup/plugin-node-resolve": "^16.0.0",
-    "@rollup/plugin-terser": "^0.4.4",
     "@storybook/addon-essentials": "^8.6.0",
     "@storybook/web-components": "^8.6.0",
     "@storybook/web-components-vite": "^8.6.0",

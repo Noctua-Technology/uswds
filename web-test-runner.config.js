@@ -2,5 +2,5 @@ export default {
   nodeResolve: {
     exportConditions: ["production"],
   },
-  files: ["target/**/*.test.js", "target/**/*.spec.js"],
+  files: ["target/**/*.test.js"],
 };
