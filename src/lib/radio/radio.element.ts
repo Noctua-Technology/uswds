@@ -134,14 +134,14 @@ export class USARadioElement extends HTMLElement implements RadioContainer {
   accessor tiled = false;
 
   #internals = this.attachInternals();
-  #legend = query("#legend");
-
-  connectedCallback() {
-    this.#syncFormState();
-  }
+  #firstInput: HTMLInputElement | null = null;
 
   addRadioOption(el: HTMLElement) {
     this.shadowRoot?.append(el);
+
+    if (this.#firstInput === null) {
+      this.#firstInput = el.querySelector("input");
+    }
 
     this.#syncFormState();
   }
@@ -162,13 +162,13 @@ export class USARadioElement extends HTMLElement implements RadioContainer {
     this.#internals.setValidity({});
 
     if (this.required && !this.value) {
-      const input = this.shadowRoot?.querySelector("input");
-
-      this.#internals.setValidity(
-        { valueMissing: true },
-        "Please select an option if you want to proceed",
-        input ?? this.#legend(),
-      );
+      if (this.#firstInput?.validationMessage) {
+        this.#internals.setValidity(
+          { customError: true },
+          this.#firstInput.validationMessage,
+          this.#firstInput,
+        );
+      }
     }
   }
 }

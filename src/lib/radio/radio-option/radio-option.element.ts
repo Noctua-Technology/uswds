@@ -46,13 +46,15 @@ export class USARadioOptionElement extends HTMLElement {
   #radioCtx = inject(RADIO_CTX);
 
   #observer = new MutationObserver(() => {
-    const { name, value } = this.#radioCtx();
-
-    this.#input({ name, checked: value === this.value });
+    this.#sync();
   });
 
   attributeChangedCallback() {
-    this.#input({ value: this.value, disabled: this.disabled });
+    this.#input({
+      value: this.value,
+      disabled: this.disabled,
+    });
+
     this.#slot({ name: this.value });
 
     this.slot = this.value;
@@ -64,13 +66,10 @@ export class USARadioOptionElement extends HTMLElement {
 
     radioCtx.addRadioOption(this.#label());
 
-    this.#input({
-      name: radioCtx.name,
-      checked: radioCtx.value === this.value,
-    });
+    this.#sync();
 
     this.#observer.observe(radioCtx, {
-      attributeFilter: ["value", "name"],
+      attributeFilter: ["value", "name", "required"],
     });
   }
 
@@ -78,5 +77,15 @@ export class USARadioOptionElement extends HTMLElement {
     this.#label().remove();
 
     this.#observer.disconnect();
+  }
+
+  #sync() {
+    const radioCtx = this.#radioCtx();
+
+    this.#input({
+      name: radioCtx.name,
+      checked: radioCtx.value === this.value,
+      required: radioCtx.required,
+    });
   }
 }

@@ -103,6 +103,18 @@ export class USATextInputElement
   accessor placeholder = "";
 
   @attr()
+  accessor min = "";
+
+  @attr()
+  accessor max = "";
+
+  @attr()
+  accessor minLength = -1;
+
+  @attr()
+  accessor maxLength = -1;
+
+  @attr()
   accessor required = false;
 
   @attr()
@@ -134,9 +146,17 @@ export class USATextInputElement
   }
 
   attributeChangedCallback() {
-    const { autocomplete, placeholder, name, type } = this;
-
-    this.#input({ autocomplete, placeholder, name, type });
+    this.#input({
+      autocomplete: this.autocomplete,
+      placeholder: this.placeholder,
+      name: this.name,
+      type: this.type,
+      required: this.required,
+      min: this.min,
+      max: this.max,
+      minLength: this.minLength,
+      maxLength: this.maxLength,
+    });
   }
 
   connectedCallback() {
@@ -182,12 +202,15 @@ export class USATextInputElement
   #syncFormState() {
     const input = this.#input();
 
+    this.#internals.setValidity({});
     this.#internals.setFormValue(input.value);
 
-    if (this.required && !input.value) {
-      this.#internals.setValidity({ valueMissing: true }, "Required", input);
-    } else {
-      this.#internals.setValidity({});
+    if (input.validationMessage) {
+      this.#internals.setValidity(
+        { customError: true },
+        input.validationMessage,
+        input,
+      );
     }
   }
 
