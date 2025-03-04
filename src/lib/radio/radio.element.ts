@@ -161,14 +161,12 @@ export class USARadioElement extends HTMLElement implements RadioContainer {
     this.#internals.setFormValue(this.value);
     this.#internals.setValidity({});
 
-    if (this.required && !this.value) {
-      if (this.#firstInput?.validationMessage) {
-        this.#internals.setValidity(
-          { customError: true },
-          this.#firstInput.validationMessage,
-          this.#firstInput,
-        );
-      }
+    if (this.#firstInput?.validationMessage) {
+      this.#internals.setValidity(
+        { customError: true },
+        this.#firstInput.validationMessage,
+        this.#firstInput,
+      );
     }
   }
 }
