@@ -1,5 +1,5 @@
 import { injectable } from "@joist/di";
-import { attr, css, element, html, listen, query } from "@joist/element";
+import { attr, css, element, html, listen } from "@joist/element";
 
 import { RADIO_CTX, type RadioContainer } from "./context.js";
 

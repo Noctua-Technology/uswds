@@ -150,17 +150,6 @@ export class USACheckboxElement extends HTMLElement {
 
   #internals = this.attachInternals();
 
-  connectedCallback() {
-    this.#checkbox({
-      checked: this.checked,
-      name: this.name,
-      disabled: this.disabled,
-      required: this.required,
-    });
-
-    this.#syncFormState();
-  }
-
   attributeChangedCallback() {
     this.#checkbox({
       checked: this.checked,
@@ -184,12 +173,7 @@ export class USACheckboxElement extends HTMLElement {
     const checkbox = this.#checkbox();
 
     this.#internals.setValidity({});
-
-    if (checkbox.checked) {
-      this.#internals.setFormValue(this.value);
-    } else {
-      this.#internals.setFormValue(null);
-    }
+    this.#internals.setFormValue(checkbox.checked ? this.value : null);
 
     if (checkbox.validationMessage) {
       this.#internals.setValidity(

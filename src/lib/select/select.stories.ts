@@ -7,7 +7,7 @@ import type { USASelectElement } from "./select.element.js";
 const meta = {
   title: "usa-select",
   tags: ["autodocs"],
-  render(args) {
+  render() {
     return html`
       <usa-select value="third">
         Hello World

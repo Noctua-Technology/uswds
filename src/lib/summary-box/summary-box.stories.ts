@@ -7,7 +7,7 @@ import type { USASummaryBoxElement } from "./summary-box.element.js";
 const meta = {
   title: "usa-summary-box",
   tags: ["autodocs"],
-  render(args) {
+  render() {
     return html`<usa-summary-box> Hello World </usa-summary-box>`;
   },
   argTypes: {},

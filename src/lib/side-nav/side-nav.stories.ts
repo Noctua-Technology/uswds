@@ -7,7 +7,7 @@ import type { USASideNavElement } from "./side-nav.element.js";
 const meta = {
   title: "usa-side-nav",
   tags: ["autodocs"],
-  render(args) {
+  render() {
     return html`
       <usa-side-nav>
         <usa-side-nav-item current>
