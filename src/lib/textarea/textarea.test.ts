@@ -1,7 +1,7 @@
 import "./textarea.element.js";
 
-import { fireEvent } from "@noctuatech-uswds/testing";
 import { assert, fixture, html } from "@open-wc/testing";
+import { userEvent } from "@testing-library/user-event";
 
 describe("usa-textarea", () => {
   it("should be accessible", async () => {
@@ -39,9 +39,7 @@ describe("usa-textarea", () => {
     const nativeInput = input?.shadowRoot?.querySelector("textarea");
 
     if (nativeInput) {
-      nativeInput.value = "Bar";
-
-      await fireEvent.input(nativeInput, { bubbles: true });
+      await userEvent.type(nativeInput, "Bar");
     }
 
     const value = new FormData(form);

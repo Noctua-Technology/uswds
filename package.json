@@ -32,7 +32,7 @@
       "dependencies": ["build_storybook", "build_website"]
     },
     "preview": {
-      "command": "eleventy --serve --incremental --quiet",
+      "command": "eleventy --serve --incremental",
       "service": true,
       "dependencies": [
         {
@@ -56,8 +56,7 @@
     "tsc": {
       "command": "tsc --build --pretty",
       "clean": "if-file-deleted",
-      "files": ["src/**", "tsconfig.json"],
-      "dependencies": ["./packages/testing:build"]
+      "files": ["src/**", "tsconfig.json"]
     },
     "copy_icons": {
       "command": "cp -a node_modules/@uswds/uswds/dist/img/usa-icons/. assets/usa-icons/",
@@ -72,7 +71,6 @@
     "@joist/di": "^4.0.0",
     "@joist/element": "^4.0.0",
     "@joist/observable": "^4.0.0",
-    "@testing-library/dom": "^10.4.0",
     "tslib": "2.8.1"
   },
   "devDependencies": {
@@ -82,6 +80,7 @@
     "@storybook/addon-essentials": "^8.6.0",
     "@storybook/web-components": "^8.6.0",
     "@storybook/web-components-vite": "^8.6.0",
+    "@testing-library/dom": "^10.4.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/mocha": "^10.0.7",
     "@types/node": "^22.0.0",

@@ -1,8 +1,8 @@
 import "./select.element.js";
 import "./select-option/select-option.element.js";
 
-import { fireEvent } from "@noctuatech-uswds/testing";
 import { assert, fixture, html } from "@open-wc/testing";
+import { userEvent } from "@testing-library/user-event";
 
 describe("usa-select", () => {
   it("should be accessible", async () => {
@@ -104,9 +104,7 @@ describe("usa-select", () => {
     const nativeSelect = select?.shadowRoot?.querySelector("select");
 
     if (nativeSelect) {
-      nativeSelect.value = "third";
-
-      await fireEvent.change(nativeSelect, { bubbles: true });
+      await userEvent.selectOptions(nativeSelect, "third");
     }
 
     const value = new FormData(form);
