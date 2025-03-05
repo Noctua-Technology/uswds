@@ -1,6 +1,8 @@
 import "./accordion.element.js";
 
 import { assert, fixture, html } from "@open-wc/testing";
+import { screen } from "@testing-library/dom";
+import { userEvent } from "@testing-library/user-event";
 
 import type { USAAccordionElement } from "./accordion.element.js";
 
@@ -36,7 +38,7 @@ describe("usa-accordion", () => {
       </usa-accordion>
     `);
 
-    const heading = accordion.querySelector("h4");
+    const heading = await screen.findByRole("heading");
     const content = accordion.querySelector<HTMLDivElement>(".content");
 
     heading?.click();
@@ -58,12 +60,12 @@ describe("usa-accordion", () => {
       </usa-accordion>
     `);
 
-    const heading = accordion.querySelector("h4");
+    const heading = await screen.findByRole("heading");
     const content = accordion.querySelector<HTMLDivElement>(".content");
 
     assert.isFalse(content?.checkVisibility());
 
-    heading?.click();
+    await userEvent.click(heading);
 
     assert.isTrue(content.checkVisibility());
   });

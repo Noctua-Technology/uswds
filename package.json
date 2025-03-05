@@ -26,7 +26,7 @@
     },
     "test": {
       "command": "wtr",
-      "dependencies": ["tsc"]
+      "dependencies": ["tsc", "build_testing_library"]
     },
     "build": {
       "dependencies": ["build_storybook", "build_website"]
@@ -48,6 +48,11 @@
       "command": "eleventy --pathprefix=uswds",
       "dependencies": ["tsc", "copy_icons"]
     },
+    "build_testing_library": {
+      "command": "esbuild ./node_modules/@testing-library/* --bundle --outdir=testing-library --format=esm",
+      "files": ["node_modules/@testing-library/**"],
+      "output": ["testing-library/**"]
+    },
     "tsc": {
       "command": "tsc --build --pretty",
       "clean": "if-file-deleted",
@@ -67,6 +72,7 @@
     "@joist/di": "^4.0.0",
     "@joist/element": "^4.0.0",
     "@joist/observable": "^4.0.0",
+    "@testing-library/dom": "^10.4.0",
     "tslib": "2.8.1"
   },
   "devDependencies": {
@@ -76,9 +82,11 @@
     "@storybook/addon-essentials": "^8.6.0",
     "@storybook/web-components": "^8.6.0",
     "@storybook/web-components-vite": "^8.6.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/mocha": "^10.0.7",
     "@types/node": "^22.0.0",
     "@uswds/uswds": "^3.10.0",
+    "@web/dev-server-import-maps": "^0.2.1",
     "@web/test-runner": "^0.20.0",
     "husky": "^9.0.11",
     "js-beautify": "^1.15.1",
