@@ -83,13 +83,21 @@ export class USASelectElement extends HTMLElement implements SelectContainer {
   #internals = this.attachInternals();
 
   connectedCallback() {
-    this.#select({ value: this.value, name: this.name });
+    this.#select({
+      value: this.value,
+      name: this.name,
+      required: this.required,
+    });
 
     this.#syncFormState();
   }
 
   attributeChangedCallback() {
-    this.#select({ value: this.value, name: this.name });
+    this.#select({
+      value: this.value,
+      name: this.name,
+      required: this.required,
+    });
 
     this.#syncFormState();
   }
@@ -109,14 +117,16 @@ export class USASelectElement extends HTMLElement implements SelectContainer {
   }
 
   #syncFormState() {
+    const select = this.#select();
+
     this.#internals.setFormValue(this.value);
     this.#internals.setValidity({});
 
-    if (this.required && !this.value) {
+    if (select.validationMessage) {
       this.#internals.setValidity(
-        { valueMissing: true },
-        "Please select an option",
-        this.#select(),
+        { customError: true },
+        select.validationMessage,
+        select,
       );
     }
   }

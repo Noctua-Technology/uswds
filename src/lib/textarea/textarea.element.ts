@@ -87,8 +87,16 @@ export class USATextareaElement extends HTMLElement {
 
   @ready()
   onReady() {
-    const input = this.#input();
-    input.autofocus = this.autofocus;
+    this.#input({ autofocus: this.autofocus });
+  }
+
+  attributeChangedCallback() {
+    this.#input({
+      name: this.name,
+      placeholder: this.placeholder,
+      autocomplete: this.autocomplete,
+      required: this.required,
+    });
   }
 
   connectedCallback() {
@@ -107,21 +115,18 @@ export class USATextareaElement extends HTMLElement {
     this.value = this.#input().value;
   }
 
-  attributeChangedCallback() {
-    const { name, placeholder, autocomplete } = this;
-
-    this.#input({ name, placeholder, autocomplete });
-  }
-
   #syncFormState() {
     const input = this.#input();
 
     this.#internals.setFormValue(input.value);
+    this.#internals.setValidity({});
 
-    if (this.required && !input.value) {
-      this.#internals.setValidity({ valueMissing: true }, "Required", input);
-    } else {
-      this.#internals.setValidity({});
+    if (input.validationMessage) {
+      this.#internals.setValidity(
+        { customError: true },
+        input.validationMessage,
+        input,
+      );
     }
   }
 }

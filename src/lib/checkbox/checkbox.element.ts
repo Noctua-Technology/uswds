@@ -155,6 +155,7 @@ export class USACheckboxElement extends HTMLElement {
       checked: this.checked,
       name: this.name,
       disabled: this.disabled,
+      required: this.required,
     });
 
     this.#syncFormState();
@@ -165,6 +166,7 @@ export class USACheckboxElement extends HTMLElement {
       checked: this.checked,
       name: this.name,
       disabled: this.disabled,
+      required: this.required,
     });
 
     this.#syncFormState();
@@ -181,20 +183,20 @@ export class USACheckboxElement extends HTMLElement {
   #syncFormState() {
     const checkbox = this.#checkbox();
 
+    this.#internals.setValidity({});
+
     if (checkbox.checked) {
       this.#internals.setFormValue(this.value);
     } else {
       this.#internals.setFormValue(null);
     }
 
-    if (this.required && !checkbox.checked) {
+    if (checkbox.validationMessage) {
       this.#internals.setValidity(
-        { valueMissing: true },
-        "Please check this box if you want to proceed",
-        this.#checkbox(),
+        { customError: true },
+        checkbox.validationMessage,
+        checkbox,
       );
-    } else {
-      this.#internals.setValidity({});
     }
   }
 }

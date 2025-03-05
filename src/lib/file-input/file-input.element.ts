@@ -106,6 +106,9 @@ export class USAFileInputElement extends HTMLElement {
   @attr()
   accessor accept = "";
 
+  @attr()
+  accessor required = false;
+
   @observe()
   accessor files: FileList | null = null;
 
@@ -119,12 +122,25 @@ export class USAFileInputElement extends HTMLElement {
       name: this.name,
       multiple: this.multiple,
       accept: this.accept,
+      required: this.required,
     });
+  }
+
+  connectedCallback() {
+    const input = this.#input();
+
+    if (input.validationMessage) {
+      this.#internals.setValidity(
+        { customError: true },
+        input.validationMessage,
+        input,
+      );
+    }
   }
 
   @effect()
   onChange() {
-    this.#input({ files: this.files });
+    const input = this.#input({ files: this.files });
     this.#preview({ files: this.files });
 
     const box = this.#box();
@@ -140,6 +156,16 @@ export class USAFileInputElement extends HTMLElement {
     }
 
     this.#internals.setFormValue(formData);
+
+    if (input.validationMessage) {
+      this.#internals.setValidity(
+        { customError: true },
+        input.validationMessage,
+        input,
+      );
+    } else {
+      this.#internals.setValidity({});
+    }
   }
 
   @listen("change")

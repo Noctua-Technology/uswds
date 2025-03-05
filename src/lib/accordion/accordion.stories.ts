@@ -7,7 +7,7 @@ import type { USAAccordionElement } from "./accordion.element.js";
 const meta = {
   title: "usa-accordion",
   tags: ["autodocs"],
-  render(args) {
+  render() {
     return html`
       <usa-accordion id="first" name="ammendment">
         <h4 slot="heading">First Ammendment</h4>

@@ -1,6 +1,6 @@
 {
   "name": "@noctuatech/uswds",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "type": "module",
   "workspaces": ["packages/**"],
   "main": "./target/lib.js",
@@ -34,7 +34,12 @@
     "preview": {
       "command": "eleventy --serve --incremental --quiet",
       "service": true,
-      "dependencies": [{ "script": "tsc", "cascade": false }]
+      "dependencies": [
+        {
+          "script": "tsc",
+          "cascade": false
+        }
+      ]
     },
     "build_storybook": {
       "command": "storybook build -o _site/storybook"

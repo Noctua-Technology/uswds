@@ -7,7 +7,7 @@ import type { USAFileInputElement } from "./file-input.element.js";
 const meta = {
   title: "usa-file-input",
   tags: ["autodocs"],
-  render(args) {
+  render() {
     function onSubmit(e: Event) {
       e.preventDefault();
 
@@ -18,7 +18,7 @@ const meta = {
 
     return html`
       <form @submit=${onSubmit}>
-        <usa-file-input name="upload">
+        <usa-file-input name="upload" required>
           Input accepts a single file
 
           <div slot="description">

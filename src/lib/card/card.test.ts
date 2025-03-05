@@ -15,7 +15,7 @@ describe("usa-card", () => {
       <usa-card-group>
         <usa-card>
           <usa-card-media>
-            <img src="/img/built-to-grow--alt.jpg" alt="A placeholder image" />
+            <img alt="A placeholder image" />
           </usa-card-media>
 
           <usa-card-header>Card with media</usa-card-header>
