@@ -49,17 +49,18 @@
       "dependencies": ["tsc", "copy_icons"]
     },
     "build_testing_library": {
-      "command": "esbuild ./node_modules/@testing-library/* --bundle --outdir=testing-library --format=esm",
+      "command": "./scripts/build_testing_library.sh",
       "files": ["node_modules/@testing-library/**"],
       "output": ["testing-library/**"]
     },
     "tsc": {
       "command": "tsc --build --pretty",
       "clean": "if-file-deleted",
-      "files": ["src/**", "tsconfig.json"]
+      "files": ["src/**", "tsconfig.json"],
+      "output": ["target/**"]
     },
     "copy_icons": {
-      "command": "cp -a node_modules/@uswds/uswds/dist/img/usa-icons/. assets/usa-icons/",
+      "command": "./scripts/copy_usa_icons.sh",
       "files": ["node_modules/@uswds/uswds/dist/img/usa-icons/**"],
       "output": ["assets/usa-icon/**"]
     }
