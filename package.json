@@ -26,13 +26,13 @@
     },
     "test": {
       "command": "wtr",
-      "dependencies": ["tsc"]
+      "dependencies": ["tsc", "build_testing_library"]
     },
     "build": {
       "dependencies": ["build_storybook", "build_website"]
     },
     "preview": {
-      "command": "eleventy --serve --incremental --quiet",
+      "command": "eleventy --serve --incremental",
       "service": true,
       "dependencies": [
         {
@@ -48,14 +48,19 @@
       "command": "eleventy --pathprefix=uswds",
       "dependencies": ["tsc", "copy_icons"]
     },
+    "build_testing_library": {
+      "command": "./scripts/build_testing_library.sh",
+      "files": ["node_modules/@testing-library/**"],
+      "output": ["testing-library/**"]
+    },
     "tsc": {
       "command": "tsc --build --pretty",
       "clean": "if-file-deleted",
       "files": ["src/**", "tsconfig.json"],
-      "dependencies": ["./packages/testing:build"]
+      "output": ["target/**"]
     },
     "copy_icons": {
-      "command": "cp -a node_modules/@uswds/uswds/dist/img/usa-icons/. assets/usa-icons/",
+      "command": "./scripts/copy_usa_icons.sh",
       "files": ["node_modules/@uswds/uswds/dist/img/usa-icons/**"],
       "output": ["assets/usa-icon/**"]
     }
@@ -76,9 +81,12 @@
     "@storybook/addon-essentials": "^8.6.0",
     "@storybook/web-components": "^8.6.0",
     "@storybook/web-components-vite": "^8.6.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/mocha": "^10.0.7",
     "@types/node": "^22.0.0",
     "@uswds/uswds": "^3.10.0",
+    "@web/dev-server-import-maps": "^0.2.1",
     "@web/test-runner": "^0.20.0",
     "husky": "^9.0.11",
     "js-beautify": "^1.15.1",

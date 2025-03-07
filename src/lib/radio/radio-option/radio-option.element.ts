@@ -1,6 +1,6 @@
+import { inject, injectable, injected } from "@joist/di";
 import { attr, css, element, html, query } from "@joist/element";
 
-import { inject, injectable, injected } from "@joist/di";
 import { RADIO_CTX } from "../context.js";
 
 declare global {
@@ -50,11 +50,7 @@ export class USARadioOptionElement extends HTMLElement {
   });
 
   attributeChangedCallback() {
-    this.#input({
-      value: this.value,
-      disabled: this.disabled,
-    });
-
+    this.#input({ value: this.value, disabled: this.disabled });
     this.#slot({ name: this.value });
 
     this.slot = this.value;

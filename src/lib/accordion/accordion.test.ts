@@ -1,6 +1,8 @@
 import "./accordion.element.js";
 
 import { assert, fixture, html } from "@open-wc/testing";
+import { screen } from "@testing-library/dom";
+import { userEvent } from "@testing-library/user-event";
 
 import type { USAAccordionElement } from "./accordion.element.js";
 
@@ -36,10 +38,10 @@ describe("usa-accordion", () => {
       </usa-accordion>
     `);
 
-    const heading = accordion.querySelector("h4");
+    const heading = await screen.findByRole("heading");
     const content = accordion.querySelector<HTMLDivElement>(".content");
 
-    heading?.click();
+    await userEvent.click(heading);
 
     assert.isTrue(content?.checkVisibility());
   });
@@ -58,12 +60,12 @@ describe("usa-accordion", () => {
       </usa-accordion>
     `);
 
-    const heading = accordion.querySelector("h4");
+    const heading = await screen.findByRole("heading");
     const content = accordion.querySelector<HTMLDivElement>(".content");
 
     assert.isFalse(content?.checkVisibility());
 
-    heading?.click();
+    await userEvent.click(heading);
 
     assert.isTrue(content.checkVisibility());
   });
@@ -91,21 +93,21 @@ describe("usa-accordion", () => {
     const headings = el.querySelectorAll("h4");
     const content = Array.from(el.querySelectorAll<HTMLDivElement>(".content"));
 
-    headings[0].click();
+    await userEvent.click(headings[0]);
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
       [true, false, false],
     );
 
-    headings[1].click();
+    await userEvent.click(headings[1]);
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
       [false, true, false],
     );
 
-    headings[2].click();
+    await userEvent.click(headings[2]);
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
@@ -136,21 +138,21 @@ describe("usa-accordion", () => {
     const headings = el.querySelectorAll("h4");
     const content = Array.from(el.querySelectorAll<HTMLDivElement>(".content"));
 
-    headings[0].click();
+    await userEvent.click(headings[0]);
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
       [true, false, false],
     );
 
-    headings[1].click();
+    await userEvent.click(headings[1]);
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
       [false, true, false],
     );
 
-    headings[2].click();
+    await userEvent.click(headings[2]);
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),

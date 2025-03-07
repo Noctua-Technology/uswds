@@ -140,3 +140,4 @@ storybook-static
 assets/uswds.min.js
 assets/usa-icons/*.svg
 _site
+testing-library
