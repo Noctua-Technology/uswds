@@ -7,7 +7,6 @@ import type { USACardElement } from "./card.element.js";
 const meta = {
   title: "usa-card",
   tags: ["autodocs"],
-
   argTypes: {},
   args: {},
 } satisfies Meta<USACardElement>;

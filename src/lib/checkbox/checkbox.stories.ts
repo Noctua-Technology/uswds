@@ -7,30 +7,6 @@ import type { USACheckboxElement } from "./checkbox.element.js";
 const meta = {
   title: "usa-checkbox",
   tags: ["autodocs"],
-  render() {
-    return html`
-      <usa-checkbox-group>
-        <legend class="usa-legend">Select any historical figure</legend>
-
-        <usa-checkbox name="historical-figure" value="sojurner-truth" tiled>
-          Sojourner Truth
-          <usa-description>This is optional text that can be used to describe the label in more detail.</usa-description>
-        </usa-checkbox>
-
-        <usa-checkbox name="historical-figure" value="frederick-douglass" tiled>
-          Frederick Douglass
-        </usa-checkbox>
-
-        <usa-checkbox name="historical-figure" value="booker-t-washington" tiled>
-          Booker T. Washington
-        </usa-checkbox>
-
-        <usa-checkbox name="historical-figure" value="gw-carver" tiled disabled>
-          George Washington Carver
-        </usa-checkbox>
-      </usa-checkbox-group>
-    `;
-  },
   argTypes: {},
   args: {},
 } satisfies Meta<USACheckboxElement & { description: string }>;

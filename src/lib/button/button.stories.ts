@@ -7,7 +7,7 @@ import { BUTTON_VARIANTS, type USAButtonElement } from "./button.element.js";
 const meta = {
   title: "usa-button",
   tags: ["autodocs"],
-  render(args) {
+  render() {
     return html`
       <div style="display: inline-flex; flex-direction: column; gap: 1rem">
         ${BUTTON_VARIANTS.map(
