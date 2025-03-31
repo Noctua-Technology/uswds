@@ -71,7 +71,7 @@ export class USARangeSliderElement extends HTMLElement {
   accessor name = "";
 
   @attr()
-  accessor value = "";
+  accessor value = "0";
 
   @attr()
   accessor min = "0";
@@ -95,6 +95,7 @@ export class USARangeSliderElement extends HTMLElement {
       min: this.min,
       max: this.max,
       step: this.step,
+      id: this.name,
     });
 
     this.#internals.setFormValue(this.value);
