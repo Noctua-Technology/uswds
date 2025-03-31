@@ -33,3 +33,4 @@ import "./textarea/textarea.element.js";
 import "./collection/collection.element.js";
 import "./collection/collection-item/collection-item.element.js";
 import "./checkbox/checkbox-group/checkbox-group.element.js";
+import "./range-slider/range-slider.element.js";
