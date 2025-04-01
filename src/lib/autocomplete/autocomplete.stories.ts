@@ -61,7 +61,7 @@ const meta = {
         "Wisconsin",
         "Wyoming",
       ]}>
-        <usa-input name="search" slot="input" autocomplete="off"></usa-input>
+        <usa-input name="search" slot="input" autocomplete="off">States</usa-input>
       </usa-autocomplete>
     `;
   },

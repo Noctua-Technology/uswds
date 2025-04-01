@@ -11,11 +11,27 @@ declare global {
   shadowDom: [
     css`
       :host {
-        display: contents;
+        display: flex;
+        max-width: 30rem;
+        flex-direction: column;
       }
 
       ul {
         padding: 0; margin: 0;
+        border-left: 1px solid #e6e6e6;
+        border-right: 1px solid #e6e6e6;
+      }
+
+      ul li {
+        list-style: none;
+        border-bottom: 1px solid #e6e6e6;
+        cursor: pointer;
+        display: block;
+        padding: 0.5rem;
+      }
+
+      ::slotted(:is(input, usa-input)) {
+        margin-bottom: 0;
       }
     `,
     html`
@@ -29,14 +45,15 @@ export class USAAutocompleteElement extends HTMLElement {
   list = query("ul");
   input = query<HTMLInputElement>('[slot="input"]', this);
   items: string[] = [];
-  currentItem: Element | null = null;
+  currentItemEl: Element | null = null;
+  currentItem: string | null = null;
 
   @listen("input", (host) => host)
   async onInput() {
     const input = this.input();
     const list = this.list({ innerHTML: "" });
 
-    this.currentItem = null;
+    this.currentItemEl = null;
 
     list.innerHTML = "";
 
@@ -60,7 +77,7 @@ export class USAAutocompleteElement extends HTMLElement {
       // the active element will not be set until after all of the focus and blur events are done
       if (!this.contains(document.activeElement)) {
         this.list({ innerHTML: "" });
-        this.currentItem = null;
+        this.currentItemEl = null;
       }
     }, 0);
   }
@@ -75,21 +92,24 @@ export class USAAutocompleteElement extends HTMLElement {
       case "ARROWDOWN": {
         e.preventDefault();
 
-        if (this.currentItem && this.currentItem.nextElementSibling === null) {
+        if (
+          this.currentItemEl &&
+          this.currentItemEl.nextElementSibling === null
+        ) {
           // last item in current list
           break;
         }
 
-        if (this.currentItem === null) {
+        if (this.currentItemEl === null) {
           // if there is no current item, set the first item as the current item
-          this.currentItem = list.firstElementChild;
+          this.currentItemEl = list.firstElementChild;
         } else {
           // if there is a current item, set the next item as the current item
-          this.currentItem = this.currentItem.nextElementSibling;
+          this.currentItemEl = this.currentItemEl.nextElementSibling;
         }
 
-        if (this.currentItem instanceof HTMLElement) {
-          this.currentItem.focus();
+        if (this.currentItemEl instanceof HTMLElement) {
+          this.currentItemEl.focus();
         }
 
         break;
@@ -98,11 +118,11 @@ export class USAAutocompleteElement extends HTMLElement {
       case "ARROWUP": {
         e.preventDefault();
 
-        if (this.currentItem?.previousElementSibling) {
-          this.currentItem = this.currentItem.previousElementSibling;
+        if (this.currentItemEl?.previousElementSibling) {
+          this.currentItemEl = this.currentItemEl.previousElementSibling;
 
-          if (this.currentItem instanceof HTMLElement) {
-            this.currentItem.focus();
+          if (this.currentItemEl instanceof HTMLElement) {
+            this.currentItemEl.focus();
           }
         }
 
@@ -112,7 +132,7 @@ export class USAAutocompleteElement extends HTMLElement {
       case "ENTER": {
         e.preventDefault();
 
-        this.currentItem = null;
+        this.currentItemEl = null;
 
         this.input({
           value: target.dataset.value,
@@ -128,7 +148,7 @@ export class USAAutocompleteElement extends HTMLElement {
       case "ESCAPE": {
         e.preventDefault();
 
-        this.currentItem = null;
+        this.currentItemEl = null;
 
         this.list({
           innerHTML: "",

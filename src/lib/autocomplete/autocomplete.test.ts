@@ -64,13 +64,13 @@ describe("usa-autocomplete", () => {
     input.dispatchEvent(
       new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }),
     );
-    assert.equal(autocomplete.currentItem?.textContent, "Banana");
+    assert.equal(autocomplete.currentItemEl?.textContent, "Banana");
 
     // Arrow down again
     input.dispatchEvent(
       new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }),
     );
-    assert.equal(autocomplete.currentItem?.textContent, "Blueberry");
+    assert.equal(autocomplete.currentItemEl?.textContent, "Blueberry");
   });
 
   it("should select suggestion with enter key", async () => {
@@ -103,7 +103,7 @@ describe("usa-autocomplete", () => {
     );
 
     assert.equal(autocomplete.list().innerHTML, "");
-    assert.equal(autocomplete.currentItem, null);
+    assert.equal(autocomplete.currentItemEl, null);
   });
 
   it("should not go above first suggestion with arrow up", async () => {
@@ -119,7 +119,7 @@ describe("usa-autocomplete", () => {
       new KeyboardEvent("keydown", { key: "ArrowUp", bubbles: true }),
     );
 
-    assert.equal(autocomplete.currentItem?.textContent, "Banana");
+    assert.equal(autocomplete.currentItemEl?.textContent, "Banana");
   });
 
   it("should not go below last suggestion with arrow down", async () => {
@@ -143,6 +143,6 @@ describe("usa-autocomplete", () => {
       new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }),
     );
 
-    assert.equal(autocomplete.currentItem?.textContent, "Blueberry");
+    assert.equal(autocomplete.currentItemEl?.textContent, "Blueberry");
   });
 });
