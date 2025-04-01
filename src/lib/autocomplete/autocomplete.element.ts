@@ -13,6 +13,10 @@ declare global {
       :host {
         display: contents;
       }
+
+      ul {
+        padding: 0; margin: 0;
+      }
     `,
     html`
       <slot name="input"></slot>
@@ -25,14 +29,14 @@ export class USAAutocompleteElement extends HTMLElement {
   list = query("ul");
   input = query<HTMLInputElement>('[slot="input"]', this);
   items: string[] = [];
-  focusedIndex: number | null = null;
+  currentItem: Element | null = null;
 
   @listen("input", (host) => host)
   async onInput() {
     const input = this.input();
     const list = this.list({ innerHTML: "" });
 
-    this.focusedIndex = null;
+    this.currentItem = null;
 
     list.innerHTML = "";
 
@@ -41,40 +45,51 @@ export class USAAutocompleteElement extends HTMLElement {
     for (const item of filteredItems) {
       const li = document.createElement("li");
 
-      const btn = document.createElement("button");
-      btn.innerHTML = item;
-      btn.dataset.value = item;
-      btn.tabIndex = -1;
+      li.innerHTML = item;
+      li.dataset.value = item;
+      li.tabIndex = -1;
 
-      li.append(btn);
       list.append(li);
     }
+  }
+
+  @listen("focusout")
+  onFocusOut() {
+    setTimeout(() => {
+      // This needs to be in a timeout so that it runs as part of the next loop.
+      // the active element will not be set until after all of the focus and blur events are done
+      if (!this.contains(document.activeElement)) {
+        this.list({ innerHTML: "" });
+        this.currentItem = null;
+      }
+    }, 0);
   }
 
   @listen("keydown")
   onKeyDown(e: KeyboardEvent) {
     const target = e.target as HTMLElement;
     const key = e.key.toUpperCase();
-    const focusable = this.list().querySelectorAll("button");
+    const list = this.list();
 
     switch (key) {
       case "ARROWDOWN": {
         e.preventDefault();
 
-        if (this.focusedIndex === focusable.length - 1) {
+        if (this.currentItem && this.currentItem.nextElementSibling === null) {
+          // last item in current list
           break;
         }
 
-        if (this.focusedIndex === null) {
-          this.focusedIndex = 0;
+        if (this.currentItem === null) {
+          // if there is no current item, set the first item as the current item
+          this.currentItem = list.firstElementChild;
         } else {
-          this.focusedIndex = this.focusedIndex + 1;
+          // if there is a current item, set the next item as the current item
+          this.currentItem = this.currentItem.nextElementSibling;
         }
 
-        const focusableItem = focusable[this.focusedIndex];
-
-        if (focusableItem) {
-          focusableItem.focus();
+        if (this.currentItem instanceof HTMLElement) {
+          this.currentItem.focus();
         }
 
         break;
@@ -83,13 +98,11 @@ export class USAAutocompleteElement extends HTMLElement {
       case "ARROWUP": {
         e.preventDefault();
 
-        if (this.focusedIndex !== null && this.focusedIndex > 0) {
-          this.focusedIndex = this.focusedIndex - 1;
+        if (this.currentItem?.previousElementSibling) {
+          this.currentItem = this.currentItem.previousElementSibling;
 
-          const focusableItem = focusable[this.focusedIndex];
-
-          if (focusableItem) {
-            focusableItem.focus();
+          if (this.currentItem instanceof HTMLElement) {
+            this.currentItem.focus();
           }
         }
 
@@ -99,7 +112,7 @@ export class USAAutocompleteElement extends HTMLElement {
       case "ENTER": {
         e.preventDefault();
 
-        this.focusedIndex = null;
+        this.currentItem = null;
 
         this.input({
           value: target.dataset.value,
@@ -113,7 +126,9 @@ export class USAAutocompleteElement extends HTMLElement {
       }
 
       case "ESCAPE": {
-        this.focusedIndex = null;
+        e.preventDefault();
+
+        this.currentItem = null;
 
         this.list({
           innerHTML: "",
