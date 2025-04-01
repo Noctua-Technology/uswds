@@ -34,3 +34,4 @@ export { USACollectionElement } from "./lib/collection/collection.element.js";
 export { USACollectionItemElement } from "./lib/collection/collection-item/collection-item.element.js";
 export { USACheckboxGroupElement } from "./lib/checkbox/checkbox-group/checkbox-group.element.js";
 export { USARangeSliderElement } from "./lib/range-slider/range-slider.element.js";
+export { USAAutocompleteElement } from "./lib/autocomplete/autocomplete.element.js";

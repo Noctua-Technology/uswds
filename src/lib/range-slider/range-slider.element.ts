@@ -32,7 +32,6 @@ declare global {
         outline-offset: 0;
       }
 
-      /* Special styling for WebKit/Blink */
       input::-webkit-slider-thumb {
         height: 1.25rem;
         border-radius: 99rem;
@@ -87,7 +86,9 @@ export class USARangeSliderElement extends HTMLElement {
   #internals = this.attachInternals();
 
   attributeChangedCallback() {
-    this.#label({ htmlFor: this.name });
+    this.#label({
+      htmlFor: this.name,
+    });
 
     this.#input({
       name: this.name,
