@@ -1,17 +1,17 @@
-import "./autocomplete.element.js";
+import "./combo-box.element.js";
 import "../input/input.element.js";
 
 import { assert, fixture, html } from "@open-wc/testing";
 
 import type { USATextInputElement } from "../input/input.element.js";
-import type { USAAutocompleteElement } from "./autocomplete.element.js";
+import type { USAComboBoxElement } from "./combo-box.element.js";
 
 describe("usa-autocomplete", () => {
-  let autocomplete: USAAutocompleteElement;
+  let autocomplete: USAComboBoxElement;
   let input: USATextInputElement;
 
   beforeEach(async () => {
-    autocomplete = await fixture<USAAutocompleteElement>(html`
+    autocomplete = await fixture<USAComboBoxElement>(html`
       <usa-autocomplete>
         <usa-input slot="input" name="search"></usa-input>
       </usa-autocomplete>

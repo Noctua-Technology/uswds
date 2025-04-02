@@ -2,7 +2,7 @@ import { css, element, html, listen, query } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-autocomplete": USAAutocompleteElement;
+    "usa-autocomplete": USAComboBoxElement;
   }
 }
 
@@ -63,7 +63,7 @@ declare global {
     `,
   ],
 })
-export class USAAutocompleteElement extends HTMLElement {
+export class USAComboBoxElement extends HTMLElement {
   list = query("ul");
   input = query<HTMLInputElement>('[slot="input"]', this);
   items: string[] = [];

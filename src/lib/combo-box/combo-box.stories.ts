@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
-import type { USAAutocompleteElement } from "./autocomplete.element.js";
+import type { USAComboBoxElement } from "./combo-box.element.js";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
@@ -67,11 +67,11 @@ const meta = {
   },
   argTypes: {},
   args: {},
-} satisfies Meta<USAAutocompleteElement>;
+} satisfies Meta<USAComboBoxElement>;
 
 export default meta;
 
-type Story = StoryObj<USAAutocompleteElement>;
+type Story = StoryObj<USAComboBoxElement>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
