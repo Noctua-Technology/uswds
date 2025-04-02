@@ -138,73 +138,75 @@ export class USAComboBoxElement
   }
 
   @listen("keydown")
-  onKeyDown(e: KeyboardEvent) {
-    const target = e.target as HTMLElement;
-    const key = e.key.toUpperCase();
-    const list = this.list();
-
-    switch (key) {
-      case "ARROWDOWN": {
-        e.preventDefault();
-
-        if (this.currentItemEl === null) {
-          // if there is no current item, set the first item as the current item
-          this.currentItemEl = list.firstElementChild;
-        } else if (this.currentItemEl.nextSibling) {
-          // if there is a current item, set the next item as the current item
-          this.currentItemEl = this.currentItemEl.nextElementSibling;
-        }
-
-        if (this.currentItemEl instanceof HTMLElement) {
-          this.currentItemEl.focus();
-        }
-
-        break;
-      }
-
-      case "ARROWUP": {
-        e.preventDefault();
-
-        if (this.currentItemEl?.previousElementSibling) {
-          this.currentItemEl = this.currentItemEl.previousElementSibling;
-
-          if (this.currentItemEl instanceof HTMLElement) {
-            this.currentItemEl.focus();
-          }
-        } else {
-          this.input().focus();
-          this.currentItemEl = null;
-        }
-
-        break;
-      }
-
-      case "ENTER": {
-        e.preventDefault();
-
-        this.currentItemEl = null;
-
-        const value = target.dataset.value || "";
-
-        this.input({
-          value,
-          selectionStart: value.length,
-          selectionEnd: value.length,
-        }).focus();
-
-        this.list({ textContent: "" });
-
-        break;
-      }
+  onArrowDown(e: KeyboardEvent): void {
+    if (e.key.toUpperCase() !== "ARROWDOWN") {
+      return;
     }
+
+    e.preventDefault();
+
+    if (this.currentItemEl === null) {
+      // if there is no current item, set the first item as the current item
+      const list = this.list();
+
+      this.currentItemEl = list.firstElementChild;
+    } else if (this.currentItemEl.nextSibling) {
+      // if there is a current item, set the next item as the current item
+      this.currentItemEl = this.currentItemEl.nextElementSibling;
+    }
+
+    if (this.currentItemEl instanceof HTMLElement) {
+      this.currentItemEl.focus();
+    }
+  }
+
+  @listen("keydown")
+  onArrowUp(e: KeyboardEvent): void {
+    if (e.key.toUpperCase() !== "ARROWUP") {
+      return;
+    }
+
+    e.preventDefault();
+
+    if (this.currentItemEl?.previousElementSibling) {
+      this.currentItemEl = this.currentItemEl.previousElementSibling;
+
+      if (this.currentItemEl instanceof HTMLElement) {
+        this.currentItemEl.focus();
+      }
+    } else {
+      this.input().focus();
+      this.currentItemEl = null;
+    }
+  }
+
+  @listen("keydown")
+  onEnter(e: KeyboardEvent): void {
+    if (e.key.toUpperCase() !== "ENTER") {
+      return;
+    }
+
+    e.preventDefault();
+
+    const target = e.target as HTMLElement;
+
+    this.currentItemEl = null;
+
+    const value = target.dataset.value || "";
+
+    this.input({
+      value,
+      selectionStart: value.length,
+      selectionEnd: value.length,
+    }).focus();
+
+    this.list({ textContent: "" });
   }
 
   @listen("click")
   onClick(e: MouseEvent) {
-    const target = e.target;
-
-    if (target instanceof HTMLLIElement) {
-      const value = target.dataset.value || "";
+    if (e.target instanceof HTMLLIElement) {
+      const value = e.target.dataset.value || "";
 
       this.input({
         value,
