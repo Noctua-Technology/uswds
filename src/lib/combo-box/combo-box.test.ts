@@ -14,6 +14,13 @@ describe("usa-combo-box", () => {
     autocomplete = await fixture<USAComboBoxElement>(html`
       <usa-combo-box>
         <usa-input slot="input" name="search"></usa-input>
+
+        <datalist>
+          <option value="Apple"></option>
+          <option value="Banana"></option>
+          <option value="Blueberry"></option>
+          <option value="Cherry"></option>
+        </datalist>
       </usa-combo-box>
     `);
 
@@ -24,7 +31,6 @@ describe("usa-combo-box", () => {
     }
 
     input = inputElement;
-    autocomplete.items = ["Apple", "Banana", "Blueberry", "Cherry"];
   });
 
   it("should filter items based on input", async () => {
