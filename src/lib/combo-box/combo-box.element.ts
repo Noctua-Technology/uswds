@@ -17,9 +17,8 @@ declare global {
   shadowDom: [
     css`
       :host {
-        display: flex;
+        display: block;
         max-width: 30rem;
-        flex-direction: column;
         position: relative;
       }
 
@@ -32,9 +31,10 @@ declare global {
         transform: translateY(100%);
         margin: 0;
         border: 1px solid rgb(92, 92, 92);
-        max-height: 12.1em;
+        max-height: 12em;
         overflow-y: scroll;
         overflow-x: visible;
+        z-index: 1001;
       }
 
       ul:empty {
@@ -57,10 +57,6 @@ declare global {
       li:focus {
         outline: 0.25rem solid #2491ff;
         outline-offset: -0.25rem;
-      }
-
-      ::slotted(:is(input, usa-input)) {
-        margin-bottom: 0;
       }
     `,
     html`
