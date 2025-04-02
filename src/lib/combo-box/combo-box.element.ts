@@ -2,12 +2,12 @@ import { css, element, html, listen, query } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-autocomplete": USAComboBoxElement;
+    "usa-combo-box": USAComboBoxElement;
   }
 }
 
 @element({
-  tagName: "usa-autocomplete",
+  tagName: "usa-combo-box",
   shadowDom: [
     css`
       :host {

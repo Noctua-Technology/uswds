@@ -5,11 +5,11 @@ import type { USAComboBoxElement } from "./combo-box.element.js";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
-  title: "usa-autocomplete",
+  title: "usa-combo-box",
   tags: ["autodocs"],
   render() {
     return html`
-      <usa-autocomplete .items=${[
+      <usa-combo-box .items=${[
         "Alabama",
         "Alaska",
         "Arizona",
@@ -62,7 +62,7 @@ const meta = {
         "Wyoming",
       ]}>
         <usa-input name="search" slot="input" autocomplete="off">States</usa-input>
-      </usa-autocomplete>
+      </usa-combo-box>
     `;
   },
   argTypes: {},

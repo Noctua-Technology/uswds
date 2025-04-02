@@ -6,15 +6,15 @@ import { assert, fixture, html } from "@open-wc/testing";
 import type { USATextInputElement } from "../input/input.element.js";
 import type { USAComboBoxElement } from "./combo-box.element.js";
 
-describe("usa-autocomplete", () => {
+describe("usa-combo-box", () => {
   let autocomplete: USAComboBoxElement;
   let input: USATextInputElement;
 
   beforeEach(async () => {
     autocomplete = await fixture<USAComboBoxElement>(html`
-      <usa-autocomplete>
+      <usa-combo-box>
         <usa-input slot="input" name="search"></usa-input>
-      </usa-autocomplete>
+      </usa-combo-box>
     `);
 
     const inputElement = autocomplete.querySelector("usa-input");
