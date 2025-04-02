@@ -8,7 +8,7 @@ const meta = {
   title: "usa-range-slider",
   tags: ["autodocs"],
   render(args) {
-    return html`<usa-range-slider>Hello World</usa-range-slider>`;
+    return html`<usa-range-slider name="test" value="50">Hello World</usa-range-slider>`;
   },
   argTypes: {},
   args: {},
