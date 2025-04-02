@@ -14,19 +14,29 @@ declare global {
         display: flex;
         max-width: 30rem;
         flex-direction: column;
+        position: relative;
       }
 
       ul {
         padding: 0;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        transform: translateY(100%);
         margin: 0;
-        border-left: 1px solid #e6e6e6;
-        border-right: 1px solid #e6e6e6;
-        border-bottom: 1px solid #e6e6e6;
+        border: 1px solid rgb(92, 92, 92);
         max-height: 12.1em;
-        overflow-y: hidden;
+        overflow-y: scroll;
+        overflow-x: visible;
+      }
+
+      ul:empty {
+        border: none;
       }
 
       ul li {
+        background: #ffff;
         list-style: none;
         border-bottom: 1px solid #e6e6e6;
         cursor: pointer;
@@ -40,7 +50,7 @@ declare global {
 
       li:focus {
         outline: 0.25rem solid #2491ff;
-        outline-offset: 0rem;
+        outline-offset: -0.25rem;
       }
 
       ::slotted(:is(input, usa-input)) {
@@ -49,8 +59,7 @@ declare global {
     `,
     html`
       <slot name="input"></slot>
-
-      <ul></ul>
+      <ul tabindex="-1"></ul>
     `,
   ],
 })
@@ -59,6 +68,10 @@ export class USAAutocompleteElement extends HTMLElement {
   input = query<HTMLInputElement>('[slot="input"]', this);
   items: string[] = [];
   currentItemEl: Element | null = null;
+
+  listItems() {
+    return this.list().querySelectorAll("li");
+  }
 
   @listen("input", (host) => host)
   async onInput() {

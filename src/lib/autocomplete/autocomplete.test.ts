@@ -31,7 +31,7 @@ describe("usa-autocomplete", () => {
     input.value = "b";
     input.dispatchEvent(new Event("input", { bubbles: true }));
 
-    const suggestions = autocomplete.list().querySelectorAll("li");
+    const suggestions = autocomplete.listItems();
     assert.equal(suggestions.length, 2);
     assert.equal(suggestions[0].textContent, "Banana");
     assert.equal(suggestions[1].textContent, "Blueberry");
@@ -41,7 +41,7 @@ describe("usa-autocomplete", () => {
     input.value = "";
     input.dispatchEvent(new Event("input", { bubbles: true }));
 
-    const suggestions = autocomplete.list().querySelectorAll("li");
+    const suggestions = autocomplete.listItems();
     assert.equal(suggestions.length, 4);
   });
 
@@ -49,7 +49,7 @@ describe("usa-autocomplete", () => {
     input.value = "B";
     input.dispatchEvent(new Event("input", { bubbles: true }));
 
-    const suggestions = autocomplete.list().querySelectorAll("li");
+    const suggestions = autocomplete.listItems();
     assert.equal(suggestions.length, 2);
     assert.equal(suggestions[0].textContent, "Banana");
     assert.equal(suggestions[1].textContent, "Blueberry");
@@ -83,7 +83,7 @@ describe("usa-autocomplete", () => {
     );
 
     // Select suggestion
-    const firstSuggestion = autocomplete.list().querySelector("li");
+    const firstSuggestion = autocomplete.listItems()[0];
 
     firstSuggestion?.dispatchEvent(
       new KeyboardEvent("keydown", { key: "Enter", bubbles: true }),
