@@ -105,7 +105,9 @@ export class USAComboBoxElement extends HTMLElement {
     this.currentItemEl = null;
 
     for (const item of this.#allListItems) {
-      if (item.dataset.value?.toLowerCase().startsWith(input.value)) {
+      if (
+        item.dataset.value?.toLowerCase().startsWith(input.value.toLowerCase())
+      ) {
         if (!list.contains(item)) {
           list.append(item);
         }
@@ -140,11 +142,9 @@ export class USAComboBoxElement extends HTMLElement {
         if (this.currentItemEl === null) {
           // if there is no current item, set the first item as the current item
           this.currentItemEl = list.firstElementChild;
-        } else {
-          if (this.currentItemEl.nextSibling) {
-            // if there is a current item, set the next item as the current item
-            this.currentItemEl = this.currentItemEl.nextElementSibling;
-          }
+        } else if (this.currentItemEl.nextSibling) {
+          // if there is a current item, set the next item as the current item
+          this.currentItemEl = this.currentItemEl.nextElementSibling;
         }
 
         if (this.currentItemEl instanceof HTMLElement) {

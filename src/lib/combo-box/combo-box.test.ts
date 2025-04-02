@@ -99,7 +99,7 @@ describe("usa-combo-box", () => {
     assert.equal(autocomplete.list().innerHTML, "");
   });
 
-  it("should not go above first suggestion with arrow up", async () => {
+  it("should focus back on the input if no other items", async () => {
     input.value = "b";
     input.dispatchEvent(new Event("input", { bubbles: true }));
 
@@ -112,7 +112,7 @@ describe("usa-combo-box", () => {
       new KeyboardEvent("keydown", { key: "ArrowUp", bubbles: true }),
     );
 
-    assert.equal(autocomplete.currentItemEl?.textContent, "Banana");
+    assert.equal(autocomplete.currentItemEl, null);
   });
 
   it("should not go below last suggestion with arrow down", async () => {
