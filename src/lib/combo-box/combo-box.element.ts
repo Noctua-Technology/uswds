@@ -131,20 +131,14 @@ export class USAComboBoxElement extends HTMLElement {
       case "ARROWDOWN": {
         e.preventDefault();
 
-        if (
-          this.currentItemEl &&
-          this.currentItemEl.nextElementSibling === null
-        ) {
-          // last item in current list
-          break;
-        }
-
         if (this.currentItemEl === null) {
           // if there is no current item, set the first item as the current item
           this.currentItemEl = list.firstElementChild;
         } else {
-          // if there is a current item, set the next item as the current item
-          this.currentItemEl = this.currentItemEl.nextElementSibling;
+          if (this.currentItemEl.nextSibling) {
+            // if there is a current item, set the next item as the current item
+            this.currentItemEl = this.currentItemEl.nextElementSibling;
+          }
         }
 
         if (this.currentItemEl instanceof HTMLElement) {
