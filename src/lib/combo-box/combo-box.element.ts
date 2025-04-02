@@ -184,9 +184,7 @@ export class USAComboBoxElement extends HTMLElement {
           selectionEnd: value.length,
         }).focus();
 
-        this.list({
-          textContent: "",
-        });
+        this.list({ textContent: "" });
 
         break;
       }
@@ -198,7 +196,14 @@ export class USAComboBoxElement extends HTMLElement {
     const target = e.target;
 
     if (target instanceof HTMLLIElement) {
-      this.input({ value: target.dataset.value });
+      const value = target.dataset.value || "";
+
+      this.input({
+        value,
+        selectionStart: value.length,
+        selectionEnd: value.length,
+      }).focus();
+
       this.list({ textContent: "" });
 
       this.currentItemEl = null;
