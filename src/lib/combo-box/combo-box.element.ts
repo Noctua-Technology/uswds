@@ -1,4 +1,4 @@
-import { css, element, html, listen, query } from "@joist/element";
+import { css, element, html, listen, query, queryAll } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -66,7 +66,7 @@ declare global {
 export class USAComboBoxElement extends HTMLElement {
   list = query("ul");
   input = query<HTMLInputElement>('[slot="input"]', this);
-  items: string[] = [];
+  datalist = queryAll<HTMLOptionElement>("datalist option", this);
   currentItemEl: Element | null = null;
 
   listItems() {
@@ -99,8 +99,8 @@ export class USAComboBoxElement extends HTMLElement {
         const input = this.input();
 
         if (!input.value) {
-          for (const item of this.items) {
-            const li = this.#createListItem(item);
+          for (const item of this.datalist()) {
+            const li = this.#createListItem(item.value);
 
             list.append(li);
           }
@@ -187,9 +187,15 @@ export class USAComboBoxElement extends HTMLElement {
   }
 
   search(val: string) {
-    return this.items.filter((item) =>
-      item.toLowerCase().startsWith(val.toLowerCase()),
-    );
+    const res: string[] = [];
+
+    for (const option of this.datalist()) {
+      if (option.value.toLowerCase().startsWith(val.toLowerCase())) {
+        res.push(option.value);
+      }
+    }
+
+    return res;
   }
 
   #createListItem(item: string) {
