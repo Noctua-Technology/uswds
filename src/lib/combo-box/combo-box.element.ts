@@ -1,4 +1,6 @@
-import { css, element, html, listen, query, queryAll } from "@joist/element";
+import { injectable } from "@joist/di";
+import { css, element, html, listen, query } from "@joist/element";
+import { COMBO_BOX_CTX, type ComboBoxContainer } from "./context.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -6,9 +8,10 @@ declare global {
   }
 }
 
-const itemTemplate = document.createElement("template");
-itemTemplate.innerHTML = /*html*/ `<li tabindex="-1"></li>`;
-
+@injectable({
+  name: "usa-combo-box-ctx",
+  provideSelfAs: [COMBO_BOX_CTX],
+})
 @element({
   tagName: "usa-combo-box",
   shadowDom: [
@@ -66,10 +69,12 @@ itemTemplate.innerHTML = /*html*/ `<li tabindex="-1"></li>`;
     `,
   ],
 })
-export class USAComboBoxElement extends HTMLElement {
+export class USAComboBoxElement
+  extends HTMLElement
+  implements ComboBoxContainer
+{
   list = query("ul");
   input = query<HTMLInputElement>('[slot="input"]', this);
-  datalist = queryAll<HTMLOptionElement>("datalist option", this);
   currentItemEl: Element | null = null;
   #allListItems = new Set<HTMLLIElement>();
 
@@ -77,10 +82,12 @@ export class USAComboBoxElement extends HTMLElement {
     return this.list().querySelectorAll("li");
   }
 
-  connectedCallback() {
-    for (const item of this.datalist()) {
-      this.#allListItems.add(this.#createListItem(item.value));
-    }
+  addOption(el: HTMLLIElement) {
+    this.#allListItems.add(el);
+  }
+
+  removeOption(el: HTMLLIElement) {
+    this.#allListItems.delete(el);
   }
 
   @listen("focusin", (host) => host)
@@ -209,19 +216,5 @@ export class USAComboBoxElement extends HTMLElement {
 
       this.currentItemEl = null;
     }
-  }
-
-  #createListItem(item: string) {
-    const fragment = itemTemplate.content.cloneNode(true) as HTMLElement;
-    const li = fragment.querySelector("li");
-
-    if (!li) {
-      throw new Error("something went wrong");
-    }
-
-    li.textContent = item;
-    li.dataset.value = item;
-
-    return li;
   }
 }

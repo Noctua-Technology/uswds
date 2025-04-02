@@ -1,4 +1,5 @@
 import "./combo-box.element.js";
+import "./combo-box-option/combo-box-option.element.js";
 import "../input/input.element.js";
 
 import { assert, fixture, html } from "@open-wc/testing";
@@ -15,12 +16,10 @@ describe("usa-combo-box", () => {
       <usa-combo-box>
         <usa-input slot="input" name="search"></usa-input>
 
-        <datalist>
-          <option value="Apple"></option>
-          <option value="Banana"></option>
-          <option value="Blueberry"></option>
-          <option value="Cherry"></option>
-        </datalist>
+        <usa-combo-box-option value="Apple"></usa-combo-box-option>
+        <usa-combo-box-option value="Banana"></usa-combo-box-option>
+        <usa-combo-box-option value="Blueberry"></usa-combo-box-option>
+        <usa-combo-box-option value="Cherry"></usa-combo-box-option>
       </usa-combo-box>
     `);
 
