@@ -71,9 +71,34 @@ export class USAComboBoxElement extends HTMLElement {
   input = query<HTMLInputElement>('[slot="input"]', this);
   datalist = queryAll<HTMLOptionElement>("datalist option", this);
   currentItemEl: Element | null = null;
+  #allListItems = new Map<string, HTMLLIElement>();
 
   listItems() {
     return this.list().querySelectorAll("li");
+  }
+
+  @listen("focusin")
+  onFocusIn(e: Event) {
+    if (e.target instanceof HTMLElement) {
+      if (e.target.getAttribute("slot") === "input") {
+        const list = this.list();
+
+        const fragment = document.createDocumentFragment();
+
+        for (const item of this.datalist()) {
+          let li = this.#allListItems.get(item.value);
+
+          if (!li) {
+            li = this.#createListItem(item.value);
+            this.#allListItems.set(item.value, li);
+          }
+
+          fragment.append(li);
+        }
+
+        list.replaceChildren(fragment);
+      }
+    }
   }
 
   @listen("input", (host) => host)
@@ -87,34 +112,16 @@ export class USAComboBoxElement extends HTMLElement {
     const fragment = document.createDocumentFragment();
 
     for (const item of filteredItems) {
-      const li = this.#createListItem(item);
+      const li = this.#allListItems.get(item);
+
+      if (!li) {
+        throw new Error("something went wrong");
+      }
 
       fragment.append(li);
     }
 
     list.replaceChildren(fragment);
-  }
-
-  @listen("focusin")
-  onFocusIn(e: Event) {
-    if (e.target instanceof HTMLElement) {
-      if (e.target.getAttribute("slot") === "input") {
-        const list = this.list();
-        const input = this.input();
-
-        if (!input.value) {
-          const fragment = document.createDocumentFragment();
-
-          for (const item of this.datalist()) {
-            const li = this.#createListItem(item.value);
-
-            fragment.append(li);
-          }
-
-          list.replaceChildren(fragment);
-        }
-      }
-    }
   }
 
   @listen("focusout")
