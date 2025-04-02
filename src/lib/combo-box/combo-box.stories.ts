@@ -10,7 +10,10 @@ const meta = {
   render() {
     return html`
       <usa-combo-box>
-        <usa-input name="search" slot="input" autocomplete="off">States</usa-input>
+        <usa-input name="search" slot="input" autocomplete="off" detail="sfx">
+          States
+          <usa-icon slot="detail" icon="expand_more"></usa-icon>
+        </usa-input>
 
         <datalist>
           <option value="Alabama"></option>

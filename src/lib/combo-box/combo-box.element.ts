@@ -83,11 +83,12 @@ export class USAComboBoxElement extends HTMLElement {
     }
   }
 
-  @listen("focusin")
-  onFocusIn(e: Event) {
+  @listen("focusin", (host) => host)
+  onFocusIn(e: FocusEvent) {
     if (e.target instanceof HTMLElement) {
       if (e.target.getAttribute("slot") === "input") {
         const list = this.list();
+
         for (const item of this.#allListItems) {
           if (!list.contains(item)) {
             list.append(item);
@@ -97,7 +98,7 @@ export class USAComboBoxElement extends HTMLElement {
     }
   }
 
-  @listen("input")
+  @listen("input", (host) => host)
   async onInput() {
     const input = this.input();
     const list = this.list();
