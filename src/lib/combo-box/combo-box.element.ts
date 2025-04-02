@@ -79,11 +79,9 @@ export class USAComboBoxElement extends HTMLElement {
   @listen("input", (host) => host)
   async onInput() {
     const input = this.input();
-    const list = this.list({ innerHTML: "" });
+    const list = this.list();
 
     this.currentItemEl = null;
-
-    list.innerHTML = "";
 
     const filteredItems = this.search(input.value);
     const fragment = document.createDocumentFragment();
@@ -94,7 +92,7 @@ export class USAComboBoxElement extends HTMLElement {
       fragment.append(li);
     }
 
-    list.append(fragment);
+    list.replaceChildren(fragment);
   }
 
   @listen("focusin")
@@ -113,7 +111,7 @@ export class USAComboBoxElement extends HTMLElement {
             fragment.append(li);
           }
 
-          list.append(fragment);
+          list.replaceChildren(fragment);
         }
       }
     }
