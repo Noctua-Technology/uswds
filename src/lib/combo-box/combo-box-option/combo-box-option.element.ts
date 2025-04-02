@@ -1,5 +1,5 @@
 import { inject, injectable } from "@joist/di";
-import { attr, css, element, html } from "@joist/element";
+import { attr, element, html } from "@joist/element";
 
 import { COMBO_BOX_CTX } from "../context.js";
 
@@ -27,6 +27,7 @@ export class USAComboBoxOptionElement extends HTMLElement {
     super();
 
     this.#li.tabIndex = -1;
+    this.#li.role = "option";
   }
 
   attributeChangedCallback() {

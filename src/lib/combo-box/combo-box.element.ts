@@ -61,7 +61,7 @@ declare global {
     `,
     html`
       <slot name="input"></slot>
-      <ul tabindex="-1"></ul>
+      <ul tabindex="-1" role="listbox"></ul>
     `,
   ],
 })
@@ -86,17 +86,15 @@ export class USAComboBoxElement
     this.#allListItems.delete(el);
   }
 
-  @listen("focusin", (host) => host)
-  onFocusIn(e: FocusEvent) {
-    if (e.target instanceof HTMLElement) {
-      if (e.target.getAttribute("slot") === "input") {
-        const list = this.list();
+  @listen("focus", (host) => host.input())
+  onFocusIn() {
+    this.currentItemEl = null;
 
-        for (const item of this.#allListItems) {
-          if (!list.contains(item)) {
-            list.append(item);
-          }
-        }
+    const list = this.list();
+
+    for (const item of this.#allListItems) {
+      if (!list.contains(item)) {
+        list.append(item);
       }
     }
   }
