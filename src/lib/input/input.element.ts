@@ -163,6 +163,10 @@ export class USATextInputElement
     this.#syncFormState();
   }
 
+  focus(options?: FocusOptions): void {
+    this.#input().focus(options);
+  }
+
   @effect()
   onChange() {
     const { value, selectionStart, selectionEnd } = this;

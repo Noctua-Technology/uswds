@@ -71,10 +71,16 @@ export class USAComboBoxElement extends HTMLElement {
   input = query<HTMLInputElement>('[slot="input"]', this);
   datalist = queryAll<HTMLOptionElement>("datalist option", this);
   currentItemEl: Element | null = null;
-  #allListItems = new Map<string, HTMLLIElement>();
+  #allListItems = new Set<HTMLLIElement>();
 
   listItems() {
     return this.list().querySelectorAll("li");
+  }
+
+  connectedCallback() {
+    for (const item of this.datalist()) {
+      this.#allListItems.add(this.#createListItem(item.value));
+    }
   }
 
   @listen("focusin")
@@ -82,46 +88,31 @@ export class USAComboBoxElement extends HTMLElement {
     if (e.target instanceof HTMLElement) {
       if (e.target.getAttribute("slot") === "input") {
         const list = this.list();
-
-        const fragment = document.createDocumentFragment();
-
-        for (const item of this.datalist()) {
-          let li = this.#allListItems.get(item.value);
-
-          if (!li) {
-            li = this.#createListItem(item.value);
-            this.#allListItems.set(item.value, li);
+        for (const item of this.#allListItems) {
+          if (!list.contains(item)) {
+            list.append(item);
           }
-
-          fragment.append(li);
         }
-
-        list.replaceChildren(fragment);
       }
     }
   }
 
-  @listen("input", (host) => host)
+  @listen("input")
   async onInput() {
     const input = this.input();
     const list = this.list();
 
     this.currentItemEl = null;
 
-    const filteredItems = this.search(input.value);
-    const fragment = document.createDocumentFragment();
-
-    for (const item of filteredItems) {
-      const li = this.#allListItems.get(item);
-
-      if (!li) {
-        throw new Error("something went wrong");
+    for (const item of this.#allListItems) {
+      if (item.dataset.value?.toLowerCase().startsWith(input.value)) {
+        if (!list.contains(item)) {
+          list.append(item);
+        }
+      } else {
+        item.remove();
       }
-
-      fragment.append(li);
     }
-
-    list.replaceChildren(fragment);
   }
 
   @listen("focusout")
@@ -172,6 +163,9 @@ export class USAComboBoxElement extends HTMLElement {
           if (this.currentItemEl instanceof HTMLElement) {
             this.currentItemEl.focus();
           }
+        } else {
+          this.input().focus();
+          this.currentItemEl = null;
         }
 
         break;
@@ -182,9 +176,13 @@ export class USAComboBoxElement extends HTMLElement {
 
         this.currentItemEl = null;
 
+        const value = target.dataset.value || "";
+
         this.input({
-          value: target.dataset.value,
-        });
+          value,
+          selectionStart: value.length,
+          selectionEnd: value.length,
+        }).focus();
 
         this.list({
           textContent: "",
@@ -205,18 +203,6 @@ export class USAComboBoxElement extends HTMLElement {
 
       this.currentItemEl = null;
     }
-  }
-
-  search(val: string) {
-    const res: string[] = [];
-
-    for (const option of this.datalist()) {
-      if (option.value.toLowerCase().startsWith(val.toLowerCase())) {
-        res.push(option.value);
-      }
-    }
-
-    return res;
   }
 
   #createListItem(item: string) {
