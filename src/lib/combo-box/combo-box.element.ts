@@ -6,6 +6,9 @@ declare global {
   }
 }
 
+const itemTemplate = document.createElement("template");
+itemTemplate.innerHTML = /*html*/ `<li tabindex="-1"></li>`;
+
 @element({
   tagName: "usa-combo-box",
   shadowDom: [
@@ -83,12 +86,15 @@ export class USAComboBoxElement extends HTMLElement {
     list.innerHTML = "";
 
     const filteredItems = this.search(input.value);
+    const fragment = document.createDocumentFragment();
 
     for (const item of filteredItems) {
       const li = this.#createListItem(item);
 
-      list.append(li);
+      fragment.append(li);
     }
+
+    list.append(fragment);
   }
 
   @listen("focusin")
@@ -99,11 +105,15 @@ export class USAComboBoxElement extends HTMLElement {
         const input = this.input();
 
         if (!input.value) {
+          const fragment = document.createDocumentFragment();
+
           for (const item of this.datalist()) {
             const li = this.#createListItem(item.value);
 
-            list.append(li);
+            fragment.append(li);
           }
+
+          list.append(fragment);
         }
       }
     }
@@ -115,7 +125,7 @@ export class USAComboBoxElement extends HTMLElement {
       // This needs to be in a timeout so that it runs as part of the next loop.
       // the active element will not be set until after all of the focus and blur events are done
       if (!this.contains(document.activeElement)) {
-        this.list({ innerHTML: "" });
+        this.list({ textContent: "" });
         this.currentItemEl = null;
       }
     }, 0);
@@ -172,11 +182,23 @@ export class USAComboBoxElement extends HTMLElement {
         });
 
         this.list({
-          innerHTML: "",
+          textContent: "",
         });
 
         break;
       }
+    }
+  }
+
+  @listen("click")
+  onClick(e: MouseEvent) {
+    const target = e.target;
+
+    if (target instanceof HTMLLIElement) {
+      this.input({ value: target.dataset.value });
+      this.list({ textContent: "" });
+
+      this.currentItemEl = null;
     }
   }
 
@@ -193,19 +215,15 @@ export class USAComboBoxElement extends HTMLElement {
   }
 
   #createListItem(item: string) {
-    const li = document.createElement("li");
-    li.innerHTML = item;
+    const fragment = itemTemplate.content.cloneNode(true) as HTMLElement;
+    const li = fragment.querySelector("li");
+
+    if (!li) {
+      throw new Error("something went wrong");
+    }
+
+    li.textContent = item;
     li.dataset.value = item;
-    li.tabIndex = -1;
-
-    li.addEventListener("click", () => {
-      const input = this.input();
-      const list = this.list();
-
-      this.currentItemEl = null;
-      input.value = item;
-      list.innerHTML = "";
-    });
 
     return li;
   }
