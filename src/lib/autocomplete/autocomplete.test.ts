@@ -37,12 +37,12 @@ describe("usa-autocomplete", () => {
     assert.equal(suggestions[1].textContent, "Blueberry");
   });
 
-  it("should show no suggestions when input is empty", async () => {
+  it("should show all suggestions when input is empty", async () => {
     input.value = "";
     input.dispatchEvent(new Event("input", { bubbles: true }));
 
     const suggestions = autocomplete.list().querySelectorAll("li");
-    assert.equal(suggestions.length, 0);
+    assert.equal(suggestions.length, 4);
   });
 
   it("should handle case-insensitive search", async () => {
@@ -91,19 +91,6 @@ describe("usa-autocomplete", () => {
 
     assert.equal(input.value, "Banana");
     assert.equal(autocomplete.list().innerHTML, "");
-  });
-
-  it("should clear suggestions with escape key", async () => {
-    input.value = "b";
-    input.dispatchEvent(new Event("input", { bubbles: true }));
-
-    // Clear suggestions
-    input.dispatchEvent(
-      new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
-    );
-
-    assert.equal(autocomplete.list().innerHTML, "");
-    assert.equal(autocomplete.currentItemEl, null);
   });
 
   it("should not go above first suggestion with arrow up", async () => {

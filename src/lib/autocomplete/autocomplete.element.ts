@@ -17,9 +17,13 @@ declare global {
       }
 
       ul {
-        padding: 0; margin: 0;
+        padding: 0;
+        margin: 0;
         border-left: 1px solid #e6e6e6;
         border-right: 1px solid #e6e6e6;
+        border-bottom: 1px solid #e6e6e6;
+        max-height: 12.1em;
+        overflow-y: hidden;
       }
 
       ul li {
@@ -28,6 +32,15 @@ declare global {
         cursor: pointer;
         display: block;
         padding: 0.5rem;
+      }
+
+      ul li:hover {
+        background-color: #f0f0f0;
+      }
+
+      li:focus {
+        outline: 0.25rem solid #2491ff;
+        outline-offset: 0rem;
       }
 
       ::slotted(:is(input, usa-input)) {
@@ -46,7 +59,6 @@ export class USAAutocompleteElement extends HTMLElement {
   input = query<HTMLInputElement>('[slot="input"]', this);
   items: string[] = [];
   currentItemEl: Element | null = null;
-  currentItem: string | null = null;
 
   @listen("input", (host) => host)
   async onInput() {
@@ -60,13 +72,27 @@ export class USAAutocompleteElement extends HTMLElement {
     const filteredItems = this.search(input.value);
 
     for (const item of filteredItems) {
-      const li = document.createElement("li");
-
-      li.innerHTML = item;
-      li.dataset.value = item;
-      li.tabIndex = -1;
+      const li = this.#createListItem(item);
 
       list.append(li);
+    }
+  }
+
+  @listen("focusin")
+  onFocusIn(e: Event) {
+    if (e.target instanceof HTMLElement) {
+      if (e.target.getAttribute("slot") === "input") {
+        const list = this.list();
+        const input = this.input();
+
+        if (!input.value) {
+          for (const item of this.items) {
+            const li = this.#createListItem(item);
+
+            list.append(li);
+          }
+        }
+      }
     }
   }
 
@@ -144,28 +170,30 @@ export class USAAutocompleteElement extends HTMLElement {
 
         break;
       }
-
-      case "ESCAPE": {
-        e.preventDefault();
-
-        this.currentItemEl = null;
-
-        this.list({
-          innerHTML: "",
-        });
-
-        break;
-      }
     }
   }
 
   search(val: string) {
-    if (!val) {
-      return [];
-    }
-
     return this.items.filter((item) =>
       item.toLowerCase().startsWith(val.toLowerCase()),
     );
+  }
+
+  #createListItem(item: string) {
+    const li = document.createElement("li");
+    li.innerHTML = item;
+    li.dataset.value = item;
+    li.tabIndex = -1;
+
+    li.addEventListener("click", () => {
+      const input = this.input();
+      const list = this.list();
+
+      this.currentItemEl = null;
+      input.value = item;
+      list.innerHTML = "";
+    });
+
+    return li;
   }
 }
