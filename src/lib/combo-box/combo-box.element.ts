@@ -52,6 +52,7 @@ declare global {
         margin-top: 0.5rem;
         padding: 0.5rem;
         width: 100%;
+        padding-right: 2.5rem;
       }
 
       input:not(:disabled):focus {
@@ -92,6 +93,13 @@ declare global {
         outline: 0.25rem solid #2491ff;
         outline-offset: -0.25rem;
       }
+
+      usa-icon {
+        display: block;
+        position: absolute;
+        bottom: 0.21rem;
+        right: 0.5rem;
+      }
     `,
     html`
       <label>
@@ -104,6 +112,8 @@ declare global {
           aria-controls="combo-box-list" 
           aria-expanded="false"
         />
+
+        <usa-icon icon="expand_more"></usa-icon>
       </label>
 
       <ul tabindex="-1" role="listbox" id="combo-box-list"></ul>
