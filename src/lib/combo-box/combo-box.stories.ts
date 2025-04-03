@@ -177,47 +177,47 @@ const meta = {
         </usa-combo-box-option>
 
         <usa-combo-box-option value="South Carolina">
-          <img src="./flags/south_carolina.svg" alt="South Carolina" height="20" /> South Carolina
+          <img loading="lazy" src="./flags/south_carolina.svg" alt="South Carolina" height="20" /> South Carolina
         </usa-combo-box-option>
 
         <usa-combo-box-option value="South Dakota">
-          <img src="./flags/south_dakota.svg" alt="South Dakota" height="20" /> South Dakota
+          <img loading="lazy" src="./flags/south_dakota.svg" alt="South Dakota" height="20" /> South Dakota
         </usa-combo-box-option>
 
         <usa-combo-box-option value="Tennessee">
-          <img src="./flags/tennessee.svg" alt="Tennessee" height="20" /> Tennessee
+          <img loading="lazy" src="./flags/tennessee.svg" alt="Tennessee" height="20" /> Tennessee
         </usa-combo-box-option>
 
         <usa-combo-box-option value="Texas">
-          <img src="./flags/texas.svg" alt="Texas" height="20" /> Texas
+          <img loading="lazy" src="./flags/texas.svg" alt="Texas" height="20" /> Texas
         </usa-combo-box-option>
 
         <usa-combo-box-option value="Utah">
-          <img src="./flags/utah.svg" alt="Utah" height="20" /> Utah
+          <img loading="lazy" src="./flags/utah.svg" alt="Utah" height="20" /> Utah
         </usa-combo-box-option>
 
         <usa-combo-box-option value="Vermont">
-          <img src="./flags/vermont.svg" alt="Vermont" height="20" /> Vermont
+          <img loading="lazy" src="./flags/vermont.svg" alt="Vermont" height="20" /> Vermont
         </usa-combo-box-option>
 
         <usa-combo-box-option value="Virginia">
-          <img src="./flags/virginia.svg" alt="Virginia" height="20" /> Virginia
+          <img loading="lazy" src="./flags/virginia.svg" alt="Virginia" height="20" /> Virginia
         </usa-combo-box-option>
 
         <usa-combo-box-option value="Washington">
-          <img src="./flags/washington.svg" alt="Washington" height="20" /> Washington
+          <img loading="lazy" src="./flags/washington.svg" alt="Washington" height="20" /> Washington
         </usa-combo-box-option>
 
         <usa-combo-box-option value="West Virginia">
-          <img src="./flags/west_virginia.svg" alt="West Virginia" height="20" /> West Virginia
+          <img loading="lazy" src="./flags/west_virginia.svg" alt="West Virginia" height="20" /> West Virginia
         </usa-combo-box-option>
 
         <usa-combo-box-option value="Wisconsin">
-          <img src="./flags/wisconsin.svg" alt="Wisconsin" height="20" /> Wisconsin
+          <img loading="lazy" src="./flags/wisconsin.svg" alt="Wisconsin" height="20" /> Wisconsin
         </usa-combo-box-option>
         
         <usa-combo-box-option value="Wyoming">
-          <img src="./flags/wyoming.svg" alt="Wyoming" height="20" /> Wyoming
+          <img loading="lazy" src="./flags/wyoming.svg" alt="Wyoming" height="20" /> Wyoming
         </usa-combo-box-option>
       </usa-combo-box>
     `;
