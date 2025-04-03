@@ -37,9 +37,10 @@ describe("usa-combo-box", () => {
     input.dispatchEvent(new Event("input", { bubbles: true }));
 
     const suggestions = autocomplete.listItems();
+
     assert.equal(suggestions.length, 2);
-    assert.equal(suggestions[0].textContent, "Banana");
-    assert.equal(suggestions[1].textContent, "Blueberry");
+    assert.equal(suggestions[0].dataset.value, "Banana");
+    assert.equal(suggestions[1].dataset.value, "Blueberry");
   });
 
   it("should show all suggestions when input is empty", async () => {
@@ -56,8 +57,8 @@ describe("usa-combo-box", () => {
 
     const suggestions = autocomplete.listItems();
     assert.equal(suggestions.length, 2);
-    assert.equal(suggestions[0].textContent, "Banana");
-    assert.equal(suggestions[1].textContent, "Blueberry");
+    assert.equal(suggestions[0].dataset.value, "Banana");
+    assert.equal(suggestions[1].dataset.value, "Blueberry");
   });
 
   it("should navigate suggestions with arrow keys", async () => {
@@ -69,13 +70,19 @@ describe("usa-combo-box", () => {
     input.dispatchEvent(
       new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }),
     );
-    assert.equal(autocomplete.currentItemEl?.textContent, "Banana");
+    assert.equal(
+      autocomplete.currentItemEl?.getAttribute("data-value"),
+      "Banana",
+    );
 
     // Arrow down again
     input.dispatchEvent(
       new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }),
     );
-    assert.equal(autocomplete.currentItemEl?.textContent, "Blueberry");
+    assert.equal(
+      autocomplete.currentItemEl?.getAttribute("data-value"),
+      "Blueberry",
+    );
   });
 
   it("should select suggestion with enter key", async () => {
@@ -135,6 +142,9 @@ describe("usa-combo-box", () => {
       new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }),
     );
 
-    assert.equal(autocomplete.currentItemEl?.textContent, "Blueberry");
+    assert.equal(
+      autocomplete.currentItemEl?.getAttribute("data-value"),
+      "Blueberry",
+    );
   });
 });
