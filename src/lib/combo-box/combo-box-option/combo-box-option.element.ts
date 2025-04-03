@@ -1,5 +1,5 @@
 import { inject, injectable } from "@joist/di";
-import { attr, css, element, html } from "@joist/element";
+import { attr, css, element, html, query } from "@joist/element";
 
 import { COMBO_BOX_CTX } from "../context.js";
 
@@ -8,6 +8,14 @@ declare global {
     "usa-combo-box-option": USAComboBoxOptionElement;
   }
 }
+
+const template = document.createElement("template");
+
+template.innerHTML = /*html*/ `
+  <li tabindex="-1" role="option">
+    <slot></slot>
+  </li>
+`;
 
 @injectable({
   name: "usa-combo-box-option-ctx",
@@ -30,36 +38,31 @@ export class USAComboBoxOptionElement extends HTMLElement {
   @attr()
   accessor value = "";
 
-  #slot = document.createElement("slot");
-  #li = document.createElement("li");
+  #listItem = template.content.cloneNode(true) as HTMLLIElement;
+  #li = query("li", this.#listItem);
+  #slot = query("slot", this.#listItem);
   #ctx = inject(COMBO_BOX_CTX);
 
-  constructor() {
-    super();
-
-    this.#li.tabIndex = -1;
-    this.#li.role = "option";
-    this.#li.append(this.#slot);
-  }
-
   attributeChangedCallback() {
-    this.#li.dataset.value = this.value;
-    this.#slot.name = this.value;
+    const value = this.value.split(" ").join("-").toLocaleLowerCase();
 
-    this.slot = this.value;
+    this.#li().dataset.value = this.value;
+    this.#slot().name = value;
+
+    this.slot = value;
   }
 
   connectedCallback() {
     const ctx = this.#ctx();
 
-    ctx.addOption(this.#li);
+    ctx.addOption(this.#li());
   }
 
   disconnectedCallback() {
     const ctx = this.#ctx();
 
-    ctx.removeOption(this.#li);
+    ctx.removeOption(this.#li());
 
-    this.#li.remove();
+    this.#li().remove();
   }
 }
