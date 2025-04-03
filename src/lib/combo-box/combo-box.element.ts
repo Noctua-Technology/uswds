@@ -35,6 +35,7 @@ declare global {
         display: block;
         max-width: 30rem;
         position: relative;
+        margin-bottom: 1.5rem;
       }
 
 
@@ -127,6 +128,7 @@ export class USAComboBoxElement
   list = query("ul");
   input = query("input");
   currentItemEl: Element | null = null;
+
   #allListItems = new Set<HTMLLIElement>();
   #internals = this.attachInternals();
 
