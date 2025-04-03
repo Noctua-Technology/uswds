@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="24" height="16" fill="#002868"/>
+  <rect x="0" y="0" width="24" height="8" fill="#FFFFFF"/>
+  <rect x="0" y="8" width="24" height="8" fill="#BF0A30"/>
+  
+  <!-- Eagle -->
+  <path d="M12 4L14 6L12 8L10 6L12 4Z" fill="#FFD700"/>
+  <path d="M12 6L14 8L12 10L10 8L12 6Z" fill="#FFD700"/>
+  
+  <!-- Ribbon -->
+  <path d="M8 10L16 10L16 12L8 12L8 10Z" fill="#FFFFFF"/>
+</svg> 

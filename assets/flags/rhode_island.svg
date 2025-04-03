@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="24" height="16" fill="#FFFFFF"/>
+  
+  <!-- Anchor -->
+  <path d="M12 4L14 6L12 8L10 6L12 4Z" fill="#FFD700"/>
+  <path d="M12 6L14 8L12 10L10 8L12 6Z" fill="#FFD700"/>
+  <path d="M12 8L14 10L12 12L10 10L12 8Z" fill="#FFD700"/>
+  
+  <!-- Rope -->
+  <path d="M8 10L16 10" stroke="#FFD700" stroke-width="1"/>
+  <path d="M8 12L16 12" stroke="#FFD700" stroke-width="1"/>
+</svg> 

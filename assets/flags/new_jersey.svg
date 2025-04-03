@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="24" height="16" fill="#FFD700"/>
+  
+  <!-- Seal circle -->
+  <circle cx="12" cy="8" r="6" fill="#002868"/>
+  <circle cx="12" cy="8" r="5" fill="#FFD700"/>
+  
+  <!-- Horse -->
+  <path d="M8 8L16 8L16 10L8 10L8 8Z" fill="#FFFFFF"/>
+  <path d="M10 6L14 6L14 8L10 8L10 6Z" fill="#FFFFFF"/>
+  <path d="M12 4L14 6L12 8L10 6L12 4Z" fill="#FFFFFF"/>
+</svg> 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="24" height="16" fill="#BF0A30"/>
+  
+  <!-- Stars -->
+  <circle cx="6" cy="8" r="2" fill="#FFFFFF"/>
+  <circle cx="12" cy="8" r="2" fill="#FFFFFF"/>
+  <circle cx="18" cy="8" r="2" fill="#FFFFFF"/>
+  
+  <!-- Stripes -->
+  <rect x="0" y="0" width="24" height="2" fill="#FFFFFF"/>
+  <rect x="0" y="14" width="24" height="2" fill="#FFFFFF"/>
+</svg> 

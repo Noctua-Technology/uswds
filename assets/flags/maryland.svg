@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Calvert family (black and gold) -->
+  <rect x="0" y="0" width="12" height="8" fill="#000000"/>
+  <rect x="12" y="0" width="12" height="8" fill="#FFD700"/>
+  <path d="M0 0L12 8L0 8L12 0L0 0Z" fill="#FFD700"/>
+  <path d="M12 0L24 8L12 8L24 0L12 0Z" fill="#000000"/>
+  
+  <!-- Crossland family (red and white) -->
+  <rect x="0" y="8" width="12" height="8" fill="#BF0A30"/>
+  <rect x="12" y="8" width="12" height="8" fill="#FFFFFF"/>
+  <path d="M0 8L12 16L0 16L12 8L0 8Z" fill="#FFFFFF"/>
+  <path d="M12 8L24 16L12 16L24 8L12 8Z" fill="#BF0A30"/>
+</svg> 

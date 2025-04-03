@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="24" height="16" fill="#BF0A30"/>
+  
+  <!-- Mountains -->
+  <path d="M6 12L12 6L18 12L6 12Z" fill="#002868"/>
+  <path d="M8 12L12 8L16 12L8 12Z" fill="#FFFFFF"/>
+  
+  <!-- Sun -->
+  <circle cx="12" cy="4" r="2" fill="#FFD700"/>
+</svg> 

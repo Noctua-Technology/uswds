@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="24" height="16" fill="#002868"/>
+  <!-- Crescent -->
+  <path d="M4 4C4 2.89543 4.89543 2 6 2H10C11.1046 2 12 2.89543 12 4V8C12 9.10457 11.1046 10 10 10H6C4.89543 10 4 9.10457 4 8V4Z" fill="#FFFFFF"/>
+  <!-- Palmetto tree -->
+  <path d="M16 4L18 6L16 8L14 6L16 4Z" fill="#FFD700"/>
+  <path d="M16 6L18 8L16 10L14 8L16 6Z" fill="#FFD700"/>
+  <path d="M16 8L18 10L16 12L14 10L16 8Z" fill="#FFD700"/>
+  <path d="M16 10L18 12L16 14L14 12L16 10Z" fill="#FFD700"/>
+</svg> 

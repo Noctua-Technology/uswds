@@ -1,5 +1,5 @@
 import { inject, injectable } from "@joist/di";
-import { attr, element, html } from "@joist/element";
+import { attr, css, element, html } from "@joist/element";
 
 import { COMBO_BOX_CTX } from "../context.js";
 
@@ -14,12 +14,23 @@ declare global {
 })
 @element({
   tagName: "usa-combo-box-option",
-  shadowDom: [html`<slot></slot>`],
+  shadowDom: [
+    css`
+    :host {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem;  
+    }
+    `,
+    html`<slot></slot>`,
+  ],
 })
 export class USAComboBoxOptionElement extends HTMLElement {
   @attr()
   accessor value = "";
 
+  #slot = document.createElement("slot");
   #li = document.createElement("li");
   #ctx = inject(COMBO_BOX_CTX);
 
@@ -28,11 +39,14 @@ export class USAComboBoxOptionElement extends HTMLElement {
 
     this.#li.tabIndex = -1;
     this.#li.role = "option";
+    this.#li.append(this.#slot);
   }
 
   attributeChangedCallback() {
     this.#li.dataset.value = this.value;
-    this.#li.textContent = this.value;
+    this.#slot.name = this.value;
+
+    this.slot = this.value;
   }
 
   connectedCallback() {

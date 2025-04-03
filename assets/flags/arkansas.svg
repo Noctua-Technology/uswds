@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="24" height="16" fill="#BF0A30"/>
+  <rect x="0" y="0" width="24" height="8" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="24" height="4" fill="#002868"/>
+  
+  <!-- Diamond -->
+  <path d="M12 4L16 8L12 12L8 8L12 4Z" fill="#FFD700"/>
+  
+  <!-- Stars -->
+  <circle cx="12" cy="6" r="1" fill="#002868"/>
+  <circle cx="10" cy="8" r="1" fill="#002868"/>
+  <circle cx="14" cy="8" r="1" fill="#002868"/>
+  <circle cx="12" cy="10" r="1" fill="#002868"/>
+</svg> 

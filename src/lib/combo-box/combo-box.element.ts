@@ -1,5 +1,6 @@
 import { injectable } from "@joist/di";
 import { css, element, html, listen, query } from "@joist/element";
+
 import { COMBO_BOX_CTX, type ComboBoxContainer } from "./context.js";
 
 declare global {
@@ -17,6 +18,8 @@ declare global {
   shadowDom: [
     css`
       :host {
+        --usa-combo-max-height: 12.5em;
+
         display: block;
         max-width: 30rem;
         position: relative;
@@ -31,7 +34,7 @@ declare global {
         transform: translateY(100%);
         margin: 0;
         border: 1px solid rgb(92, 92, 92);
-        max-height: 12em;
+        max-height: var(--usa-combo-max-height);
         overflow-y: scroll;
         overflow-x: visible;
         z-index: 1001;
@@ -47,7 +50,6 @@ declare global {
         border-bottom: 1px solid #e6e6e6;
         cursor: pointer;
         display: block;
-        padding: 0.5rem;
       }
 
       ul li:hover {
@@ -92,11 +94,13 @@ export class USAComboBoxElement
 
     const list = this.list();
 
+    const fragment = document.createDocumentFragment();
+
     for (const item of this.#allListItems) {
-      if (!list.contains(item)) {
-        list.append(item);
-      }
+      fragment.append(item);
     }
+
+    list.replaceChildren(fragment);
   }
 
   @listen("input", (host) => host)
@@ -106,17 +110,17 @@ export class USAComboBoxElement
 
     this.currentItemEl = null;
 
+    const fragment = document.createDocumentFragment();
+
     for (const item of this.#allListItems) {
       if (
         item.dataset.value?.toLowerCase().startsWith(input.value.toLowerCase())
       ) {
-        if (!list.contains(item)) {
-          list.append(item);
-        }
-      } else {
-        item.remove();
+        fragment.append(item);
       }
     }
+
+    list.replaceChildren(fragment);
   }
 
   @listen("focusout")
@@ -125,7 +129,7 @@ export class USAComboBoxElement
       // This needs to be in a timeout so that it runs as part of the next loop.
       // the active element will not be set until after all of the focus and blur events are done
       if (!this.contains(document.activeElement)) {
-        this.list({ textContent: "" });
+        this.list({ innerHTML: "" });
         this.currentItemEl = null;
       }
     }, 0);
@@ -194,23 +198,25 @@ export class USAComboBoxElement
       selectionEnd: value.length,
     }).focus();
 
-    this.list({ textContent: "" });
+    this.list({ innerHTML: "" });
   }
 
   @listen("click")
   onClick(e: MouseEvent) {
-    if (e.target instanceof HTMLLIElement) {
-      const value = e.target.dataset.value || "";
+    if (e.target instanceof HTMLElement) {
+      const value = e.target.getAttribute("value");
 
-      this.input({
-        value,
-        selectionStart: value.length,
-        selectionEnd: value.length,
-      }).focus();
+      if (value) {
+        this.input({
+          value,
+          selectionStart: value.length,
+          selectionEnd: value.length,
+        }).focus();
 
-      this.list({ textContent: "" });
+        this.list({ innerHTML: "" });
 
-      this.currentItemEl = null;
+        this.currentItemEl = null;
+      }
     }
   }
 }

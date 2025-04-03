@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Union Jack -->
+  <rect x="0" y="0" width="12" height="8" fill="#002868"/>
+  <path d="M0 0L12 8L0 8L12 0L0 0Z" fill="#FFFFFF"/>
+  <path d="M0 0L12 8L0 8L12 0L0 0Z" fill="#BF0A30"/>
+  <path d="M0 0L12 8L0 8L12 0L0 0Z" fill="#FFFFFF"/>
+  <path d="M0 0L12 8L0 8L12 0L0 0Z" fill="#BF0A30"/>
+  
+  <!-- Stripes -->
+  <rect x="0" y="8" width="24" height="1" fill="#BF0A30"/>
+  <rect x="0" y="10" width="24" height="1" fill="#BF0A30"/>
+  <rect x="0" y="12" width="24" height="1" fill="#BF0A30"/>
+  <rect x="0" y="14" width="24" height="1" fill="#BF0A30"/>
+  <rect x="0" y="9" width="24" height="1" fill="#FFFFFF"/>
+  <rect x="0" y="11" width="24" height="1" fill="#FFFFFF"/>
+  <rect x="0" y="13" width="24" height="1" fill="#FFFFFF"/>
+  <rect x="0" y="15" width="24" height="1" fill="#FFFFFF"/>
+</svg> 

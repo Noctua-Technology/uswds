@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="24" height="16" fill="#002868"/>
+  
+  <!-- Osage shield -->
+  <path d="M8 4L16 4L20 8L16 12L8 12L4 8L8 4Z" fill="#FFD700"/>
+  <path d="M10 6L14 6L16 8L14 10L10 10L8 8L10 6Z" fill="#BF0A30"/>
+  
+  <!-- Cross -->
+  <path d="M12 6L12 10" stroke="#FFD700" stroke-width="1"/>
+  <path d="M10 8L14 8" stroke="#FFD700" stroke-width="1"/>
+</svg> 

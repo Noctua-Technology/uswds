@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Swallowtail shape -->
+  <path d="M0 0L24 0L24 16L12 12L0 16L0 0Z" fill="#BF0A30"/>
+  <path d="M0 0L24 0L24 16L12 12L0 16L0 0Z" fill="#002868"/>
+  <path d="M0 0L24 0L24 16L12 12L0 16L0 0Z" fill="#FFFFFF"/>
+  
+  <!-- Stars -->
+  <circle cx="6" cy="4" r="1" fill="#BF0A30"/>
+  <circle cx="18" cy="4" r="1" fill="#BF0A30"/>
+  <circle cx="6" cy="12" r="1" fill="#BF0A30"/>
+  <circle cx="18" cy="12" r="1" fill="#BF0A30"/>
+  
+  <!-- O -->
+  <path d="M12 6C12 4.89543 12.8954 4 14 4C15.1046 4 16 4.89543 16 6V10C16 11.1046 15.1046 12 14 12C12.8954 12 12 11.1046 12 10V6Z" fill="#BF0A30"/>
+</svg> 
