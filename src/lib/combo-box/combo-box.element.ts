@@ -99,6 +99,7 @@ declare global {
         position: absolute;
         bottom: 0rem;
         right: 0.5rem;
+        cursor: pointer;
       }
     `,
     html`
