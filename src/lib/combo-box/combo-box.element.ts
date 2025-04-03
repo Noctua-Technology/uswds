@@ -17,6 +17,10 @@ declare global {
   tagName: "usa-combo-box",
   shadowDom: [
     css`
+      * {
+        box-sizing: border-box
+      }
+      
       :host {
         --usa-combo-max-height: 12.5em;
 
@@ -29,14 +33,12 @@ declare global {
         padding: 0;
         position: absolute;
         bottom: 0;
-        left: 0;
-        right: 0;
+        width: 100%;
         transform: translateY(100%);
         margin: 0;
         border: 1px solid rgb(92, 92, 92);
         max-height: var(--usa-combo-max-height);
         overflow-y: scroll;
-        overflow-x: visible;
         z-index: 1001;
       }
 
