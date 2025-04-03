@@ -9,16 +9,8 @@ const meta = {
   tags: ["autodocs"],
   render() {
     return html`
-      <usa-combo-box>
-        <usa-input
-          placeholder="Select a state"
-          name="state" 
-          slot="input" 
-          autocomplete="off" 
-          detail="sfx">
-          States
-          <usa-icon slot="detail" icon="expand_more"></usa-icon>
-        </usa-input>
+      <usa-combo-box placeholder="Select a state" name="state">
+        <span slot="label">States</span>
 
         <usa-combo-box-option value="Alabama">
           <img loading="lazy" src="./flags/alabama.svg" alt="Alabama" height="20" /> Alabama

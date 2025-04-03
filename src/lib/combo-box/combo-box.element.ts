@@ -1,5 +1,13 @@
 import { injectable } from "@joist/di";
-import { css, element, html, listen, query } from "@joist/element";
+import {
+  attr,
+  attrChanged,
+  css,
+  element,
+  html,
+  listen,
+  query,
+} from "@joist/element";
 
 import { COMBO_BOX_CTX, type ComboBoxContainer } from "./context.js";
 
@@ -27,6 +35,27 @@ declare global {
         display: block;
         max-width: 30rem;
         position: relative;
+      }
+
+
+      input {
+        border-width: 1px;
+        border-color: #5c5c5c;
+        border-style: solid;
+        border-radius: 0;
+        color: #1b1b1b;
+        display: block;
+        height: 2.5rem;
+        line-height: 1.3;
+        font-size: 1.06rem;
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+        width: 100%;
+      }
+
+      input:not(:disabled):focus {
+        outline: 0.25rem solid #2491ff;
+        outline-offset: 0;
       }
 
       ul {
@@ -64,8 +93,19 @@ declare global {
       }
     `,
     html`
-      <slot name="input"></slot>
-      <ul tabindex="-1" role="listbox"></ul>
+      <label>
+        <slot name="label"></slot>
+
+        <input 
+          tabindex="0" 
+          role="combobox" 
+          autocomplete="off" 
+          aria-controls="combo-box-list" 
+          aria-expanded="false"
+        />
+      </label>
+
+      <ul tabindex="-1" role="listbox" id="combo-box-list"></ul>
     `,
   ],
 })
@@ -73,10 +113,35 @@ export class USAComboBoxElement
   extends HTMLElement
   implements ComboBoxContainer
 {
+  static formAssociated = true;
+
+  @attr()
+  accessor name = "";
+
+  @attr()
+  accessor value = "";
+
+  @attr()
+  accessor placeholder = "";
+
   list = query("ul");
-  input = query<HTMLInputElement>('[slot="input"]', this);
+  input = query("input");
   currentItemEl: Element | null = null;
   #allListItems = new Set<HTMLLIElement>();
+  #internals = this.attachInternals();
+
+  attributeChangedCallback(attr: string) {
+    this.input({
+      name: this.name,
+      value: this.value,
+      placeholder: this.placeholder,
+    });
+  }
+
+  @attrChanged("value")
+  onValueChanged() {
+    this.#internals.setFormValue(this.value);
+  }
 
   listItems() {
     return this.list().querySelectorAll("li");
@@ -96,6 +161,8 @@ export class USAComboBoxElement
 
     const list = this.list();
 
+    this.input({ ariaExpanded: "true" });
+
     const fragment = document.createDocumentFragment();
 
     for (const item of this.#allListItems) {
@@ -105,7 +172,7 @@ export class USAComboBoxElement
     list.replaceChildren(fragment);
   }
 
-  @listen("input", (host) => host)
+  @listen("input")
   async onInput() {
     const input = this.input();
     const list = this.list();
@@ -133,6 +200,8 @@ export class USAComboBoxElement
       if (!this.contains(document.activeElement)) {
         this.list({ innerHTML: "" });
         this.currentItemEl = null;
+
+        this.input({ ariaExpanded: "false" });
       }
     }, 0);
   }
@@ -201,6 +270,8 @@ export class USAComboBoxElement
     }).focus();
 
     this.list({ innerHTML: "" });
+
+    this.value = value;
   }
 
   @listen("click")
@@ -218,6 +289,8 @@ export class USAComboBoxElement
         this.list({ innerHTML: "" });
 
         this.currentItemEl = null;
+
+        this.value = value;
       }
     }
   }

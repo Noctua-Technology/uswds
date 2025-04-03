@@ -3,33 +3,27 @@ import "./combo-box-option/combo-box-option.element.js";
 import "../input/input.element.js";
 
 import { assert, fixture, html } from "@open-wc/testing";
+import { userEvent } from "@testing-library/user-event";
 
-import type { USATextInputElement } from "../input/input.element.js";
 import type { USAComboBoxElement } from "./combo-box.element.js";
 
 describe("usa-combo-box", () => {
   let autocomplete: USAComboBoxElement;
-  let input: USATextInputElement;
+  let input: HTMLInputElement;
 
   beforeEach(async () => {
     autocomplete = await fixture<USAComboBoxElement>(html`
-      <usa-combo-box>
-        <usa-input slot="input" name="search"></usa-input>
+      <usa-combo-box name="search" placeholder="Select a fruit">
+        <span slot="label">Fruits</span>
 
-        <usa-combo-box-option value="Apple"></usa-combo-box-option>
-        <usa-combo-box-option value="Banana"></usa-combo-box-option>
-        <usa-combo-box-option value="Blueberry"></usa-combo-box-option>
-        <usa-combo-box-option value="Cherry"></usa-combo-box-option>
+        <usa-combo-box-option value="Apple">Apple</usa-combo-box-option>
+        <usa-combo-box-option value="Banana">Banana</usa-combo-box-option>
+        <usa-combo-box-option value="Blueberry">Blueberry</usa-combo-box-option>
+        <usa-combo-box-option value="Cherry">Cherry</usa-combo-box-option>
       </usa-combo-box>
     `);
 
-    const inputElement = autocomplete.querySelector("usa-input");
-
-    if (!inputElement) {
-      throw new Error("Input element not found");
-    }
-
-    input = inputElement;
+    input = autocomplete.input();
   });
 
   it("should filter items based on input", async () => {
@@ -147,4 +141,118 @@ describe("usa-combo-box", () => {
       "Blueberry",
     );
   });
+
+  it("should submit form with default values", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <usa-combo-box name="search" value="Apple" placeholder="Select a fruit">
+          <span slot="label">Fruits</span>
+
+          <usa-combo-box-option value="Apple">Apple</usa-combo-box-option>
+          <usa-combo-box-option value="Banana">Banana</usa-combo-box-option>
+          <usa-combo-box-option value="Blueberry">Blueberry</usa-combo-box-option>
+          <usa-combo-box-option value="Cherry">Cherry</usa-combo-box-option>
+        </usa-combo-box>
+
+        <button>Submit</button>
+      </form>
+    `);
+
+    const value = new FormData(form);
+    assert.equal(value.get("search"), "Apple");
+  });
+
+  it("should update form value when an option is selected", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <usa-combo-box name="search" placeholder="Select a fruit">
+          <span slot="label">Fruits</span>
+
+          <usa-combo-box-option value="Apple">Apple</usa-combo-box-option>
+          <usa-combo-box-option value="Banana">Banana</usa-combo-box-option>
+          <usa-combo-box-option value="Blueberry">Blueberry</usa-combo-box-option>
+          <usa-combo-box-option value="Cherry">Cherry</usa-combo-box-option>
+        </usa-combo-box>
+
+        <button>Submit</button>
+      </form>
+    `);
+
+    const comboBox = form.querySelector("usa-combo-box");
+
+    if (!comboBox) {
+      throw new Error("Combo box not found");
+    }
+
+    const input = comboBox.shadowRoot?.querySelector("input");
+
+    if (!input) {
+      throw new Error("input not found");
+    }
+
+    // Type to show suggestions
+    input.value = "Ban";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+
+    // Select the first suggestion
+    const suggestions = comboBox.listItems();
+
+    suggestions[0]
+      .querySelector("slot")
+      ?.assignedElements()[0]
+      .dispatchEvent(new MouseEvent("click", { bubbles: true }));
+
+    const value = new FormData(form);
+    assert.equal(value.get("search"), "Banana");
+  });
+
+  // it("should not submit when required and no value is selected", async () => {
+  //   const form = await fixture<HTMLFormElement>(html`
+  //     <form>
+  //       <usa-combo-box name="search" required placeholder="Select a fruit">
+  //         <span slot="label">Fruits</span>
+
+  //         <usa-combo-box-option value="Apple">Apple</usa-combo-box-option>
+  //         <usa-combo-box-option value="Banana">Banana</usa-combo-box-option>
+  //         <usa-combo-box-option value="Blueberry">Blueberry</usa-combo-box-option>
+  //         <usa-combo-box-option value="Cherry">Cherry</usa-combo-box-option>
+  //       </usa-combo-box>
+
+  //       <button>Submit</button>
+  //     </form>
+  //   `);
+
+  //   assert.equal(form.checkValidity(), false);
+  // });
+
+  // it("should reset to default value when form is reset", async () => {
+  //   const form = await fixture<HTMLFormElement>(html`
+  //     <form>
+  //       <usa-combo-box name="search" value="Apple" placeholder="Select a fruit">
+  //         <span slot="label">Fruits</span>
+
+  //         <usa-combo-box-option value="Apple">Apple</usa-combo-box-option>
+  //         <usa-combo-box-option value="Banana">Banana</usa-combo-box-option>
+  //         <usa-combo-box-option value="Blueberry">Blueberry</usa-combo-box-option>
+  //         <usa-combo-box-option value="Cherry">Cherry</usa-combo-box-option>
+  //       </usa-combo-box>
+
+  //       <button type="submit">Submit</button>
+  //       <button type="reset">Reset</button>
+  //     </form>
+  //   `);
+
+  //   const comboBox = form.querySelector("usa-combo-box");
+  //   if (comboBox) {
+  //     // Change the value
+  //     comboBox.value = "Banana";
+  //     comboBox.dispatchEvent(new Event("input", { bubbles: true }));
+
+  //     // Reset the form
+  //     form.reset();
+
+  //     // Check that the value was reset
+  //     assert.equal(comboBox.value, "Apple");
+  //   }
+  // });
 });
