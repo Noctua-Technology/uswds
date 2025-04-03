@@ -94,10 +94,10 @@ declare global {
         outline-offset: -0.25rem;
       }
 
-      usa-icon {
+      .usa-combo-box-icon {
         display: block;
         position: absolute;
-        bottom: 0.21rem;
+        bottom: 0rem;
         right: 0.5rem;
       }
     `,
@@ -113,7 +113,9 @@ declare global {
           aria-expanded="false"
         />
 
-        <usa-icon icon="expand_more"></usa-icon>
+        <div class="usa-combo-box-icon">
+          <usa-icon icon="expand_more"></usa-icon>
+        </div>
       </label>
 
       <ul tabindex="-1" role="listbox" id="combo-box-list"></ul>
