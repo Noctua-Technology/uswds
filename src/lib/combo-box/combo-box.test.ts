@@ -206,24 +206,24 @@ describe("usa-combo-box", () => {
     assert.equal(value.get("search"), "Banana");
   });
 
-  // it("should not submit when required and no value is selected", async () => {
-  //   const form = await fixture<HTMLFormElement>(html`
-  //     <form>
-  //       <usa-combo-box name="search" required placeholder="Select a fruit">
-  //         <span slot="label">Fruits</span>
+  it("should not submit when required and no value is selected", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <usa-combo-box name="search" required placeholder="Select a fruit">
+          <span slot="label">Fruits</span>
 
-  //         <usa-combo-box-option value="Apple">Apple</usa-combo-box-option>
-  //         <usa-combo-box-option value="Banana">Banana</usa-combo-box-option>
-  //         <usa-combo-box-option value="Blueberry">Blueberry</usa-combo-box-option>
-  //         <usa-combo-box-option value="Cherry">Cherry</usa-combo-box-option>
-  //       </usa-combo-box>
+          <usa-combo-box-option value="Apple">Apple</usa-combo-box-option>
+          <usa-combo-box-option value="Banana">Banana</usa-combo-box-option>
+          <usa-combo-box-option value="Blueberry">Blueberry</usa-combo-box-option>
+          <usa-combo-box-option value="Cherry">Cherry</usa-combo-box-option>
+        </usa-combo-box>
 
-  //       <button>Submit</button>
-  //     </form>
-  //   `);
+        <button>Submit</button>
+      </form>
+    `);
 
-  //   assert.equal(form.checkValidity(), false);
-  // });
+    assert.equal(form.checkValidity(), false);
+  });
 
   // it("should reset to default value when form is reset", async () => {
   //   const form = await fixture<HTMLFormElement>(html`
