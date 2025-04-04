@@ -51,7 +51,7 @@ declare global {
         margin-top: 0.5rem;
         padding: 0.5rem;
         width: 100%;
-        padding-right: 2.5rem;
+        padding-right: 2.8rem;
       }
 
       input:not(:disabled):focus {
@@ -105,9 +105,9 @@ declare global {
         width: 1px;
         top: 0.3rem;
         bottom: 0.5rem;
-        left: 0;
+        left: -0.3rem;
         position: absolute;
-        background-color: gray;
+        background-color: #c6cace;
       }
     `,
     html`
