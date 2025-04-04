@@ -37,8 +37,7 @@ declare global {
         position: relative;
         margin-bottom: 1.5rem;
       }
-
-
+      
       input {
         border-width: 1px;
         border-color: #5c5c5c;
@@ -101,6 +100,15 @@ declare global {
         right: 0.5rem;
         cursor: pointer;
       }
+
+      .usa-combo-box-icon .line {
+        width: 1px;
+        top: 0.3rem;
+        bottom: 0.5rem;
+        left: 0;
+        position: absolute;
+        background-color: gray;
+      }
     `,
     html`
       <label>
@@ -115,6 +123,8 @@ declare global {
         />
 
         <div class="usa-combo-box-icon">
+          <div class="line"></div>
+
           <usa-icon icon="expand_more"></usa-icon>
         </div>
       </label>
@@ -133,6 +143,9 @@ export class USAComboBoxElement
   accessor name = "";
 
   @attr()
+  accessor required = false;
+
+  @attr()
   accessor value = "";
 
   @attr()
@@ -145,17 +158,21 @@ export class USAComboBoxElement
   #allListItems = new Set<HTMLLIElement>();
   #internals = this.attachInternals();
 
-  attributeChangedCallback(attr: string) {
+  attributeChangedCallback() {
     this.input({
       name: this.name,
-      value: this.value,
       placeholder: this.placeholder,
+      required: this.required,
     });
   }
 
-  @attrChanged("value")
+  @attrChanged("value", "required")
   onValueChanged() {
-    this.#internals.setFormValue(this.value);
+    this.#syncFormState();
+  }
+
+  connectedCallback() {
+    this.#syncFormState();
   }
 
   listItems() {
@@ -278,11 +295,7 @@ export class USAComboBoxElement
 
     const value = target.dataset.value || "";
 
-    this.input({
-      value,
-      selectionStart: value.length,
-      selectionEnd: value.length,
-    }).focus();
+    this.input().focus();
 
     this.list({ innerHTML: "" });
 
@@ -295,11 +308,7 @@ export class USAComboBoxElement
       const value = e.target.getAttribute("value");
 
       if (value) {
-        this.input({
-          value,
-          selectionStart: value.length,
-          selectionEnd: value.length,
-        }).focus();
+        this.input().focus();
 
         this.list({ innerHTML: "" });
 
@@ -307,6 +316,21 @@ export class USAComboBoxElement
 
         this.value = value;
       }
+    }
+  }
+
+  #syncFormState() {
+    const input = this.input({ value: this.value });
+
+    this.#internals.setValidity({});
+    this.#internals.setFormValue(this.value);
+
+    if (input.validationMessage) {
+      this.#internals.setValidity(
+        { customError: true },
+        input.validationMessage,
+        input,
+      );
     }
   }
 }

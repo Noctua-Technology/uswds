@@ -47,7 +47,8 @@ export class USAComboBoxOptionElement extends HTMLElement {
     const value = this.value.split(" ").join("-").toLocaleLowerCase();
 
     this.#li().dataset.value = this.value;
-    this.#slot().name = value;
+
+    this.#slot({ name: value });
 
     this.slot = value;
   }
