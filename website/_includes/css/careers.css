@@ -1,0 +1,68 @@
+.careers {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 3rem;
+  margin-bottom: 1rem;
+}
+
+.careers li {
+  color: #4c165f;
+  list-style: none;
+}
+
+.careers h3 {
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0;
+}
+
+.careers .career_description {
+  padding-left: calc(40px + 1rem);
+}
+
+.careers-banner {
+  position: relative;
+  height: 215px;
+  overflow: hidden;
+}
+
+.careers-banner .careers-banner__content {
+  font-size: 24px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.careers-banner .careers-banner__content a {
+  font-weight: bold;
+  color: #4c165f;
+  background: #f6f6f6;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.careers-banner .careers-banner__img-wrapper {
+  background: #4c165f;
+  overflow: hidden;
+  height: 307px;
+}
+
+.careers-banner img {
+  object-fit: cover;
+  object-position: 50% 50%;
+  width: 100%;
+  height: 100%;
+}

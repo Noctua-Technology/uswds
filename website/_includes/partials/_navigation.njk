@@ -1,0 +1,43 @@
+<header>
+    <a href="{{ '/' | url }}" aria-label="Navigate home">
+        <img id="logo" src="{{ '/assets/img/noctua-logo.avif' | url }}" height="90" width="338" aria-hidden="true"/>
+    </a>
+
+    <nct-nav>
+        <nct-nav-btn nav-target="mobile-nav"></nct-nav-btn>
+
+        <nav class="desktop">
+            <ul>
+                <li>
+                    <a href="{{'/#careers' | url}}">Why?</a>
+                </li>
+
+                <li>
+                    <a href="{{'/#careers' | url}}">Devs</a>
+                </li>
+
+                <li>
+                    <a class="contact-button" href="mailto:Info@NoctuaTech.com?subject=Inquiry - Noctua Technology, Inc." target="_self">
+                        Contact Us
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <dialog id="mobile-nav">
+            <nav class="mobile">
+                <ul>
+                    <li>
+                        <a href="{{'/#careers' | url}}">Devs</a>
+                    </li>
+
+                    <li>
+                        <a href="mailto:Info@NoctuaTech.com?subject=Inquiry - Noctua Technology, Inc." target="_self">
+                        Contact Us
+                    </a>
+                    </li>
+                </ul>
+            </nav>
+        </dialog>
+    </nct-nav>
+</header>

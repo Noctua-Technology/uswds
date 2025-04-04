@@ -1,0 +1,52 @@
+.hero {
+  position: relative;
+  height: auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.hero h1 {
+  color: #fff;
+  position: absolute;
+  top: 10%;
+  right: 3rem;
+  font-weight: normal;
+  padding: 0;
+  width: 40%;
+  text-align: right;
+  font-size: 34px;
+}
+
+.hero .hero__img-wrapper {
+  background: #4c165f;
+  overflow: hidden;
+  height: 666px;
+}
+
+.hero .hero__text {
+  color: #fff;
+  position: absolute;
+  width: 75%;
+  left: 2rem;
+  bottom: 2rem;
+  line-height: 1.875em;
+  font-size: 1rem;
+}
+
+.hero img {
+  object-fit: cover;
+  object-position: 50% 50%;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 550px) {
+  .hero h1 {
+    width: auto;
+    top: 1.5rem;
+    right: 1.5rem;
+    left: 2.5rem;
+  }
+}

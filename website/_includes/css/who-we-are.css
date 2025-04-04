@@ -1,0 +1,37 @@
+.who-we-are {
+  color: #4c165f;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.who-we-are li {
+  list-style: none;
+  background: #c8c8c4cc;
+}
+
+.who-we-are .bio-card__social {
+  display: flex;
+  justify-content: right;
+  padding: 1rem 2rem 0 2rem;
+}
+
+.who-we-are .bio-card__title {
+  padding: 1rem 2rem 0 2rem;
+}
+
+.who-we-are .bio-card__name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 1rem 2rem 0 2rem;
+}
+
+.who-we-are .bio-card__bio {
+  padding: 1rem 2rem 2rem 2rem;
+}
+
+.who-we-are .bio-card .bio-card__headshot {
+  width: 100%;
+}

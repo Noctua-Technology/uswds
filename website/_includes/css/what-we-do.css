@@ -1,0 +1,34 @@
+.what-we-do {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.what-we-do__item__img {
+  border-radius: 50%;
+  overflow: hidden;
+  height: 120px;
+  width: 120px;
+  margin: 0 auto;
+}
+
+.what-we-do__item h3 {
+  color: #4c165f;
+  text-align: center;
+  font-size: 22px;
+}
+
+.what-we-do__item__subheading {
+  color: #7c399b;
+  line-height: 1.4em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.what-we-do__item ul li {
+  color: #000;
+  line-height: 1.25em;
+  margin-bottom: 1rem;
+}
