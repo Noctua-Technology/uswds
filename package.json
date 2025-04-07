@@ -63,7 +63,7 @@
     "minify_html_literals": {
       "command": "node ./scripts/minify_html_literals.js",
       "files": ["target/**/*.js"],
-      "dependencies": []
+      "dependencies": ["tsc"]
     }
   },
   "author": "",
