@@ -61,7 +61,7 @@
       "output": ["assets/usa-icon/**"]
     },
     "minify_html_literals": {
-      "command": "node ./scripts/minify_html_literals.js",
+      "command": "./scripts/minify_html_literals.js",
       "files": ["target/**/*.js"],
       "dependencies": ["tsc"]
     }

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { readFile, readdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { minifyHTMLLiterals } from "minify-html-literals";
@@ -9,7 +11,7 @@ async function findFiles(dir, ext, files = []) {
     const fullPath = join(dir, entry.name);
 
     if (entry.isDirectory()) {
-      await findFiles(fullPath);
+      await findFiles(fullPath, ext, files);
     } else if (entry.name.endsWith(ext)) {
       const content = await readFile(fullPath, "utf-8");
 
