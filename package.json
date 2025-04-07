@@ -29,7 +29,7 @@
       "dependencies": ["tsc", "build_testing_library"]
     },
     "build": {
-      "dependencies": ["build_storybook"]
+      "dependencies": ["tsc", "build_storybook", "minify_html_literals"]
     },
     "preview": {
       "command": "eleventy --serve --incremental",
@@ -59,6 +59,11 @@
       "command": "./scripts/copy_usa_icons.sh",
       "files": ["node_modules/@uswds/uswds/dist/img/usa-icons/**"],
       "output": ["assets/usa-icon/**"]
+    },
+    "minify_html_literals": {
+      "command": "node ./scripts/minify_html_literals.js",
+      "files": ["target/**/*.js"],
+      "dependencies": []
     }
   },
   "author": "",
@@ -88,6 +93,7 @@
     "js-beautify": "^1.15.1",
     "lint-staged": "^15.2.2",
     "lit": "^3.2.1",
+    "minify-html-literals": "^1.3.5",
     "mocha": "^11.0.0",
     "plop": "^4.0.1",
     "storybook": "^8.6.0",
