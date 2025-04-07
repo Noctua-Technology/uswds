@@ -2,7 +2,7 @@
 
 import { readFile, readdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { minifyHTMLLiterals } from "minify-html-literals";
+import { minifyHTMLLiterals } from "minify-literals";
 
 async function findFiles(dir, ext, files = []) {
   const entries = await readdir(dir, { withFileTypes: true });
