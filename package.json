@@ -72,7 +72,6 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
     "@biomejs/biome": "1.9.4",
     "@open-wc/testing": "^4.0.0",
     "@storybook/addon-essentials": "^8.6.0",
@@ -85,7 +84,6 @@
     "@uswds/uswds": "^3.10.0",
     "@web/dev-server-import-maps": "^0.2.1",
     "@web/test-runner": "^0.20.0",
-    "clean-css": "^5.3.3",
     "husky": "^9.0.11",
     "js-beautify": "^1.15.1",
     "lint-staged": "^15.2.2",
@@ -93,7 +91,6 @@
     "mocha": "^11.0.0",
     "plop": "^4.0.1",
     "storybook": "^8.6.0",
-    "terser": "^5.39.0",
     "typescript": "^5.8.0",
     "wireit": "^0.14.9"
   },
