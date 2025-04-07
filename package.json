@@ -29,7 +29,7 @@
       "dependencies": ["tsc", "build_testing_library"]
     },
     "build": {
-      "dependencies": ["build_storybook", "build_website"]
+      "dependencies": ["build_storybook"]
     },
     "preview": {
       "command": "eleventy --serve --incremental",
@@ -38,19 +38,11 @@
         {
           "script": "tsc",
           "cascade": false
-        },
-        {
-          "script": "tsc_website",
-          "cascade": false
         }
       ]
     },
     "build_storybook": {
-      "command": "storybook build -o _site/storybook"
-    },
-    "build_website": {
-      "command": "eleventy --pathprefix=uswds",
-      "dependencies": ["tsc", "tsc_website", "copy_icons"]
+      "command": "storybook build"
     },
     "build_testing_library": {
       "command": "./scripts/build_testing_library.sh",
@@ -62,16 +54,6 @@
       "clean": "if-file-deleted",
       "files": ["src/**", "tsconfig.json"],
       "output": ["target/**", "tsconfig.tsbuildinfo"]
-    },
-    "tsc_website": {
-      "command": "tsc -p tsconfig.website.json --pretty",
-      "clean": "if-file-deleted",
-      "files": ["website/_includes/js/src/**", "tsconfig.website.json"],
-      "output": [
-        "website/_includes/js/target/**",
-        "tsconfig.website.tsbuildinfo"
-      ],
-      "dependencies": ["tsc"]
     },
     "copy_icons": {
       "command": "./scripts/copy_usa_icons.sh",

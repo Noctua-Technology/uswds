@@ -10,7 +10,7 @@ const config: StorybookConfig = {
   staticDirs: ["../assets"],
   async viteFinal(config, { configType }) {
     if (configType === "PRODUCTION") {
-      config.base = "/uswds/storybook/";
+      config.base = "/uswds/";
     }
 
     config.mode = "production";
