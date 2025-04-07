@@ -11,7 +11,7 @@
     <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet" />
 
     <script type="importmap">
-          {
+    {
       "imports": {
         "@joist/di": "{{'/node_modules/@joist/di/target/lib.js' | url}}",
         "@joist/di/": "{{'/node_modules/@joist/di/target/lib/' | url}}",
@@ -21,7 +21,7 @@
         "@joist/observable/": "{{'/node_modules/@joist/observable/target/lib/' | url}}",
         "tslib": "{{'/node_modules/tslib/tslib.es6.js' | url}}"
       }
-          }
+    }
     </script>
   </head>
 
@@ -54,6 +54,11 @@
         margin: 0.75rem auto 0;
         border-radius: 0.25rem;
       }
+
+      section {
+        margin-left: 4rem;
+        margin-right: 4rem;
+      }
     </style>
 
     {% for jsFile in jsFiles %}
@@ -69,67 +74,117 @@
 
     {% include "partials/_hero.njk" %}
 
-    <h2 id="what-we-do">What is USWDS?</h2>
+    <section>
+      <h2 id="what-we-do">What is USWDS?</h2>
 
-    <p>
-      A design system for U.S. federal websites and digital services, providing a standardized, accessible, and responsive framework.
+      <p>
+        A design system for U.S. federal websites and digital services, providing a standardized, accessible, and responsive framework.
+  
+        <ul>
+          <li>Built with flexible components, design tokens, and templates to ensure a consistent user experience across government sites.</li>
+          <li>Developed using modern web technologies like HTML, CSS, JavaScript, and design tokens, making it adaptable for various frameworks.</li>
+          <li>Includes predefined UI components (buttons, forms, navigation, alerts, etc.) that follow best practices for usability and accessibility.</li>
+        </ul>
+      </p>
+    </section>
 
-      <ul>
-        <li>Built with flexible components, design tokens, and templates to ensure a consistent user experience across government sites.</li>
-        <li>Developed using modern web technologies like HTML, CSS, JavaScript, and design tokens, making it adaptable for various frameworks.</li>
-        <li>Includes predefined UI components (buttons, forms, navigation, alerts, etc.) that follow best practices for usability and accessibility.</li>
-      </ul>
-    </p>
+    <section>
+      <h2 id="what-we-do">Why use USWDS?</h2>
 
-    <h2 id="what-we-do">Why use USWDS?</h2>
-
-    <p>
       <ul>
         <li>Ensures consistency across federal digital services and websites</li>
         <li>Improves accessibility making government websites more usable for all citizens</li>
         <li>Enhances performance and mobile responsiveness, optimizing user experience across devices</li>
         <li>Reduces cost and development time through ready-to-use design components</li>
       </ul>
-    </p>
+    </section>
 
-    <h2 id="what-we-do">Why did we build this?</h2>
+    <section>
+      <h2 id="what-we-do">Why did we build this?</h2>
+    </section>
 
-    <h2 id="what-we-do">Getting started</h2>
+    
+    <section>
+      <h2 id="what-we-do">Getting started</h2>
 
-    <p>
-      {% highlight sh %}
-      npm install @noctuatech/uswds
+      <p>
+        The easiest way to get started is to include the USWDS script tag in your project from esm.sh.
+      </p>
+
+      {% highlight html %}
+<script type="module" src="https://esm.sh/@noctuatech/uswds/define.js"></script>
+
+<usa-config icon-path="https://esm.sh/@noctuatech/uswds/assets/usa-icons/"> 
+  <usa-alert type="info">
+    <h3 slot="heading">Welcome to the USWDS</h3>
+    This an example to get you started with the USWDS.
+  </usa-alert>
+
+  <form>
+    <usa-input name="name" label="Name"></usa-input>
+    <usa-input name="email" label="Email"></usa-input>
+
+    <usa-input-mask>
+      <usa-input name="phone" label="Phone" mask="(999) 999-9999"></usa-input>
+    </usa-input-mask>
+
+    <usa-select name="state" label="State">
+      <usa-select-option value="AL">Alabama</usa-select-option>
+      <usa-select-option value="AK">Alaska</usa-select-option>
+      <usa-select-option value="AZ">Arizona</usa-select-option>
+      <usa-select-option value="AR">Arkansas</usa-select-option>
+      <usa-select-option value="CA">California</usa-select-option>
+    </usa-select>
+
+    <usa-button>Submit</usa-button>
+  </form>
+</usa-config>
       {% endhighlight %}
-    </p>
 
-    <p>
-{% highlight html %}
-<usa-alert type="info">
-  <h3 slot="heading">Welcome to the USWDS</h3>
+      <p>
+        If you are using node and npm you can also install the package directly into your project.
+      </p>
 
-  This an example to get you started with the USWDS.
-</usa-alert>
+    {% highlight sh %}
+    npm install @noctuatech/uswds
+    {% endhighlight %}
+    </section>
 
-<form>
-  <usa-input name="name" label="Name"></usa-input>
-  <usa-input name="email" label="Email"></usa-input>
+    <section>
+      <h3 id="what-we-do">Result</h3>
 
-  <usa-input-mask>
-    <usa-input name="phone" label="Phone" mask="111-111-1111"></usa-input>
-  </usa-input-mask>
+      <script type="module" src="https://esm.sh/@noctuatech/uswds/define.js"></script>
 
-  <usa-select name="state" label="State">
-    <option value="AL">Alabama</option>
-    <option value="AK">Alaska</option>
-    <option value="AZ">Arizona</option>
-    <option value="AR">Arkansas</option>
-    <option value="CA">California</option>
-  </usa-select>
+      <usa-config icon-path="https://esm.sh/@noctuatech/uswds/assets/usa-icons/">
+        <usa-alert type="info">
+          <h3 slot="heading">Welcome to the USWDS</h3>
+          This an example to get you started with the USWDS.
+        </usa-alert>
 
-  <usa-button>Submit</usa-button>
-</form>
-{% endhighlight %}
-    </p>
+        <form>
+          <usa-input name="name" label="Name">Name</usa-input>
+          <usa-input name="email" label="Email">Email</usa-input>
+
+          <usa-input-mask>
+            <usa-input name="phone" label="Phone" mask="(999) 999-9999">Phone</usa-input>
+          </usa-input-mask>
+
+          <usa-select name="state" label="State">
+            State
+
+            <usa-select-option value="AL">Alabama</usa-select-option>
+            <usa-select-option value="AK">Alaska</usa-select-option>
+            <usa-select-option value="AZ">Arizona</usa-select-option>
+            <usa-select-option value="AR">Arkansas</usa-select-option>
+            <usa-select-option value="CA">California</usa-select-option>
+          </usa-select>
+
+          <usa-button>Submit</usa-button>
+        </form>
+      </usa-config>
+    </section>
+
+    <br>
 
     {% include "partials/_footer.njk" %}
   </body>
