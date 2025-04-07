@@ -506,9 +506,16 @@
     </usa-modal>
   </usa-config>
 
-  <script type="module" src="/target/lib/define.js"></script>
+  <script type="module">
+    const search = new URLSearchParams(window.location.search);
 
-  <!-- <script src="https://esm.sh/@noctuatech/uswds@latest/define.js?bundle" type="module"></script> -->
+    if (search.has("remote")) {
+      await import("https://esm.sh/@noctuatech/uswds@latest/define.js?bundle");
+    } else {
+      await import("/target/lib/define.js");
+    }
+  </script>
+
 </body>
 
 </html>

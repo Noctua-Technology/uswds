@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "rootDir": "./website/_includes/js/src/",
-    "outDir": "./website/_includes/js/target/",
-    "skipLibCheck": true
-  },
-  "include": ["website/_includes/js/src"]
-}
