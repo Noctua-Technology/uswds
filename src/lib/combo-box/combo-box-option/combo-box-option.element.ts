@@ -9,9 +9,7 @@ declare global {
   }
 }
 
-const template = document.createElement("template");
-
-template.innerHTML = /*html*/ `
+const listTemplate = html`
   <li tabindex="-1" role="option">
     <slot></slot>
   </li>
@@ -38,7 +36,7 @@ export class USAComboBoxOptionElement extends HTMLElement {
   @attr()
   accessor value = "";
 
-  #listItem = template.content.cloneNode(true) as HTMLLIElement;
+  #listItem = listTemplate.createNode() as HTMLElement;
   #li = query("li", this.#listItem);
   #slot = query("slot", this.#listItem);
   #ctx = inject(COMBO_BOX_CTX);
