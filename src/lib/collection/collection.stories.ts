@@ -25,7 +25,7 @@ const meta = {
         </usa-collection-item>
 
         <usa-collection-item>
-          <img height="80" width="80" src="./assets/img/gog-logo.png" slot="img"/>
+          <img height="80" width="80" src="./img/gog-logo.png" slot="img"/>
 
           <h4 slot="heading">
             <usa-link href="#">Gears of Government President's Award winners</usa-link>
@@ -55,7 +55,7 @@ const meta = {
         </usa-collection-item>
 
         <usa-collection-item>
-          <img height="52" width="80" src="./assets/img/wosb1.jpg" slot="img"/>
+          <img height="52" width="80" src="./img/wosb1.jpg" slot="img"/>
 
           <h4 slot="heading">
             <usa-link href="#">Women-owned small business dashboard</usa-link>
