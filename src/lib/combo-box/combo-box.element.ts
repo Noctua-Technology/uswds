@@ -151,6 +151,9 @@ export class USAComboBoxElement
   @attr()
   accessor placeholder = "";
 
+  @attr()
+  accessor disabled = false;
+
   list = query("ul");
   input = query("input");
   currentItemEl: Element | null = null;
@@ -163,6 +166,7 @@ export class USAComboBoxElement
       name: this.name,
       placeholder: this.placeholder,
       required: this.required,
+      disabled: this.disabled,
     });
   }
 
@@ -189,6 +193,10 @@ export class USAComboBoxElement
 
   @listen("focus", (host) => host.input())
   onFocusIn() {
+    if (this.disabled) {
+      return;
+    }
+
     this.currentItemEl = null;
 
     const list = this.list();
@@ -206,6 +214,10 @@ export class USAComboBoxElement
 
   @listen("input")
   async onInput() {
+    if (this.disabled) {
+      return;
+    }
+
     const input = this.input();
     const list = this.list();
 

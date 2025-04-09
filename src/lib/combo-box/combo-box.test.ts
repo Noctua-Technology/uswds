@@ -225,34 +225,22 @@ describe("usa-combo-box", () => {
     assert.equal(form.checkValidity(), false);
   });
 
-  // it("should reset to default value when form is reset", async () => {
-  //   const form = await fixture<HTMLFormElement>(html`
-  //     <form>
-  //       <usa-combo-box name="search" value="Apple" placeholder="Select a fruit">
-  //         <span slot="label">Fruits</span>
+  it("should not show suggestions when disabled", async () => {
+    const disabledComboBox = await fixture<USAComboBoxElement>(html`
+      <usa-combo-box name="search" disabled placeholder="Select a fruit">
+        <span slot="label">Fruits</span>
 
-  //         <usa-combo-box-option value="Apple">Apple</usa-combo-box-option>
-  //         <usa-combo-box-option value="Banana">Banana</usa-combo-box-option>
-  //         <usa-combo-box-option value="Blueberry">Blueberry</usa-combo-box-option>
-  //         <usa-combo-box-option value="Cherry">Cherry</usa-combo-box-option>
-  //       </usa-combo-box>
+        <usa-combo-box-option value="Apple">Apple</usa-combo-box-option>
+        <usa-combo-box-option value="Banana">Banana</usa-combo-box-option>
+        <usa-combo-box-option value="Blueberry">Blueberry</usa-combo-box-option>
+        <usa-combo-box-option value="Cherry">Cherry</usa-combo-box-option>
+      </usa-combo-box>
+    `);
 
-  //       <button type="submit">Submit</button>
-  //       <button type="reset">Reset</button>
-  //     </form>
-  //   `);
+    const input = disabledComboBox.input();
+    input.focus();
 
-  //   const comboBox = form.querySelector("usa-combo-box");
-  //   if (comboBox) {
-  //     // Change the value
-  //     comboBox.value = "Banana";
-  //     comboBox.dispatchEvent(new Event("input", { bubbles: true }));
-
-  //     // Reset the form
-  //     form.reset();
-
-  //     // Check that the value was reset
-  //     assert.equal(comboBox.value, "Apple");
-  //   }
-  // });
+    const suggestions = disabledComboBox.listItems();
+    assert.equal(suggestions.length, 0);
+  });
 });
