@@ -36,3 +36,4 @@ export { USACheckboxGroupElement } from "./lib/checkbox/checkbox-group/checkbox-
 export { USARangeSliderElement } from "./lib/range-slider/range-slider.element.js";
 export { USAComboBoxElement as USAAutocompleteElement } from "./lib/combo-box/combo-box.element.js";
 export { USAComboBoxOptionElement } from "./lib/combo-box/combo-box-option/combo-box-option.element.js";
+export { USASearchElement } from "./lib/search/search.element.js";

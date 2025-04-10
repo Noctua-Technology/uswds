@@ -36,3 +36,4 @@ import "./checkbox/checkbox-group/checkbox-group.element.js";
 import "./range-slider/range-slider.element.js";
 import "./combo-box/combo-box.element.js";
 import "./combo-box/combo-box-option/combo-box-option.element.js";
+import "./search/search.element.js";

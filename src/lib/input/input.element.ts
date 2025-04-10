@@ -118,6 +118,9 @@ export class USATextInputElement
   accessor required = false;
 
   @attr()
+  accessor disabled = false;
+
+  @attr()
   accessor type: "text" | "password" | "number" = "text";
 
   @attr({
@@ -136,6 +139,10 @@ export class USATextInputElement
 
   @observe()
   accessor selectionEnd: number | null = null;
+
+  get validationMessage() {
+    return this.#input().validationMessage;
+  }
 
   #internals = this.attachInternals();
   #input = query("input");
@@ -156,6 +163,7 @@ export class USATextInputElement
       max: this.max,
       minLength: this.minLength,
       maxLength: this.maxLength,
+      disabled: this.disabled,
     });
   }
 

@@ -25,7 +25,11 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
   shadowDom: [
     css`
       :host {
-        display: contents;
+        display: inline-block;
+        border-top-right-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+        border-top-left-radius: 0.25rem;
+        border-bottom-left-radius: 0.25rem;
       }
 
       button {
@@ -39,7 +43,10 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
         appearance: none;
         align-items: center;
         border: 0;
-        border-radius: 0.25rem;
+        border-top-right-radius: inherit;
+        border-bottom-right-radius: inherit;
+        border-top-left-radius: inherit;
+        border-bottom-left-radius: inherit;
         cursor: pointer;
         -moz-column-gap: 0.5rem;
         column-gap: 0.5rem;
@@ -50,11 +57,12 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
         text-align: center;
         text-decoration: none;
         width: 100%;
+        height: 100%;
         cursor: pointer;
       }
 
       @media all and (min-width: 30em) {
-        button {
+        :host {
           width: auto;
         }
       }
