@@ -212,6 +212,14 @@ export class USAComboBoxElement
     list.replaceChildren(fragment);
   }
 
+  focus(options?: FocusOptions): void {
+    this.input().focus(options);
+  }
+
+  blur(): void {
+    this.input().blur();
+  }
+
   @listen("input")
   async onInput() {
     if (this.disabled) {

@@ -67,3 +67,50 @@ npm run storybook
 ```sh
 npm run gen element
 ```
+
+## USWDS Components Checklist
+
+### Form Components
+- [x] Button
+- [ ] Button group
+- [x] Checkbox
+- [x] Combo box
+- [ ] Date picker
+- [ ] Date range picker
+- [x] File input
+- [x] Input mask
+- [x] Input prefix or suffix
+- [ ] Memorable date
+- [x] Radio buttons
+- [x] Range slider
+- [ ] Search
+- [x] Select
+- [x] Text input
+- [ ] Time picker
+
+### Navigation Components
+- [x] Accordion
+- [ ] Breadcrumb
+- [ ] In-page navigation
+- [ ] Pagination
+- [x] Side navigation
+- [x] Step indicator
+
+### Content Components
+- [x] Alert
+- [ ] Banner
+- [x] Card
+- [x] Collection
+- [ ] Footer
+- [ ] Header
+- [x] Icon
+- [ ] Identifier
+- [ ] List
+- [x] Modal
+- [ ] Process list
+- [ ] Prose
+- [x] Site alert
+- [x] Summary box
+- [ ] Table
+- [x] Tag
+- [ ] Tooltip
