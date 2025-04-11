@@ -11,9 +11,9 @@ declare global {
   shadowDom: [
     css`
       :host {
-        background: blue;
-        color: #fff;
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
       }
     `,
     html`
