@@ -83,11 +83,11 @@ export class USASearchElement extends HTMLElement {
 
   @listen("submit", "form")
   onSubmit(e: Event) {
-    const event = new USASearchEvent(this.value);
+    const searchEvent = new USASearchEvent(this.value);
 
-    this.dispatchEvent(event);
+    this.dispatchEvent(searchEvent);
 
-    if (event.defaultPrevented) {
+    if (searchEvent.defaultPrevented) {
       e.preventDefault();
     }
   }

@@ -83,7 +83,7 @@ npm run gen element
 - [ ] Memorable date
 - [x] Radio buttons
 - [x] Range slider
-- [ ] Search
+- [x] Search
 - [x] Select
 - [x] Text input
 - [ ] Time picker
