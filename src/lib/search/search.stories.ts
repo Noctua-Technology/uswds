@@ -8,7 +8,7 @@ const meta = {
   title: "usa-search",
   tags: ["autodocs"],
   render(args) {
-    return html`<usa-search @usa::search=${console.log}></usa-search>`;
+    return html`<usa-search>Search</usa-search>`;
   },
   argTypes: {},
   args: {},

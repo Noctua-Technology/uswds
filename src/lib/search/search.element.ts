@@ -1,4 +1,5 @@
 import { attr, css, element, html, listen, query } from "@joist/element";
+
 import { USASearchEvent } from "./search.event.js";
 
 declare global {
@@ -43,16 +44,14 @@ declare global {
           <slot></slot>
         </usa-input>
 
-        <usa-button type="submit">
-          <usa-icon icon="search"></usa-icon>
-        </usa-button>
+        <usa-button type="submit">Search</usa-button>
       </form>
     `,
   ],
 })
 export class USASearchElement extends HTMLElement {
   @attr()
-  accessor name = "search";
+  accessor name = "hello";
 
   @attr()
   accessor placeholder = "Search";
@@ -82,6 +81,10 @@ export class USASearchElement extends HTMLElement {
     });
   }
 
+  connectedCallback() {
+    console.log("INPUT", this.#input().constructor);
+  }
+
   @listen("input")
   onInputChange() {
     const input = this.#input();
@@ -90,10 +93,6 @@ export class USASearchElement extends HTMLElement {
 
   @listen("submit", "form")
   onSubmit(e: Event) {
-    e.preventDefault();
-
-    console.log("#########################", e);
-
     this.dispatchEvent(new USASearchEvent(this.value));
   }
 }

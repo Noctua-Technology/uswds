@@ -1,4 +1,6 @@
 import "./search.element.js";
+import "../input/input.element.js";
+import "../button/button.element.js";
 
 import { assert, fixture, html } from "@open-wc/testing";
 
@@ -9,6 +11,8 @@ describe("usa-search", () => {
     const search = await fixture<USASearchElement>(html`
       <usa-search name="search">Hello World</usa-search>
     `);
+
+    console.log(search.shadowRoot?.querySelector("usa-input")?.constructor);
 
     return assert.isAccessible(search);
   });
