@@ -1,4 +1,4 @@
-import { css, element, html } from "@joist/element";
+import { attr, css, element, html } from "@joist/element";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -16,6 +16,7 @@ declare global {
 
       :host {
         display: flex;
+        gap: .5rem;
         flex-direction: column;
         position: relative;
         padding-left: 3rem;
@@ -46,9 +47,6 @@ declare global {
         bottom: -2rem;
         left: calc(2.5rem / 2 - .25rem);
       }
-
-      .content {
-      }
       
       #title::slotted(*) {
         margin-top: 0;
@@ -76,4 +74,7 @@ declare global {
     `,
   ],
 })
-export class USAProcessListItemElement extends HTMLElement {}
+export class USAProcessListItemElement extends HTMLElement {
+  @attr()
+  accessor role = "list-item";
+}
