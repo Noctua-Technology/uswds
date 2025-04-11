@@ -37,3 +37,5 @@ export { USARangeSliderElement } from "./lib/range-slider/range-slider.element.j
 export { USAComboBoxElement as USAAutocompleteElement } from "./lib/combo-box/combo-box.element.js";
 export { USAComboBoxOptionElement } from "./lib/combo-box/combo-box-option/combo-box-option.element.js";
 export { USASearchElement } from "./lib/search/search.element.js";
+export { USAProcessListElement } from "./lib/process-list/process-list.element.js";
+export { USAProcessListItemElement } from "./lib/process-list/process-list-item/process-list-item.element.js";
