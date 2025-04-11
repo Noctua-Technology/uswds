@@ -76,5 +76,5 @@ declare global {
 })
 export class USAProcessListItemElement extends HTMLElement {
   @attr()
-  accessor role = "list-item";
+  accessor role = "listitem";
 }

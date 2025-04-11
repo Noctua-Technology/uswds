@@ -1,4 +1,5 @@
 import "./process-list.element.js";
+import "./process-list-item/process-list-item.element.js";
 
 import { assert, fixture, html } from "@open-wc/testing";
 
