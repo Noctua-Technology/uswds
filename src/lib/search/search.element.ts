@@ -51,7 +51,7 @@ declare global {
 })
 export class USASearchElement extends HTMLElement {
   @attr()
-  accessor name = "hello";
+  accessor name = "search";
 
   @attr()
   accessor placeholder = "Search";
@@ -81,18 +81,16 @@ export class USASearchElement extends HTMLElement {
     });
   }
 
-  connectedCallback() {
-    console.log("INPUT", this.#input().constructor);
-  }
-
-  @listen("input")
-  onInputChange() {
-    const input = this.#input();
-    this.value = input.value;
-  }
-
   @listen("submit", "form")
   onSubmit(e: Event) {
-    this.dispatchEvent(new USASearchEvent(this.value));
+    const event = new USASearchEvent(this.value);
+
+    this.dispatchEvent(event);
+
+    console.log(event.defaultPrevented);
+
+    if (event.defaultPrevented) {
+      e.preventDefault();
+    }
   }
 }

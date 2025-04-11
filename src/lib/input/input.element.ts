@@ -153,8 +153,6 @@ export class USATextInputElement
   }
 
   attributeChangedCallback(attr: string) {
-    console.log("usa-input", attr, this.name, this.getAttribute("name"));
-
     this.#input({
       autocomplete: this.autocomplete,
       placeholder: this.placeholder,
