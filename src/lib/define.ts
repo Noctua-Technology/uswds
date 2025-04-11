@@ -37,3 +37,5 @@ import "./range-slider/range-slider.element.js";
 import "./combo-box/combo-box.element.js";
 import "./combo-box/combo-box-option/combo-box-option.element.js";
 import "./search/search.element.js";
+import "./process-list/process-list.element.js";
+import "./process-list/process-list-item/process-list-item.element.js";
