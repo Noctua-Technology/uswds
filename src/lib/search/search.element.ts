@@ -87,8 +87,6 @@ export class USASearchElement extends HTMLElement {
 
     this.dispatchEvent(event);
 
-    console.log(event.defaultPrevented);
-
     if (event.defaultPrevented) {
       e.preventDefault();
     }
