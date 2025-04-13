@@ -24,6 +24,10 @@ declare global {
         text-decoration: none;
       }
 
+      a:hover {
+        text-decoration: underline;
+      }
+
       :host([primary]) a {
         font-weight: bold;
       }
