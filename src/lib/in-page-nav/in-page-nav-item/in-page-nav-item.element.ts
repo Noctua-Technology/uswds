@@ -1,5 +1,4 @@
 import { attr, css, element, html, listen, query } from "@joist/element";
-import { click } from "@testing-library/user-event/dist/cjs/convenience/click.js";
 
 declare global {
   interface HTMLElementTagNameMap {
