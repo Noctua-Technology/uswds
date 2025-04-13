@@ -11,16 +11,18 @@ const meta = {
     return html`
       <div class="usa-in-page-nav-container">  
         <aside style="position: fixed; right: 1rem; top: 2rem;">
-          <usa-in-page-nav>
-            <usa-in-page-nav-item target="lorem-ipsum-dolor" primary>Lorem ipsum dolor</usa-in-page-nav-item>
-            <usa-in-page-nav-item target="consectetuer-adipiscing-elit" primary>Consectetuer adipiscing elit</usa-in-page-nav-item>
-            <usa-in-page-nav-item target="nullam-sit-amet-enim">Nullam sit amet enim</usa-in-page-nav-item>
-            <usa-in-page-nav-item target="vivamus-pharetra-posuere-sapien">Vivamus pharetra posuere sapien</usa-in-page-nav-item>
-            <usa-in-page-nav-item target="suspendisse-id-velit">Suspendisse id velit</usa-in-page-nav-item>
-            <usa-in-page-nav-item target="orci-magna-rhoncus-neque">Orci magna rhoncus neque</usa-in-page-nav-item>
-            <usa-in-page-nav-item target="aliquam-erat-volutpat-velit-vitae-ligula-volutpat" primary>Aliquam erat volutpat: velit vitae ligula volutpat</usa-in-page-nav-item>
-            <usa-in-page-nav-item target="vitae-ligula">Vitae ligula</usa-in-page-nav-item>
-          </usa-in-page-nav>
+          <nav>
+            <usa-in-page-nav>
+              <usa-in-page-nav-item target="lorem-ipsum-dolor" primary>Lorem ipsum dolor</usa-in-page-nav-item>
+              <usa-in-page-nav-item target="consectetuer-adipiscing-elit" primary>Consectetuer adipiscing elit</usa-in-page-nav-item>
+              <usa-in-page-nav-item target="nullam-sit-amet-enim">Nullam sit amet enim</usa-in-page-nav-item>
+              <usa-in-page-nav-item target="vivamus-pharetra-posuere-sapien">Vivamus pharetra posuere sapien</usa-in-page-nav-item>
+              <usa-in-page-nav-item target="suspendisse-id-velit">Suspendisse id velit</usa-in-page-nav-item>
+              <usa-in-page-nav-item target="orci-magna-rhoncus-neque">Orci magna rhoncus neque</usa-in-page-nav-item>
+              <usa-in-page-nav-item target="aliquam-erat-volutpat-velit-vitae-ligula-volutpat" primary>Aliquam erat volutpat: velit vitae ligula volutpat</usa-in-page-nav-item>
+              <usa-in-page-nav-item target="vitae-ligula">Vitae ligula</usa-in-page-nav-item>
+            </usa-in-page-nav>
+          </nav>
         </aside>
 
         <main style="padding-right: 16rem; max-width: 68ex;">

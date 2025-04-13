@@ -26,7 +26,7 @@ declare global {
 })
 export class USAInPageNavElement extends HTMLElement {
   @attr()
-  accessor role = "navigation";
+  accessor role = "list";
 
   items = queryAll("usa-in-page-nav-item", this);
 
