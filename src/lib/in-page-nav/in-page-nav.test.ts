@@ -1,4 +1,5 @@
 import "./in-page-nav.element.js";
+import "./in-page-nav-item/in-page-nav-item.element.js";
 
 import { assert, fixture, html } from "@open-wc/testing";
 

@@ -50,7 +50,7 @@ declare global {
 })
 export class USAInPageNavItemElement extends HTMLElement {
   @attr()
-  accessor role = "listitem";
+  accessor role = "link";
 
   @attr()
   accessor primary = false;
