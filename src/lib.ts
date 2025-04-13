@@ -39,3 +39,5 @@ export { USAComboBoxOptionElement } from "./lib/combo-box/combo-box-option/combo
 export { USASearchElement } from "./lib/search/search.element.js";
 export { USAProcessListElement } from "./lib/process-list/process-list.element.js";
 export { USAProcessListItemElement } from "./lib/process-list/process-list-item/process-list-item.element.js";
+export { USAInPageNavElement } from "./lib/in-page-nav/in-page-nav.element.js";
+export { USAInPageNavItemElement } from "./lib/in-page-nav/in-page-nav-item/in-page-nav-item.element.js";
