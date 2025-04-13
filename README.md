@@ -91,7 +91,7 @@ npm run gen element
 ### Navigation Components
 - [x] Accordion
 - [ ] Breadcrumb
-- [ ] In-page navigation
+- [x] In-page navigation
 - [x] Link
 - [ ] Pagination
 - [x] Side navigation
