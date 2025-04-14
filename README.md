@@ -93,7 +93,7 @@ npm run gen element
 - [x] Breadcrumb
 - [x] In-page navigation
 - [x] Link
-- [ ] Pagination
+- [x] Pagination
 - [x] Side navigation
 - [x] Step indicator
 

@@ -11,7 +11,7 @@ declare global {
   shadowDom: [
     css`
       :host {
-        display: inline-flex;
+        display: contents;
         color: #005ea2;
         text-decoration: underline;
       }

@@ -44,3 +44,6 @@ export { USAInPageNavItemElement } from "./lib/in-page-nav/in-page-nav-item/in-p
 export { USAButtonGroupElement } from "./lib/button-group/button-group.element.js";
 export { USABreadcrumbsElement } from "./lib/breadcrumbs/breadcrumbs.element.js";
 export { USABreadcrumbElement } from "./lib/breadcrumbs/breadcrumb/breadcrumb.element.js";
+export { USAPaginationElement } from "./lib/pagination/pagination.element.js";
+export { USAPaginationItemElement } from "./lib/pagination-item/pagination-item.element.js";
+export { USAPaginationNoElement } from "./lib/pagination-no/pagination-no.element.js";

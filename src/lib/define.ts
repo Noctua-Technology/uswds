@@ -44,3 +44,6 @@ import "./in-page-nav/in-page-nav-item/in-page-nav-item.element.js";
 import "./button-group/button-group.element.js";
 import "./breadcrumbs/breadcrumbs.element.js";
 import "./breadcrumbs/breadcrumb/breadcrumb.element.js";
+import "./pagination/pagination.element.js";
+import "./pagination/pagination-item/pagination-item.element.js";
+import "./pagination/pagination-no/pagination-no.element.js";
