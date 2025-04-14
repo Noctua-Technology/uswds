@@ -42,3 +42,5 @@ import "./process-list/process-list-item/process-list-item.element.js";
 import "./in-page-nav/in-page-nav.element.js";
 import "./in-page-nav/in-page-nav-item/in-page-nav-item.element.js";
 import "./button-group/button-group.element.js";
+import "./breadcrumbs/breadcrumbs.element.js";
+import "./breadcrumbs/breadcrumb/breadcrumb.element.js";

@@ -42,3 +42,5 @@ export { USAProcessListItemElement } from "./lib/process-list/process-list-item/
 export { USAInPageNavElement } from "./lib/in-page-nav/in-page-nav.element.js";
 export { USAInPageNavItemElement } from "./lib/in-page-nav/in-page-nav-item/in-page-nav-item.element.js";
 export { USAButtonGroupElement } from "./lib/button-group/button-group.element.js";
+export { USABreadcrumbsElement } from "./lib/breadcrumbs/breadcrumbs.element.js";
+export { USABreadcrumbElement } from "./lib/breadcrumbs/breadcrumb/breadcrumb.element.js";
