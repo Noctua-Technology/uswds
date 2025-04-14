@@ -41,3 +41,4 @@ export { USAProcessListElement } from "./lib/process-list/process-list.element.j
 export { USAProcessListItemElement } from "./lib/process-list/process-list-item/process-list-item.element.js";
 export { USAInPageNavElement } from "./lib/in-page-nav/in-page-nav.element.js";
 export { USAInPageNavItemElement } from "./lib/in-page-nav/in-page-nav-item/in-page-nav-item.element.js";
+export { USAButtonGroupElement } from "./lib/button-group/button-group.element.js";
