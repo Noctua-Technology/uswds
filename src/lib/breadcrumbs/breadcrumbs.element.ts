@@ -23,6 +23,10 @@ declare global {
         margin-left: -.25rem;
         margin-right: -.25rem;
       }
+
+      :host([wrap]) {
+        white-space: normal;
+      }
     `,
     html`
       <slot></slot>
@@ -32,4 +36,7 @@ declare global {
 export class USABreadcrumbsElement extends HTMLElement {
   @attr()
   accessor role = "list";
+
+  @attr()
+  accessor wrap = false;
 }

@@ -15,7 +15,7 @@ declare global {
         right: auto;
         display: inline;
         max-width: unset;
-        padding-right: 1rem;
+        padding-right: 1.5rem;
       }
 
       :host(:last-child) usa-icon {
@@ -30,7 +30,7 @@ declare global {
 
       usa-icon {
         height: 1rem;
-        width: 1rem;
+        width: 1.5rem;
         position: absolute;
         top: .075rem;
       }
