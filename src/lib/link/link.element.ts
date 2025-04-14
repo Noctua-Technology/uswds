@@ -20,6 +20,7 @@ declare global {
         color: inherit;
         text-decoration: inherit;
         display: inherit;
+        text-overflow: inherit
       }
     `,
     html`

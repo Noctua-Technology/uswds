@@ -72,7 +72,7 @@ npm run gen element
 
 ### Form Components
 - [x] Button
-- [ ] Button group
+- [x] Button group
 - [x] Checkbox
 - [x] Combo box
 - [ ] Date picker
@@ -90,7 +90,7 @@ npm run gen element
 
 ### Navigation Components
 - [x] Accordion
-- [ ] Breadcrumb
+- [x] Breadcrumb
 - [x] In-page navigation
 - [x] Link
 - [ ] Pagination
@@ -105,7 +105,6 @@ npm run gen element
 - [ ] Footer
 - [ ] Header
 - [x] Icon
-- [ ] Identifier
 - [ ] List
 - [x] Modal
 - [x] Process list
