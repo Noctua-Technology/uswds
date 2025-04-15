@@ -45,8 +45,6 @@ declare global {
   ],
 })
 export class USAModalElement extends HTMLElement {
-  modalAction: null | string = null;
-
   #dialog = query("dialog");
 
   openModal() {
