@@ -75,11 +75,13 @@ export class USAModalElement extends HTMLElement {
   @listen("click", (host) => host)
   onModalAction(e: Event) {
     if (e.target instanceof Element) {
-      this.modalAction = e.target.getAttribute("modal-action");
+      const modalAction = e.target.getAttribute("modal-action");
 
-      this.closeModal();
+      if (modalAction === "close") {
+        this.closeModal();
 
-      this.dispatchEvent(new Event("usa::modal::close"));
+        this.dispatchEvent(new Event("usa::modal::close"));
+      }
     }
   }
 }
