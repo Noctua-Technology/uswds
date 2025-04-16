@@ -7,9 +7,9 @@ import type { USAAccordionElement } from "./accordion.element.js";
 const meta = {
   title: "usa-accordion",
   tags: ["autodocs"],
-  render() {
+  render(args) {
     return html`
-      <usa-accordion id="first" name="ammendment">
+      <usa-accordion id="first" name="${args.name}">
         <h4 slot="heading">First Ammendment</h4>
 
         Congress shall make no law respecting an establishment of religion, or
@@ -18,7 +18,7 @@ const meta = {
         assemble, and to petition the Government for a redress of grievances.
       </usa-accordion>
 
-      <usa-accordion id="second" name="ammendment">
+      <usa-accordion id="second" name="${args.name}">
         <h4 slot="heading">Second Ammendment</h4>
 
         A well regulated Militia, being necessary to the security of a free
@@ -26,7 +26,7 @@ const meta = {
         infringed.
       </usa-accordion>
 
-      <usa-accordion id="third" name="ammendment">
+      <usa-accordion id="third" name="${args.name}">
         <h4 slot="heading">Third Ammendment</h4>
 
         No Soldier shall, in time of peace be quartered in any house, without
@@ -36,7 +36,9 @@ const meta = {
     `;
   },
   argTypes: {},
-  args: {},
+  args: {
+    name: "ammendment",
+  },
 } satisfies Meta<USAAccordionElement>;
 
 export default meta;

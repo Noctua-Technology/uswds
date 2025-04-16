@@ -7,9 +7,9 @@ import type { USABreadcrumbsElement } from "./breadcrumbs.element.js";
 const meta = {
   title: "usa-breadcrumbs",
   tags: ["autodocs"],
-  render() {
+  render(args) {
     return html`
-      <usa-breadcrumbs>
+      <usa-breadcrumbs ?wrap=${args.wrap}>
         <usa-breadcrumb href="/">Home</usa-breadcrumb>
         <usa-breadcrumb href="/">Federal Contracting</usa-breadcrumb>
         <usa-breadcrumb href="/">Contracting assistance programs</usa-breadcrumb>
@@ -17,8 +17,15 @@ const meta = {
       </usa-breadcrumbs>
     `;
   },
-  argTypes: {},
-  args: {},
+  argTypes: {
+    wrap: {
+      type: "boolean",
+      control: "boolean",
+    },
+  },
+  args: {
+    wrap: false,
+  },
 } satisfies Meta<USABreadcrumbsElement>;
 
 export default meta;

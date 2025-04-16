@@ -17,10 +17,27 @@ type Story = StoryObj<USACheckboxElement>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
+  render(args) {
+    return html`
+      <usa-checkbox name="${args.name}" value="${args.value}" ?checked=${args.checked} ?disabled=${args.disabled} ?required=${args.required}>
+        I agree to the above terms and conditions
+      </usa-checkbox>
+    `;
+  },
+  args: {
+    checked: false,
+    name: "toc",
+    value: "agree",
+    disabled: false,
+    required: false,
+  },
+};
+
+export const Group: Story = {
   render() {
     return html`
       <usa-checkbox-group>
-        <legend class="usa-legend">Select any historical figure</legend>
+        <legend>Select any historical figure</legend>
 
         <usa-checkbox name="historical-figure" value="sojurner-truth">
           Sojourner Truth
