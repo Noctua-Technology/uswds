@@ -1,0 +1,76 @@
+# Getting Started
+
+Getting started is easy! In just two simple steps, you'll be up and running with Noctua's US Web Design System, making it easy to build accessible, fast, and consistent websites. Let's get started!
+
+## Install USWDS
+
+Either install USWDS directly from NPM.
+
+```sh
+npm install @noctuatech/uswds
+```
+
+Or from a CDN.
+
+```html
+<script type="module" src="https://esm.sh/@noctuatech/uswds/define.js?bundle"></script>
+```
+
+## Use components directly in your HTML
+
+After installing USWDS, you can start using the components in your HTML.
+
+```html
+<!-- USWDS needs to be told where to find static assets such as icons -->
+<usa-config icon-path="https://esm.sh/@noctuatech/uswds/assets/usa-icons/">
+  <form>
+    <usa-input name="name" placeholder="Bob Smith">Name</usa-input>
+    <usa-input name="email" placeholder="my@email.com">Email</usa-input>
+
+    <usa-input-mask mask="(999) 999-9999">
+      <usa-input name="phone" placeholder="(xxx) xxx-xxxx">
+        Phone
+      </usa-input>
+    </usa-input-mask>
+    
+    <usa-button type="submit">Submit</usa-button>
+  </form>
+</usa-config>
+```
+
+### Configuration
+
+There are two ways to confifure UWDS for your application. There is currently only one configuration option, but there will be more in the future.
+
+1. The `usa-config` element is used to configure the USWDS components. This element will most comonly be at the root of your application. But you can have multiple instances if you have different needs in different parts of your document.
+
+```html
+<body>
+  <usa-config icon-path="https://esm.sh/@noctuatech/uswds/assets/usa-icons/">
+    <!-- Your application -->  
+  </usa-config>
+</body>
+```
+
+2. JavaScript API. This version of USWDS is built with [Joist](https://github.com/joist-framework/joist), a dependency injection framework for JavaScript. 
+   Knowing this we can provide our own configuration to USWDS components.
+
+```ts
+import { DOMInjector } from "@joist/di";
+import { USAConfig } from "@noctuatech/uswds";
+
+const app = new DOMInjector([
+  [
+    USAConfig, 
+    {
+      factory() {
+        return {
+          iconPath: "https://esm.sh/@noctuatech/uswds/assets/usa-icons/",
+        };
+      },
+    },
+  ],
+]);
+
+app.attach(document.body);
+```
