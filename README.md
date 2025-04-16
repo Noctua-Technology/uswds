@@ -87,6 +87,7 @@ npm run gen element
 - [x] Select
 - [x] Text input
 - [ ] Time picker
+- ~~[ ] Validation~~
 
 ### Navigation Components
 - [x] Accordion
@@ -105,7 +106,7 @@ npm run gen element
 - [ ] Footer
 - [ ] Header
 - [x] Icon
-- [ ] List
+- ~~[ ] List~~
 - [x] Modal
 - [x] Process list
 - [ ] Prose
@@ -114,3 +115,5 @@ npm run gen element
 - [ ] Table
 - [x] Tag
 - [ ] Tooltip
+- [ ] Character count
+- ~~[ ] Identifier~~
