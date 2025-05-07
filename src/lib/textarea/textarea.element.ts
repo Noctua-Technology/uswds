@@ -42,7 +42,6 @@ declare global {
         border-radius: 0;
         color: var(--usa-input-text-color);
         display: block;
-        max-width: 30rem;
         padding: .5rem;
         border-width: 1px;
         border-color: var(--usa-input-border-color);
