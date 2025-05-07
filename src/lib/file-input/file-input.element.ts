@@ -63,7 +63,6 @@ declare global {
         position: relative;
         text-align: center;
         width: 100%;
-        max-width: 30rem;
         height: 5.2rem;
         align-items: center;
         justify-content: center;
