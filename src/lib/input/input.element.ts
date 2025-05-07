@@ -25,6 +25,7 @@ declare global {
         --usa-input-disabled-bg-color: #fff;
         --usa-input-disabled-border-color: #757575;
         --usa-input-disabled-text-color: #757575;
+        --usa-input-radius: 0;
 
         font-size: 1.06rem;
         line-height: 1.3;
@@ -40,7 +41,7 @@ declare global {
         border-width: 1px;
         border-color: var(--usa-input-border-color);
         border-style: solid;
-        border-radius: 0;
+        border-radius: var(--usa-input-radius);
         color: var(--usa-input-text-color);
         display: block;
         height: 2.5rem;

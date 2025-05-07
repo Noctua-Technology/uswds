@@ -23,6 +23,7 @@ declare global {
         --usa-input-disabled-bg-color: #fff;
         --usa-input-disabled-border-color: #757575;
         --usa-input-disabled-text-color: #757575;
+        --usa-input-radius: 0;
 
         font-size: 1.06rem;
         line-height: 1.3;
@@ -39,7 +40,7 @@ declare global {
       textarea {
         font-family: inherit;
         font-size: inherit;
-        border-radius: 0;
+        border-radius: var(--usa-input-radius);
         color: var(--usa-input-text-color);
         display: block;
         padding: .5rem;

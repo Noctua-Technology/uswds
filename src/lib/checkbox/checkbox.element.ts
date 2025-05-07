@@ -23,6 +23,7 @@ declare global {
         --usa-input-disabled-border-color: #757575;
         --usa-input-disabled-text-color: #757575;
         --usa-input-active-color: #005ea2;
+        --usa-input-radius: 0;
 
         display: inline-block;
         max-width: 30rem;
@@ -32,7 +33,7 @@ declare global {
       :host([tiled]) label {
         background-color: var(--usa-input-bg-color);
         border: 2px solid var(--usa-input-border-color);
-        border-radius: 0.25rem;
+        border-radius: var(--usa-input-radius);
         color: var(--usa-input-text-color);
         padding: 0.75rem 1rem 0.75rem 0.75rem;
       }
@@ -54,7 +55,7 @@ declare global {
         height: 1.25rem;
         min-width: 1.25rem;
         max-width: 1.25rem;
-        border-radius: 2px;
+        border-radius: var(--usa-input-radius);
         position: relative;
         margin-right: 0.75rem;
       }

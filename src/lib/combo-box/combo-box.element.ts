@@ -39,6 +39,7 @@ declare global {
         --usa-input-disabled-text-color: #757575;
         --usa-input-hover-bg-color: #f0f0f0;
         --usa-combo-max-height: 12.5em;
+        --usa-input-radius: 0;
 
         display: block;
         max-width: 30rem;
@@ -50,7 +51,7 @@ declare global {
         border-width: 1px;
         border-color: var(--usa-input-border-color);
         border-style: solid;
-        border-radius: 0;
+        border-radius: var(--usa-input-radius);
         color: var(--usa-input-text-color);
         background-color: var(--usa-input-bg-color);
         display: block;
