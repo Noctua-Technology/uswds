@@ -30,6 +30,14 @@ declare global {
       }
       
       :host {
+        --usa-input-bg-color: #fff;
+        --usa-input-border-color: #5c5c5c;
+        --usa-input-text-color: #1b1b1b;
+        --usa-input-focus-color: #2491ff;
+        --usa-input-disabled-bg-color: #fff;
+        --usa-input-disabled-border-color: #757575;
+        --usa-input-disabled-text-color: #757575;
+        --usa-input-hover-bg-color: #f0f0f0;
         --usa-combo-max-height: 12.5em;
 
         display: block;
@@ -40,10 +48,11 @@ declare global {
       
       input {
         border-width: 1px;
-        border-color: #5c5c5c;
+        border-color: var(--usa-input-border-color);
         border-style: solid;
         border-radius: 0;
-        color: #1b1b1b;
+        color: var(--usa-input-text-color);
+        background-color: var(--usa-input-bg-color);
         display: block;
         height: 2.5rem;
         line-height: 1.3;
@@ -55,8 +64,14 @@ declare global {
       }
 
       input:not(:disabled):focus {
-        outline: 0.25rem solid #2491ff;
+        outline: 0.25rem solid var(--usa-input-focus-color);
         outline-offset: 0;
+      }
+
+      input:disabled {
+        background-color: var(--usa-input-disabled-bg-color);
+        border-color: var(--usa-input-disabled-border-color);
+        color: var(--usa-input-disabled-text-color);
       }
 
       ul {
@@ -66,7 +81,7 @@ declare global {
         width: 100%;
         transform: translateY(100%);
         margin: 0;
-        border: 1px solid rgb(92, 92, 92);
+        border: 1px solid var(--usa-input-border-color);
         max-height: var(--usa-combo-max-height);
         overflow-y: scroll;
         z-index: 1001;
@@ -77,7 +92,7 @@ declare global {
       }
 
       ul li {
-        background: #ffff;
+        background: var(--usa-input-bg-color);
         list-style: none;
         border-bottom: 1px solid #e6e6e6;
         cursor: pointer;
@@ -85,11 +100,11 @@ declare global {
       }
 
       ul li:hover {
-        background-color: #f0f0f0;
+        background-color: var(--usa-input-hover-bg-color);
       }
 
       li:focus {
-        outline: 0.25rem solid #2491ff;
+        outline: 0.25rem solid var(--usa-input-focus-color);
         outline-offset: -0.25rem;
       }
 

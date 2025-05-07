@@ -70,9 +70,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@joist/di": "^4.2.2",
-    "@joist/element": "^4.2.2",
-    "@joist/observable": "^4.2.2",
+    "@joist/di": "^4.2.3-next.7",
+    "@joist/element": "^4.2.3-next.7",
+    "@joist/observable": "^4.2.3-next.7",
     "tslib": "2.8.1"
   },
   "devDependencies": {

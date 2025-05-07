@@ -16,6 +16,14 @@ declare global {
       }
 
       :host {
+        --usa-input-bg-color: #fff;
+        --usa-input-border-color: #5c5c5c;
+        --usa-input-text-color: #1b1b1b;
+        --usa-input-focus-color: #2491ff;
+        --usa-input-disabled-bg-color: #fff;
+        --usa-input-disabled-border-color: #757575;
+        --usa-input-disabled-text-color: #757575;
+
         font-size: 1.06rem;
         line-height: 1.3;
         display: flex;
@@ -32,13 +40,14 @@ declare global {
         font-family: inherit;
         font-size: inherit;
         border-radius: 0;
-        color: #1b1b1b;
+        color: var(--usa-input-text-color);
         display: block;
         max-width: 30rem;
         padding: .5rem;
         border-width: 1px;
-        border-color: #5c5c5c;
+        border-color: var(--usa-input-border-color);
         border-style: solid;
+        background-color: var(--usa-input-bg-color);
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
@@ -48,8 +57,14 @@ declare global {
       }
 
       textarea:not(:disabled):focus {
-        outline: 0.25rem solid #2491ff;
+        outline: 0.25rem solid var(--usa-input-focus-color);
         outline-offset: 0;
+      }
+
+      textarea:disabled {
+        background-color: var(--usa-input-disabled-bg-color);
+        border-color: var(--usa-input-disabled-border-color);
+        color: var(--usa-input-disabled-text-color);
       }
     `,
     html`

@@ -18,6 +18,14 @@ declare global {
       }
 
       :host {
+        --usa-input-bg-color: #fff;
+        --usa-input-border-color: #5c5c5c;
+        --usa-input-text-color: #1b1b1b;
+        --usa-input-focus-color: #2491ff;
+        --usa-input-disabled-bg-color: #fff;
+        --usa-input-disabled-border-color: #757575;
+        --usa-input-disabled-text-color: #757575;
+
         font-size: 1.06rem;
         line-height: 1.3;
         display: block;
@@ -28,11 +36,12 @@ declare global {
       }
 
       input {
+        background-color: var(--usa-input-bg-color);
         border-width: 1px;
-        border-color: #5c5c5c;
+        border-color: var(--usa-input-border-color);
         border-style: solid;
         border-radius: 0;
-        color: #1b1b1b;
+        color: var(--usa-input-text-color);
         display: block;
         height: 2.5rem;
         line-height: 1.3;
@@ -43,8 +52,14 @@ declare global {
       }
 
       input:not(:disabled):focus {
-        outline: 0.25rem solid #2491ff;
+        outline: 0.25rem solid var(--usa-input-focus-color);
         outline-offset: 0;
+      }
+
+      input:disabled {
+        background-color: var(--usa-input-disabled-bg-color);
+        border-color: var(--usa-input-disabled-border-color);
+        color: var(--usa-input-disabled-text-color);
       }
 
       slot[name="detail"]::slotted(*) {

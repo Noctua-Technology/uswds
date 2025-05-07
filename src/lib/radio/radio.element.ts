@@ -18,15 +18,21 @@ declare global {
   shadowDom: [
     css`
       :host {
-        --usa-radio-active-color: #005ea2;
+        --usa-input-bg-color: #fff;
+        --usa-input-border-color: #5c5c5c;
+        --usa-input-text-color: #1b1b1b;
+        --usa-input-focus-color: #2491ff;
+        --usa-input-disabled-bg-color: #fff;
+        --usa-input-disabled-border-color: #757575;
+        --usa-input-disabled-text-color: #757575;
+        --usa-input-active-color: #005ea2;
+        --usa-radio-active-color: var(--usa-input-active-color);
         --usa-radio-tiled-bg: rgba(0, 94, 162, 0.1);
-        --usa-radio-focus-color: #2491ff;
+        --usa-radio-focus-color: var(--usa-input-focus-color);
 
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        display: inline-block;
         max-width: 30rem;
-        margin-bottom: 1.5rem;
+        position: relative;
       }
 
       label {
@@ -47,8 +53,8 @@ declare global {
         height: 1.25rem;
         border-radius: 99rem;
         width: 1.25rem;
-        background: #fff;
-        box-shadow: 0 0 0 2px #1b1b1b;
+        background: var(--usa-input-bg-color);
+        box-shadow: 0 0 0 2px var(--usa-input-text-color);
         flex: 0 0 1.25rem;
         position: relative;
         z-index: 1000;
@@ -58,24 +64,24 @@ declare global {
         background-color: var(--usa-radio-active-color);
         box-shadow:
           0 0 0 2px var(--usa-radio-active-color),
-          inset 0 0 0 2px #fff;
+          inset 0 0 0 2px var(--usa-input-bg-color);
       }
 
       label:has(input:checked:is(:disabled))::before {
-        background-color: #757575;
+        background-color: var(--usa-input-disabled-text-color);
         box-shadow:
-          0 0 0 2px #757575,
-          inset 0 0 0 2px #fff;
+          0 0 0 2px var(--usa-input-disabled-text-color),
+          inset 0 0 0 2px var(--usa-input-bg-color);
       }
 
       label:has(input:disabled) {
         cursor: not-allowed;
-        color: #757575 !important;
+        color: var(--usa-input-disabled-text-color) !important;
       }
 
       label:has(input:disabled)::before {
-        background-color: #fff;
-        box-shadow: 0 0 0 2px #757575;
+        background-color: var(--usa-input-disabled-bg-color);
+        box-shadow: 0 0 0 2px var(--usa-input-disabled-border-color);
       }
       
       label:has(input:focus)::before {
@@ -88,21 +94,60 @@ declare global {
       }
 
       :host([tiled]) label {
-        background-color: #fff;
-        border: 2px solid #c9c9c9;
-        color: #1b1b1b;
+        background-color: var(--usa-input-bg-color);
+        border: 2px solid var(--usa-input-border-color);
         border-radius: 0.25rem;
+        color: var(--usa-input-text-color);
         padding: 0.75rem 1rem 0.75rem 0.75rem;
       }
 
+      .radio {
+        background: var(--usa-input-bg-color);
+        box-shadow: 0 0 0 2px var(--usa-input-text-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 1.25rem;
+        min-width: 1.25rem;
+        max-width: 1.25rem;
+        border-radius: 50%;
+        position: relative;
+        margin-right: 0.75rem;
+      }
+
+      input:disabled + .radio {
+        background-color: var(--usa-input-disabled-bg-color);
+        box-shadow: 0 0 0 2px var(--usa-input-disabled-border-color);
+      }
+
+      input:disabled:is(:checked) + .radio {
+        background-color: var(--usa-input-disabled-text-color);
+        box-shadow: 0 0 0 2px var(--usa-input-disabled-border-color);
+      }
+
+      :host([disabled]) label {
+        color: var(--usa-input-disabled-text-color);
+        cursor: not-allowed;
+      }
+
+      input:checked + .radio {
+        background-color: var(--usa-input-active-color);
+        box-shadow: 0 0 0 2px var(--usa-input-active-color);
+      }
+
+      input:focus + .radio {
+        outline: 0.25rem solid var(--usa-input-focus-color);
+        outline-offset: 0.25rem;
+      }
+
       :host([tiled]) label:has(input:checked) {
-        background-color: var(--usa-radio-tiled-bg);
-        border-color: var(--usa-radio-active-color);
+        background-color: rgba(0, 94, 162, 0.1);
+        border-color: var(--usa-input-active-color);
       }
 
       :host([tiled]) label:has(input:checked:is(:disabled)) {
-        background-color: #fff;
-        border-color: #757575;
+        background-color: var(--usa-input-disabled-bg-color);
+        border-color: var(--usa-input-disabled-border-color);
       }
 
       slot {
