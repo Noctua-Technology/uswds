@@ -20,6 +20,7 @@ declare global {
 
       :host {
         --usa-input-radius: 0;
+        --usa-input-bg-color: #d9e8f6;
         
         display: block;
         max-width: 30rem;

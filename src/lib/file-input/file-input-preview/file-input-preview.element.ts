@@ -65,7 +65,7 @@ declare global {
     `,
     html`
       <slot class="preview-heading"></slot>
-
+      
       <j-for bind="fileEntries" key="src">
         <template>
           <div class="preview-item">
