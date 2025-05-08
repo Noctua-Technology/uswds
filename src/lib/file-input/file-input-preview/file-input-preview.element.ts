@@ -25,6 +25,8 @@ declare global {
         text-align: left;
         word-wrap: anywhere;
         z-index: 3;
+        border-radius: var(--usa-input-radius);
+        overflow: hidden;
       }
 
       :host([hidden]) {
