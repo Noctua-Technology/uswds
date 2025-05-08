@@ -1,5 +1,7 @@
-import { css, element, html, query } from "@joist/element";
-import { effect, observe } from "@joist/observable";
+import "@joist/templating/define.js";
+
+import { css, element, html } from "@joist/element";
+import { bind } from "@joist/templating";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -62,88 +64,57 @@ declare global {
       }
     `,
     html`
-      <template>
-        <div class="preview-item">
-          <img height="40" width="40" aria-hidden="true" style="display: none" />
-          <usa-icon icon="file_present" style="display: none"></usa-icon>
-        </div>
-      </template>
+      <j-if bind="fileEntries.length">
+        <template>
+          <slot class="preview-heading"></slot>
+        </template>
+      </j-if>
 
-      <slot class="preview-heading"></slot>
+      <j-for bind="fileEntries" key="src">
+        <template>
+          <div class="preview-item">
+            <j-if bind="each.value.isImage">
+              <template>
+                <j-props>
+                  <img height="40" width="40" aria-hidden="true" $.src="each.value.src" />
+                </j-props>
+              </template>
+
+              <template else>
+                <usa-icon icon="file_present"></usa-icon>
+              </template>
+            </j-if>
+
+            <j-value bind="each.value.file.name"></j-value>
+          </div>
+        </template>
+      </j-for>
     `,
   ],
 })
 export class USAFileInputPreviewElement extends HTMLElement {
-  @observe()
-  accessor files: FileList | null = null;
+  @bind()
+  accessor fileEntries: FileEntry[] = [];
 
-  #items = new Map<string, Element>();
-  #template = query("template");
+  #files: FileList | null = null;
 
-  connectedCallback() {
-    this.onChange();
+  get files() {
+    return this.#files;
   }
 
-  get shadow() {
-    if (!this.shadowRoot) {
-      throw new Error("no shadow root");
-    }
+  set files(value: FileList | null) {
+    this.#files = value;
 
-    return this.shadowRoot;
+    this.fileEntries = Array.from(value ?? []).map((file) => ({
+      file,
+      src: URL.createObjectURL(file),
+      isImage: file.type.startsWith("image"),
+    }));
   }
+}
 
-  @effect()
-  onChange() {
-    const template = this.#template();
-
-    if (this.files?.length) {
-      this.hidden = false;
-
-      const names = new Set<string>();
-
-      for (const file of this.files) {
-        names.add(file.name);
-
-        if (!this.#items.has(file.name)) {
-          const clone = template.content.cloneNode(true) as DocumentFragment;
-
-          const item = clone.firstElementChild;
-
-          if (!item) {
-            throw new Error("SOMETHING HAS GONE VERY WRONG");
-          }
-
-          item.id = file.name;
-          item.append(document.createTextNode(file.name));
-
-          const img = item.querySelector("img");
-          const icon = item.querySelector("usa-icon");
-
-          if (!img || !icon) {
-            throw Error("Something went very wrong");
-          }
-
-          if (file.type.startsWith("image")) {
-            img.style.display = "block";
-            img.src = URL.createObjectURL(file);
-          } else {
-            icon.style.display = "block";
-          }
-
-          this.shadow.append(item);
-
-          this.#items.set(file.name, item);
-        }
-      }
-
-      for (const [name, item] of this.#items) {
-        if (!names.has(name)) {
-          item.remove();
-          this.#items.delete(name);
-        }
-      }
-    } else {
-      this.hidden = true;
-    }
-  }
+interface FileEntry {
+  file: File;
+  src: string;
+  isImage: boolean;
 }
