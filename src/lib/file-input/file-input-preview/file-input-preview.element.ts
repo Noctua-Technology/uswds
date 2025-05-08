@@ -82,7 +82,7 @@ declare global {
                 <usa-icon icon="file_present"></usa-icon>
               </template>
             </j-if>
-
+            
             <j-value bind="each.value.file.name"></j-value>
           </div>
         </template>
