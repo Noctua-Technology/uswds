@@ -1,5 +1,8 @@
+import "@joist/templating/define.js";
+
 import { attr, css, element, html, listen, query } from "@joist/element";
-import { effect, observe } from "@joist/observable";
+import { effect } from "@joist/observable";
+import { bind } from "@joist/templating";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -82,15 +85,23 @@ declare global {
         <div class="container">
           <input type="file" tabindex="0"/>
 
-          <div class="box">
-            <slot name="description">
-              Drag file here or <usa-link>choose from folder</usa-link>
-            </slot>
-          </div>
+          <j-if bind="!filesVisible">
+            <template>
+              <div class="box">
+                <slot name="description">
+                  Drag file here or <usa-link>choose from folder</usa-link>
+                </slot>
+              </div>
+            </template>
 
-          <usa-file-input-preview>
-            Selected file <usa-link>Change file</usa-link>
-          </usa-file-input-preview>
+            <template else>
+              <j-props>
+                <usa-file-input-preview $.files="files">
+                  Selected file <usa-link>Change file</usa-link>
+                </usa-file-input-preview>
+              </j-props>
+            </template>
+          </j-if>
         </div>
       </label>
     `,
@@ -111,13 +122,14 @@ export class USAFileInputElement extends HTMLElement {
   @attr()
   accessor required = false;
 
-  @observe()
+  @bind()
   accessor files: FileList | null = null;
+
+  @bind()
+  accessor filesVisible = false;
 
   #internals = this.attachInternals();
   #input = query("input");
-  #box = query(".box");
-  #preview = query("usa-file-input-preview");
 
   attributeChangedCallback() {
     this.#input({
@@ -141,15 +153,10 @@ export class USAFileInputElement extends HTMLElement {
   }
 
   @effect()
-  onChange() {
+  syncFormValues() {
     const input = this.#input({ files: this.files });
-    this.#preview({ files: this.files });
-
-    const box = this.#box();
 
     const formData = new FormData();
-
-    box.style.display = this.files?.length ? "none" : "flex";
 
     if (this.files?.length) {
       for (const file of this.files) {
@@ -175,6 +182,7 @@ export class USAFileInputElement extends HTMLElement {
     const input = this.#input();
 
     this.files = input.files;
+    this.filesVisible = !!input.files?.length;
 
     this.dispatchEvent(new Event("change"));
   }

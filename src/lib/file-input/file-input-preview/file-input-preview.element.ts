@@ -66,12 +66,8 @@ declare global {
       }
     `,
     html`
-      <j-if bind="fileEntries.length">
-        <template>
-          <slot class="preview-heading"></slot>
-        </template>
-      </j-if>
-
+      <slot class="preview-heading"></slot>
+      
       <j-for bind="fileEntries" key="src">
         <template>
           <div class="preview-item">
