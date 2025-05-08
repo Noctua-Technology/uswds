@@ -16,6 +16,8 @@ declare global {
       }
 
       :host {
+        --usa-input-radius: 0;
+        
         display: block;
         max-width: 30rem;
         position: relative;
@@ -58,6 +60,7 @@ declare global {
 
       .box {
         border: 1px dashed #adadad;
+        border-radius: var(--usa-input-radius);
         display: flex;
         font-size: 0.93rem;
         position: relative;

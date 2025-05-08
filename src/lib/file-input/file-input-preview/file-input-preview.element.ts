@@ -18,6 +18,8 @@ declare global {
       }
 
       :host {
+        --usa-input-bg-color: #d9e8f6;
+
         display: block;
         font-size: 0.87rem;
         pointer-events: none;
@@ -43,7 +45,7 @@ declare global {
 
       .preview-heading {
         align-items: center;
-        background: #d9e8f6;
+        background: var(--usa-input-bg-color);
         display: flex;
         pointer-events: none;
         position: relative;
@@ -56,7 +58,7 @@ declare global {
 
       .preview-item {
         align-items: center;
-        background: #d9e8f6;
+        background: var(--usa-input-bg-color);
         display: flex;
         padding: 0.5rem;
         width: 100%;
