@@ -18,8 +18,6 @@ declare global {
       }
 
       :host {
-        --usa-input-bg-color: #d9e8f6;
-
         display: block;
         font-size: 0.87rem;
         pointer-events: none;
@@ -67,7 +65,7 @@ declare global {
     `,
     html`
       <slot class="preview-heading"></slot>
-      
+
       <j-for bind="fileEntries" key="src">
         <template>
           <div class="preview-item">
