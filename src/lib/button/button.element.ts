@@ -1,4 +1,7 @@
-import { attr, css, element, html, listen, query, ready } from "@joist/element";
+import "@joist/templating/define.js";
+
+import { attr, css, element, html, listen } from "@joist/element";
+import { bind } from "@joist/templating";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -30,9 +33,10 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
         border-bottom-right-radius: 0.25rem;
         border-top-left-radius: 0.25rem;
         border-bottom-left-radius: 0.25rem;
+        overflow: hidden;
       }
 
-      button {
+      button, a {
         box-sizing: border-box;
         font-size: 1.06rem;
         line-height: 0.9;
@@ -43,10 +47,6 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
         appearance: none;
         align-items: center;
         border: 0;
-        border-top-right-radius: inherit;
-        border-bottom-right-radius: inherit;
-        border-top-left-radius: inherit;
-        border-bottom-left-radius: inherit;
         cursor: pointer;
         -moz-column-gap: 0.5rem;
         column-gap: 0.5rem;
@@ -67,111 +67,125 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
         }
       }
 
-      button:visited {
+      :is(button, a):visited {
         color: white;
       }
 
-      button:hover {
+      :is(button, a):hover {
         color: white;
         background-color: #1a4480;
         border-bottom: 0;
         text-decoration: none;
       }
 
-      button:active {
+      :is(button, a):active {
         color: white;
         background-color: #162e51;
       }
 
-      button:not([disabled]):focus {
+      :is(button, a):not([disabled]):focus {
         outline-offset: 0.25rem;
       }
 
-      button:disabled {
+      :is(button, a):disabled {
         color: #454545;
         background-color: #c9c9c9;
         cursor: not-allowed;
         opacity: 1;
       }
 
-      button:disabled:hover,
-      button:disabled:active,
-      button:disabled:focus {
+      :is(button, a):disabled:hover,
+      :is(button, a):disabled:active,
+      :is(button, a):disabled:focus {
         color: #454545;
         background-color: #c9c9c9;
       }
 
-      button:focus {
+      :is(button, a):focus {
         outline: 0.25rem solid #2491ff;
         outline-offset: 0;
       }
 
       /** Secondary */
-      :host([variant="secondary"]) button {
+      :host([variant="secondary"]) :is(button, a) {
         color: #fff;
         background-color: #d83933;
       }
 
-      :host([variant="secondary"]) button:hover {
+      :host([variant="secondary"]) :is(button, a):hover {
         background-color: #b50909;
       }
 
-      :host([variant="secondary"]) button:active {
+      :host([variant="secondary"]) :is(button, a):active {
         background-color: #8b0a03;
       }
 
       /** cool */
-      :host([variant="cool"]) button {
+      :host([variant="cool"]) :is(button, a) {
         color: #1b1b1b;
         background-color: #00bde3;
       }
 
-      :host([variant="cool"]) button:hover {
+      :host([variant="cool"]) :is(button, a):hover {
         background-color: #28a0cb;
       }
 
-      :host([variant="cool"]) button:active {
+      :host([variant="cool"]) :is(button, a):active {
         color: #fff;
         background-color: #07648d;
       }
 
       /** warm */
-      :host([variant="warm"]) button {
+      :host([variant="warm"]) :is(button, a) {
         color: #1b1b1b;
         background-color: #fa9441;
       }
 
-      :host([variant="warm"]) button:hover {
+      :host([variant="warm"]) :is(button, a):hover {
         color: #fff;
         background-color: #c05600;
       }
 
-      :host([variant="warm"]) button:active {
+      :host([variant="warm"]) :is(button, a):active {
         color: #fff;
         background-color: #775540;
       }
 
       /** outline */
-      :host([variant="outline"]) button {
+      :host([variant="outline"]) :is(button, a) {
         background-color: transparent;
         box-shadow: inset 0 0 0 2px #005ea2;
         color: #005ea2;
       }
 
-      :host([variant="outline"]) button:hover {
+      :host([variant="outline"]) :is(button, a):hover {
         box-shadow: inset 0 0 0 2px #1a4480;
         color: #1a4480;
       }
 
-      :host([variant="outline"]) button:active {
+      :host([variant="outline"]) :is(button, a):active {
         box-shadow: inset 0 0 0 2px #162e51;
         color: #162e51;
       }
     `,
     html`
-      <button tabindex="0">
-        <slot></slot>
-      </button>
+      <j-if bind="href">
+        <template>
+          <j-props>
+            <a $href="href" $disabled="disabled" $target="target">
+              <slot></slot>
+            </a>
+          </j-props>
+        </template>
+
+        <template else>
+          <j-props>
+            <button tabindex="0" $type="type" $disabled="disabled" $value="value">
+              <slot></slot>
+            </button>
+          </j-props>
+        </template>
+      </j-if>
     `,
   ],
 })
@@ -179,34 +193,35 @@ export class USAButtonElement extends HTMLElement {
   static formAssociated = true;
 
   @attr()
+  @bind()
   accessor type: "button" | "submit" | "reset" = "button";
 
   @attr()
+  @bind()
   accessor disabled = false;
 
   @attr()
   accessor variant: ButtonVariant = "primary";
 
   @attr()
+  @bind()
   accessor value = "";
+
+  @attr()
+  @bind()
+  accessor href = "";
+
+  @attr()
+  @bind()
+  accessor target = "";
 
   accessor tabIndex = 0;
 
   #internals = this.attachInternals();
-  #button = query("button");
-
-  @ready()
-  onReady() {
-    this.#button({ autofocus: this.autofocus });
-  }
 
   @listen("click")
   onInternalClick() {
     this.#handleForm();
-  }
-
-  attributeChangedCallback() {
-    this.#button({ type: this.type, disabled: this.disabled });
   }
 
   #handleForm() {

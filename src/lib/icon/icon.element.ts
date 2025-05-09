@@ -1,4 +1,4 @@
-import { inject, injectable, injected } from "@joist/di";
+import { inject, injectable } from "@joist/di";
 import { attr, css, element } from "@joist/element";
 
 import { IconService } from "../services/icon.service.js";
@@ -41,18 +41,17 @@ export class USAIconElement extends HTMLElement {
   #icon = inject(IconService);
   #injected = false;
 
-  @injected()
-  onInjected() {
-    this.#injected = true;
-    this.#updateIcon();
-  }
-
   attributeChangedCallback(_: string, newVal: string, oldVal: string) {
     if (this.#injected) {
       if (newVal !== oldVal) {
         this.#updateIcon();
       }
     }
+  }
+
+  connectedCallback() {
+    this.#injected = true;
+    this.#updateIcon();
   }
 
   async #updateIcon() {

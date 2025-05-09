@@ -16,6 +16,12 @@ const meta = {
               i === BUTTON_VARIANTS.length - 1 ? "" : "\n\n"
             }`,
         )}
+        ${BUTTON_VARIANTS.map(
+          (variant, i) =>
+            html`<usa-button href="#" variant=${variant}>Hello World (Link)</usa-button> ${
+              i === BUTTON_VARIANTS.length - 1 ? "" : "\n\n"
+            }`,
+        )}
         <usa-button disabled>Disabled</usa-button>
       </div>
     `;
