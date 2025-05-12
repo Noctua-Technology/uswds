@@ -86,21 +86,21 @@ declare global {
         <div class="container">
           <input type="file" tabindex="0"/>
 
-          <j-if bind="!filesVisible">
-            <template>
+          <j-if bind="filesVisible">
+              <template>
+                <j-props>
+                <usa-file-input-preview $.files="files">
+                  Selected file <usa-link>Change file</usa-link>
+                </usa-file-input-preview>
+              </j-props>
+            </template>
+
+            <template else>
               <div class="box">
                 <slot name="description">
                   Drag file here or <usa-link>choose from folder</usa-link>
                 </slot>
               </div>
-            </template>
-
-            <template else>
-              <j-props>
-                <usa-file-input-preview $.files="files">
-                  Selected file <usa-link>Change file</usa-link>
-                </usa-file-input-preview>
-              </j-props>
             </template>
           </j-if>
         </div>
@@ -218,6 +218,7 @@ export class USAFileInputElement extends HTMLElement {
       }
 
       this.files = data.files;
+      this.filesVisible = !!this.files?.length;
     }
   }
 }
