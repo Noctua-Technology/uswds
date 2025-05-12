@@ -44,4 +44,36 @@ describe("usa-file-input", () => {
 
     assert.deepEqual(fileNames, ["first.txt", "second.txt"]);
   });
+
+  it("should show file preview after drag and drop", async () => {
+    const fileInput = await fixture<USAFileInputElement>(html`
+      <usa-file-input>
+        Input accepts a single file
+      </usa-file-input>
+    `);
+
+    const nativeInput = fileInput.shadowRoot?.querySelector("input");
+
+    assert.isOk(nativeInput);
+
+    // Simulate drag and drop with a file
+    const data = new DataTransfer();
+    data.items.add(new File([], "test.txt"));
+
+    const dropEvent = new DragEvent("drop", {
+      dataTransfer: data,
+      bubbles: true,
+      cancelable: true,
+    });
+
+    nativeInput.dispatchEvent(dropEvent);
+
+    // Wait for effects to resolve
+    await Promise.resolve();
+
+    // Verify that filesVisible is true and files are set
+    assert.isTrue(fileInput.filesVisible);
+    assert.equal(fileInput.files?.length, 1);
+    assert.equal(fileInput.files?.[0].name, "test.txt");
+  });
 });
