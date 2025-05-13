@@ -33,7 +33,7 @@ declare global {
       :host([tiled]) label {
         background-color: var(--usa-input-bg-color);
         border: 2px solid var(--usa-input-border-color);
-        border-radius: var(--usa-input-radius);
+        border-radius: 0.25rem;
         color: var(--usa-input-text-color);
         padding: 0.75rem 1rem 0.75rem 0.75rem;
       }
@@ -55,7 +55,7 @@ declare global {
         height: 1.25rem;
         min-width: 1.25rem;
         max-width: 1.25rem;
-        border-radius: var(--usa-input-radius);
+        border-radius: 0.25rem;
         position: relative;
         margin-right: 0.75rem;
       }
