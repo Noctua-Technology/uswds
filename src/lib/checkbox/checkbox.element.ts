@@ -55,7 +55,7 @@ declare global {
         height: 1.25rem;
         min-width: 1.25rem;
         max-width: 1.25rem;
-        border-radius: 0.25rem;
+        border-radius: var(--usa-input-radius);
         position: relative;
         margin-right: 0.75rem;
       }
