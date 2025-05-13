@@ -1,6 +1,7 @@
 import "@joist/templating/define.js";
 
 import { css, element, html } from "@joist/element";
+import { observe } from "@joist/observable";
 import { bind } from "@joist/templating";
 
 declare global {
@@ -91,24 +92,21 @@ declare global {
   ],
 })
 export class USAFileInputPreviewElement extends HTMLElement {
-  @bind()
-  accessor fileEntries: FileEntry[] = [];
+  @observe()
+  accessor files: FileList | null = null;
 
-  #files: FileList | null = null;
+  @bind((i) => {
+    if (!i.files || i.files.length === 0) {
+      return [];
+    }
 
-  get files() {
-    return this.#files;
-  }
-
-  set files(value: FileList | null) {
-    this.#files = value;
-
-    this.fileEntries = Array.from(value ?? []).map((file) => ({
+    return Array.from(i.files).map((file) => ({
       file,
       src: URL.createObjectURL(file),
       isImage: file.type.startsWith("image"),
     }));
-  }
+  })
+  accessor fileEntries: FileEntry[] = [];
 }
 
 interface FileEntry {

@@ -31,9 +31,11 @@ declare global {
         --usa-radio-focus-color: var(--usa-input-focus-color);
         --usa-input-radius: 0;
 
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
         max-width: 30rem;
-        position: relative;
+        margin-bottom: 1.5rem;
       }
 
       label {
@@ -97,7 +99,7 @@ declare global {
       :host([tiled]) label {
         background-color: var(--usa-input-bg-color);
         border: 2px solid var(--usa-input-border-color);
-        border-radius: var(--usa-input-radius);
+        border-radius: 0.25rem;
         color: var(--usa-input-text-color);
         padding: 0.75rem 1rem 0.75rem 0.75rem;
       }
