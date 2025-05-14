@@ -55,11 +55,11 @@ declare global {
       }
     `,
     html`
-      <label>
+      <label part="label">
         <slot></slot>
       </label>
 
-      <input type="range">
+      <input type="range" part="input">
     `,
   ],
 })

@@ -29,7 +29,7 @@ declare global {
       }
     `,
     html`
-      <h2>
+      <h2 part="heading">
         <slot></slot>
       </h2>
     `,

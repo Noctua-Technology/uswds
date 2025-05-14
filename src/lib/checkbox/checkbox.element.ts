@@ -15,26 +15,16 @@ declare global {
       }
 
       :host {
-        --usa-input-bg-color: #fff;
-        --usa-input-border-color: #5c5c5c;
-        --usa-input-text-color: #1b1b1b;
-        --usa-input-focus-color: #2491ff;
-        --usa-input-disabled-bg-color: #fff;
-        --usa-input-disabled-border-color: #757575;
-        --usa-input-disabled-text-color: #757575;
-        --usa-input-active-color: #005ea2;
-        --usa-input-radius: 0;
-
         display: inline-block;
         max-width: 30rem;
         position: relative;
       }
 
       :host([tiled]) label {
-        background-color: var(--usa-input-bg-color);
-        border: 2px solid var(--usa-input-border-color);
+        background-color: #fff;
+        border: 2px solid #5c5c5c;
         border-radius: 0.25rem;
-        color: var(--usa-input-text-color);
+        color: #1b1b1b;
         padding: 0.75rem 1rem 0.75rem 0.75rem;
       }
 
@@ -47,37 +37,37 @@ declare global {
       }
 
       .checkbox {
-        background: var(--usa-input-bg-color);
-        box-shadow: 0 0 0 2px var(--usa-input-text-color);
+        background: #fff;
+        box-shadow: 0 0 0 2px #1b1b1b;
         display: flex;
         align-items: center;
         justify-content: center;
         height: 1.25rem;
         min-width: 1.25rem;
         max-width: 1.25rem;
-        border-radius: var(--usa-input-radius);
+        border-radius: 2px;
         position: relative;
         margin-right: 0.75rem;
       }
 
       input:disabled + .checkbox {
-        background-color: var(--usa-input-disabled-bg-color);
-        box-shadow: 0 0 0 2px var(--usa-input-disabled-border-color);
+        background-color: #fff;
+        box-shadow: 0 0 0 2px #757575;
       }
 
       input:disabled:is(:checked) + .checkbox {
-        background-color: var(--usa-input-disabled-text-color);
-        box-shadow: 0 0 0 2px var(--usa-input-disabled-border-color);
+        background-color: #757575;
+        box-shadow: 0 0 0 2px #757575;
       }
 
       :host([disabled]) label {
-        color: var(--usa-input-disabled-text-color);
+        color: #757575;
         cursor: not-allowed;
       }
 
       input:checked + .checkbox {
-        background-color: var(--usa-input-active-color);
-        box-shadow: 0 0 0 2px var(--usa-input-active-color);
+        background-color: #005ea2;
+        box-shadow: 0 0 0 2px #005ea2;
       }
       
       input:checked + .checkbox::after {
@@ -95,7 +85,7 @@ declare global {
       }
 
       input:focus + .checkbox {
-        outline: 0.25rem solid var(--usa-input-focus-color);
+        outline: 0.25rem solid #2491ff;
         outline-offset: 0.25rem;
       }
 
@@ -112,23 +102,24 @@ declare global {
 
       :host([tiled]) label:has(input:checked) {
         background-color: rgba(0, 94, 162, 0.1);
-        border-color: var(--usa-input-active-color);
+        border-color: #005ea2;
       }
 
       :host([tiled]) label:has(input:checked:is(:disabled)) {
-        background-color: var(--usa-input-disabled-bg-color);
-        border-color: var(--usa-input-disabled-border-color);
+        background-color: #fff;
+        border-color: #757575;
       }
     `,
     html`
       <label>
         <input type="checkbox" tabindex="0"/>
 
-        <div class="checkbox"></div>
+        <div class="checkbox" part="checkbox"></div>
 
-        <div class="title">
-          <slot></slot>
-        </div>
+        <div class="title" part="title">
+            <slot></slot>
+          </div>
+        </j-props>
       </label>
     `,
   ],

@@ -18,15 +18,6 @@ declare global {
   shadowDom: [
     css`
       :host {
-        --usa-input-bg-color: #fff;
-        --usa-input-border-color: #5c5c5c;
-        --usa-input-text-color: #1b1b1b;
-        --usa-input-focus-color: #2491ff;
-        --usa-input-disabled-bg-color: #fff;
-        --usa-input-disabled-border-color: #757575;
-        --usa-input-disabled-text-color: #757575;
-        --usa-input-radius: 0;
-
         display: block;
         line-height: 1.3;
         position: relative;
@@ -39,11 +30,11 @@ declare global {
         font-size: 1.06rem;
         appearance: none;
         border-width: 1px;
-        border-color: var(--usa-input-border-color);
+        border-color: #5c5c5c;
         border-style: solid;
-        border-radius: var(--usa-input-radius);
-        color: var(--usa-input-text-color);
-        background-color: var(--usa-input-bg-color);
+        border-radius: 0;
+        color: #1b1b1b;
+        background-color: #fff;
         display: block;
         height: 2.5rem;
         margin-top: 0.5rem;
@@ -52,14 +43,14 @@ declare global {
       }
 
       select:not(:disabled):focus {
-        outline: 0.25rem solid var(--usa-input-focus-color);
+        outline: 0.25rem solid #2491ff;
         outline-offset: 0;
       }
 
       select:disabled {
-        background-color: var(--usa-input-disabled-bg-color);
-        border-color: var(--usa-input-disabled-border-color);
-        color: var(--usa-input-disabled-text-color);
+        background-color: #fff;
+        border-color: #757575;
+        color: #757575;
       }
 
       usa-icon {
@@ -74,11 +65,11 @@ declare global {
       <usa-icon icon="unfold_more"></usa-icon>
 
       <label>
-        <div class="label">
+        <div class="label" part="label">
           <slot></slot>
         </div>
 
-        <select></select>
+        <select part="select"></select>
       </label>
     `,
   ],

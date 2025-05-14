@@ -38,7 +38,7 @@ declare global {
       }
     `,
     html`
-      <dialog>
+      <dialog part="dialog">
         <slot></slot>
       </dialog>
     `,

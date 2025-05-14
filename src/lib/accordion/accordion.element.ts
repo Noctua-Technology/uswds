@@ -1,4 +1,7 @@
-import { attr, css, element, html, listen, query } from "@joist/element";
+import "@joist/templating/define.js";
+
+import { attr, css, element, html, listen } from "@joist/element";
+import { bind } from "@joist/templating";
 
 import { USAAccordionToggleEvent } from "./events.js";
 
@@ -88,18 +91,20 @@ declare global {
       }
     `,
     html`
-      <details>
-        <summary>
-          <slot name="heading"></slot>
+      <j-props>
+        <details $.open="open">
+          <summary>
+            <slot name="heading"></slot>
 
-          <usa-icon icon="add"></usa-icon>
-          <usa-icon icon="remove"></usa-icon>
-        </summary>
+            <usa-icon icon="add"></usa-icon>
+            <usa-icon icon="remove"></usa-icon>
+          </summary>
 
-        <div class="content">
-          <slot></slot>
-        </div>
-      </details>
+          <div class="content">
+            <slot></slot>
+          </div>
+        </details>
+      </j-props>
     `,
   ],
 })
@@ -108,13 +113,8 @@ export class USAAccordionElement extends HTMLElement {
   accessor name = "";
 
   @attr()
+  @bind()
   accessor open = false;
-
-  #details = query("details");
-
-  attributeChangedCallback() {
-    this.#details({ open: this.open });
-  }
 
   @listen("click", "summary")
   onClick(e: Event) {

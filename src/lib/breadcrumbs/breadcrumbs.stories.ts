@@ -10,9 +10,9 @@ const meta = {
   render(args) {
     return html`
       <usa-breadcrumbs ?wrap=${args.wrap}>
-        <usa-breadcrumb href="/">Home</usa-breadcrumb>
-        <usa-breadcrumb href="/">Federal Contracting</usa-breadcrumb>
-        <usa-breadcrumb href="/">Contracting assistance programs</usa-breadcrumb>
+        <usa-breadcrumb href="/home">Home</usa-breadcrumb>
+        <usa-breadcrumb href="/federal-contracting">Federal Contracting</usa-breadcrumb>
+        <usa-breadcrumb href="/contracting-assistance-programs">Contracting assistance programs</usa-breadcrumb>
         <usa-breadcrumb>Economically disadvantaged women-owned small business federal contracting program</usa-breadcrumb>
       </usa-breadcrumbs>
     `;

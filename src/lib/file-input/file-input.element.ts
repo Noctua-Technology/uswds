@@ -19,9 +19,6 @@ declare global {
       }
 
       :host {
-        --usa-input-radius: 0;
-        --usa-input-bg-color: #d9e8f6;
-        
         display: block;
         max-width: 30rem;
         position: relative;
@@ -64,7 +61,7 @@ declare global {
 
       .box {
         border: 1px dashed #adadad;
-        border-radius: var(--usa-input-radius);
+        border-radius: 0;
         display: flex;
         font-size: 0.93rem;
         position: relative;
@@ -87,16 +84,16 @@ declare global {
           <input type="file" tabindex="0"/>
 
           <j-if bind="filesVisible">
-              <template>
-                <j-props>
-                <usa-file-input-preview $.files="files">
+            <template>
+              <j-props>
+                <usa-file-input-preview $.files="files" part="preview">
                   Selected file <usa-link>Change file</usa-link>
                 </usa-file-input-preview>
               </j-props>
             </template>
 
             <template else>
-              <div class="box">
+              <div class="box" part="input">
                 <slot name="description">
                   Drag file here or <usa-link>choose from folder</usa-link>
                 </slot>
@@ -126,7 +123,7 @@ export class USAFileInputElement extends HTMLElement {
   @bind()
   accessor files: FileList | null = null;
 
-  @bind()
+  @bind((i) => !!i.files?.length)
   accessor filesVisible = false;
 
   #internals = this.attachInternals();
@@ -183,7 +180,6 @@ export class USAFileInputElement extends HTMLElement {
     const input = this.#input();
 
     this.files = input.files;
-    this.filesVisible = !!input.files?.length;
 
     this.dispatchEvent(new Event("change"));
   }
@@ -218,7 +214,6 @@ export class USAFileInputElement extends HTMLElement {
       }
 
       this.files = data.files;
-      this.filesVisible = !!this.files?.length;
     }
   }
 }

@@ -172,7 +172,7 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
       <j-if bind="href">
         <template>
           <j-props>
-            <a $href="href" $disabled="disabled" $target="target">
+            <a part="link" $href="href" $disabled="disabled" $target="target">
               <slot></slot>
             </a>
           </j-props>
@@ -180,7 +180,7 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
 
         <template else>
           <j-props>
-            <button tabindex="0" $type="type" $disabled="disabled" $value="value">
+            <button tabindex="0" part="button" $type="type" $disabled="disabled" $value="value">
               <slot></slot>
             </button>
           </j-props>

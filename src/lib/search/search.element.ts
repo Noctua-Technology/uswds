@@ -40,11 +40,11 @@ declare global {
     `,
     html`
       <form>
-        <usa-input>
+        <usa-input exportparts="input">
           <slot></slot>
         </usa-input>
 
-        <usa-button type="submit">Search</usa-button>
+        <usa-button type="submit" exportparts="button,link">Search</usa-button>
       </form>
     `,
   ],

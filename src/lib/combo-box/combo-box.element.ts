@@ -30,17 +30,6 @@ declare global {
       }
       
       :host {
-        --usa-input-bg-color: #fff;
-        --usa-input-border-color: #5c5c5c;
-        --usa-input-text-color: #1b1b1b;
-        --usa-input-focus-color: #2491ff;
-        --usa-input-disabled-bg-color: #fff;
-        --usa-input-disabled-border-color: #757575;
-        --usa-input-disabled-text-color: #757575;
-        --usa-input-hover-bg-color: #f0f0f0;
-        --usa-combo-max-height: 12.5em;
-        --usa-input-radius: 0;
-
         display: block;
         max-width: 30rem;
         position: relative;
@@ -49,11 +38,11 @@ declare global {
       
       input {
         border-width: 1px;
-        border-color: var(--usa-input-border-color);
+        border-color: #5c5c5c;
         border-style: solid;
-        border-radius: var(--usa-input-radius);
-        color: var(--usa-input-text-color);
-        background-color: var(--usa-input-bg-color);
+        border-radius: 0;
+        color: #1b1b1b;
+        background-color: #fff;
         display: block;
         height: 2.5rem;
         line-height: 1.3;
@@ -65,14 +54,14 @@ declare global {
       }
 
       input:not(:disabled):focus {
-        outline: 0.25rem solid var(--usa-input-focus-color);
+        outline: 0.25rem solid #2491ff;
         outline-offset: 0;
       }
 
       input:disabled {
-        background-color: var(--usa-input-disabled-bg-color);
-        border-color: var(--usa-input-disabled-border-color);
-        color: var(--usa-input-disabled-text-color);
+        background-color: #fff;
+        border-color: #757575;
+        color: #757575;
       }
 
       ul {
@@ -82,8 +71,8 @@ declare global {
         width: 100%;
         transform: translateY(100%);
         margin: 0;
-        border: 1px solid var(--usa-input-border-color);
-        max-height: var(--usa-combo-max-height);
+        border: 1px solid #5c5c5c;
+        max-height: 12.5em;
         overflow-y: scroll;
         z-index: 1001;
       }
@@ -93,7 +82,7 @@ declare global {
       }
 
       ul li {
-        background: var(--usa-input-bg-color);
+        background: #fff;
         list-style: none;
         border-bottom: 1px solid #e6e6e6;
         cursor: pointer;
@@ -101,11 +90,11 @@ declare global {
       }
 
       ul li:hover {
-        background-color: var(--usa-input-hover-bg-color);
+        background-color: #f0f0f0;
       }
 
       li:focus {
-        outline: 0.25rem solid var(--usa-input-focus-color);
+        outline: 0.25rem solid #2491ff;
         outline-offset: -0.25rem;
       }
 
@@ -131,6 +120,7 @@ declare global {
         <slot name="label"></slot>
 
         <input 
+          part="input"
           tabindex="0" 
           role="combobox" 
           autocomplete="off" 

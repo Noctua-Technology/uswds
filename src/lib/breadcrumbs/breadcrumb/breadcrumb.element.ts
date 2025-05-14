@@ -1,4 +1,5 @@
-import { attr, css, element, html, query } from "@joist/element";
+import { attr, css, element, html } from "@joist/element";
+import { bind } from "@joist/templating";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -36,9 +37,11 @@ declare global {
       }
     `,
     html`
-      <a>
-        <slot></slot>
-      </a>
+      <j-props>
+        <a $.href="href">
+          <slot></slot>
+        </a>
+      </j-props>
 
       <usa-icon icon="navigate_next"></usa-icon>
     `,
@@ -46,14 +49,9 @@ declare global {
 })
 export class USABreadcrumbElement extends HTMLElement {
   @attr()
+  @bind()
   accessor href = "";
 
   @attr()
   accessor role = "listitem";
-
-  #a = query("a");
-
-  attributeChangedCallback() {
-    this.#a({ href: this.href });
-  }
 }

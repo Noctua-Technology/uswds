@@ -16,15 +16,6 @@ declare global {
       }
 
       :host {
-        --usa-input-bg-color: #fff;
-        --usa-input-border-color: #5c5c5c;
-        --usa-input-text-color: #1b1b1b;
-        --usa-input-focus-color: #2491ff;
-        --usa-input-disabled-bg-color: #fff;
-        --usa-input-disabled-border-color: #757575;
-        --usa-input-disabled-text-color: #757575;
-        --usa-input-radius: 0;
-
         font-size: 1.06rem;
         line-height: 1.3;
         display: flex;
@@ -40,14 +31,14 @@ declare global {
       textarea {
         font-family: inherit;
         font-size: inherit;
-        border-radius: var(--usa-input-radius);
-        color: var(--usa-input-text-color);
+        border-radius: 0;
+        color: #1b1b1b;
         display: block;
         padding: .5rem;
         border-width: 1px;
-        border-color: var(--usa-input-border-color);
+        border-color: #5c5c5c;
         border-style: solid;
-        background-color: var(--usa-input-bg-color);
+        background-color: #fff;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
@@ -57,22 +48,22 @@ declare global {
       }
 
       textarea:not(:disabled):focus {
-        outline: 0.25rem solid var(--usa-input-focus-color);
+        outline: 0.25rem solid #2491ff;
         outline-offset: 0;
       }
 
       textarea:disabled {
-        background-color: var(--usa-input-disabled-bg-color);
-        border-color: var(--usa-input-disabled-border-color);
-        color: var(--usa-input-disabled-text-color);
+        background-color: #fff;
+        border-color: #757575;
+        color: #757575;
       }
     `,
     html`
-      <label for="textarea">
+      <label for="textarea" part="label">
         <slot></slot>
       </label>
       
-      <textarea id="textarea"></textarea>
+      <textarea id="textarea" part="textarea"></textarea>
     `,
   ],
 })
