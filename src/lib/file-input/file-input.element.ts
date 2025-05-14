@@ -1,17 +1,17 @@
-import "@joist/templating/define.js";
+import '@joist/templating/define.js';
 
-import { attr, css, element, html, listen, query } from "@joist/element";
-import { effect } from "@joist/observable";
-import { bind } from "@joist/templating";
+import { attr, css, element, html, listen, query } from '@joist/element';
+import { effect } from '@joist/observable';
+import { bind } from '@joist/templating';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-file-input": USAFileInputElement;
+    'usa-file-input': USAFileInputElement;
   }
 }
 
 @element({
-  tagName: "usa-file-input",
+  tagName: 'usa-file-input',
   shadowDom: [
     css`
       * {
@@ -81,12 +81,12 @@ declare global {
         <slot class="label"></slot>
 
         <div class="container">
-          <input type="file" tabindex="0"/>
+          <input type="file" tabindex="0" />
 
           <j-if bind="filesVisible">
             <template>
               <j-props>
-                <usa-file-input-preview $.files="files" part="preview">
+                <usa-file-input-preview $.files="files" part="preview" exportparts="heading, item">
                   Selected file <usa-link>Change file</usa-link>
                 </usa-file-input-preview>
               </j-props>
@@ -94,9 +94,7 @@ declare global {
 
             <template else>
               <div class="box" part="input">
-                <slot name="description">
-                  Drag file here or <usa-link>choose from folder</usa-link>
-                </slot>
+                <slot name="description"> Drag file here or <usa-link>choose from folder</usa-link> </slot>
               </div>
             </template>
           </j-if>
@@ -109,13 +107,13 @@ export class USAFileInputElement extends HTMLElement {
   static formAssociated = true;
 
   @attr()
-  accessor name = "";
+  accessor name = '';
 
   @attr()
   accessor multiple = true;
 
   @attr()
-  accessor accept = "";
+  accessor accept = '';
 
   @attr()
   accessor required = false;
@@ -127,7 +125,7 @@ export class USAFileInputElement extends HTMLElement {
   accessor filesVisible = false;
 
   #internals = this.attachInternals();
-  #input = query("input");
+  #input = query('input');
 
   attributeChangedCallback() {
     this.#input({
@@ -142,11 +140,7 @@ export class USAFileInputElement extends HTMLElement {
     const input = this.#input();
 
     if (input.validationMessage) {
-      this.#internals.setValidity(
-        { customError: true },
-        input.validationMessage,
-        input,
-      );
+      this.#internals.setValidity({ customError: true }, input.validationMessage, input);
     }
   }
 
@@ -165,38 +159,34 @@ export class USAFileInputElement extends HTMLElement {
     this.#internals.setFormValue(formData);
 
     if (input.validationMessage) {
-      this.#internals.setValidity(
-        { customError: true },
-        input.validationMessage,
-        input,
-      );
+      this.#internals.setValidity({ customError: true }, input.validationMessage, input);
     } else {
       this.#internals.setValidity({});
     }
   }
 
-  @listen("change")
+  @listen('change')
   onInputChange() {
     const input = this.#input();
 
     this.files = input.files;
 
-    this.dispatchEvent(new Event("change"));
+    this.dispatchEvent(new Event('change'));
   }
 
-  @listen("dragenter")
+  @listen('dragenter')
   onDragEnter() {
-    this.classList.add("dragenter");
+    this.classList.add('dragenter');
   }
 
-  @listen("dragleave")
+  @listen('dragleave')
   onDragLeave() {
-    this.classList.remove("dragenter");
+    this.classList.remove('dragenter');
   }
 
-  @listen("drop")
+  @listen('drop')
   onDrop(e: DragEvent) {
-    this.classList.remove("dragenter");
+    this.classList.remove('dragenter');
 
     if (e.dataTransfer?.items) {
       e.preventDefault();
@@ -204,7 +194,7 @@ export class USAFileInputElement extends HTMLElement {
       const data = new DataTransfer();
 
       for (const item of e.dataTransfer.items) {
-        if (item.kind === "file") {
+        if (item.kind === 'file') {
           const file = item.getAsFile();
 
           if (file) {

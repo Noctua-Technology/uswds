@@ -1,17 +1,17 @@
-import "@joist/templating/define.js";
+import '@joist/templating/define.js';
 
-import { css, element, html } from "@joist/element";
-import { observe } from "@joist/observable";
-import { bind } from "@joist/templating";
+import { css, element, html } from '@joist/element';
+import { observe } from '@joist/observable';
+import { bind } from '@joist/templating';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-file-input-preview": USAFileInputPreviewElement;
+    'usa-file-input-preview': USAFileInputPreviewElement;
   }
 }
 
 @element({
-  tagName: "usa-file-input-preview",
+  tagName: 'usa-file-input-preview',
   shadowDom: [
     css`
       * {
@@ -26,7 +26,7 @@ declare global {
         text-align: left;
         word-wrap: anywhere;
         z-index: 3;
-        border-radius: var(--usa-input-radius);
+        border-radius: 0;
         overflow: hidden;
       }
 
@@ -45,8 +45,8 @@ declare global {
       }
 
       .preview-heading {
+        background: #d9e8f6;
         align-items: center;
-        background: var(--usa-input-bg-color);
         display: flex;
         pointer-events: none;
         position: relative;
@@ -55,23 +55,26 @@ declare global {
         justify-content: space-between;
         padding: 0.5rem;
         text-align: left;
+        font-size: 0.93rem;
+        line-height: 1.6;
       }
 
       .preview-item {
+        background: #d9e8f6;
         align-items: center;
-        background: var(--usa-input-bg-color);
         display: flex;
         padding: 0.5rem;
         width: 100%;
         margin-top: 1px;
+        margin-bottom: 1px;
       }
     `,
     html`
-      <slot class="preview-heading"></slot>
-      
+      <slot class="preview-heading" part="heading"></slot>
+
       <j-for bind="fileEntries" key="src">
         <template>
-          <div class="preview-item">
+          <div class="preview-item" part="item">
             <j-if bind="each.value.isImage">
               <template>
                 <j-props>
@@ -83,7 +86,7 @@ declare global {
                 <usa-icon icon="file_present"></usa-icon>
               </template>
             </j-if>
-            
+
             <j-value bind="each.value.file.name"></j-value>
           </div>
         </template>
@@ -103,7 +106,7 @@ export class USAFileInputPreviewElement extends HTMLElement {
     return Array.from(i.files).map((file) => ({
       file,
       src: URL.createObjectURL(file),
-      isImage: file.type.startsWith("image"),
+      isImage: file.type.startsWith('image'),
     }));
   })
   accessor fileEntries: FileEntry[] = [];
