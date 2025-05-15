@@ -103,7 +103,9 @@ export class USATextareaElement extends HTMLElement {
   }
 
   connectedCallback() {
-    this.value = this.getAttribute('value') || '';
+    if (!this.value) {
+      this.value = this.getAttribute('value') ?? '';
+    }
 
     this.#syncFormState();
   }

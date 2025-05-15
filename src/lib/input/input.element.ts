@@ -167,7 +167,7 @@ export class USATextInputElement extends HTMLElement implements MaskableElement 
   }
 
   connectedCallback() {
-    if (!this.value && this.hasAttribute('value')) {
+    if (!this.value) {
       this.value = this.getAttribute('value') ?? '';
     }
 
