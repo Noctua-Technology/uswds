@@ -103,10 +103,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@joist/di": "^4.2.3-next.14",
-    "@joist/element": "^4.2.3-next.14",
-    "@joist/observable": "^4.2.3-next.14",
-    "@joist/templating": "^4.2.3-next.14",
+    "@joist/di": "4.2.3-next.17",
+    "@joist/element": "4.2.3-next.17",
+    "@joist/observable": "4.2.3-next.17",
+    "@joist/templating": "4.2.3-next.17",
     "tslib": "2.8.1"
   },
   "devDependencies": {

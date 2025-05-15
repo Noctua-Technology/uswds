@@ -77,29 +77,39 @@ declare global {
       }
     `,
     html`
-      <label>
+      <label for="file-input">
         <slot class="label"></slot>
-
-        <div class="container">
-          <input type="file" tabindex="0" />
-
-          <j-if bind="filesVisible">
-            <template>
-              <j-props>
-                <usa-file-input-preview $.files="files" part="preview" exportparts="heading, item">
-                  Selected file <usa-link>Change file</usa-link>
-                </usa-file-input-preview>
-              </j-props>
-            </template>
-
-            <template else>
-              <div class="box" part="input">
-                <slot name="description"> Drag file here or <usa-link>choose from folder</usa-link> </slot>
-              </div>
-            </template>
-          </j-if>
-        </div>
       </label>
+
+      <div class="container">
+        <j-props>
+          <input
+            id="file-input"
+            type="file"
+            tabindex="0"
+            $.name="name"
+            $.multiple="multiple"
+            $.accept="accept"
+            $.required="required"
+          />
+        </j-props>
+
+        <j-if bind="filesVisible">
+          <template>
+            <j-props>
+              <usa-file-input-preview $.files="files" part="preview" exportparts="heading, item">
+                Selected file&nbsp;<usa-link>Change file</usa-link>
+              </usa-file-input-preview>
+            </j-props>
+          </template>
+
+          <template else>
+            <div class="box" part="input">
+              <slot name="description"> Drag file here or <usa-link>choose from folder</usa-link> </slot>
+            </div>
+          </template>
+        </j-if>
+      </div>
     `,
   ],
 })
@@ -107,15 +117,19 @@ export class USAFileInputElement extends HTMLElement {
   static formAssociated = true;
 
   @attr()
+  @bind()
   accessor name = '';
 
   @attr()
+  @bind()
   accessor multiple = true;
 
   @attr()
+  @bind()
   accessor accept = '';
 
   @attr()
+  @bind()
   accessor required = false;
 
   @bind()
@@ -127,15 +141,6 @@ export class USAFileInputElement extends HTMLElement {
   #internals = this.attachInternals();
   #input = query('input');
 
-  attributeChangedCallback() {
-    this.#input({
-      name: this.name,
-      multiple: this.multiple,
-      accept: this.accept,
-      required: this.required,
-    });
-  }
-
   connectedCallback() {
     const input = this.#input();
 
@@ -146,7 +151,7 @@ export class USAFileInputElement extends HTMLElement {
 
   @effect()
   syncFormValues() {
-    const input = this.#input({ files: this.files });
+    const input = this.#input();
 
     const formData = new FormData();
 
