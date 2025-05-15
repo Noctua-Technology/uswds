@@ -1,16 +1,16 @@
-import { attr, css, element, html, listen, query, ready } from "@joist/element";
-import { effect, observe } from "@joist/observable";
+import { attr, css, element, html, listen, query, ready } from '@joist/element';
+import { effect, observe } from '@joist/observable';
 
-import type { MaskableElement } from "../input-mask/maskable.element.js";
+import type { MaskableElement } from '../input-mask/maskable.element.js';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-input": USATextInputElement;
+    'usa-input': USATextInputElement;
   }
 }
 
 @element({
-  tagName: "usa-input",
+  tagName: 'usa-input',
   shadowDom: [
     css`
       * {
@@ -54,31 +54,31 @@ declare global {
         color: #757575;
       }
 
-      slot[name="detail"]::slotted(*) {
+      slot[name='detail']::slotted(*) {
         color: #757575;
       }
 
-      slot[name="detail"]::slotted(usa-icon) {
+      slot[name='detail']::slotted(usa-icon) {
         width: 1.5rem;
         height: 1.5rem;
       }
 
-      slot[name="detail"] {
+      slot[name='detail'] {
         display: block;
         position: absolute;
         bottom: 0.21rem;
         left: 0.5rem;
       }
 
-      :host([detail="pfx"]) input {
+      :host([detail='pfx']) input {
         padding-left: 2.5rem;
       }
 
-      :host([detail="sfx"]) input {
+      :host([detail='sfx']) input {
         padding-right: 2.5rem;
       }
 
-      :host([detail="sfx"]) slot[name="detail"] {
+      :host([detail='sfx']) slot[name='detail'] {
         right: 0.5rem;
         left: auto;
       }
@@ -94,26 +94,23 @@ declare global {
     `,
   ],
 })
-export class USATextInputElement
-  extends HTMLElement
-  implements MaskableElement
-{
+export class USATextInputElement extends HTMLElement implements MaskableElement {
   static formAssociated = true;
 
   @attr()
-  accessor name = "";
+  accessor name = '';
 
   @attr()
-  accessor autocomplete: AutoFill = "on";
+  accessor autocomplete: AutoFill = 'on';
 
   @attr()
-  accessor placeholder = "";
+  accessor placeholder = '';
 
   @attr()
-  accessor min = "";
+  accessor min = '';
 
   @attr()
-  accessor max = "";
+  accessor max = '';
 
   @attr()
   accessor minLength = -1;
@@ -128,18 +125,13 @@ export class USATextInputElement
   accessor disabled = false;
 
   @attr()
-  accessor type: "text" | "password" | "number" = "text";
+  accessor type: 'text' | 'password' | 'number' = 'text';
 
-  @attr({
-    observed: false,
-  })
-  accessor detail: "pfx" | "sfx" | "" = "";
+  @attr()
+  accessor detail: 'pfx' | 'sfx' | '' = '';
 
-  @attr({
-    reflect: false,
-  })
   @observe()
-  accessor value = "";
+  accessor value = '';
 
   @observe()
   accessor selectionStart: number | null = null;
@@ -152,14 +144,14 @@ export class USATextInputElement
   }
 
   #internals = this.attachInternals();
-  #input = query("input");
+  #input = query('input');
 
   @ready()
   onReady() {
     this.#input({ autofocus: this.autofocus });
   }
 
-  attributeChangedCallback(attr: string) {
+  attributeChangedCallback() {
     this.#input({
       autocomplete: this.autocomplete,
       placeholder: this.placeholder,
@@ -175,6 +167,10 @@ export class USATextInputElement
   }
 
   connectedCallback() {
+    if (!this.value && this.hasAttribute('value')) {
+      this.value = this.getAttribute('value') ?? '';
+    }
+
     this.#syncFormState();
   }
 
@@ -191,14 +187,14 @@ export class USATextInputElement
     this.#syncFormState();
   }
 
-  @listen("keydown")
+  @listen('keydown')
   onKeyDown(e: KeyboardEvent) {
     const form = this.#internals.form;
 
     if (form) {
       const hasModifier = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey;
 
-      if (e.key.toUpperCase() === "ENTER" && !hasModifier) {
+      if (e.key.toUpperCase() === 'ENTER' && !hasModifier) {
         // this makes sure that the user has a chance to cancel the event before submitting
         setTimeout(() => {
           if (!e.defaultPrevented && !e.isComposing) {
@@ -209,7 +205,7 @@ export class USATextInputElement
     }
   }
 
-  @listen("input")
+  @listen('input')
   onInputChange() {
     const input = this.#input();
 
@@ -222,20 +218,16 @@ export class USATextInputElement
     const input = this.#input();
 
     this.#internals.setValidity({});
-    this.#internals.setFormValue(input.value);
+    this.#internals.setFormValue(this.value);
 
     if (input.validationMessage) {
-      this.#internals.setValidity(
-        { customError: true },
-        input.validationMessage,
-        input,
-      );
+      this.#internals.setValidity({ customError: true }, input.validationMessage, input);
     }
   }
 
   #submit(form: HTMLFormElement) {
-    const btn = document.createElement("button");
-    btn.type = "submit";
+    const btn = document.createElement('button');
+    btn.type = 'submit';
     form.append(btn);
 
     btn.click();

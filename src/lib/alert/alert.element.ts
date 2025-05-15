@@ -1,17 +1,20 @@
-import { attr, css, element, html, query } from "@joist/element";
+import { attr, css, element, html, query } from '@joist/element';
 
-import { type USAAlertType, USA_ALERT_CONFIG } from "./alert-types.js";
+import { type USAAlertType, USA_ALERT_CONFIG } from './alert-types.js';
+import { bind } from '@joist/templating';
+import { USAIcon } from '../icon/icon-types.js';
+import { observe } from '@joist/observable';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-alert": USAAlertElement;
+    'usa-alert': USAAlertElement;
   }
 }
 
 @element({
-  tagName: "usa-alert",
+  tagName: 'usa-alert',
   shadowDomOpts: {
-    mode: "open",
+    mode: 'open',
     delegatesFocus: true,
   },
   shadowDom: [
@@ -24,33 +27,33 @@ declare global {
         margin-bottom: 1rem;
       }
 
-      :host([type="info"]) {
+      :host([type='info']) {
         border-left-color: #00bde3;
         background-color: #e7f6f8;
       }
 
-      :host([type="warning"]) {
+      :host([type='warning']) {
         background-color: #faf3d1;
         border-left-color: #ffbe2e;
       }
 
-      :host([type="success"]) {
+      :host([type='success']) {
         background-color: #ecf3ec;
         border-left-color: #00a91c;
       }
 
-      :host([type="error"]) {
+      :host([type='error']) {
         background-color: #f4e3db;
         border-left-color: #d54309;
       }
 
-      :host([type="emergency"]) {
+      :host([type='emergency']) {
         background-color: #9c3d10;
         border-left-color: #9c3d10;
         color: #fff;
       }
 
-      :host([type="emergency"]) ::slotted(*) {
+      :host([type='emergency']) ::slotted(*) {
         color: #fff;
       }
 
@@ -73,7 +76,9 @@ declare global {
     `,
     html`
       <div class="alert-heading">
-        <usa-icon icon="check_circle"></usa-icon>
+        <j-props>
+          <usa-icon $.icon="icon"></usa-icon>
+        </j-props>
 
         <div>
           <slot id="heading" name="heading"></slot>
@@ -90,13 +95,9 @@ declare global {
 })
 export class USAAlertElement extends HTMLElement {
   @attr()
-  accessor type: USAAlertType = "info";
+  @bind()
+  accessor type: USAAlertType = 'info';
 
-  #icon = query("usa-icon");
-
-  attributeChangedCallback() {
-    this.#icon({
-      icon: USA_ALERT_CONFIG[this.type].icon,
-    });
-  }
+  @bind((i) => USA_ALERT_CONFIG[i.type].icon)
+  accessor icon: USAIcon = 'info';
 }

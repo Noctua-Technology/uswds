@@ -1,14 +1,14 @@
-import { attr, css, element, html, listen, query, ready } from "@joist/element";
-import { effect, observe } from "@joist/observable";
+import { attr, css, element, html, listen, query, ready } from '@joist/element';
+import { effect, observe } from '@joist/observable';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-textarea": USATextareaElement;
+    'usa-textarea': USATextareaElement;
   }
 }
 
 @element({
-  tagName: "usa-textarea",
+  tagName: 'usa-textarea',
   shadowDom: [
     css`
       * {
@@ -34,7 +34,7 @@ declare global {
         border-radius: 0;
         color: #1b1b1b;
         display: block;
-        padding: .5rem;
+        padding: 0.5rem;
         border-width: 1px;
         border-color: #5c5c5c;
         border-style: solid;
@@ -62,7 +62,7 @@ declare global {
       <label for="textarea" part="label">
         <slot></slot>
       </label>
-      
+
       <textarea id="textarea" part="textarea"></textarea>
     `,
   ],
@@ -71,25 +71,22 @@ export class USATextareaElement extends HTMLElement {
   static formAssociated = true;
 
   @attr()
-  accessor name = "";
+  accessor name = '';
 
   @attr()
-  accessor autocomplete: AutoFill = "on";
+  accessor autocomplete: AutoFill = 'on';
 
   @attr()
-  accessor placeholder = "";
+  accessor placeholder = '';
 
   @attr()
   accessor required = false;
 
-  @attr({
-    reflect: false,
-  })
   @observe()
-  accessor value = "";
+  accessor value = '';
 
   #internals = this.attachInternals();
-  #input = query("textarea");
+  #input = query('textarea');
 
   @ready()
   onReady() {
@@ -106,6 +103,8 @@ export class USATextareaElement extends HTMLElement {
   }
 
   connectedCallback() {
+    this.value = this.getAttribute('value') || '';
+
     this.#syncFormState();
   }
 
@@ -116,7 +115,7 @@ export class USATextareaElement extends HTMLElement {
     this.#syncFormState();
   }
 
-  @listen("input")
+  @listen('input')
   onInputChange() {
     this.value = this.#input().value;
   }
@@ -124,15 +123,11 @@ export class USATextareaElement extends HTMLElement {
   #syncFormState() {
     const input = this.#input();
 
-    this.#internals.setFormValue(input.value);
+    this.#internals.setFormValue(this.value);
     this.#internals.setValidity({});
 
     if (input.validationMessage) {
-      this.#internals.setValidity(
-        { customError: true },
-        input.validationMessage,
-        input,
-      );
+      this.#internals.setValidity({ customError: true }, input.validationMessage, input);
     }
   }
 }

@@ -1,21 +1,16 @@
-import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
+import type { Meta, StoryObj } from '@storybook/web-components';
+import { html } from 'lit';
 
-import type { USAInputMaskElement } from "./input-mask.element.js";
+import type { USAInputMaskElement } from './input-mask.element.js';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
-  title: "input-mask",
-  tags: ["autodocs"],
+  title: 'input-mask',
+  tags: ['autodocs'],
   render(args) {
     return html`
       <usa-input-mask>
-        <usa-input
-          name="phone"
-          placeholder=${args.mask}
-          autocomplete="off"
-          mask=${args.mask}
-        >
+        <usa-input name="phone" placeholder=${args.mask} autocomplete="off" mask=${args.mask} value="1234567890">
           Phone:
         </usa-input>
       </usa-input-mask>
@@ -23,7 +18,7 @@ const meta = {
   },
   argTypes: {},
   args: {
-    mask: "(999) 999-9999",
+    mask: '(999) 999-9999',
   },
 } satisfies Meta<USAInputMaskElement>;
 

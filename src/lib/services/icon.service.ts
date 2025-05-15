@@ -1,15 +1,16 @@
-import { inject, injectable } from "@joist/di";
+import { inject, injectable } from '@joist/di';
 
-import { USAConfig } from "../config/config.element.js";
-import { HttpService } from "./http.service.js";
+import { USAConfig } from '../config/config.element.js';
+import { HttpService } from './http.service.js';
+import { USAIcon } from '../icon/icon-types.js';
 
 @injectable()
 export class IconService {
   #config = inject(USAConfig);
   #http = inject(HttpService);
-  #iconCache: Map<string, Promise<HTMLTemplateElement>> = new Map();
+  #iconCache: Map<USAIcon, Promise<HTMLTemplateElement>> = new Map();
 
-  async getIcon(icon: string): Promise<Node> {
+  async getIcon(icon: USAIcon): Promise<Node> {
     const config = this.#config();
     const http = this.#http();
 
@@ -18,7 +19,7 @@ export class IconService {
     if (cached) {
       return cached.then((res) => {
         if (!res.content.firstElementChild) {
-          throw Error("cached value is not valid");
+          throw Error('cached value is not valid');
         }
 
         return res.content.firstElementChild.cloneNode(true);
@@ -26,17 +27,17 @@ export class IconService {
     }
 
     const svg = http
-      .fetch(`${config.iconPath}${icon}.svg`)
+      .fetch(`${config.iconPath}${icon}.svg`, {})
       .then((res) => {
         switch (res.status) {
           case 200:
             return res.text();
         }
 
-        return "";
+        return '';
       })
       .then((res) => {
-        const template = document.createElement("template");
+        const template = document.createElement('template');
         template.innerHTML = res;
 
         return template;
@@ -46,7 +47,7 @@ export class IconService {
 
     return svg.then((res) => {
       if (!res.content.firstElementChild) {
-        throw Error("ICON is not valid");
+        throw Error('ICON is not valid');
       }
 
       return res.content.firstElementChild.cloneNode(true);

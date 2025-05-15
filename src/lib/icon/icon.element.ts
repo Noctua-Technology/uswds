@@ -1,17 +1,18 @@
-import { inject, injectable } from "@joist/di";
-import { attr, css, element } from "@joist/element";
+import { inject, injectable } from '@joist/di';
+import { attr, css, element } from '@joist/element';
 
-import { IconService } from "../services/icon.service.js";
-import type { USAIcon } from "./icon-types.js";
+import { IconService } from '../services/icon.service.js';
+import type { USAIcon } from './icon-types.js';
+import { observe } from '@joist/observable';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-icon": USAIconElement;
+    'usa-icon': USAIconElement;
   }
 }
 
 @element({
-  tagName: "usa-icon",
+  tagName: 'usa-icon',
   shadowDom: [
     css`
       :host {
@@ -30,13 +31,13 @@ declare global {
   ],
 })
 @injectable({
-  name: "usa-icon-ctx",
+  name: 'usa-icon-ctx',
 })
 export class USAIconElement extends HTMLElement {
   @attr()
-  accessor icon: USAIcon = "accessibility_new";
+  accessor icon: USAIcon = 'accessibility_new';
 
-  ariaHidden: string | null = "true";
+  ariaHidden: string | null = 'true';
 
   #icon = inject(IconService);
   #injected = false;
@@ -55,16 +56,20 @@ export class USAIconElement extends HTMLElement {
   }
 
   async #updateIcon() {
+    if (!this.icon) {
+      return;
+    }
+
     const icon = this.#icon();
 
-    if (this.shadowRoot) {
-      const currentIcon = await icon.getIcon(this.icon);
-
-      if (this.shadowRoot.firstElementChild) {
-        this.shadowRoot.firstElementChild.replaceWith(currentIcon);
-      } else {
-        this.shadowRoot.append(currentIcon);
+    icon.getIcon(this.icon).then((currentIcon) => {
+      if (this.shadowRoot) {
+        if (this.shadowRoot.firstElementChild) {
+          this.shadowRoot.firstElementChild.replaceWith(currentIcon);
+        } else {
+          this.shadowRoot.append(currentIcon);
+        }
       }
-    }
+    });
   }
 }
