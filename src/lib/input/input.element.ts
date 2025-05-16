@@ -130,6 +130,9 @@ export class USATextInputElement extends HTMLElement implements MaskableElement 
   @attr()
   accessor detail: 'pfx' | 'sfx' | '' = '';
 
+  @attr({
+    reflect: false,
+  })
   @observe()
   accessor value = '';
 
@@ -167,10 +170,6 @@ export class USATextInputElement extends HTMLElement implements MaskableElement 
   }
 
   connectedCallback() {
-    if (!this.value) {
-      this.value = this.getAttribute('value') ?? '';
-    }
-
     this.#syncFormState();
   }
 

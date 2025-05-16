@@ -1,20 +1,20 @@
-import "@joist/templating/define.js";
+import '@joist/templating/define.js';
 
-import { attr, css, element, html, listen } from "@joist/element";
-import { bind } from "@joist/templating";
+import { attr, css, element, html, listen } from '@joist/element';
+import { bind } from '@joist/templating';
 
-import { USAAccordionToggleEvent } from "./events.js";
+import { USAAccordionToggleEvent } from './events.js';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-accordion": USAAccordionElement;
+    'usa-accordion': USAAccordionElement;
   }
 }
 
 @element({
-  tagName: "usa-accordion",
+  tagName: 'usa-accordion',
   shadowDomOpts: {
-    mode: "open",
+    mode: 'open',
     delegatesFocus: true,
   },
   shadowDom: [
@@ -54,12 +54,12 @@ declare global {
         display: none;
       }
 
-      slot[name="heading"] {
+      slot[name='heading'] {
         display: block;
         flex: 1 1 auto;
       }
 
-      slot[name="heading"]::slotted(*) {
+      slot[name='heading']::slotted(*) {
         margin: 0;
       }
 
@@ -67,18 +67,6 @@ declare global {
         padding-bottom: 1.5rem;
         padding-left: 1rem;
         padding-top: 1.5rem;
-      }
-
-      usa-icon[icon="remove"] {
-        display: none;
-      }
-
-      details[open] usa-icon[icon="add"] {
-        display: none;
-      }
-
-      details[open] usa-icon[icon="remove"] {
-        display: block;
       }
 
       summary:hover {
@@ -96,8 +84,9 @@ declare global {
           <summary>
             <slot name="heading"></slot>
 
-            <usa-icon icon="add"></usa-icon>
-            <usa-icon icon="remove"></usa-icon>
+            <j-props>
+              <usa-icon $.icon="icon"></usa-icon>
+            </j-props>
           </summary>
 
           <div class="content">
@@ -110,20 +99,23 @@ declare global {
 })
 export class USAAccordionElement extends HTMLElement {
   @attr()
-  accessor name = "";
+  accessor name = '';
 
   @attr()
   @bind()
   accessor open = false;
 
-  @listen("click", "summary")
+  @bind((i) => (i.open ? 'remove' : 'add'))
+  accessor icon: 'add' | 'remove' = 'add';
+
+  @listen('click', 'summary')
   onClick(e: Event) {
     e.preventDefault();
 
     this.dispatchEvent(new USAAccordionToggleEvent(!this.open));
   }
 
-  @listen("usa::accordion::toggle", () => document.body)
+  @listen('usa::accordion::toggle', () => document.body)
   onAccordionToggle(e: USAAccordionToggleEvent) {
     if (e.target.name === this.name) {
       this.open = e.target === this && e.open;

@@ -82,6 +82,9 @@ export class USATextareaElement extends HTMLElement {
   @attr()
   accessor required = false;
 
+  @attr({
+    reflect: false,
+  })
   @observe()
   accessor value = '';
 
@@ -103,10 +106,6 @@ export class USATextareaElement extends HTMLElement {
   }
 
   connectedCallback() {
-    if (!this.value) {
-      this.value = this.getAttribute('value') ?? '';
-    }
-
     this.#syncFormState();
   }
 

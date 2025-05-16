@@ -95,7 +95,7 @@ declare global {
 })
 export class USAAlertElement extends HTMLElement {
   @attr()
-  @bind()
+  @observe()
   accessor type: USAAlertType = 'info';
 
   @bind((i) => USA_ALERT_CONFIG[i.type].icon)

@@ -8,26 +8,26 @@ import { USAIcon } from '../icon/icon-types.js';
 export class IconService {
   #config = inject(USAConfig);
   #http = inject(HttpService);
-  #iconCache: Map<USAIcon, Promise<HTMLTemplateElement>> = new Map();
+  #iconCache: Map<USAIcon, HTMLTemplateElement> = new Map();
 
-  async getIcon(icon: USAIcon): Promise<Node> {
+  async getIcon(icon: USAIcon, abortSignal?: AbortSignal): Promise<Node> {
     const config = this.#config();
     const http = this.#http();
 
     const cached = this.#iconCache.get(icon);
 
     if (cached) {
-      return cached.then((res) => {
-        if (!res.content.firstElementChild) {
-          throw Error('cached value is not valid');
-        }
+      if (!cached.content.firstElementChild) {
+        throw Error('cached value is not valid');
+      }
 
-        return res.content.firstElementChild.cloneNode(true);
-      });
+      return cached.content.firstElementChild.cloneNode(true);
     }
 
     const svg = http
-      .fetch(`${config.iconPath}${icon}.svg`, {})
+      .fetch(`${config.iconPath}${icon}.svg`, {
+        signal: abortSignal,
+      })
       .then((res) => {
         switch (res.status) {
           case 200:
@@ -40,10 +40,10 @@ export class IconService {
         const template = document.createElement('template');
         template.innerHTML = res;
 
+        this.#iconCache.set(icon, template);
+
         return template;
       });
-
-    this.#iconCache.set(icon, svg);
 
     return svg.then((res) => {
       if (!res.content.firstElementChild) {
