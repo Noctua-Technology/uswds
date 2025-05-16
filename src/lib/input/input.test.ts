@@ -2,6 +2,7 @@ import './input.element.js';
 
 import { assert, fixture, html } from '@open-wc/testing';
 import { userEvent } from '@testing-library/user-event';
+import { USATextInputElement } from './input.element.js';
 
 describe('usa-input', () => {
   it('should be accessible', async () => {
@@ -22,6 +23,16 @@ describe('usa-input', () => {
     const value = new FormData(form);
 
     assert.equal(value.get('fname'), 'Foo');
+  });
+
+  it('should display default attribute value', async () => {
+    const input = await fixture<USATextInputElement>(html`
+      <usa-input name="fname" value="Foo">Hello World</usa-input>
+    `);
+
+    const nativeInput = input.shadowRoot?.querySelector('input');
+
+    assert.equal(nativeInput?.value, 'Foo');
   });
 
   it('should update form value as input value changed', async () => {

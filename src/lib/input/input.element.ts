@@ -1,4 +1,4 @@
-import { attr, css, element, html, listen, query, ready } from '@joist/element';
+import { attr, css, element, html, listen, query } from '@joist/element';
 import { effect, observe } from '@joist/observable';
 
 import type { MaskableElement } from '../input-mask/maskable.element.js';
@@ -149,11 +149,6 @@ export class USATextInputElement extends HTMLElement implements MaskableElement 
   #internals = this.attachInternals();
   #input = query('input');
 
-  @ready()
-  onReady() {
-    this.#input({ autofocus: this.autofocus });
-  }
-
   attributeChangedCallback() {
     this.#input({
       autocomplete: this.autocomplete,
@@ -170,6 +165,8 @@ export class USATextInputElement extends HTMLElement implements MaskableElement 
   }
 
   connectedCallback() {
+    this.#input({ autofocus: this.autofocus, value: this.value });
+
     this.#syncFormState();
   }
 

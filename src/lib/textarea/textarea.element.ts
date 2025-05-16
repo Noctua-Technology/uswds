@@ -1,4 +1,4 @@
-import { attr, css, element, html, listen, query, ready } from '@joist/element';
+import { attr, css, element, html, listen, query } from '@joist/element';
 import { effect, observe } from '@joist/observable';
 
 declare global {
@@ -91,11 +91,6 @@ export class USATextareaElement extends HTMLElement {
   #internals = this.attachInternals();
   #input = query('textarea');
 
-  @ready()
-  onReady() {
-    this.#input({ autofocus: this.autofocus });
-  }
-
   attributeChangedCallback() {
     this.#input({
       name: this.name,
@@ -106,6 +101,7 @@ export class USATextareaElement extends HTMLElement {
   }
 
   connectedCallback() {
+    this.#input({ autofocus: this.autofocus, value: this.value });
     this.#syncFormState();
   }
 
