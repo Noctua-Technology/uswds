@@ -79,21 +79,21 @@ declare global {
       }
     `,
     html`
-      <j-props>
-        <details $.open="open">
+      <j-bind props="open">
+        <details>
           <summary>
             <slot name="heading"></slot>
 
-            <j-props>
-              <usa-icon $.icon="icon"></usa-icon>
-            </j-props>
+            <j-bind props="icon">
+              <usa-icon></usa-icon>
+            </j-bind>
           </summary>
 
           <div class="content">
             <slot></slot>
           </div>
         </details>
-      </j-props>
+      </j-bind>
     `,
   ],
 })

@@ -77,9 +77,9 @@ declare global {
           <div class="preview-item" part="item">
             <j-if bind="each.value.isImage">
               <template>
-                <j-props>
-                  <img height="40" width="40" aria-hidden="true" $.src="each.value.src" />
-                </j-props>
+                <j-bind props="src:each.value.src">
+                  <img height="40" width="40" aria-hidden="true" />
+                </j-bind>
               </template>
 
               <template else>
@@ -87,7 +87,7 @@ declare global {
               </template>
             </j-if>
 
-            <j-value bind="each.value.file.name"></j-value>
+            <j-val bind="each.value.file.name"></j-val>
           </div>
         </template>
       </j-for>

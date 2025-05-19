@@ -202,12 +202,16 @@ export class USATextInputElement extends HTMLElement implements MaskableElement 
   }
 
   @listen('input')
-  onInputChange() {
+  onInputChange(e: Event) {
+    e.stopPropagation();
+
     const input = this.#input();
 
     this.value = input.value;
     this.selectionStart = input.selectionStart;
     this.selectionEnd = input.selectionEnd;
+
+    this.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
   #syncFormState() {

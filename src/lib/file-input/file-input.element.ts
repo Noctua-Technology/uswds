@@ -82,25 +82,17 @@ declare global {
       </label>
 
       <div class="container">
-        <j-props>
-          <input
-            id="file-input"
-            type="file"
-            tabindex="0"
-            $.name="name"
-            $.multiple="multiple"
-            $.accept="accept"
-            $.required="required"
-          />
-        </j-props>
+        <j-bind props="name,multiple,accept,required">
+          <input id="file-input" type="file" tabindex="0" />
+        </j-bind>
 
         <j-if bind="filesVisible">
           <template>
-            <j-props>
-              <usa-file-input-preview $.files="files" part="preview" exportparts="heading, item">
+            <j-bind props="files">
+              <usa-file-input-preview part="preview" exportparts="heading, item">
                 Selected file&nbsp;<usa-link>Change file</usa-link>
               </usa-file-input-preview>
-            </j-props>
+            </j-bind>
           </template>
 
           <template else>

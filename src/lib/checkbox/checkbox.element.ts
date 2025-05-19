@@ -1,13 +1,13 @@
-import { attr, css, element, html, listen, query } from "@joist/element";
+import { attr, css, element, html, listen, query } from '@joist/element';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-checkbox": USACheckboxElement;
+    'usa-checkbox': USACheckboxElement;
   }
 }
 
 @element({
-  tagName: "usa-checkbox",
+  tagName: 'usa-checkbox',
   shadowDom: [
     css`
       * {
@@ -69,9 +69,9 @@ declare global {
         background-color: #005ea2;
         box-shadow: 0 0 0 2px #005ea2;
       }
-      
+
       input:checked + .checkbox::after {
-        content: " ";
+        content: ' ';
         display: block;
         height: 1rem;
         width: 0.5rem;
@@ -112,14 +112,13 @@ declare global {
     `,
     html`
       <label>
-        <input type="checkbox" tabindex="0"/>
+        <input type="checkbox" tabindex="0" />
 
         <div class="checkbox" part="checkbox"></div>
 
         <div class="title" part="title">
-            <slot></slot>
-          </div>
-        </j-props>
+          <slot></slot>
+        </div>
       </label>
     `,
   ],
@@ -131,10 +130,10 @@ export class USACheckboxElement extends HTMLElement {
   accessor checked = false;
 
   @attr()
-  accessor name = "";
+  accessor name = '';
 
   @attr()
-  accessor value = "";
+  accessor value = '';
 
   @attr()
   accessor required = false;
@@ -147,7 +146,7 @@ export class USACheckboxElement extends HTMLElement {
   })
   accessor tiled = false;
 
-  #checkbox = query("input");
+  #checkbox = query('input');
 
   #internals = this.attachInternals();
 
@@ -162,7 +161,7 @@ export class USACheckboxElement extends HTMLElement {
     this.#syncFormState();
   }
 
-  @listen("change", "input[type=checkbox]")
+  @listen('change', 'input[type=checkbox]')
   onCheckboxChange() {
     const checkbox = this.#checkbox();
     this.checked = checkbox.checked;
@@ -177,11 +176,7 @@ export class USACheckboxElement extends HTMLElement {
     this.#internals.setFormValue(checkbox.checked ? this.value : null);
 
     if (checkbox.validationMessage) {
-      this.#internals.setValidity(
-        { customError: true },
-        checkbox.validationMessage,
-        checkbox,
-      );
+      this.#internals.setValidity({ customError: true }, checkbox.validationMessage, checkbox);
     }
   }
 }

@@ -1,28 +1,22 @@
-import "@joist/templating/define.js";
+import '@joist/templating/define.js';
 
-import { attr, css, element, html, listen } from "@joist/element";
-import { bind } from "@joist/templating";
+import { attr, css, element, html, listen } from '@joist/element';
+import { bind } from '@joist/templating';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-button": USAButtonElement;
+    'usa-button': USAButtonElement;
   }
 }
 
-export const BUTTON_VARIANTS = [
-  "primary",
-  "secondary",
-  "cool",
-  "warm",
-  "outline",
-] as const;
+export const BUTTON_VARIANTS = ['primary', 'secondary', 'cool', 'warm', 'outline'] as const;
 
 export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
 
 @element({
-  tagName: "usa-button",
+  tagName: 'usa-button',
   shadowDomOpts: {
-    mode: "open",
+    mode: 'open',
     delegatesFocus: true,
   },
   shadowDom: [
@@ -36,7 +30,8 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
         overflow: hidden;
       }
 
-      button, a {
+      button,
+      a {
         box-sizing: border-box;
         font-size: 1.06rem;
         line-height: 0.9;
@@ -107,63 +102,63 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
       }
 
       /** Secondary */
-      :host([variant="secondary"]) :is(button, a) {
+      :host([variant='secondary']) :is(button, a) {
         color: #fff;
         background-color: #d83933;
       }
 
-      :host([variant="secondary"]) :is(button, a):hover {
+      :host([variant='secondary']) :is(button, a):hover {
         background-color: #b50909;
       }
 
-      :host([variant="secondary"]) :is(button, a):active {
+      :host([variant='secondary']) :is(button, a):active {
         background-color: #8b0a03;
       }
 
       /** cool */
-      :host([variant="cool"]) :is(button, a) {
+      :host([variant='cool']) :is(button, a) {
         color: #1b1b1b;
         background-color: #00bde3;
       }
 
-      :host([variant="cool"]) :is(button, a):hover {
+      :host([variant='cool']) :is(button, a):hover {
         background-color: #28a0cb;
       }
 
-      :host([variant="cool"]) :is(button, a):active {
+      :host([variant='cool']) :is(button, a):active {
         color: #fff;
         background-color: #07648d;
       }
 
       /** warm */
-      :host([variant="warm"]) :is(button, a) {
+      :host([variant='warm']) :is(button, a) {
         color: #1b1b1b;
         background-color: #fa9441;
       }
 
-      :host([variant="warm"]) :is(button, a):hover {
+      :host([variant='warm']) :is(button, a):hover {
         color: #fff;
         background-color: #c05600;
       }
 
-      :host([variant="warm"]) :is(button, a):active {
+      :host([variant='warm']) :is(button, a):active {
         color: #fff;
         background-color: #775540;
       }
 
       /** outline */
-      :host([variant="outline"]) :is(button, a) {
+      :host([variant='outline']) :is(button, a) {
         background-color: transparent;
         box-shadow: inset 0 0 0 2px #005ea2;
         color: #005ea2;
       }
 
-      :host([variant="outline"]) :is(button, a):hover {
+      :host([variant='outline']) :is(button, a):hover {
         box-shadow: inset 0 0 0 2px #1a4480;
         color: #1a4480;
       }
 
-      :host([variant="outline"]) :is(button, a):active {
+      :host([variant='outline']) :is(button, a):active {
         box-shadow: inset 0 0 0 2px #162e51;
         color: #162e51;
       }
@@ -171,19 +166,19 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
     html`
       <j-if bind="href">
         <template>
-          <j-props>
-            <a part="link" $href="href" $disabled="disabled" $target="target">
+          <j-bind props="href">
+            <a part="link" $disabled="disabled" $target="target">
               <slot></slot>
             </a>
-          </j-props>
+          </j-bind>
         </template>
 
         <template else>
-          <j-props>
-            <button tabindex="0" part="button" $type="type" $disabled="disabled" $value="value">
+          <j-bind props="value,type,disabled">
+            <button tabindex="0" part="button">
               <slot></slot>
             </button>
-          </j-props>
+          </j-bind>
         </template>
       </j-if>
     `,
@@ -194,32 +189,32 @@ export class USAButtonElement extends HTMLElement {
 
   @attr()
   @bind()
-  accessor type: "button" | "submit" | "reset" = "button";
+  accessor type: 'button' | 'submit' | 'reset' = 'button';
 
   @attr()
   @bind()
   accessor disabled = false;
 
   @attr()
-  accessor variant: ButtonVariant = "primary";
+  accessor variant: ButtonVariant = 'primary';
 
   @attr()
   @bind()
-  accessor value = "";
+  accessor value = '';
 
   @attr()
   @bind()
-  accessor href = "";
+  accessor href = '';
 
   @attr()
   @bind()
-  accessor target = "";
+  accessor target = '';
 
   accessor tabIndex = 0;
 
   #internals = this.attachInternals();
 
-  @listen("click")
+  @listen('click')
   onInternalClick() {
     this.#handleForm();
   }
@@ -228,17 +223,17 @@ export class USAButtonElement extends HTMLElement {
     const { form } = this.#internals;
 
     if (form) {
-      if (this.type === "submit") {
+      if (this.type === 'submit') {
         this.#submit(form);
-      } else if (this.type === "reset") {
+      } else if (this.type === 'reset') {
         form.reset();
       }
     }
   }
 
   #submit(form: HTMLFormElement) {
-    const btn = document.createElement("button");
-    btn.type = "submit";
+    const btn = document.createElement('button');
+    btn.type = 'submit';
     form.append(btn);
 
     btn.click();

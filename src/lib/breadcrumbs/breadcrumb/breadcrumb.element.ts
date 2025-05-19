@@ -1,14 +1,14 @@
-import { attr, css, element, html } from "@joist/element";
-import { bind } from "@joist/templating";
+import { attr, css, element, html } from '@joist/element';
+import { bind } from '@joist/templating';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-breadcrumb": USABreadcrumbElement;
+    'usa-breadcrumb': USABreadcrumbElement;
   }
 }
 
 @element({
-  tagName: "usa-breadcrumb",
+  tagName: 'usa-breadcrumb',
   shadowDom: [
     css`
       :host {
@@ -33,15 +33,15 @@ declare global {
         height: 1rem;
         width: 1.5rem;
         position: absolute;
-        top: .075rem;
+        top: 0.075rem;
       }
     `,
     html`
-      <j-props>
-        <a $.href="href">
+      <j-bind props="href">
+        <a>
           <slot></slot>
         </a>
-      </j-props>
+      </j-bind>
 
       <usa-icon icon="navigate_next"></usa-icon>
     `,
@@ -50,8 +50,8 @@ declare global {
 export class USABreadcrumbElement extends HTMLElement {
   @attr()
   @bind()
-  accessor href = "";
+  accessor href = '';
 
   @attr()
-  accessor role = "listitem";
+  accessor role = 'listitem';
 }
