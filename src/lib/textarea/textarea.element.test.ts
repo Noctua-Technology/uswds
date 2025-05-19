@@ -1,10 +1,10 @@
-import "./textarea.element.js";
+import './textarea.element.js';
 
-import { assert, fixture, html } from "@open-wc/testing";
-import { userEvent } from "@testing-library/user-event";
+import { assert, fixture, html } from '@open-wc/testing';
+import { userEvent } from '@testing-library/user-event';
 
-describe("usa-textarea", () => {
-  it("should be accessible", async () => {
+describe('usa-textarea', () => {
+  it('should be accessible', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <usa-textarea name="fname" value="Foo">Hello World</usa-textarea>
     `);
@@ -12,7 +12,7 @@ describe("usa-textarea", () => {
     return assert.isAccessible(form);
   });
 
-  it("should submit form with default values", async () => {
+  it('should submit form with default values', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <usa-textarea name="fname" value="Foo">Hello World</usa-textarea>
@@ -23,10 +23,10 @@ describe("usa-textarea", () => {
 
     const value = new FormData(form);
 
-    assert.equal(value.get("fname"), "Foo");
+    assert.equal(value.get('fname'), 'Foo');
   });
 
-  it("should update form value as input value changed", async () => {
+  it('should update form value as input value changed', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <usa-textarea name="fname">Hello World</usa-textarea>
@@ -35,19 +35,19 @@ describe("usa-textarea", () => {
       </form>
     `);
 
-    const input = form.querySelector("usa-textarea");
-    const nativeInput = input?.shadowRoot?.querySelector("textarea");
+    const input = form.querySelector('usa-textarea');
+    const nativeInput = input?.shadowRoot?.querySelector('textarea');
 
     if (nativeInput) {
-      await userEvent.type(nativeInput, "Bar");
+      await userEvent.type(nativeInput, 'Bar');
     }
 
     const value = new FormData(form);
 
-    assert.equal(value.get("fname"), "Bar");
+    assert.equal(value.get('fname'), 'Bar');
   });
 
-  it("should not submit when not valid", async () => {
+  it('should not submit when not valid', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <usa-textarea name="fname" required>Hello World</usa-textarea>

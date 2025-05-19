@@ -1,11 +1,11 @@
-import "./select.element.js";
-import "./select-option/select-option.element.js";
+import './select.element.js';
+import './select-option/select-option.element.js';
 
-import { assert, fixture, html } from "@open-wc/testing";
-import { userEvent } from "@testing-library/user-event";
+import { assert, fixture, html } from '@open-wc/testing';
+import { userEvent } from '@testing-library/user-event';
 
-describe("usa-select", () => {
-  it("should be accessible", async () => {
+describe('usa-select', () => {
+  it('should be accessible', async () => {
     const el = await fixture<HTMLFormElement>(html`
       <usa-select name="example">
         Hello World
@@ -19,7 +19,7 @@ describe("usa-select", () => {
     return assert.isAccessible(el);
   });
 
-  it("should create local select options", async () => {
+  it('should create local select options', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <usa-select name="example">
@@ -32,17 +32,15 @@ describe("usa-select", () => {
       </form>
     `);
 
-    const nativeInputs = form
-      .querySelector("usa-select")
-      ?.shadowRoot?.querySelectorAll("option");
+    const nativeInputs = form.querySelector('usa-select')?.shadowRoot?.querySelectorAll('option');
 
     assert.deepEqual(
       Array.from(nativeInputs ?? []).map((input) => input.value),
-      ["first", "second", "third"],
+      ['first', 'second', 'third'],
     );
   });
 
-  it("should remove select options when options are removed", async () => {
+  it('should remove select options when options are removed', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <usa-select name="example">
@@ -55,21 +53,19 @@ describe("usa-select", () => {
       </form>
     `);
 
-    const options = form.querySelectorAll("usa-select-option");
+    const options = form.querySelectorAll('usa-select-option');
 
     options[1].remove();
 
-    const nativeInputs = form
-      .querySelector("usa-select")
-      ?.shadowRoot?.querySelectorAll("option");
+    const nativeInputs = form.querySelector('usa-select')?.shadowRoot?.querySelectorAll('option');
 
     assert.deepEqual(
       Array.from(nativeInputs ?? []).map((input) => input.value),
-      ["first", "third"],
+      ['first', 'third'],
     );
   });
 
-  it("should submit form with default values", async () => {
+  it('should submit form with default values', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <usa-select name="example" value="second">
@@ -84,10 +80,10 @@ describe("usa-select", () => {
 
     const value = new FormData(form);
 
-    assert.equal(value.get("example"), "second");
+    assert.equal(value.get('example'), 'second');
   });
 
-  it("should update form value as select value changed", async () => {
+  it('should update form value as select value changed', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <usa-select name="example" value="second">
@@ -100,19 +96,19 @@ describe("usa-select", () => {
       </form>
     `);
 
-    const select = form.querySelector("usa-select");
-    const nativeSelect = select?.shadowRoot?.querySelector("select");
+    const select = form.querySelector('usa-select');
+    const nativeSelect = select?.shadowRoot?.querySelector('select');
 
     if (nativeSelect) {
-      await userEvent.selectOptions(nativeSelect, "third");
+      await userEvent.selectOptions(nativeSelect, 'third');
     }
 
     const value = new FormData(form);
 
-    assert.equal(value.get("example"), "third");
+    assert.equal(value.get('example'), 'third');
   });
 
-  it("should not submit when not valid", async () => {
+  it('should not submit when not valid', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <usa-select name="example" required>

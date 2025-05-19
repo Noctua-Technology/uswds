@@ -1,22 +1,21 @@
-import "./accordion.element.js";
+import './accordion.element.js';
 
-import { assert, fixture, html } from "@open-wc/testing";
-import { screen } from "@testing-library/dom";
-import { userEvent } from "@testing-library/user-event";
+import { assert, fixture, html } from '@open-wc/testing';
+import { screen } from '@testing-library/dom';
+import { userEvent } from '@testing-library/user-event';
 
-import type { USAAccordionElement } from "./accordion.element.js";
+import type { USAAccordionElement } from './accordion.element.js';
 
-describe("usa-accordion", () => {
-  it("should be accessible", async () => {
+describe('usa-accordion', () => {
+  it('should be accessible', async () => {
     const accordion = await fixture<USAAccordionElement>(html`
       <usa-accordion id="first" name="ammendment">
         <h4 slot="heading">First Ammendment</h4>
 
         <div class="content">
-          Congress shall make no law respecting an establishment of religion, or
-          prohibiting the free exercise thereof; or abridging the freedom of
-          speech, or of the press; or the right of the people peaceably to
-          assemble, and to petition the Government for a redress of grievances.
+          Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof;
+          or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to
+          petition the Government for a redress of grievances.
         </div>
       </usa-accordion>
     `);
@@ -24,44 +23,42 @@ describe("usa-accordion", () => {
     return assert.isAccessible(accordion);
   });
 
-  it("should toggle the open state when clicked", async () => {
+  it('should toggle the open state when clicked', async () => {
     const accordion = await fixture<USAAccordionElement>(html`
       <usa-accordion id="first" name="ammendment">
         <h4 slot="heading">First Ammendment</h4>
 
         <div class="content">
-          Congress shall make no law respecting an establishment of religion, or
-          prohibiting the free exercise thereof; or abridging the freedom of
-          speech, or of the press; or the right of the people peaceably to
-          assemble, and to petition the Government for a redress of grievances.
+          Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof;
+          or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to
+          petition the Government for a redress of grievances.
         </div>
       </usa-accordion>
     `);
 
-    const heading = await screen.findByRole("heading");
-    const content = accordion.querySelector<HTMLDivElement>(".content");
+    const heading = await screen.findByRole('heading');
+    const content = accordion.querySelector<HTMLDivElement>('.content');
 
     await userEvent.click(heading);
 
     assert.isTrue(content?.checkVisibility());
   });
 
-  it("should toggle the open state when clicked", async () => {
+  it('should toggle the open state when clicked', async () => {
     const accordion = await fixture<USAAccordionElement>(html`
       <usa-accordion id="first" name="ammendment">
         <h4 slot="heading">First Ammendment</h4>
 
         <div class="content">
-          Congress shall make no law respecting an establishment of religion, or
-          prohibiting the free exercise thereof; or abridging the freedom of
-          speech, or of the press; or the right of the people peaceably to
-          assemble, and to petition the Government for a redress of grievances.
+          Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof;
+          or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to
+          petition the Government for a redress of grievances.
         </div>
       </usa-accordion>
     `);
 
-    const heading = await screen.findByRole("heading");
-    const content = accordion.querySelector<HTMLDivElement>(".content");
+    const heading = await screen.findByRole('heading');
+    const content = accordion.querySelector<HTMLDivElement>('.content');
 
     assert.isFalse(content?.checkVisibility());
 
@@ -70,7 +67,7 @@ describe("usa-accordion", () => {
     assert.isTrue(content.checkVisibility());
   });
 
-  it("should only allow a single accordion in a group to be open", async () => {
+  it('should only allow a single accordion in a group to be open', async () => {
     const el = await fixture(html`
       <section>
         <usa-accordion name="ammendment">
@@ -90,8 +87,8 @@ describe("usa-accordion", () => {
       </section>
     `);
 
-    const headings = el.querySelectorAll("h4");
-    const content = Array.from(el.querySelectorAll<HTMLDivElement>(".content"));
+    const headings = el.querySelectorAll('h4');
+    const content = Array.from(el.querySelectorAll<HTMLDivElement>('.content'));
 
     await userEvent.click(headings[0]);
 
@@ -115,7 +112,7 @@ describe("usa-accordion", () => {
     );
   });
 
-  it("should not close accordion not in the same group", async () => {
+  it('should not close accordion not in the same group', async () => {
     const el = await fixture(html`
       <section>
         <usa-accordion name="ammendment">
@@ -135,8 +132,8 @@ describe("usa-accordion", () => {
       </section>
     `);
 
-    const headings = el.querySelectorAll("h4");
-    const content = Array.from(el.querySelectorAll<HTMLDivElement>(".content"));
+    const headings = el.querySelectorAll('h4');
+    const content = Array.from(el.querySelectorAll<HTMLDivElement>('.content'));
 
     await userEvent.click(headings[0]);
 

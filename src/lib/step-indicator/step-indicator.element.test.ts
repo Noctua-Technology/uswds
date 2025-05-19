@@ -1,12 +1,12 @@
-import "./step-indicator.element.js";
-import "./step/step.element.js";
+import './step-indicator.element.js';
+import './step/step.element.js';
 
-import { assert, fixture, html } from "@open-wc/testing";
+import { assert, fixture, html } from '@open-wc/testing';
 
-import type { USAStepIndicatorElement } from "./step-indicator.element.js";
+import type { USAStepIndicatorElement } from './step-indicator.element.js';
 
-describe("usa-step-indicator", () => {
-  it("should be accessible", async () => {
+describe('usa-step-indicator', () => {
+  it('should be accessible', async () => {
     const stepIndicator = await fixture<USAStepIndicatorElement>(html`
       <usa-step-indicator>
         <usa-step state="complete" counter="on">Personal information</usa-step>
