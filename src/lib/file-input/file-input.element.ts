@@ -134,11 +134,7 @@ export class USAFileInputElement extends HTMLElement {
   #input = query('input');
 
   connectedCallback() {
-    const input = this.#input();
-
-    if (input.validationMessage) {
-      this.#internals.setValidity({ customError: true }, input.validationMessage, input);
-    }
+    this.syncFormValues();
   }
 
   @effect()

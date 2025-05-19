@@ -1,5 +1,8 @@
+import '@joist/templating/define.js';
+
 import { attr, css, element, html, listen, query } from '@joist/element';
-import { effect, observe } from '@joist/observable';
+import { effect } from '@joist/observable';
+import { bind } from '@joist/templating';
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -63,7 +66,9 @@ declare global {
         <slot></slot>
       </label>
 
-      <textarea id="textarea" part="textarea"></textarea>
+      <j-bind props="name,placeholder,autocomplete,required,value">
+        <textarea id="textarea" part="textarea"></textarea>
+      </j-bind>
     `,
   ],
 })
@@ -71,44 +76,40 @@ export class USATextareaElement extends HTMLElement {
   static formAssociated = true;
 
   @attr()
+  @bind()
   accessor name = '';
 
   @attr()
+  @bind()
   accessor autocomplete: AutoFill = 'on';
 
   @attr()
+  @bind()
   accessor placeholder = '';
 
   @attr()
+  @bind()
   accessor required = false;
+
+  @attr()
+  @bind()
+  accessor autofocus = false;
 
   @attr({
     reflect: false,
   })
-  @observe()
+  @bind()
   accessor value = '';
 
   #internals = this.attachInternals();
   #input = query('textarea');
 
-  attributeChangedCallback() {
-    this.#input({
-      name: this.name,
-      placeholder: this.placeholder,
-      autocomplete: this.autocomplete,
-      required: this.required,
-    });
-  }
-
   connectedCallback() {
-    this.#input({ autofocus: this.autofocus, value: this.value });
     this.#syncFormState();
   }
 
   @effect()
   onChange() {
-    this.#input({ value: this.value });
-
     this.#syncFormState();
   }
 

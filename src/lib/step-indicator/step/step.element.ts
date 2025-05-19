@@ -1,13 +1,13 @@
-import { attr, attrChanged, css, element, html } from "@joist/element";
+import { attr, attrChanged, css, element, html } from '@joist/element';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-step": USAStepIndicatorStepElement;
+    'usa-step': USAStepIndicatorStepElement;
   }
 }
 
 @element({
-  tagName: "usa-step",
+  tagName: 'usa-step',
   shadowDom: [
     css`
       :host {
@@ -42,26 +42,26 @@ declare global {
         box-sizing: border-box;
       }
 
-      :host([state="complete"]) {
+      :host([state='complete']) {
         color: #162e51;
       }
 
-      :host([state="complete"])::before {
+      :host([state='complete'])::before {
         background-color: #162e51;
       }
 
-      :host([state="current"]) {
+      :host([state='current']) {
         color: #005ea2;
         font-weight: bold;
       }
 
-      :host([state="current"])::before {
+      :host([state='current'])::before {
         background-color: #005ea2;
       }
 
       :host:before {
         background-color: #919191;
-        content: "";
+        content: '';
         display: block;
         height: 0.5rem;
       }
@@ -78,19 +78,19 @@ declare global {
         margin-top: 1.5rem;
       }
 
-      :host([counter][state="complete"]):after {
+      :host([counter][state='complete']):after {
         background-color: #162e51;
         box-shadow: 0 0 0 0.25rem #fff;
         color: #fff;
       }
 
-      :host([counter][state="current"]):after {
+      :host([counter][state='current']):after {
         background-color: #005ea2;
         box-shadow: 0 0 0 0.25rem #fff;
         color: #fff;
       }
 
-      :host([counter="small"]):after {
+      :host([counter='small']):after {
         height: 1.5rem;
         width: 1.5rem;
         font-size: 0.93rem;
@@ -109,15 +109,15 @@ declare global {
 })
 export class USAStepIndicatorStepElement extends HTMLElement {
   @attr()
-  accessor state: "complete" | "current" | "" = "";
+  accessor state: 'complete' | 'current' | '' = '';
 
   @attr()
-  accessor role = "listitem";
+  accessor role = 'listitem';
 
-  @attrChanged("state")
+  @attrChanged('state')
   onStateAttrChanged() {
-    if (this.state === "current") {
-      this.ariaCurrent = "step";
+    if (this.state === 'current') {
+      this.ariaCurrent = 'step';
     }
   }
 }

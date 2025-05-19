@@ -1,26 +1,29 @@
-import { attr, css, element, html, listen, query } from "@joist/element";
+import '@joist/templating/define.js';
+
+import { attr, css, element, html, listen } from '@joist/element';
+import { bind } from '@joist/templating';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-in-page-nav-item": USAInPageNavItemElement;
+    'usa-in-page-nav-item': USAInPageNavItemElement;
   }
 }
 
 @element({
-  tagName: "usa-in-page-nav-item",
+  tagName: 'usa-in-page-nav-item',
   shadowDom: [
     css`
       :host {
-        border-left: solid .25rem transparent;
+        border-left: solid 0.25rem transparent;
         display: flex;
-        font-size: .93rem;
+        font-size: 0.93rem;
         line-height: 1.1;
         position: relative;
       }
 
       a {
         color: #005ea2;
-        padding: .5rem 1rem;
+        padding: 0.5rem 1rem;
         text-decoration: none;
       }
 
@@ -42,21 +45,24 @@ declare global {
       }
     `,
     html`
-      <a>
-        <slot></slot>
-      </a>
+      <j-bind props="href:target">
+        <a>
+          <slot></slot>
+        </a>
+      </j-bind>
     `,
   ],
 })
 export class USAInPageNavItemElement extends HTMLElement {
   @attr()
-  accessor role = "listitem";
+  accessor role = 'listitem';
 
   @attr()
   accessor primary = false;
 
   @attr()
-  accessor target = "";
+  @bind()
+  accessor target = '';
 
   @attr()
   accessor active = false;
@@ -65,20 +71,14 @@ export class USAInPageNavItemElement extends HTMLElement {
     return document.getElementById(this.target);
   }
 
-  #a = query("a");
-
-  attributeChangedCallback() {
-    this.#a({ href: `#${this.target}` });
-  }
-
-  @listen("click")
+  @listen('click')
   async onClick(e: Event) {
     e.preventDefault();
 
     if (this.targetElement) {
-      this.targetElement.scrollIntoView({ behavior: "smooth" });
+      this.targetElement.scrollIntoView({ behavior: 'smooth' });
     }
 
-    history.pushState(null, "", `#${this.target}`);
+    history.pushState(null, '', `#${this.target}`);
   }
 }

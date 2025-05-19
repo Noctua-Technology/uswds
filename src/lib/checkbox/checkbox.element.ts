@@ -1,4 +1,8 @@
+import '@joist/templating/define.js';
+
 import { attr, css, element, html, listen, query } from '@joist/element';
+import { bind } from '@joist/templating';
+import { effect } from '@joist/observable';
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -112,9 +116,10 @@ declare global {
     `,
     html`
       <label>
-        <input type="checkbox" tabindex="0" />
-
-        <div class="checkbox" part="checkbox"></div>
+        <j-bind props="checked,required,disabled" target="input">
+          <input type="checkbox" tabindex="0" />
+          <div class="checkbox" part="checkbox"></div>
+        </j-bind>
 
         <div class="title" part="title">
           <slot></slot>
@@ -127,18 +132,23 @@ export class USACheckboxElement extends HTMLElement {
   static formAssociated = true;
 
   @attr()
+  @bind()
   accessor checked = false;
 
   @attr()
+  @bind()
   accessor name = '';
 
   @attr()
+  @bind()
   accessor value = '';
 
   @attr()
+  @bind()
   accessor required = false;
 
   @attr()
+  @bind()
   accessor disabled = false;
 
   @attr({
@@ -147,17 +157,10 @@ export class USACheckboxElement extends HTMLElement {
   accessor tiled = false;
 
   #checkbox = query('input');
-
   #internals = this.attachInternals();
 
-  attributeChangedCallback() {
-    this.#checkbox({
-      checked: this.checked,
-      name: this.name,
-      disabled: this.disabled,
-      required: this.required,
-    });
-
+  @effect()
+  onChange() {
     this.#syncFormState();
   }
 
@@ -165,15 +168,13 @@ export class USACheckboxElement extends HTMLElement {
   onCheckboxChange() {
     const checkbox = this.#checkbox();
     this.checked = checkbox.checked;
-
-    this.#syncFormState();
   }
 
   #syncFormState() {
     const checkbox = this.#checkbox();
 
     this.#internals.setValidity({});
-    this.#internals.setFormValue(checkbox.checked ? this.value : null);
+    this.#internals.setFormValue(this.checked ? this.value : null);
 
     if (checkbox.validationMessage) {
       this.#internals.setValidity({ customError: true }, checkbox.validationMessage, checkbox);

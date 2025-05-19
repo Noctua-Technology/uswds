@@ -1,5 +1,8 @@
+import '@joist/templating/define.js';
+
 import { attr, css, element, html, listen, query } from '@joist/element';
 import { effect, observe } from '@joist/observable';
+import { bind } from '@joist/templating';
 
 import type { MaskableElement } from '../input-mask/maskable.element.js';
 
@@ -89,7 +92,23 @@ declare global {
 
         <slot></slot>
 
-        <input tabindex="0" part="input" />
+        <j-bind
+          props="
+            autocomplete,
+            autofocus,
+            placeholder,
+            name,
+            type,
+            required,
+            min,
+            max,
+            minLength,
+            maxLength,
+            disabled
+          "
+        >
+          <input tabindex="0" part="input" />
+        </j-bind>
       </label>
     `,
   ],
@@ -98,34 +117,48 @@ export class USATextInputElement extends HTMLElement implements MaskableElement 
   static formAssociated = true;
 
   @attr()
+  @bind()
   accessor name = '';
 
   @attr()
+  @bind()
   accessor autocomplete: AutoFill = 'on';
 
   @attr()
+  @bind()
   accessor placeholder = '';
 
   @attr()
+  @bind()
   accessor min = '';
 
   @attr()
+  @bind()
   accessor max = '';
 
   @attr()
-  accessor minLength = -1;
+  @bind()
+  accessor minLength = 0;
 
   @attr()
-  accessor maxLength = -1;
+  @bind()
+  accessor maxLength = 524_288;
 
   @attr()
+  @bind()
   accessor required = false;
 
   @attr()
+  @bind()
   accessor disabled = false;
 
   @attr()
+  @bind()
   accessor type: 'text' | 'password' | 'number' = 'text';
+
+  @attr()
+  @bind()
+  accessor autofocus = false;
 
   @attr()
   accessor detail: 'pfx' | 'sfx' | '' = '';
@@ -142,45 +175,30 @@ export class USATextInputElement extends HTMLElement implements MaskableElement 
   @observe()
   accessor selectionEnd: number | null = null;
 
-  get validationMessage() {
-    return this.#input().validationMessage;
-  }
-
   #internals = this.attachInternals();
   #input = query('input');
 
-  attributeChangedCallback() {
-    this.#input({
-      autocomplete: this.autocomplete,
-      placeholder: this.placeholder,
-      name: this.name,
-      type: this.type,
-      required: this.required,
-      min: this.min,
-      max: this.max,
-      minLength: this.minLength,
-      maxLength: this.maxLength,
-      disabled: this.disabled,
-    });
+  connectedCallback() {
+    const { selectionStart, selectionEnd, value } = this;
+
+    // these have to be set manually.
+    this.#input({ value, selectionStart, selectionEnd });
+
+    this.#syncFormState();
   }
 
-  connectedCallback() {
-    this.#input({ autofocus: this.autofocus, value: this.value });
+  @effect()
+  onChange() {
+    const { selectionStart, selectionEnd, value } = this;
+
+    // these have to be set manually.
+    this.#input({ value, selectionStart, selectionEnd });
 
     this.#syncFormState();
   }
 
   focus(options?: FocusOptions): void {
     this.#input().focus(options);
-  }
-
-  @effect()
-  onChange() {
-    const { value, selectionStart, selectionEnd } = this;
-
-    this.#input({ value, selectionStart, selectionEnd });
-
-    this.#syncFormState();
   }
 
   @listen('keydown')

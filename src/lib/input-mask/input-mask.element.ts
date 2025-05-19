@@ -32,12 +32,14 @@ export class USAInputMaskElement extends HTMLElement {
 
       if (formatted) {
         input.value = formatted;
+        input.selectionStart = input.selectionStart;
+        input.selectionEnd = input.selectionEnd;
       }
     }
   }
 
   @listen('input')
-  onInput(e: Event) {
+  async onInput(e: Event) {
     const input = e.target as MaskableElement;
     const selectionStart = input.selectionStart || 0;
     const prev = input.value;

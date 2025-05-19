@@ -1,9 +1,9 @@
-import "./checkbox.element.js";
+import './checkbox.element.js';
 
-import { assert, fixture, html } from "@open-wc/testing";
+import { assert, fixture, html } from '@open-wc/testing';
 
-describe("usa-checkbox", () => {
-  it("should be accessible", async () => {
+describe('usa-checkbox', () => {
+  it('should be accessible', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <usa-checkbox name="fname" value="Foo">Hello World</usa-checkbox>
     `);
@@ -11,12 +11,10 @@ describe("usa-checkbox", () => {
     return assert.isAccessible(form);
   });
 
-  it("should submit form with default values", async () => {
+  it('should submit form with default values', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
-        <usa-checkbox name="enabled" value="test" checked>
-          Hello World
-        </usa-checkbox>
+        <usa-checkbox name="enabled" value="test" checked> Hello World </usa-checkbox>
 
         <button>Submit</button>
       </form>
@@ -24,10 +22,10 @@ describe("usa-checkbox", () => {
 
     const value = new FormData(form);
 
-    assert.equal(value.get("enabled"), "test");
+    assert.equal(value.get('enabled'), 'test');
   });
 
-  it("should update form value as input value changed", async () => {
+  it('should update form value as input value changed', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <usa-checkbox name="enabled" value="test">Hello World</usa-checkbox>
@@ -36,24 +34,24 @@ describe("usa-checkbox", () => {
       </form>
     `);
 
-    const checkbox = form.querySelector("usa-checkbox");
-    const nativeInput = checkbox?.shadowRoot?.querySelector("input");
+    const checkbox = form.querySelector('usa-checkbox');
+    const nativeInput = checkbox?.shadowRoot?.querySelector('input');
 
     if (nativeInput) {
       nativeInput.click();
     }
 
+    await Promise.resolve();
+
     const value = new FormData(form);
 
-    assert.equal(value.get("enabled"), "test");
+    assert.equal(value.get('enabled'), 'test');
   });
 
-  it("should not submit when not valid", async () => {
+  it('should not submit when not valid', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
-        <usa-checkbox name="enabled" value="test" required>
-          Hello World
-        </usa-checkbox>
+        <usa-checkbox name="enabled" value="test" required> Hello World </usa-checkbox>
 
         <button>Submit</button>
       </form>

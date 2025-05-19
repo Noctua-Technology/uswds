@@ -1,13 +1,13 @@
-import { css, element, html } from "@joist/element";
+import { css, element, html } from '@joist/element';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-pagination-item": USAPaginationItemElement;
+    'usa-pagination-item': USAPaginationItemElement;
   }
 }
 
 @element({
-  tagName: "usa-pagination-item",
+  tagName: 'usa-pagination-item',
   shadowDom: [
     css`
       :host {
@@ -26,10 +26,13 @@ declare global {
       :host(:last-child) {
         margin-left: 1rem;
       }
+
+      ::slotted(usa-link) {
+        display: inline-flex;
+        align-items: center;
+      }
     `,
-    html`
-      <slot></slot>
-    `,
+    html` <slot></slot> `,
   ],
 })
 export class USAPaginationItemElement extends HTMLElement {}

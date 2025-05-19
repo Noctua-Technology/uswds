@@ -13,6 +13,8 @@ const meta = {
         <usa-input name="phone" placeholder=${args.mask} autocomplete="off" mask=${args.mask} value="1234567890">
           Phone:
         </usa-input>
+
+        <input type="text" placeholder=${args.mask} autocomplete="off" mask=${args.mask} value="1234567890" />
       </usa-input-mask>
     `;
   },

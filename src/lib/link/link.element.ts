@@ -1,13 +1,16 @@
-import { attr, css, element, html, query } from "@joist/element";
+import '@joist/templating/define.js';
+
+import { attr, css, element, html, query } from '@joist/element';
+import { bind } from '@joist/templating';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-link": USALinkElement;
+    'usa-link': USALinkElement;
   }
 }
 
 @element({
-  tagName: "usa-link",
+  tagName: 'usa-link',
   shadowDom: [
     css`
       :host {
@@ -20,38 +23,26 @@ declare global {
         color: inherit;
         text-decoration: inherit;
         display: inherit;
-        text-overflow: inherit
+        text-overflow: inherit;
       }
     `,
     html`
-      <a>
-        <slot></slot>
-      </a>
+      <j-bind props="href,target,title">
+        <a>
+          <slot></slot>
+        </a>
+      </j-bind>
     `,
   ],
 })
 export class USALinkElement extends HTMLElement {
   @attr()
-  accessor href = "";
+  @bind()
+  accessor href = '';
 
   @attr()
-  accessor target: "_blank" | "_parent" | "_self" | "_top" | "" = "";
+  accessor target: '_blank' | '_parent' | '_self' | '_top' | '' = '';
 
   @attr()
-  accessor title = "";
-
-  @attr({
-    observed: false,
-  })
-  accessor disabled = false;
-
-  #anchor = query("a");
-
-  attributeChangedCallback() {
-    this.#anchor({
-      href: this.href,
-      target: this.target,
-      title: this.title,
-    });
-  }
+  accessor title = '';
 }

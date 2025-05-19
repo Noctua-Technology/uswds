@@ -1,13 +1,17 @@
-import { attr, css, element, html, listen, query } from "@joist/element";
+import '@joist/templating/define.js';
+
+import { attr, css, element, html, listen, query } from '@joist/element';
+import { effect } from '@joist/observable';
+import { bind } from '@joist/templating';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-range-slider": USARangeSliderElement;
+    'usa-range-slider': USARangeSliderElement;
   }
 }
 
 @element({
-  tagName: "usa-range-slider",
+  tagName: 'usa-range-slider',
   shadowDom: [
     css`
       :host {
@@ -24,11 +28,11 @@ declare global {
         border-radius: 0;
         color: #1b1b1b;
         display: block;
-        margin-top: .5rem;
+        margin-top: 0.5rem;
       }
 
       input:focus {
-        outline: .25rem solid #2491ff;
+        outline: 0.25rem solid #2491ff;
         outline-offset: 0;
       }
 
@@ -42,7 +46,7 @@ declare global {
         cursor: pointer;
         -webkit-appearance: none;
         appearance: none;
-        margin-top: -.19rem;
+        margin-top: -0.19rem;
       }
 
       input::-webkit-slider-runnable-track {
@@ -55,11 +59,15 @@ declare global {
       }
     `,
     html`
-      <label part="label">
-        <slot></slot>
-      </label>
+      <j-bind attrs="for:name">
+        <label part="label">
+          <slot></slot>
+        </label>
+      </j-bind>
 
-      <input type="range" part="input">
+      <j-bind props="id:name,name,value,min,max,step">
+        <input type="range" part="input" />
+      </j-bind>
     `,
   ],
 })
@@ -67,45 +75,52 @@ export class USARangeSliderElement extends HTMLElement {
   static formAssociated = true;
 
   @attr()
-  accessor name = "";
+  @bind()
+  accessor name = '';
 
   @attr()
-  accessor value = "0";
+  @bind()
+  accessor value = '0';
 
   @attr()
-  accessor min = "0";
+  @bind()
+  accessor min = '0';
 
   @attr()
-  accessor max = "100";
+  @bind()
+  accessor max = '100';
 
   @attr()
-  accessor step = "1";
+  @bind()
+  accessor step = '1';
 
-  #label = query("label");
-  #input = query("input");
+  #input = query('input');
   #internals = this.attachInternals();
 
-  attributeChangedCallback() {
-    this.#label({
-      htmlFor: this.name,
-    });
-
-    this.#input({
-      name: this.name,
-      value: this.value,
-      min: this.min,
-      max: this.max,
-      step: this.step,
-      id: this.name,
-    });
-
-    this.#internals.setFormValue(this.value);
+  connectedCallback() {
+    this.#syncFormState();
   }
 
-  @listen("change")
+  @effect()
+  onChange() {
+    this.#syncFormState();
+  }
+
+  @listen('change')
   onInputChange() {
     const input = this.#input();
 
     this.value = input.value;
+  }
+
+  #syncFormState() {
+    const input = this.#input();
+
+    this.#internals.setValidity({});
+    this.#internals.setFormValue(this.value);
+
+    if (input.validationMessage) {
+      this.#internals.setValidity({ customError: true }, input.validationMessage, input);
+    }
   }
 }
