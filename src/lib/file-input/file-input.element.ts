@@ -127,7 +127,9 @@ export class USAFileInputElement extends HTMLElement {
   @bind()
   accessor files: FileList | null = null;
 
-  @bind((i) => !!i.files?.length)
+  @bind({
+    compute: (i) => !!i.files?.length,
+  })
   accessor filesVisible = false;
 
   #internals = this.attachInternals();

@@ -98,6 +98,8 @@ export class USAAlertElement extends HTMLElement {
   @observe()
   accessor type: USAAlertType = 'info';
 
-  @bind((i) => USA_ALERT_CONFIG[i.type].icon)
+  @bind({
+    compute: (i) => USA_ALERT_CONFIG[i.type].icon,
+  })
   accessor icon: USAIcon = 'info';
 }

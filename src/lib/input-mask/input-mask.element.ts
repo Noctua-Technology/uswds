@@ -32,8 +32,6 @@ export class USAInputMaskElement extends HTMLElement {
 
       if (formatted) {
         input.value = formatted;
-        input.selectionStart = input.selectionStart;
-        input.selectionEnd = input.selectionEnd;
       }
     }
   }

@@ -41,8 +41,10 @@ export class USALinkElement extends HTMLElement {
   accessor href = '';
 
   @attr()
+  @bind()
   accessor target: '_blank' | '_parent' | '_self' | '_top' | '' = '';
 
   @attr()
+  @bind()
   accessor title = '';
 }

@@ -98,16 +98,18 @@ export class USAFileInputPreviewElement extends HTMLElement {
   @observe()
   accessor files: FileList | null = null;
 
-  @bind((i) => {
-    if (!i.files || i.files.length === 0) {
-      return [];
-    }
+  @bind({
+    compute: (i) => {
+      if (!i.files || i.files.length === 0) {
+        return [];
+      }
 
-    return Array.from(i.files).map((file) => ({
-      file,
-      src: URL.createObjectURL(file),
-      isImage: file.type.startsWith('image'),
-    }));
+      return Array.from(i.files).map((file) => ({
+        file,
+        src: URL.createObjectURL(file),
+        isImage: file.type.startsWith('image'),
+      }));
+    },
   })
   accessor fileEntries: FileEntry[] = [];
 }

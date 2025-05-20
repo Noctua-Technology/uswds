@@ -105,7 +105,9 @@ export class USAAccordionElement extends HTMLElement {
   @bind()
   accessor open = false;
 
-  @bind((i) => (i.open ? 'remove' : 'add'))
+  @bind({
+    compute: (i) => (i.open ? 'remove' : 'add'),
+  })
   accessor icon: 'add' | 'remove' = 'add';
 
   @listen('click', 'summary')

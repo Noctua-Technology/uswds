@@ -1,7 +1,7 @@
 import '@joist/templating/define.js';
 
 import { attr, css, element, html, listen, query } from '@joist/element';
-import { effect, observe } from '@joist/observable';
+import { effect } from '@joist/observable';
 import { bind } from '@joist/templating';
 
 import type { MaskableElement } from '../input-mask/maskable.element.js';
@@ -104,7 +104,10 @@ declare global {
             max,
             minLength,
             maxLength,
-            disabled
+            disabled,
+            value,
+            selectionStart,
+            selectionEnd
           "
         >
           <input tabindex="0" part="input" />
@@ -166,34 +169,28 @@ export class USATextInputElement extends HTMLElement implements MaskableElement 
   @attr({
     reflect: false,
   })
-  @observe()
+  @bind()
   accessor value = '';
 
-  @observe()
+  @bind({
+    alwaysUpdate: true,
+  })
   accessor selectionStart: number | null = null;
 
-  @observe()
+  @bind({
+    alwaysUpdate: true,
+  })
   accessor selectionEnd: number | null = null;
 
   #internals = this.attachInternals();
   #input = query('input');
 
   connectedCallback() {
-    const { selectionStart, selectionEnd, value } = this;
-
-    // these have to be set manually.
-    this.#input({ value, selectionStart, selectionEnd });
-
     this.#syncFormState();
   }
 
   @effect()
   onChange() {
-    const { selectionStart, selectionEnd, value } = this;
-
-    // these have to be set manually.
-    this.#input({ value, selectionStart, selectionEnd });
-
     this.#syncFormState();
   }
 

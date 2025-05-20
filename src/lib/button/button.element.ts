@@ -166,8 +166,8 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
     html`
       <j-if bind="href">
         <template>
-          <j-bind props="href">
-            <a part="link" $disabled="disabled" $target="target">
+          <j-bind props="href,target">
+            <a part="link">
               <slot></slot>
             </a>
           </j-bind>
