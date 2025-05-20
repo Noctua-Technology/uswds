@@ -62,11 +62,13 @@ declare global {
       }
     `,
     html`
-      <label for="textarea" part="label">
-        <slot></slot>
-      </label>
+      <j-bind attrs="for:name">
+        <label part="label">
+          <slot></slot>
+        </label>
+      </j-bind>
 
-      <j-bind props="name,placeholder,autocomplete,required,value">
+      <j-bind props="name,placeholder,autocomplete,required,value,id:name">
         <textarea id="textarea" part="textarea"></textarea>
       </j-bind>
     `,

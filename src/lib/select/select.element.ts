@@ -1,20 +1,24 @@
-import { injectable } from "@joist/di";
-import { attr, css, element, html, listen, query } from "@joist/element";
+import '@joist/templating/define.js';
 
-import { SELECT_CONTEXT, type SelectContainer } from "./context.js";
+import { injectable } from '@joist/di';
+import { attr, css, element, html, listen, query } from '@joist/element';
+import { bind } from '@joist/templating';
+
+import { SELECT_CONTEXT, type SelectContainer } from './context.js';
+import { effect } from '@joist/observable';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-select": USASelectElement;
+    'usa-select': USASelectElement;
   }
 }
 
 @injectable({
-  name: "usa-select-ctx",
+  name: 'usa-select-ctx',
   provideSelfAs: [SELECT_CONTEXT],
 })
 @element({
-  tagName: "usa-select",
+  tagName: 'usa-select',
   shadowDom: [
     css`
       :host {
@@ -69,7 +73,9 @@ declare global {
           <slot></slot>
         </div>
 
-        <select part="select"></select>
+        <j-bind props="value,name,required">
+          <select part="select"></select>
+        </j-bind>
       </label>
     `,
   ],
@@ -78,63 +84,56 @@ export class USASelectElement extends HTMLElement implements SelectContainer {
   static formAssociated = true;
 
   @attr()
-  accessor value = "";
+  @bind()
+  accessor value = '';
 
   @attr()
-  accessor name = "";
+  @bind()
+  accessor name = '';
 
   @attr()
+  @bind()
   accessor required = false;
 
-  #select = query("select");
+  #select = query('select');
   #internals = this.attachInternals();
 
   connectedCallback() {
-    this.#select({
-      value: this.value,
-      name: this.name,
-      required: this.required,
-    });
-
     this.#syncFormState();
   }
 
-  attributeChangedCallback() {
-    this.#select({
-      value: this.value,
-      name: this.name,
-      required: this.required,
-    });
-
+  @effect()
+  onChange() {
     this.#syncFormState();
   }
 
-  @listen("change")
+  @listen('change')
   onSelectChange() {
     const select = this.#select();
 
     this.value = select.value;
-
-    this.#syncFormState();
   }
 
   addSelectOption(option: HTMLOptionElement) {
     const select = this.#select();
+
+    if (!this.value && !select.children.length) {
+      this.value = option.value;
+    }
+
     select.append(option);
   }
 
-  #syncFormState() {
+  async #syncFormState() {
     const select = this.#select();
 
     this.#internals.setFormValue(this.value);
     this.#internals.setValidity({});
 
+    await Promise.resolve();
+
     if (select.validationMessage) {
-      this.#internals.setValidity(
-        { customError: true },
-        select.validationMessage,
-        select,
-      );
+      this.#internals.setValidity({ customError: true }, select.validationMessage, select);
     }
   }
 }
