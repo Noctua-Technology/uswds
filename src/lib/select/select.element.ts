@@ -109,7 +109,7 @@ export class USASelectElement extends HTMLElement implements SelectContainer {
 
   @listen('change')
   onSelectChange(e: Event) {
-    e.stopPropagation();
+    e.stopImmediatePropagation();
 
     const select = this.#select();
 
