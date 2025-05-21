@@ -160,7 +160,7 @@ export class USAFileInputElement extends HTMLElement {
     }
   }
 
-  @listen('change')
+  @listen('input')
   onInputChange(e: Event) {
     e.stopPropagation();
 
@@ -168,7 +168,7 @@ export class USAFileInputElement extends HTMLElement {
 
     this.files = input.files;
 
-    this.dispatchEvent(new Event('change', { bubbles: true }));
+    this.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
   @listen('dragenter')
