@@ -165,9 +165,13 @@ export class USACheckboxElement extends HTMLElement {
   }
 
   @listen('change', 'input[type=checkbox]')
-  onCheckboxChange() {
+  onCheckboxChange(e: Event) {
+    e.stopPropagation();
+
     const checkbox = this.#checkbox();
     this.checked = checkbox.checked;
+
+    this.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   #syncFormState() {

@@ -108,10 +108,14 @@ export class USASelectElement extends HTMLElement implements SelectContainer {
   }
 
   @listen('change')
-  onSelectChange() {
+  onSelectChange(e: Event) {
+    e.stopPropagation();
+
     const select = this.#select();
 
     this.value = select.value;
+
+    this.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   addSelectOption(option: HTMLOptionElement) {
