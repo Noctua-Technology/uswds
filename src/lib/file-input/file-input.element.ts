@@ -161,12 +161,14 @@ export class USAFileInputElement extends HTMLElement {
   }
 
   @listen('change')
-  onInputChange() {
+  onInputChange(e: Event) {
+    e.stopPropagation();
+
     const input = this.#input();
 
     this.files = input.files;
 
-    this.dispatchEvent(new Event('change'));
+    this.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   @listen('dragenter')
