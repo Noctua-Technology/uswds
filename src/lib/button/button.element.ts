@@ -82,20 +82,6 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
         outline-offset: 0.25rem;
       }
 
-      :is(button, a):disabled {
-        color: #454545;
-        background-color: #c9c9c9;
-        cursor: not-allowed;
-        opacity: 1;
-      }
-
-      :is(button, a):disabled:hover,
-      :is(button, a):disabled:active,
-      :is(button, a):disabled:focus {
-        color: #454545;
-        background-color: #c9c9c9;
-      }
-
       :is(button, a):focus {
         outline: 0.25rem solid #2491ff;
         outline-offset: 0;
@@ -161,6 +147,20 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
       :host([variant='outline']) :is(button, a):active {
         box-shadow: inset 0 0 0 2px #162e51;
         color: #162e51;
+      }
+
+      :host(*) :is(button, a):disabled {
+        color: #454545;
+        background-color: #c9c9c9;
+        cursor: not-allowed;
+        opacity: 1;
+      }
+
+      :host(*) :is(button, a):disabled:hover,
+      :host(*) :is(button, a):disabled:active,
+      :host(*) :is(button, a):disabled:focus {
+        color: #454545;
+        background-color: #c9c9c9;
       }
     `,
     html`

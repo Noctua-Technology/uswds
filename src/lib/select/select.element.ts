@@ -107,7 +107,7 @@ export class USASelectElement extends HTMLElement implements SelectContainer {
     this.#syncFormState();
   }
 
-  @listen('change')
+  @listen('input')
   onSelectChange(e: Event) {
     e.stopImmediatePropagation();
 
@@ -115,7 +115,7 @@ export class USASelectElement extends HTMLElement implements SelectContainer {
 
     this.value = select.value;
 
-    this.dispatchEvent(new Event('change', { bubbles: true }));
+    this.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
   addSelectOption(option: HTMLOptionElement) {
