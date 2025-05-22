@@ -1,9 +1,9 @@
-import { attr, css, element, html, query } from '@joist/element';
+import { attr, css, element, html } from '@joist/element';
+import { observe } from '@joist/observable';
+import { bind } from '@joist/templating';
 
 import { type USAAlertType, USA_ALERT_CONFIG } from './alert-types.js';
-import { bind } from '@joist/templating';
 import { USAIcon } from '../icon/icon-types.js';
-import { observe } from '@joist/observable';
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -84,6 +84,7 @@ declare global {
           <slot id="heading" name="heading"></slot>
         </div>
 
+        <!-- this makes the heading and content are aligned properly -->
         <div class="spacer"></div>
 
         <div>

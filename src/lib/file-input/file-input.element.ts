@@ -86,7 +86,7 @@ declare global {
           <input id="file-input" type="file" tabindex="0" />
         </j-bind>
 
-        <j-if bind="filesVisible">
+        <j-if bind="files.length">
           <template>
             <j-bind props="files">
               <usa-file-input-preview part="preview" exportparts="heading, item">
@@ -95,7 +95,7 @@ declare global {
             </j-bind>
           </template>
 
-          <template else>
+          <template id="test" else>
             <div class="box" part="input">
               <slot name="description"> Drag file here or <usa-link>choose from folder</usa-link> </slot>
             </div>
@@ -114,7 +114,7 @@ export class USAFileInputElement extends HTMLElement {
 
   @attr()
   @bind()
-  accessor multiple = true;
+  accessor multiple = false;
 
   @attr()
   @bind()
@@ -125,12 +125,7 @@ export class USAFileInputElement extends HTMLElement {
   accessor required = false;
 
   @bind()
-  accessor files: FileList | null = null;
-
-  @bind({
-    compute: (i) => !!i.files?.length,
-  })
-  accessor filesVisible = false;
+  accessor files: FileList | null | undefined = undefined;
 
   #internals = this.attachInternals();
   #input = query('input');

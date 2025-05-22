@@ -116,8 +116,12 @@ export class USATextareaElement extends HTMLElement {
   }
 
   @listen('input')
-  onInputChange() {
+  onInputChange(e: Event) {
+    e.stopPropagation();
+
     this.value = this.#input().value;
+
+    this.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
   #syncFormState() {

@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
+import type { Meta, StoryObj } from '@storybook/web-components';
+import { html } from 'lit';
 
-import type { USATextareaElement } from "./textarea.element.js";
+import type { USATextareaElement } from './textarea.element.js';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
-  title: "usa-textarea",
-  tags: ["autodocs"],
+  title: 'usa-textarea',
+  tags: ['autodocs'],
   render(args) {
     return html`<usa-textarea>Hello World</usa-textarea>`;
   },
