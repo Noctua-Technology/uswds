@@ -125,7 +125,7 @@ export class USAFileInputElement extends HTMLElement {
   accessor required = false;
 
   @bind()
-  accessor files: FileList | null | undefined = undefined;
+  accessor files: FileList | null = null;
 
   #internals = this.attachInternals();
   #input = query('input');
