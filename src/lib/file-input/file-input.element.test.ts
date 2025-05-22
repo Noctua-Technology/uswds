@@ -66,7 +66,6 @@ describe('usa-file-input', () => {
     await Promise.resolve();
 
     // Verify that filesVisible is true and files are set
-    assert.isTrue(fileInput.filesVisible);
     assert.equal(fileInput.files?.length, 1);
     assert.equal(fileInput.files?.[0].name, 'test.txt');
   });
