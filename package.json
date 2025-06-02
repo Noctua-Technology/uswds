@@ -23,7 +23,8 @@
     "storybook": "storybook dev -p 6006",
     "build_storybook": "wireit",
     "gen": "plop",
-    "prepare": "wireit"
+    "prepare": "wireit",
+    "build-storybook": "storybook build"
   },
   "wireit": {
     "prepare": {
@@ -111,10 +112,11 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "@chromatic-com/storybook": "^4.0.0",
     "@open-wc/testing": "^4.0.0",
-    "@storybook/addon-essentials": "^8.6.0",
-    "@storybook/web-components": "^8.6.0",
-    "@storybook/web-components-vite": "^8.6.0",
+    "@storybook/addon-docs": "^9.0.4",
+    "@storybook/web-components": "^9.0.4",
+    "@storybook/web-components-vite": "^9.0.4",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/mocha": "^10.0.7",
@@ -130,7 +132,7 @@
     "mocha": "^11.0.0",
     "plop": "^4.0.1",
     "prettier": "^3.5.3",
-    "storybook": "^8.6.0",
+    "storybook": "^9.0.4",
     "typescript": "^5.8.0",
     "wireit": "^0.14.9"
   },
@@ -138,5 +140,8 @@
     "*": [
       "prettier --write --ignore-unknown"
     ]
+  },
+  "overrides": {
+    "storybook": "$storybook"
   }
 }
