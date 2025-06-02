@@ -1,4 +1,4 @@
-import { inject, injectable, injected } from '@joist/di';
+import { inject, injectable } from '@joist/di';
 import { attr, css, element } from '@joist/element';
 
 import { IconService } from '../services/icon.service.js';
@@ -49,8 +49,6 @@ export class USAIconElement extends HTMLElement {
 
   @effect()
   onIconUpdate() {
-    console.log('onIconUpdate', this.icon);
-
     this.#updateIcon();
   }
 

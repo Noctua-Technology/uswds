@@ -106,7 +106,7 @@ export class USATextareaElement extends HTMLElement {
   #internals = this.attachInternals();
   #input = query('textarea');
 
-  connectedCallback() {
+  formAssociatedCallback() {
     this.#syncFormState();
   }
 
@@ -124,11 +124,13 @@ export class USATextareaElement extends HTMLElement {
     this.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
-  #syncFormState() {
+  async #syncFormState() {
     const input = this.#input();
 
     this.#internals.setFormValue(this.value);
     this.#internals.setValidity({});
+
+    await Promise.resolve();
 
     if (input.validationMessage) {
       this.#internals.setValidity({ customError: true }, input.validationMessage, input);

@@ -174,11 +174,13 @@ export class USACheckboxElement extends HTMLElement {
     this.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
-  #syncFormState() {
+  async #syncFormState() {
     const checkbox = this.#checkbox();
 
     this.#internals.setValidity({});
     this.#internals.setFormValue(this.checked ? this.value : null);
+
+    await Promise.resolve();
 
     if (checkbox.validationMessage) {
       this.#internals.setValidity({ customError: true }, checkbox.validationMessage, checkbox);

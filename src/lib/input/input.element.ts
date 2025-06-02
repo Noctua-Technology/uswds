@@ -185,7 +185,7 @@ export class USATextInputElement extends HTMLElement implements MaskableElement 
   #internals = this.attachInternals();
   #input = query('input');
 
-  connectedCallback() {
+  formAssociatedCallback() {
     this.#syncFormState();
   }
 
@@ -229,11 +229,13 @@ export class USATextInputElement extends HTMLElement implements MaskableElement 
     this.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
-  #syncFormState() {
+  async #syncFormState() {
     const input = this.#input();
 
     this.#internals.setValidity({});
     this.#internals.setFormValue(this.value);
+
+    await Promise.resolve();
 
     if (input.validationMessage) {
       this.#internals.setValidity({ customError: true }, input.validationMessage, input);
