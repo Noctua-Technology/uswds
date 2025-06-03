@@ -21,6 +21,10 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
   },
   shadowDom: [
     css`
+      :host {
+        display: inline-block;
+      }
+
       button,
       a {
         border-top-right-radius: 0.25rem;
