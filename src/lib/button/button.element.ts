@@ -21,17 +21,12 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
   },
   shadowDom: [
     css`
-      :host {
-        display: inline-block;
+      button,
+      a {
         border-top-right-radius: 0.25rem;
         border-bottom-right-radius: 0.25rem;
         border-top-left-radius: 0.25rem;
         border-bottom-left-radius: 0.25rem;
-        overflow: hidden;
-      }
-
-      button,
-      a {
         box-sizing: border-box;
         font-size: 1.06rem;
         line-height: 0.9;
