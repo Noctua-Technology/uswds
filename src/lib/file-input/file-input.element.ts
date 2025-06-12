@@ -135,7 +135,7 @@ export class USAFileInputElement extends HTMLElement {
   }
 
   @effect()
-  syncFormValues() {
+  async syncFormValues() {
     const input = this.#input();
 
     const formData = new FormData();
@@ -147,6 +147,8 @@ export class USAFileInputElement extends HTMLElement {
     }
 
     this.#internals.setFormValue(formData);
+
+    await Promise.resolve();
 
     if (input.validationMessage) {
       this.#internals.setValidity({ customError: true }, input.validationMessage, input);
