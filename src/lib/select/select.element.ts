@@ -73,7 +73,7 @@ declare global {
           <slot></slot>
         </div>
 
-        <j-bind props="value,name,required">
+        <j-bind props="value,name,required,disabled">
           <select part="select"></select>
         </j-bind>
       </label>
@@ -94,6 +94,10 @@ export class USASelectElement extends HTMLElement implements SelectContainer {
   @attr()
   @bind()
   accessor required = false;
+
+  @attr()
+  @bind()
+  accessor disabled = false;
 
   #select = query('select');
   #internals = this.attachInternals();

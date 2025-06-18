@@ -3,6 +3,7 @@ import './select-option/select-option.element.js';
 
 import { assert, fixture, html } from '@open-wc/testing';
 import { userEvent } from '@testing-library/user-event';
+import { USASelectElement } from './select.element.js';
 
 describe('usa-select', () => {
   it('should be accessible', async () => {
@@ -123,5 +124,21 @@ describe('usa-select', () => {
     `);
 
     assert.equal(form.checkValidity(), false);
+  });
+
+  it('should be disabled when disabled attribute is set', async () => {
+    const select = await fixture<USASelectElement>(html`
+      <usa-select name="example" value="second" disabled>
+        Hello World
+
+        <usa-select-option value="first">First</usa-select-option>
+        <usa-select-option value="second">Second</usa-select-option>
+        <usa-select-option value="third">Third</usa-select-option>
+      </usa-select>
+    `);
+
+    const nativeSelect = select.shadowRoot?.querySelector('select');
+
+    assert.isTrue(nativeSelect?.disabled);
   });
 });
