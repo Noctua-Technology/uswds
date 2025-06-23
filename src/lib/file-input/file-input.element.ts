@@ -82,7 +82,7 @@ declare global {
       </label>
 
       <div class="container">
-        <j-bind props="name,multiple,accept,required">
+        <j-bind props="name,multiple,accept,required,files">
           <input id="file-input" type="file" tabindex="0" />
         </j-bind>
 
