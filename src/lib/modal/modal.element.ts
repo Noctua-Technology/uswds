@@ -1,13 +1,13 @@
-import { css, element, html, listen, query } from "@joist/element";
+import { css, element, html, listen, query } from '@joist/element';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-modal": USAModalElement;
+    'usa-modal': USAModalElement;
   }
 }
 
 @element({
-  tagName: "usa-modal",
+  tagName: 'usa-modal',
   shadowDom: [
     css`
       * {
@@ -45,7 +45,7 @@ declare global {
   ],
 })
 export class USAModalElement extends HTMLElement {
-  #dialog = query("dialog");
+  #dialog = query('dialog');
 
   openModal() {
     const dialog = this.#dialog();
@@ -59,10 +59,15 @@ export class USAModalElement extends HTMLElement {
     dialog.close();
   }
 
-  @listen("click", () => document.body)
+  @listen('close', 'dialog')
+  onModalClose() {
+    this.dispatchEvent(new Event('close'));
+  }
+
+  @listen('click', () => document.body)
   onGlobalModalAction(e: Event) {
     if (e.target instanceof Element) {
-      const modalTarget = e.target.getAttribute("modal-target");
+      const modalTarget = e.target.getAttribute('modal-target');
 
       if (modalTarget === this.id) {
         this.openModal();
@@ -70,15 +75,13 @@ export class USAModalElement extends HTMLElement {
     }
   }
 
-  @listen("click", (host) => host)
+  @listen('click', (host) => host)
   onModalAction(e: Event) {
     if (e.target instanceof Element) {
-      const modalAction = e.target.getAttribute("modal-action");
+      const modalAction = e.target.getAttribute('modal-action');
 
-      if (modalAction === "close") {
+      if (modalAction === 'close') {
         this.closeModal();
-
-        this.dispatchEvent(new Event("usa::modal::close"));
       }
     }
   }
