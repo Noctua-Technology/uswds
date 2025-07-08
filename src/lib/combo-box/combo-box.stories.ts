@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html } from 'lit';
 
-import type { USAComboBoxElement } from "./combo-box.element.js";
+import type { USAComboBoxElement } from './combo-box.element.js';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
-  title: "usa-combo-box",
-  tags: ["autodocs"],
+  title: 'usa-combo-box',
+  tags: ['autodocs'],
   argTypes: {},
   args: {},
 } satisfies Meta<USAComboBoxElement>;
@@ -278,7 +278,7 @@ export const WithImages: Story = {
         <usa-combo-box-option value="Wisconsin">
           <img loading="lazy" src="./flags/wisconsin.svg" alt="Wisconsin" height="20" /> Wisconsin
         </usa-combo-box-option>
-        
+
         <usa-combo-box-option value="Wyoming">
           <img loading="lazy" src="./flags/wyoming.svg" alt="Wyoming" height="20" /> Wyoming
         </usa-combo-box-option>

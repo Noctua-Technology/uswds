@@ -112,11 +112,10 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
-    "@chromatic-com/storybook": "^4.0.0",
+    "@chromatic-com/storybook": "^4.0.1",
     "@open-wc/testing": "^4.0.0",
-    "@storybook/addon-docs": "^9.0.4",
-    "@storybook/web-components": "^9.0.4",
-    "@storybook/web-components-vite": "^9.0.4",
+    "@storybook/addon-docs": "^9.0.16",
+    "@storybook/web-components-vite": "^9.0.16",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/mocha": "^10.0.7",
@@ -132,7 +131,7 @@
     "mocha": "^11.0.0",
     "plop": "^4.0.1",
     "prettier": "^3.5.3",
-    "storybook": "^9.0.4",
+    "storybook": "^9.0.16",
     "typescript": "^5.8.0",
     "wireit": "^0.14.9"
   },

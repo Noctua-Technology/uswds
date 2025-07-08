@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html } from 'lit';
 
-import type { USACardElement } from "./card.element.js";
+import type { USACardElement } from './card.element.js';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
-  title: "usa-card",
-  tags: ["autodocs"],
+  title: 'usa-card',
+  tags: ['autodocs'],
   argTypes: {},
   args: {},
 } satisfies Meta<USACardElement>;
@@ -24,8 +24,8 @@ export const Primary: Story = {
           <usa-card-header>Card</usa-card-header>
 
           <usa-card-body>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-            earum tenetur quo cupiditate, eaque qui officia recusandae.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis earum tenetur quo cupiditate, eaque qui
+            officia recusandae.
           </usa-card-body>
 
           <usa-card-footer>
@@ -41,8 +41,8 @@ export const Primary: Story = {
           <usa-card-header>Card with media</usa-card-header>
 
           <usa-card-body>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-            earum tenetur quo cupiditate, eaque qui officia recusandae.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis earum tenetur quo cupiditate, eaque qui
+            officia recusandae.
           </usa-card-body>
 
           <usa-card-footer>
@@ -58,8 +58,8 @@ export const Primary: Story = {
           </usa-card-media>
 
           <usa-card-body>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-            possimus similique nemo odit doloremque laudantium?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore possimus similique nemo odit doloremque
+            laudantium?
           </usa-card-body>
 
           <usa-card-footer>
@@ -75,11 +75,9 @@ export const Primary: Story = {
           <usa-card-header>Inset media</usa-card-header>
 
           <usa-card-body>
-            Etiam vitae sodales metus. Fusce id orci dignissim, efficitur risus
-            eget, tempus odio. Donec lectus ante, auctor eget cursus sed,
-            convallis quis magna. Orci varius natoque penatibus et magnis dis
-            parturient montes, nascetur ridiculus mus. Mauris mattis tellus
-            bibendum aliquet malesuada.
+            Etiam vitae sodales metus. Fusce id orci dignissim, efficitur risus eget, tempus odio. Donec lectus ante,
+            auctor eget cursus sed, convallis quis magna. Orci varius natoque penatibus et magnis dis parturient montes,
+            nascetur ridiculus mus. Mauris mattis tellus bibendum aliquet malesuada.
           </usa-card-body>
 
           <usa-card-footer>
@@ -103,8 +101,8 @@ export const Flag: Story = {
           <usa-card-header>Card with media</usa-card-header>
 
           <usa-card-body>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-            earum tenetur quo cupiditate, eaque qui officia recusandae.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis earum tenetur quo cupiditate, eaque qui
+            officia recusandae.
           </usa-card-body>
 
           <usa-card-footer>
@@ -120,8 +118,8 @@ export const Flag: Story = {
           <usa-card-header>Card with media</usa-card-header>
 
           <usa-card-body>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-            earum tenetur quo cupiditate, eaque qui officia recusandae.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis earum tenetur quo cupiditate, eaque qui
+            officia recusandae.
           </usa-card-body>
 
           <usa-card-footer>

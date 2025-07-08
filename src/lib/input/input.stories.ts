@@ -1,21 +1,23 @@
-import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html } from 'lit';
 
-import type { USATextInputElement } from "./input.element.js";
+import type { USATextInputElement } from './input.element.js';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
-  title: "usa-input",
-  tags: ["autodocs"],
+  title: 'usa-input',
+  tags: ['autodocs'],
   render() {
     return html`
-      <form @submit=${(e: Event) => {
-        e.preventDefault();
+      <form
+        @submit=${(e: Event) => {
+          e.preventDefault();
 
-        const data = new FormData(e.target as HTMLFormElement);
+          const data = new FormData(e.target as HTMLFormElement);
 
-        console.log(Array.from(data.entries()));
-      }}>
+          console.log(Array.from(data.entries()));
+        }}
+      >
         <usa-input name="fname" autocomplete="off" detail="pfx">
           <usa-icon icon="credit_card" slot="detail"></usa-icon>
 
