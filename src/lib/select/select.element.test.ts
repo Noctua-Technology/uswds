@@ -1,8 +1,9 @@
-import './select.element.js';
 import './select-option/select-option.element.js';
+import './select.element.js';
 
 import { assert, fixture, html } from '@open-wc/testing';
 import { userEvent } from '@testing-library/user-event';
+
 import { USASelectElement } from './select.element.js';
 
 describe('usa-select', () => {

@@ -76,9 +76,9 @@ declare global {
     `,
     html`
       <div class="alert-heading">
-        <j-bind props="icon">
+        <usa-bind props="icon">
           <usa-icon></usa-icon>
-        </j-bind>
+        </usa-bind>
 
         <div>
           <slot id="heading" name="heading"></slot>

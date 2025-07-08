@@ -1,4 +1,4 @@
-import '@joist/templating/define.js';
+import '../templating.js';
 
 import { attr, css, element, html, listen, query } from '@joist/element';
 import { effect } from '@joist/observable';
@@ -59,15 +59,15 @@ declare global {
       }
     `,
     html`
-      <j-bind attrs="for:name">
+      <usa-bind attrs="for:name">
         <label part="label">
           <slot></slot>
         </label>
-      </j-bind>
+      </usa-bind>
 
-      <j-bind props="id:name,name,value,min,max,step">
+      <usa-bind props="id:name,name,value,min,max,step">
         <input type="range" part="input" />
-      </j-bind>
+      </usa-bind>
     `,
   ],
 })

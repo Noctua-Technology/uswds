@@ -1,4 +1,4 @@
-import '@joist/templating/define.js';
+import '../templating.js';
 
 import { attr, css, element, html, listen } from '@joist/element';
 import { bind } from '@joist/templating';
@@ -79,21 +79,21 @@ declare global {
       }
     `,
     html`
-      <j-bind props="open">
+      <usa-bind props="open">
         <details>
           <summary>
             <slot name="heading"></slot>
 
-            <j-bind props="icon">
+            <usa-bind props="icon">
               <usa-icon></usa-icon>
-            </j-bind>
+            </usa-bind>
           </summary>
 
           <div class="content">
             <slot></slot>
           </div>
         </details>
-      </j-bind>
+      </usa-bind>
     `,
   ],
 })

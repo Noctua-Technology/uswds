@@ -1,4 +1,4 @@
-import '@joist/templating/define.js';
+import '../templating.js';
 
 import { attr, css, element, html, listen } from '@joist/element';
 import { bind } from '@joist/templating';
@@ -163,23 +163,23 @@ export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
       }
     `,
     html`
-      <j-if bind="href">
+      <usa-if bind="href">
         <template>
-          <j-bind props="href,target">
+          <usa-bind props="href,target">
             <a part="link">
               <slot></slot>
             </a>
-          </j-bind>
+          </usa-bind>
         </template>
 
         <template else>
-          <j-bind props="value,type,disabled">
+          <usa-bind props="value,type,disabled">
             <button tabindex="0" part="button">
               <slot></slot>
             </button>
-          </j-bind>
+          </usa-bind>
         </template>
-      </j-if>
+      </usa-if>
     `,
   ],
 })

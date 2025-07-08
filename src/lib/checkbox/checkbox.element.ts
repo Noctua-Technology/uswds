@@ -1,4 +1,4 @@
-import '@joist/templating/define.js';
+import '../templating.js';
 
 import { attr, css, element, html, listen, query } from '@joist/element';
 import { bind } from '@joist/templating';
@@ -116,10 +116,10 @@ declare global {
     `,
     html`
       <label>
-        <j-bind props="checked,required,disabled" target="input">
+        <usa-bind props="checked,required,disabled" target="input">
           <input type="checkbox" tabindex="0" />
           <div class="checkbox" part="checkbox"></div>
-        </j-bind>
+        </usa-bind>
 
         <div class="title" part="title">
           <slot></slot>

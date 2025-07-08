@@ -1,11 +1,11 @@
-import '@joist/templating/define.js';
+import '../templating.js';
 
 import { injectable } from '@joist/di';
 import { attr, css, element, html, listen, query } from '@joist/element';
 import { bind } from '@joist/templating';
+import { effect } from '@joist/observable';
 
 import { SELECT_CONTEXT, type SelectContainer } from './context.js';
-import { effect } from '@joist/observable';
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -73,9 +73,9 @@ declare global {
           <slot></slot>
         </div>
 
-        <j-bind props="value,name,required,disabled">
+        <usa-bind props="value,name,required,disabled">
           <select part="select"></select>
-        </j-bind>
+        </usa-bind>
       </label>
     `,
   ],

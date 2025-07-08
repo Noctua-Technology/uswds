@@ -1,16 +1,17 @@
-import { inject, injectable, injected } from "@joist/di";
-import { attr, css, element, html, listen } from "@joist/element";
+import { inject, injectable, injected } from '@joist/di';
+import { attr, css, element, html, listen } from '@joist/element';
 
-import { SELECT_CONTEXT } from "../context.js";
+import { SELECT_CONTEXT } from '../context.js';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-select-option": USASelecOptionElement;
+    'usa-select-option': USASelecOptionElement;
   }
 }
 
 @element({
-  tagName: "usa-select-option",
+  tagName: 'usa-select-option',
+  dependsOn: ['usa-select'],
   shadowDom: [
     css`
       :host {
@@ -21,13 +22,13 @@ declare global {
   ],
 })
 @injectable({
-  name: "usa-select-option-ctx",
+  name: 'usa-select-option-ctx',
 })
 export class USASelecOptionElement extends HTMLElement {
   @attr()
-  accessor value = "";
+  accessor value = '';
 
-  readonly option = document.createElement("option");
+  readonly option = document.createElement('option');
 
   #select = inject(SELECT_CONTEXT);
 
@@ -51,11 +52,11 @@ export class USASelecOptionElement extends HTMLElement {
 
     this.#observer.observe(select, {
       attributes: true,
-      attributeFilter: ["value"],
+      attributeFilter: ['value'],
     });
   }
 
-  @listen("slotchange")
+  @listen('slotchange')
   onSlotChange() {
     this.option.textContent = this.textContent;
   }

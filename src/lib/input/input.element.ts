@@ -1,4 +1,4 @@
-import '@joist/templating/define.js';
+import '../templating.js';
 
 import { attr, css, element, html, listen, query } from '@joist/element';
 import { effect } from '@joist/observable';
@@ -92,7 +92,7 @@ declare global {
 
         <slot></slot>
 
-        <j-bind
+        <usa-bind
           props="
             autocomplete,
             autofocus,
@@ -111,7 +111,7 @@ declare global {
           "
         >
           <input tabindex="0" part="input" />
-        </j-bind>
+        </usa-bind>
       </label>
     `,
   ],

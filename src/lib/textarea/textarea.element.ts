@@ -1,4 +1,4 @@
-import '@joist/templating/define.js';
+import '../templating.js';
 
 import { attr, css, element, html, listen, query } from '@joist/element';
 import { effect } from '@joist/observable';
@@ -62,15 +62,15 @@ declare global {
       }
     `,
     html`
-      <j-bind attrs="for:name">
+      <usa-bind attrs="for:name">
         <label part="label">
           <slot></slot>
         </label>
-      </j-bind>
+      </usa-bind>
 
-      <j-bind props="name,placeholder,autocomplete,required,value,id:name">
+      <usa-bind props="name,placeholder,autocomplete,required,value,id:name">
         <textarea id="textarea" part="textarea"></textarea>
-      </j-bind>
+      </usa-bind>
     `,
   ],
 })

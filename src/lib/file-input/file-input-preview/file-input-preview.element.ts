@@ -1,4 +1,4 @@
-import '@joist/templating/define.js';
+import '../../templating.js';
 
 import { css, element, html } from '@joist/element';
 import { observe } from '@joist/observable';
@@ -72,25 +72,25 @@ declare global {
     html`
       <slot class="preview-heading" part="heading"></slot>
 
-      <j-for bind="fileEntries" key="src">
+      <usa-for bind="fileEntries" key="src">
         <template>
           <div class="preview-item" part="item">
-            <j-if bind="each.value.isImage">
+            <usa-if bind="each.value.isImage">
               <template>
-                <j-bind props="src:each.value.src">
+                <usa-bind props="src:each.value.src">
                   <img height="40" width="40" aria-hidden="true" />
-                </j-bind>
+                </usa-bind>
               </template>
 
               <template else>
                 <usa-icon icon="file_present"></usa-icon>
               </template>
-            </j-if>
+            </usa-if>
 
-            <j-val bind="each.value.file.name"></j-val>
+            <usa-val bind="each.value.file.name"></usa-val>
           </div>
         </template>
-      </j-for>
+      </usa-for>
     `,
   ],
 })

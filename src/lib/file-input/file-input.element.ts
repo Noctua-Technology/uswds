@@ -1,4 +1,4 @@
-import '@joist/templating/define.js';
+import '../templating.js';
 
 import { attr, css, element, html, listen, query } from '@joist/element';
 import { effect } from '@joist/observable';
@@ -82,17 +82,17 @@ declare global {
       </label>
 
       <div class="container">
-        <j-bind props="name,multiple,accept,required,files">
+        <usa-bind props="name,multiple,accept,required,files">
           <input id="file-input" type="file" tabindex="0" />
-        </j-bind>
+        </usa-bind>
 
-        <j-if bind="files.length">
+        <usa-if bind="files.length">
           <template>
-            <j-bind props="files">
+            <usa-bind props="files">
               <usa-file-input-preview part="preview" exportparts="heading, item">
                 Selected file&nbsp;<usa-link>Change file</usa-link>
               </usa-file-input-preview>
-            </j-bind>
+            </usa-bind>
           </template>
 
           <template id="test" else>
@@ -100,7 +100,7 @@ declare global {
               <slot name="description"> Drag file here or <usa-link>choose from folder</usa-link> </slot>
             </div>
           </template>
-        </j-if>
+        </usa-if>
       </div>
     `,
   ],

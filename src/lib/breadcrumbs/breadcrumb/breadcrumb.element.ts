@@ -37,11 +37,11 @@ declare global {
       }
     `,
     html`
-      <j-bind props="href">
+      <usa-bind props="href">
         <a>
           <slot></slot>
         </a>
-      </j-bind>
+      </usa-bind>
 
       <usa-icon icon="navigate_next"></usa-icon>
     `,
