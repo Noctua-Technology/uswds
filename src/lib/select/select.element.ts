@@ -140,6 +140,8 @@ export class USASelectElement extends HTMLElement implements SelectContainer {
 
     await Promise.resolve();
 
+    console.log(select);
+
     if (select.validationMessage) {
       this.#internals.setValidity({ customError: true }, select.validationMessage, select);
     }
