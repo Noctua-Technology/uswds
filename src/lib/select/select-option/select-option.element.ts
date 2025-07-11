@@ -11,6 +11,7 @@ declare global {
 
 @element({
   tagName: 'usa-select-option',
+  dependsOn: ['usa-select'],
   shadowDom: [
     css`
       :host {

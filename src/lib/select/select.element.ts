@@ -138,9 +138,7 @@ export class USASelectElement extends HTMLElement implements SelectContainer {
     this.#internals.setFormValue(this.value);
     this.#internals.setValidity({});
 
-    await Promise.resolve();
-
-    console.log(select);
+    await new Promise((resolve) => setTimeout(resolve));
 
     if (select.validationMessage) {
       this.#internals.setValidity({ customError: true }, select.validationMessage, select);
