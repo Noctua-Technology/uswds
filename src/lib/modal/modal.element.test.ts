@@ -20,4 +20,29 @@ describe('usa-modal', () => {
 
     return assert.isAccessible(modal);
   });
+
+  it('should open modal if document level element with modal-target is clicked', async () => {
+    const container = await fixture<HTMLDivElement>(html`
+      <div>
+        <button modal-target="test">OPEN</button>
+
+        <usa-modal id="test">
+          <usa-modal-close></usa-modal-close>
+
+          <usa-modal-heading> Are you sure you want to continue? </usa-modal-heading>
+
+          <p>This is some other example of content</p>
+        </usa-modal>
+      </div>
+    `);
+
+    const btn = container.querySelector('button')!;
+    const modal = container.querySelector('usa-modal')!;
+
+    assert.notOk(modal.isOpen);
+
+    btn.click();
+
+    assert.ok(modal.isOpen);
+  });
 });

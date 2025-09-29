@@ -47,6 +47,12 @@ declare global {
 export class USAModalElement extends HTMLElement {
   #dialog = query('dialog');
 
+  get isOpen() {
+    const dialog = this.#dialog();
+
+    return dialog.open;
+  }
+
   openModal() {
     const dialog = this.#dialog();
 
@@ -64,7 +70,7 @@ export class USAModalElement extends HTMLElement {
     this.dispatchEvent(new Event('close'));
   }
 
-  @listen('click', () => document.body)
+  @listen('click', (el) => el.getRootNode())
   onGlobalModalAction(e: Event) {
     if (e.target instanceof Element) {
       const modalTarget = e.target.getAttribute('modal-target');

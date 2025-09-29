@@ -1,15 +1,15 @@
-import { attr, css, element, html, listen, query } from "@joist/element";
+import { attr, css, element, html, listen, query } from '@joist/element';
 
-import { USASearchEvent } from "./search.event.js";
+import { USASearchEvent } from './search.event.js';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-search": USASearchElement;
+    'usa-search': USASearchElement;
   }
 }
 
 @element({
-  tagName: "usa-search",
+  tagName: 'usa-search',
   shadowDom: [
     css`
       * {
@@ -23,7 +23,7 @@ declare global {
 
       form {
         display: flex;
-        align-items: flex-end
+        align-items: flex-end;
       }
 
       usa-input {
@@ -33,9 +33,12 @@ declare global {
       usa-button {
         margin-bottom: 1.5rem;
         height: 2.5rem;
+        position: relative;
+      }
+
+      usa-button::part(button) {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-        position: relative;
       }
     `,
     html`
@@ -51,10 +54,10 @@ declare global {
 })
 export class USASearchElement extends HTMLElement {
   @attr()
-  accessor name = "search";
+  accessor name = 'search';
 
   @attr()
-  accessor placeholder = "Search";
+  accessor placeholder = 'Search';
 
   @attr()
   accessor required = false;
@@ -63,12 +66,12 @@ export class USASearchElement extends HTMLElement {
   accessor disabled = false;
 
   @attr()
-  accessor autocomplete: AutoFill = "off";
+  accessor autocomplete: AutoFill = 'off';
 
   @attr()
-  accessor value = "";
+  accessor value = '';
 
-  #input = query("usa-input");
+  #input = query('usa-input');
 
   attributeChangedCallback() {
     this.#input({
@@ -81,7 +84,7 @@ export class USASearchElement extends HTMLElement {
     });
   }
 
-  @listen("submit", "form")
+  @listen('submit', 'form')
   onSubmit(e: Event) {
     const searchEvent = new USASearchEvent(this.value);
 
