@@ -163,9 +163,11 @@ export class USAFileInputElement extends HTMLElement {
 
     const input = this.#input();
 
-    this.files = input.files;
+    if (input.files) {
+      this.files = input.files;
 
-    this.dispatchEvent(new Event('input', { bubbles: true }));
+      this.dispatchEvent(new Event('input', { bubbles: true }));
+    }
   }
 
   @listen('dragenter')
@@ -198,6 +200,8 @@ export class USAFileInputElement extends HTMLElement {
       }
 
       this.files = data.files;
+
+      this.dispatchEvent(new Event('input', { bubbles: true }));
     }
   }
 }
