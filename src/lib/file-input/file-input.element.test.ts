@@ -197,4 +197,38 @@ describe('usa-file-input', () => {
     // Verify that all files were accepted
     assert.equal(fileInput.files?.length, 3);
   });
+
+  it('should not clear files if 0 files are uploaded', async () => {
+    const initialData = new DataTransfer();
+    initialData.items.add(new File([], 'existing.txt'));
+
+    const fileInput = await fixture<USAFileInputElement>(html`
+      <usa-file-input .files=${initialData.files}> Input accepts files </usa-file-input>
+    `);
+
+    const nativeInput = fileInput.shadowRoot?.querySelector('input') as HTMLInputElement;
+
+    assert.isOk(nativeInput);
+
+    // Verify initial files are set
+    assert.equal(fileInput.files?.length, 1);
+    assert.equal(fileInput.files?.[0].name, 'existing.txt');
+
+    // Trigger input event with 0 files
+    nativeInput.files = new DataTransfer().files;
+
+    const inputEvent = new Event('input', {
+      bubbles: true,
+      cancelable: true,
+    });
+
+    nativeInput.dispatchEvent(inputEvent);
+
+    // Wait for effects to resolve
+    await Promise.resolve();
+
+    // Verify that existing files were not cleared
+    assert.equal(fileInput.files?.length, 1);
+    assert.equal(fileInput.files?.[0].name, 'existing.txt');
+  });
 });

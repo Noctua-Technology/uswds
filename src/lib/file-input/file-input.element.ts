@@ -163,7 +163,7 @@ export class USAFileInputElement extends HTMLElement {
 
     const input = this.#input();
 
-    if (input.files) {
+    if (input.files && input.files.length) {
       this.files = input.files;
 
       this.dispatchEvent(new Event('input', { bubbles: true }));
