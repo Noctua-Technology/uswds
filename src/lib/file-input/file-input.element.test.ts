@@ -103,4 +103,98 @@ describe('usa-file-input', () => {
     // Verify that the input event was fired
     assert.isTrue(inputEventFired);
   });
+
+  it('should filter dropped files based on accept MIME type', async () => {
+    const fileInput = await fixture<USAFileInputElement>(html`
+      <usa-file-input accept="image/*"> Input accepts only images </usa-file-input>
+    `);
+
+    const nativeInput = fileInput.shadowRoot?.querySelector('input');
+
+    assert.isOk(nativeInput);
+
+    // Simulate drag and drop with mixed file types
+    const data = new DataTransfer();
+    data.items.add(new File([], 'image.png', { type: 'image/png' }));
+    data.items.add(new File([], 'document.txt', { type: 'text/plain' }));
+    data.items.add(new File([], 'photo.jpg', { type: 'image/jpeg' }));
+
+    const dropEvent = new DragEvent('drop', {
+      dataTransfer: data,
+      bubbles: true,
+      cancelable: true,
+    });
+
+    nativeInput.dispatchEvent(dropEvent);
+
+    // Wait for effects to resolve
+    await Promise.resolve();
+
+    // Verify that only image files were accepted
+    assert.equal(fileInput.files?.length, 2);
+    assert.equal(fileInput.files?.[0].name, 'image.png');
+    assert.equal(fileInput.files?.[1].name, 'photo.jpg');
+  });
+
+  it('should filter dropped files based on accept file extension', async () => {
+    const fileInput = await fixture<USAFileInputElement>(html`
+      <usa-file-input accept=".txt,.pdf"> Input accepts text and PDF files </usa-file-input>
+    `);
+
+    const nativeInput = fileInput.shadowRoot?.querySelector('input');
+
+    assert.isOk(nativeInput);
+
+    // Simulate drag and drop with mixed file types
+    const data = new DataTransfer();
+    data.items.add(new File([], 'document.txt'));
+    data.items.add(new File([], 'image.png'));
+    data.items.add(new File([], 'report.pdf'));
+
+    const dropEvent = new DragEvent('drop', {
+      dataTransfer: data,
+      bubbles: true,
+      cancelable: true,
+    });
+
+    nativeInput.dispatchEvent(dropEvent);
+
+    // Wait for effects to resolve
+    await Promise.resolve();
+
+    // Verify that only .txt and .pdf files were accepted
+    assert.equal(fileInput.files?.length, 2);
+    assert.equal(fileInput.files?.[0].name, 'document.txt');
+    assert.equal(fileInput.files?.[1].name, 'report.pdf');
+  });
+
+  it('should accept all dropped files when accept property is not set', async () => {
+    const fileInput = await fixture<USAFileInputElement>(html`
+      <usa-file-input> Input accepts all files </usa-file-input>
+    `);
+
+    const nativeInput = fileInput.shadowRoot?.querySelector('input');
+
+    assert.isOk(nativeInput);
+
+    // Simulate drag and drop with mixed file types
+    const data = new DataTransfer();
+    data.items.add(new File([], 'document.txt'));
+    data.items.add(new File([], 'image.png'));
+    data.items.add(new File([], 'report.pdf'));
+
+    const dropEvent = new DragEvent('drop', {
+      dataTransfer: data,
+      bubbles: true,
+      cancelable: true,
+    });
+
+    nativeInput.dispatchEvent(dropEvent);
+
+    // Wait for effects to resolve
+    await Promise.resolve();
+
+    // Verify that all files were accepted
+    assert.equal(fileInput.files?.length, 3);
+  });
 });

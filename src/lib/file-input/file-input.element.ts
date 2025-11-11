@@ -193,7 +193,7 @@ export class USAFileInputElement extends HTMLElement {
         if (item.kind === 'file') {
           const file = item.getAsFile();
 
-          if (file) {
+          if (file && this.#isFileAccepted(file)) {
             data.items.add(file);
           }
         }
@@ -203,5 +203,37 @@ export class USAFileInputElement extends HTMLElement {
 
       this.dispatchEvent(new Event('input', { bubbles: true }));
     }
+  }
+
+  #isFileAccepted(file: File): boolean {
+    // If no accept property is set, accept all files
+    if (!this.accept) {
+      return true;
+    }
+
+    // Split the accept string by comma and trim whitespace
+    const acceptedTypes = this.accept.split(',').map((type) => type.trim());
+
+    for (const acceptType of acceptedTypes) {
+      if (acceptType.endsWith('/*')) {
+        // Handle wildcard types like "image/*" or "audio/*"
+
+        const mainType = acceptType.split('/')[0];
+        if (file.type.startsWith(mainType + '/')) {
+          return true;
+        }
+      } else if (acceptType.startsWith('.')) {
+        if (file.name.toLowerCase().endsWith(acceptType.toLowerCase())) {
+          return true;
+        }
+      }
+
+      // Handle exact MIME type match
+      if (file.type === acceptType) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }
