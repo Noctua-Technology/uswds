@@ -60,4 +60,34 @@ describe('IconService', () => {
     assert.equal(res.nodeName, 'svg');
     assert.equal(callCount, 1);
   });
+
+  it('should not fetch multiple times if the same icon is requested at the same time', async () => {
+    let callCount = 0;
+
+    const app = new Injector({
+      providers: [
+        [
+          HttpService,
+          {
+            use: class extends HttpService {
+              async fetch(): Promise<Response> {
+                callCount++;
+                return new Response('<svg></svg>');
+              }
+            },
+          },
+        ],
+      ],
+    });
+
+    const icon = app.inject(IconService);
+
+    await Promise.all([
+      icon.getIcon('accessibility_new'),
+      icon.getIcon('accessibility_new'),
+      icon.getIcon('accessibility_new'),
+    ]);
+
+    assert.equal(callCount, 1);
+  });
 });

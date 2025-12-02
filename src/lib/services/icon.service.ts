@@ -8,7 +8,7 @@ import { USAIcon } from '../icon/icon-types.js';
 export class IconService {
   #config = inject(USAConfig);
   #http = inject(HttpService);
-  #iconCache: Map<USAIcon, HTMLTemplateElement> = new Map();
+  #iconCache: Map<USAIcon, Promise<HTMLTemplateElement>> = new Map();
 
   async getIcon(icon: USAIcon, abortSignal?: AbortSignal): Promise<Node> {
     const config = this.#config();
@@ -17,11 +17,13 @@ export class IconService {
     const cached = this.#iconCache.get(icon);
 
     if (cached) {
-      if (!cached.content.firstElementChild) {
+      const res = await cached;
+
+      if (!res.content.firstElementChild) {
         throw Error('cached value is not valid');
       }
 
-      return cached.content.firstElementChild.cloneNode(true);
+      return res.content.firstElementChild.cloneNode(true);
     }
 
     const svg = http
@@ -39,11 +41,10 @@ export class IconService {
       .then((res) => {
         const template = document.createElement('template');
         template.innerHTML = res;
-
-        this.#iconCache.set(icon, template);
-
         return template;
       });
+
+    this.#iconCache.set(icon, svg);
 
     return svg.then((res) => {
       if (!res.content.firstElementChild) {
