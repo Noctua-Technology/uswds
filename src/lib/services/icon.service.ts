@@ -10,7 +10,7 @@ export class IconService {
   #http = inject(HttpService);
   #iconCache: Map<USAIcon, Promise<HTMLTemplateElement>> = new Map();
 
-  async getIcon(icon: USAIcon, abortSignal?: AbortSignal): Promise<Node> {
+  async getIcon(icon: USAIcon): Promise<Node> {
     const config = this.#config();
     const http = this.#http();
 
@@ -27,9 +27,7 @@ export class IconService {
     }
 
     const svg = http
-      .fetch(`${config.iconPath}${icon}.svg`, {
-        signal: abortSignal,
-      })
+      .fetch(`${config.iconPath}${icon}.svg`)
       .then((res) => {
         switch (res.status) {
           case 200:

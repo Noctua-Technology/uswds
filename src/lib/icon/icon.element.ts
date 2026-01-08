@@ -3,7 +3,6 @@ import { attr, css, element } from '@joist/element';
 
 import { IconService } from '../services/icon.service.js';
 import type { USAIcon } from './icon-types.js';
-import { effect, observe } from '@joist/observable';
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -35,27 +34,17 @@ declare global {
 })
 export class USAIconElement extends HTMLElement {
   @attr()
-  @observe()
   accessor icon: USAIcon | '' = '';
 
   ariaHidden: string | null = 'true';
 
   #icon = inject(IconService);
-  #abortController: AbortController | null = null;
 
   connectedCallback() {
     this.#updateIcon();
   }
 
-  @effect()
-  onIconUpdate() {
-    this.#updateIcon();
-  }
-
   async #updateIcon() {
-    this.#abortController?.abort();
-    this.#abortController = new AbortController();
-
     if (!this.icon) {
       return;
     }
@@ -63,7 +52,7 @@ export class USAIconElement extends HTMLElement {
     const icon = this.#icon();
 
     icon
-      .getIcon(this.icon, this.#abortController?.signal)
+      .getIcon(this.icon)
       .then((currentIcon) => {
         if (this.shadowRoot) {
           if (this.shadowRoot.firstElementChild) {
