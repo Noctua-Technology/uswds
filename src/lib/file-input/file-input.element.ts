@@ -139,7 +139,6 @@ export class USAFileInputElement extends HTMLElement {
   accessor files: FileList | null = null;
 
   #http = inject(HttpService);
-
   #internals = this.attachInternals();
   #input = query('input');
 
@@ -156,6 +155,12 @@ export class USAFileInputElement extends HTMLElement {
   }
 
   @effect()
+  async formValuesChange(changes: Changes<this>) {
+    if (changes.has('files') || changes.has('name')) {
+      this.syncFormValues();
+    }
+  }
+
   async syncFormValues() {
     const input = this.#input();
 

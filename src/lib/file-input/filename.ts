@@ -5,7 +5,8 @@
 export function filenameFromResponse(response: Response): string {
   const contentDisposition = response.headers.get('content-disposition');
   // Use a safe fallback if the response URL doesn't contain a filename (handles empty string)
-  const fallback = response.url.split('/').pop() || 'downloaded-file';
+  const url = new URL(response.url);
+  const fallback = url.pathname.split('/').pop() || 'downloaded-file';
 
   if (!contentDisposition) {
     return fallback;
