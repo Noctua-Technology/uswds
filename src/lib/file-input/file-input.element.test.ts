@@ -239,19 +239,15 @@ describe('usa-file-input', () => {
       async fetch(url: string): Promise<Response> {
         const file = new File(['file contents'], 'test-file.txt', { type: 'text/plain' });
 
-        const res = new Response(file, {
+        return {
+          ok: true,
           status: 200,
-          headers: {
-            'Content-Type': 'text/plain',
-          },
-        });
-
-        Object.defineProperty(res, 'url', {
-          value: url,
-          writable: false,
-        });
-
-        return res;
+          blob: async () => file,
+          url,
+          headers: new Headers({
+            'Content-Disposition': 'attachment; filename="test-file.txt"',
+          }),
+        } as any;
       }
     }
 
