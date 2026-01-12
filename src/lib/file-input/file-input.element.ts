@@ -1,8 +1,12 @@
 import '../templating.js';
 
+import { inject, injectable } from '@joist/di';
 import { attr, css, element, html, listen, query } from '@joist/element';
-import { effect } from '@joist/observable';
+import { Changes, effect } from '@joist/observable';
 import { bind } from '@joist/templating';
+
+import { HttpService } from '../services/http.service.js';
+import { filenameFromResponse } from './filename.js';
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -10,6 +14,9 @@ declare global {
   }
 }
 
+@injectable({
+  name: 'USAFileInputElementCtx',
+})
 @element({
   tagName: 'usa-file-input',
   shadowDom: [
@@ -95,7 +102,7 @@ declare global {
             </usa-bind>
           </template>
 
-          <template id="test" else>
+          <template else>
             <div class="box" part="input">
               <slot name="description"> Drag file here or <usa-link>choose from folder</usa-link> </slot>
             </div>
@@ -122,16 +129,30 @@ export class USAFileInputElement extends HTMLElement {
 
   @attr()
   @bind()
+  accessor url = '';
+
+  @attr()
+  @bind()
   accessor required = false;
 
   @bind()
   accessor files: FileList | null = null;
+
+  #http = inject(HttpService);
 
   #internals = this.attachInternals();
   #input = query('input');
 
   connectedCallback() {
     this.syncFormValues();
+    this.#loadFromUrl();
+  }
+
+  @effect()
+  async onURLChanged(changes: Changes<this>) {
+    if (changes.has('url')) {
+      this.#loadFromUrl();
+    }
   }
 
   @effect()
@@ -235,5 +256,30 @@ export class USAFileInputElement extends HTMLElement {
     }
 
     return false;
+  }
+
+  async #loadFromUrl(): Promise<void> {
+    if (!this.url) {
+      return void 0;
+    }
+
+    const http = this.#http();
+
+    const res = await http.fetch(this.url);
+    const blob = await res.blob();
+
+    // Determine filename from Content-Disposition header when available
+    const filename = filenameFromResponse(res);
+
+    const file = new File([blob], filename, { type: blob.type });
+
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+
+    this.files = dataTransfer.files;
+
+    this.dispatchEvent(new Event('input'));
+
+    return void 0;
   }
 }

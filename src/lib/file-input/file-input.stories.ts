@@ -66,3 +66,31 @@ export const Multiple: Story = {
     `;
   },
 };
+
+export const LoadFromURL: Story = {
+  args: {},
+  render() {
+    function onSubmit(e: Event) {
+      e.preventDefault();
+
+      const data = new FormData(e.target as HTMLFormElement);
+
+      console.log(data.getAll('upload'));
+    }
+
+    return html`
+      <form @submit=${onSubmit}>
+        <usa-file-input
+          name="upload"
+          url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREt3ngNcixKZcTbJp3-Zyiovb18MKb7OWz4A&s"
+        >
+          Input loads default from URL
+
+          <div slot="description">Drag file here or <usa-link>choose from folder</usa-link></div>
+        </usa-file-input>
+
+        <usa-button type="submit">SUBMIT</usa-button>
+      </form>
+    `;
+  },
+};

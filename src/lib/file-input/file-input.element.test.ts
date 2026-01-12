@@ -3,6 +3,8 @@ import './file-input.element.js';
 import { assert, fixture, html } from '@open-wc/testing';
 
 import type { USAFileInputElement } from './file-input.element.js';
+import { DOMInjector } from '@joist/di';
+import { HttpService } from '../services/http.service.js';
 
 describe('usa-file-input', () => {
   it('should be accessible', async () => {
@@ -230,5 +232,53 @@ describe('usa-file-input', () => {
     // Verify that existing files were not cleared
     assert.equal(fileInput.files?.length, 1);
     assert.equal(fileInput.files?.[0].name, 'existing.txt');
+  });
+
+  it('should load file from url and set files', async () => {
+    class MockHttpService extends HttpService {
+      async fetch(url: string): Promise<Response> {
+        const file = new File(['file contents'], 'test-file.txt', { type: 'text/plain' });
+
+        const res = new Response(file, {
+          status: 200,
+          headers: {
+            'Content-Type': 'text/plain',
+          },
+        });
+
+        Object.defineProperty(res, 'url', {
+          value: url,
+          writable: false,
+        });
+
+        return res;
+      }
+    }
+
+    const root = new DOMInjector({
+      providers: [[HttpService, { use: MockHttpService }]],
+    });
+
+    root.attach(document.body);
+
+    const fileInput = await fixture<USAFileInputElement>(html`<usa-file-input></usa-file-input>`);
+
+    fileInput.url = 'https://example.com/path/to/test-file.txt';
+
+    return new Promise((resolve) => {
+      fileInput.addEventListener(
+        'input',
+        () => {
+          assert.equal(fileInput.files?.length, 1);
+          assert.equal(fileInput.files?.[0].name, 'test-file.txt');
+          assert.equal(fileInput.files?.[0].type, 'text/plain');
+
+          root.detach();
+
+          resolve();
+        },
+        { once: true },
+      );
+    });
   });
 });
