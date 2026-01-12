@@ -1,9 +1,9 @@
 import './file-input.element.js';
 
 import { assert, fixture, html } from '@open-wc/testing';
+import { DOMInjector } from '@joist/di';
 
 import type { USAFileInputElement } from './file-input.element.js';
-import { DOMInjector } from '@joist/di';
 import { HttpService } from '../services/http.service.js';
 
 describe('usa-file-input', () => {
