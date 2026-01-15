@@ -43,7 +43,7 @@ export function filenameFromResponse(response: Response): string {
     contentDisposition.match(/filename\s*=\s*"([^"]+)"/i) || contentDisposition.match(/filename\s*=\s*([^;]+)/i);
 
   if (filenameMatch) {
-    return filenameMatch[1].trim().replace(/^"|"$/g, '');
+    return decodeURIComponent(filenameMatch[1].trim().replace(/^"|"$/g, ''));
   }
 
   return fallback;

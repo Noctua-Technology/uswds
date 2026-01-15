@@ -25,4 +25,28 @@ describe('filenameFromResponse', () => {
     const res = new Response(null, { headers: { 'content-disposition': 'attachment; foo=bar' } });
     assert.equal(filenameFromResponse(res), 'downloaded-file');
   });
+
+  it('correctly decodes URI-encoded filenames with special characters', () => {
+    const res = new Response(null, {
+      headers: { 'content-disposition': "attachment; filename*=UTF-8''report%20final%20(v2).pdf" },
+    });
+
+    assert.equal(filenameFromResponse(res), 'report final (v2).pdf');
+  });
+
+  it('correctly decodes URI-encoded simple quoted filename', () => {
+    const res = new Response(null, {
+      headers: { 'content-disposition': 'attachment; filename="document%20(final).pdf"' },
+    });
+
+    assert.equal(filenameFromResponse(res), 'document (final).pdf');
+  });
+
+  it('correctly decodes URI-encoded simple unquoted filename', () => {
+    const res = new Response(null, {
+      headers: { 'content-disposition': 'attachment; filename=data%20file.csv' },
+    });
+
+    assert.equal(filenameFromResponse(res), 'data file.csv');
+  });
 });
