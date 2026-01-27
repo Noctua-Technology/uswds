@@ -88,6 +88,10 @@ export class USASearchElement extends HTMLElement {
     });
   }
 
+  focus(options?: FocusOptions): void {
+    this.#input().focus(options);
+  }
+
   @listen('submit', 'form')
   onSubmit(e: Event) {
     const searchEvent = new USASearchEvent(this.value);
