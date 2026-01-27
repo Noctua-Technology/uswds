@@ -71,6 +71,9 @@ export class USASearchElement extends HTMLElement {
   @attr()
   accessor value = '';
 
+  @attr()
+  accessor autofocus = false;
+
   #input = query('usa-input');
 
   attributeChangedCallback() {
@@ -81,6 +84,7 @@ export class USASearchElement extends HTMLElement {
       disabled: this.disabled,
       autocomplete: this.autocomplete,
       value: this.value,
+      autofocus: this.autofocus,
     });
   }
 

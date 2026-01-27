@@ -4,7 +4,6 @@ import '../button/button.element.js';
 
 import { assert, fixture, html } from '@open-wc/testing';
 
-import { userEvent } from '@testing-library/user-event';
 import type { USASearchElement } from './search.element.js';
 
 describe('usa-search', () => {
