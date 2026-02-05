@@ -68,7 +68,7 @@ declare global {
         </label>
       </usa-bind>
 
-      <usa-bind props="name,placeholder,autocomplete,required,value,id:name">
+      <usa-bind props="name,placeholder,autocomplete,required,value,id:name,disabled">
         <textarea id="textarea" part="textarea"></textarea>
       </usa-bind>
     `,
@@ -80,6 +80,10 @@ export class USATextareaElement extends HTMLElement {
   @attr()
   @bind()
   accessor name = '';
+
+  @attr()
+  @bind()
+  accessor disabled = false;
 
   @attr()
   @bind()
