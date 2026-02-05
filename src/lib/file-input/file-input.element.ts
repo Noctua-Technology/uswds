@@ -66,6 +66,32 @@ declare global {
         border-color: #2491ff;
       }
 
+      :host([disabled]) {
+        opacity: 0.6;
+      }
+
+      :host([disabled]) .box {
+        border-color: #c9c9c9;
+        background: #f5f5f5;
+        cursor: not-allowed;
+      }
+
+      :host([disabled]) input,
+      :host([disabled]) .link {
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+
+      .link {
+        color: #005ea2;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+
+      .link:hover {
+        color: #1a4480;
+      }
+
       .box {
         border: 1px dashed #adadad;
         border-radius: 0;
@@ -89,7 +115,7 @@ declare global {
       </label>
 
       <div class="container">
-        <usa-bind props="name,multiple,accept,required,files">
+        <usa-bind props="name,multiple,accept,required,files,disabled">
           <input id="file-input" type="file" tabindex="0" />
         </usa-bind>
 
@@ -97,14 +123,14 @@ declare global {
           <template>
             <usa-bind props="files">
               <usa-file-input-preview part="preview" exportparts="heading, item">
-                Selected file&nbsp;<usa-link>Change file</usa-link>
+                Selected file <span class="link">Change file</span>
               </usa-file-input-preview>
             </usa-bind>
           </template>
 
           <template else>
             <div class="box" part="input">
-              <slot name="description"> Drag file here or <usa-link>choose from folder</usa-link> </slot>
+              <slot name="description"> Drag file here or&nbsp;<span class="link">choose from folder</span> </slot>
             </div>
           </template>
         </usa-if>
@@ -134,6 +160,10 @@ export class USAFileInputElement extends HTMLElement {
   @attr()
   @bind()
   accessor required = false;
+
+  @attr()
+  @bind()
+  accessor disabled = false;
 
   @bind()
   accessor files: FileList | null = null;

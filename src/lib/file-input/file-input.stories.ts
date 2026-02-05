@@ -30,11 +30,7 @@ export const Single: Story = {
 
     return html`
       <form @submit=${onSubmit}>
-        <usa-file-input name="upload" required>
-          Input accepts a single file
-
-          <div slot="description">Drag file here or <usa-link>choose from folder</usa-link></div>
-        </usa-file-input>
+        <usa-file-input name="upload" required> Input accepts a single file </usa-file-input>
 
         <usa-button type="submit">SUBMIT</usa-button>
       </form>
