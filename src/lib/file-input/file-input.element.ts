@@ -313,7 +313,7 @@ export class USAFileInputElement extends HTMLElement {
 
     this.files = dataTransfer.files;
 
-    this.dispatchEvent(new Event('input'));
+    this.dispatchEvent(new Event('input', { bubbles: true }));
 
     return void 0;
   }
