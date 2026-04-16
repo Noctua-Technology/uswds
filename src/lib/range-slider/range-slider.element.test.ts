@@ -1,13 +1,13 @@
 import './range-slider.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 import { userEvent } from '@testing-library/user-event';
 
 import type { USARangeSliderElement } from './range-slider.element.js';
 
 describe('usa-range-slider', () => {
   it('should be accessible', async () => {
-    const rangeSlider = await fixture<USARangeSliderElement>(html`
+    const rangeSlider = fixtureSync<USARangeSliderElement>(html`
       <usa-range-slider name="slider" value="0">Hello World</usa-range-slider>
     `);
 
@@ -15,7 +15,7 @@ describe('usa-range-slider', () => {
   });
 
   it('should submit form with default values', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-range-slider name="slider" value="50">Hello World</usa-range-slider>
 
@@ -29,7 +29,7 @@ describe('usa-range-slider', () => {
   });
 
   it('should update form value as input value changed', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-range-slider name="slider" value="50">Hello World</usa-range-slider>
 

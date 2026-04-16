@@ -132,7 +132,7 @@
     "plop": "^4.0.1",
     "prettier": "^3.5.3",
     "storybook": "^10.2.1",
-    "typescript": "^5.8.0",
+    "typescript": "^6.0.0",
     "wireit": "^0.14.9"
   },
   "lint-staged": {

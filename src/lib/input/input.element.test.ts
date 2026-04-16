@@ -1,18 +1,18 @@
 import './input.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 import { userEvent } from '@testing-library/user-event';
 import { USATextInputElement } from './input.element.js';
 
 describe('usa-input', () => {
   it('should be accessible', async () => {
-    const form = await fixture<HTMLFormElement>(html` <usa-input name="fname" value="Foo">Hello World</usa-input> `);
+    const form = fixtureSync<HTMLFormElement>(html` <usa-input name="fname" value="Foo">Hello World</usa-input> `);
 
     return assert.isAccessible(form);
   });
 
   it('should submit form with default values', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-input name="fname" value="Foo">Hello World</usa-input>
 
@@ -26,9 +26,7 @@ describe('usa-input', () => {
   });
 
   it('should display default attribute value', async () => {
-    const input = await fixture<USATextInputElement>(html`
-      <usa-input name="fname" value="Foo">Hello World</usa-input>
-    `);
+    const input = fixtureSync<USATextInputElement>(html` <usa-input name="fname" value="Foo">Hello World</usa-input> `);
 
     const nativeInput = input.shadowRoot?.querySelector('input');
 
@@ -36,7 +34,7 @@ describe('usa-input', () => {
   });
 
   it('should update form value as input value changed', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-input name="fname">Hello World</usa-input>
 
@@ -57,13 +55,15 @@ describe('usa-input', () => {
   });
 
   it('should not submit when not valid', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-input name="fname" required>Hello World</usa-input>
 
         <button>Submit</button>
       </form>
     `);
+
+    await Promise.resolve();
 
     assert.equal(form.checkValidity(), false);
   });

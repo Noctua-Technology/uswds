@@ -1,13 +1,13 @@
 import '../radio.element.js';
 import './radio-option.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 
 import type { USARadioOptionElement } from './radio-option.element.js';
 
 describe('usa-radio-option', () => {
   it('should map value to slot', async () => {
-    const radio = await fixture<USARadioOptionElement>(html`
+    const radio = fixtureSync<USARadioOptionElement>(html`
       <usa-radio>
         <usa-radio-option value="first">First</usa-radio-option>
       </usa-radio>
@@ -15,6 +15,6 @@ describe('usa-radio-option', () => {
 
     const option = radio.querySelectorAll('usa-radio-option');
 
-    assert.equal(option[0].value, option[0].slot);
+    assert.equal(option[0]!.value, option[0]!.slot);
   });
 });

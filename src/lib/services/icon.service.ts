@@ -2,7 +2,7 @@ import { inject, injectable } from '@joist/di';
 
 import { USAConfig } from '../config/config.element.js';
 import { HttpService } from './http.service.js';
-import { USAIcon } from '../icon/icon-types.js';
+import { type USAIcon } from '../icon/icon-types.js';
 
 @injectable()
 export class IconService {

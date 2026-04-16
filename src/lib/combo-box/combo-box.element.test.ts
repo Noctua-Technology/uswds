@@ -2,7 +2,7 @@ import './combo-box.element.js';
 import './combo-box-option/combo-box-option.element.js';
 import '../input/input.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 
 import type { USAComboBoxElement } from './combo-box.element.js';
 
@@ -11,7 +11,7 @@ describe('usa-combo-box', () => {
   let input: HTMLInputElement;
 
   beforeEach(async () => {
-    autocomplete = await fixture<USAComboBoxElement>(html`
+    autocomplete = fixtureSync<USAComboBoxElement>(html`
       <usa-combo-box name="search" placeholder="Select a fruit">
         <span slot="label">Fruits</span>
 
@@ -32,8 +32,8 @@ describe('usa-combo-box', () => {
     const suggestions = autocomplete.listItems();
 
     assert.equal(suggestions.length, 2);
-    assert.equal(suggestions[0].dataset.value, 'Banana');
-    assert.equal(suggestions[1].dataset.value, 'Blueberry');
+    assert.equal(suggestions[0]!.dataset.value, 'Banana');
+    assert.equal(suggestions[1]!.dataset.value, 'Blueberry');
   });
 
   it('should show all suggestions when input is empty', async () => {
@@ -50,8 +50,8 @@ describe('usa-combo-box', () => {
 
     const suggestions = autocomplete.listItems();
     assert.equal(suggestions.length, 2);
-    assert.equal(suggestions[0].dataset.value, 'Banana');
-    assert.equal(suggestions[1].dataset.value, 'Blueberry');
+    assert.equal(suggestions[0]!.dataset.value, 'Banana');
+    assert.equal(suggestions[1]!.dataset.value, 'Blueberry');
   });
 
   it('should navigate suggestions with arrow keys', async () => {
@@ -113,7 +113,7 @@ describe('usa-combo-box', () => {
   });
 
   it('should submit form with default values', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-combo-box name="search" value="Apple" placeholder="Select a fruit">
           <span slot="label">Fruits</span>
@@ -133,7 +133,7 @@ describe('usa-combo-box', () => {
   });
 
   it('should update form value when an option is selected', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-combo-box name="search" placeholder="Select a fruit">
           <span slot="label">Fruits</span>
@@ -167,17 +167,17 @@ describe('usa-combo-box', () => {
     // Select the first suggestion
     const suggestions = comboBox.listItems();
 
-    suggestions[0]
+    suggestions[0]!
       .querySelector('slot')
       ?.assignedElements()[0]
-      .dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
 
     const value = new FormData(form);
     assert.equal(value.get('search'), 'Banana');
   });
 
   it('should not submit when required and no value is selected', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-combo-box name="search" required placeholder="Select a fruit">
           <span slot="label">Fruits</span>
@@ -196,7 +196,7 @@ describe('usa-combo-box', () => {
   });
 
   it('should not show suggestions when disabled', async () => {
-    const disabledComboBox = await fixture<USAComboBoxElement>(html`
+    const disabledComboBox = fixtureSync<USAComboBoxElement>(html`
       <usa-combo-box name="search" disabled placeholder="Select a fruit">
         <span slot="label">Fruits</span>
 

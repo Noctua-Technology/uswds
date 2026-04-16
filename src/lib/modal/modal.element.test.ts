@@ -2,13 +2,13 @@ import './modal.element.js';
 import './modal-heading/modal-heading.element.js';
 import './modal-close/modal-close.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 
 import type { USAModalElement } from './modal.element.js';
 
 describe('usa-modal', () => {
   it('should be accessible', async () => {
-    const modal = await fixture<USAModalElement>(html`
+    const modal = fixtureSync<USAModalElement>(html`
       <usa-modal open>
         <usa-modal-close></usa-modal-close>
 
@@ -22,7 +22,7 @@ describe('usa-modal', () => {
   });
 
   it('should open modal if document level element with modal-target is clicked', async () => {
-    const container = await fixture<HTMLDivElement>(html`
+    const container = fixtureSync<HTMLDivElement>(html`
       <div>
         <button modal-target="test">OPEN</button>
 

@@ -3,7 +3,7 @@ import { observe } from '@joist/observable';
 import { bind } from '@joist/templating';
 
 import { type USAAlertType, USA_ALERT_CONFIG } from './alert-types.js';
-import { USAIcon } from '../icon/icon-types.js';
+import { type USAIcon } from '../icon/icon-types.js';
 
 declare global {
   interface HTMLElementTagNameMap {

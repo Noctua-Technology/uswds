@@ -1,6 +1,6 @@
 import './accordion.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 import { screen } from '@testing-library/dom';
 import { userEvent } from '@testing-library/user-event';
 
@@ -8,7 +8,7 @@ import type { USAAccordionElement } from './accordion.element.js';
 
 describe('usa-accordion', () => {
   it('should be accessible', async () => {
-    const accordion = await fixture<USAAccordionElement>(html`
+    const accordion = fixtureSync<USAAccordionElement>(html`
       <usa-accordion id="first" name="ammendment">
         <h4 slot="heading">First Ammendment</h4>
 
@@ -24,7 +24,7 @@ describe('usa-accordion', () => {
   });
 
   it('should toggle the open state when clicked', async () => {
-    const accordion = await fixture<USAAccordionElement>(html`
+    const accordion = fixtureSync<USAAccordionElement>(html`
       <usa-accordion id="first" name="ammendment">
         <h4 slot="heading">First Ammendment</h4>
 
@@ -45,7 +45,7 @@ describe('usa-accordion', () => {
   });
 
   it('should toggle the open state when clicked', async () => {
-    const accordion = await fixture<USAAccordionElement>(html`
+    const accordion = fixtureSync<USAAccordionElement>(html`
       <usa-accordion id="first" name="ammendment">
         <h4 slot="heading">First Ammendment</h4>
 
@@ -68,7 +68,7 @@ describe('usa-accordion', () => {
   });
 
   it('should only allow a single accordion in a group to be open', async () => {
-    const el = await fixture(html`
+    const el = fixtureSync(html`
       <section>
         <usa-accordion name="ammendment">
           <h4 slot="heading">First Ammendment</h4>
@@ -90,21 +90,21 @@ describe('usa-accordion', () => {
     const headings = el.querySelectorAll('h4');
     const content = Array.from(el.querySelectorAll<HTMLDivElement>('.content'));
 
-    await userEvent.click(headings[0]);
+    await userEvent.click(headings[0]!);
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
       [true, false, false],
     );
 
-    await userEvent.click(headings[1]);
+    await userEvent.click(headings[1]!);
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
       [false, true, false],
     );
 
-    await userEvent.click(headings[2]);
+    await userEvent.click(headings[2]!);
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
@@ -113,7 +113,7 @@ describe('usa-accordion', () => {
   });
 
   it('should not close accordion not in the same group', async () => {
-    const el = await fixture(html`
+    const el = fixtureSync(html`
       <section>
         <usa-accordion name="ammendment">
           <h4 slot="heading">First Ammendment</h4>
@@ -135,21 +135,21 @@ describe('usa-accordion', () => {
     const headings = el.querySelectorAll('h4');
     const content = Array.from(el.querySelectorAll<HTMLDivElement>('.content'));
 
-    await userEvent.click(headings[0]);
+    await userEvent.click(headings[0]!);
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
       [true, false, false],
     );
 
-    await userEvent.click(headings[1]);
+    await userEvent.click(headings[1]!);
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),
       [false, true, false],
     );
 
-    await userEvent.click(headings[2]);
+    await userEvent.click(headings[2]!);
 
     assert.deepEqual(
       content.map((el) => el.checkVisibility()),

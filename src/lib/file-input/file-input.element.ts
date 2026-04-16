@@ -2,7 +2,7 @@ import '../templating.js';
 
 import { inject, injectable } from '@joist/di';
 import { attr, css, element, html, listen, query } from '@joist/element';
-import { Changes, effect } from '@joist/observable';
+import { type Changes, effect } from '@joist/observable';
 import { bind } from '@joist/templating';
 
 import { HttpService } from '../services/http.service.js';

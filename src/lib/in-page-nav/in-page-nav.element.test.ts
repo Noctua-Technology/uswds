@@ -1,13 +1,13 @@
 import './in-page-nav.element.js';
 import './in-page-nav-item/in-page-nav-item.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 
 import type { USAInPageNavElement } from './in-page-nav.element.js';
 
 describe('usa-in-page-nav', () => {
   it('should be accessible', async () => {
-    const inPageNav = await fixture<USAInPageNavElement>(html`
+    const inPageNav = fixtureSync<USAInPageNavElement>(html`
       <usa-in-page-nav>
         <usa-in-page-nav-item target="lorem-ipsum-dolor" primary>Lorem ipsum dolor</usa-in-page-nav-item>
 

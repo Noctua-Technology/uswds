@@ -1,13 +1,13 @@
 import './file-input-preview.element.js';
 import '../../link/link.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 
 import type { USAFileInputPreviewElement } from './file-input-preview.element.js';
 
 describe('usa-file-input-preview', () => {
   it('should be accessible with no files', async () => {
-    const fileInputPreview = await fixture<USAFileInputPreviewElement>(html`
+    const fileInputPreview = fixtureSync<USAFileInputPreviewElement>(html`
       <usa-file-input-preview> Selected file <usa-link>Change file</usa-link> </usa-file-input-preview>
     `);
 
@@ -19,7 +19,7 @@ describe('usa-file-input-preview', () => {
     data.items.add(new File([], 'image1.jpg'));
     data.items.add(new File([], 'image2.jpg'));
 
-    const fileInputPreview = await fixture<USAFileInputPreviewElement>(html`
+    const fileInputPreview = fixtureSync<USAFileInputPreviewElement>(html`
       <usa-file-input-preview .files=${data.files}>
         Selected file <usa-link>Change file</usa-link>
       </usa-file-input-preview>
@@ -33,11 +33,13 @@ describe('usa-file-input-preview', () => {
     data.items.add(new File([], 'image1.jpg'));
     data.items.add(new File([], 'image2.jpg'));
 
-    const { shadowRoot } = await fixture<USAFileInputPreviewElement>(html`
+    const { shadowRoot } = fixtureSync<USAFileInputPreviewElement>(html`
       <usa-file-input-preview .files=${data.files}>
         Selected file <usa-link>Change file</usa-link>
       </usa-file-input-preview>
     `);
+
+    await Promise.resolve();
 
     const previewItems = Array.from(shadowRoot?.querySelectorAll('.preview-item') ?? []).map((item) =>
       item.textContent?.trim(),
@@ -51,7 +53,7 @@ describe('usa-file-input-preview', () => {
     data.items.add(new File([], 'image1.jpg'));
     data.items.add(new File([], 'image2.jpg'));
 
-    const fileInputPreview = await fixture<USAFileInputPreviewElement>(html`
+    const fileInputPreview = fixtureSync<USAFileInputPreviewElement>(html`
       <usa-file-input-preview .files=${data.files}>
         Selected file <usa-link>Change file</usa-link>
       </usa-file-input-preview>
@@ -77,11 +79,13 @@ describe('usa-file-input-preview', () => {
     data.items.add(new File(['Image1'], 'image1.jpg', { type: 'image/jpg' }));
     data.items.add(new File(['Image2'], 'image2.jpg', { type: 'image/jpg' }));
 
-    const { shadowRoot } = await fixture<USAFileInputPreviewElement>(html`
+    const { shadowRoot } = fixtureSync<USAFileInputPreviewElement>(html`
       <usa-file-input-preview .files=${data.files}>
         Selected file <usa-link>Change file</usa-link>
       </usa-file-input-preview>
     `);
+
+    await Promise.resolve();
 
     const [first, second] = Array.from(shadowRoot?.querySelectorAll<HTMLImageElement>('.preview-item img') ?? []).map(
       (item) => item.src.substring(29),

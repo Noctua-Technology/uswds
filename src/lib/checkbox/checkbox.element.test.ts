@@ -1,10 +1,10 @@
 import './checkbox.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 
 describe('usa-checkbox', () => {
   it('should be accessible', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <usa-checkbox name="fname" value="Foo">Hello World</usa-checkbox>
     `);
 
@@ -12,7 +12,7 @@ describe('usa-checkbox', () => {
   });
 
   it('should submit form with default values', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-checkbox name="enabled" value="test" checked> Hello World </usa-checkbox>
 
@@ -20,13 +20,15 @@ describe('usa-checkbox', () => {
       </form>
     `);
 
+    await Promise.resolve();
+
     const value = new FormData(form);
 
     assert.equal(value.get('enabled'), 'test');
   });
 
   it('should update form value as input value changed', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-checkbox name="enabled" value="test">Hello World</usa-checkbox>
 
@@ -49,13 +51,16 @@ describe('usa-checkbox', () => {
   });
 
   it('should not submit when not valid', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-checkbox name="enabled" value="test" required> Hello World </usa-checkbox>
 
         <button>Submit</button>
       </form>
     `);
+
+    await Promise.resolve();
+    await Promise.resolve();
 
     assert.equal(form.checkValidity(), false);
   });

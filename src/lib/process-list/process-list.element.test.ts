@@ -1,13 +1,13 @@
 import './process-list.element.js';
 import './process-list-item/process-list-item.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 
 import type { USAProcessListElement } from './process-list.element.js';
 
 describe('usa-process-list', () => {
   it('should be accessible', async () => {
-    const processList = await fixture<USAProcessListElement>(html`
+    const processList = fixtureSync<USAProcessListElement>(html`
       <usa-process-list>
         <usa-process-list-item>
           <h4 slot="title">Start a process</h4>

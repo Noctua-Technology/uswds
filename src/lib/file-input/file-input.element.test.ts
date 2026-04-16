@@ -1,6 +1,6 @@
 import './file-input.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 import { DOMInjector } from '@joist/di';
 
 import type { USAFileInputElement } from './file-input.element.js';
@@ -8,7 +8,7 @@ import { HttpService } from '../services/http.service.js';
 
 describe('usa-file-input', () => {
   it('should be accessible', async () => {
-    const fileInput = await fixture<USAFileInputElement>(html` <usa-file-input>Hello World</usa-file-input> `);
+    const fileInput = fixtureSync<USAFileInputElement>(html` <usa-file-input>Hello World</usa-file-input> `);
 
     return assert.isAccessible(fileInput);
   });
@@ -18,7 +18,7 @@ describe('usa-file-input', () => {
     data.items.add(new File([], 'first.txt'));
     data.items.add(new File([], 'second.txt'));
 
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-file-input name="upload" .files=${data.files}>
           Input accepts a single file
@@ -44,7 +44,7 @@ describe('usa-file-input', () => {
   });
 
   it('should show file preview after drag and drop', async () => {
-    const fileInput = await fixture<USAFileInputElement>(html`
+    const fileInput = fixtureSync<USAFileInputElement>(html`
       <usa-file-input> Input accepts a single file </usa-file-input>
     `);
 
@@ -69,11 +69,11 @@ describe('usa-file-input', () => {
 
     // Verify that filesVisible is true and files are set
     assert.equal(fileInput.files?.length, 1);
-    assert.equal(fileInput.files?.[0].name, 'test.txt');
+    assert.equal(fileInput.files?.[0]!.name, 'test.txt');
   });
 
   it('should fire input event when a file is dragged and dropped', async () => {
-    const fileInput = await fixture<USAFileInputElement>(html`
+    const fileInput = fixtureSync<USAFileInputElement>(html`
       <usa-file-input> Input accepts a single file </usa-file-input>
     `);
 
@@ -107,7 +107,7 @@ describe('usa-file-input', () => {
   });
 
   it('should filter dropped files based on accept MIME type', async () => {
-    const fileInput = await fixture<USAFileInputElement>(html`
+    const fileInput = fixtureSync<USAFileInputElement>(html`
       <usa-file-input accept="image/*"> Input accepts only images </usa-file-input>
     `);
 
@@ -134,12 +134,12 @@ describe('usa-file-input', () => {
 
     // Verify that only image files were accepted
     assert.equal(fileInput.files?.length, 2);
-    assert.equal(fileInput.files?.[0].name, 'image.png');
-    assert.equal(fileInput.files?.[1].name, 'photo.jpg');
+    assert.equal(fileInput.files?.[0]!.name, 'image.png');
+    assert.equal(fileInput.files?.[1]!.name, 'photo.jpg');
   });
 
   it('should filter dropped files based on accept file extension', async () => {
-    const fileInput = await fixture<USAFileInputElement>(html`
+    const fileInput = fixtureSync<USAFileInputElement>(html`
       <usa-file-input accept=".txt,.pdf"> Input accepts text and PDF files </usa-file-input>
     `);
 
@@ -166,12 +166,12 @@ describe('usa-file-input', () => {
 
     // Verify that only .txt and .pdf files were accepted
     assert.equal(fileInput.files?.length, 2);
-    assert.equal(fileInput.files?.[0].name, 'document.txt');
-    assert.equal(fileInput.files?.[1].name, 'report.pdf');
+    assert.equal(fileInput.files?.[0]!.name, 'document.txt');
+    assert.equal(fileInput.files?.[1]!.name, 'report.pdf');
   });
 
   it('should accept all dropped files when accept property is not set', async () => {
-    const fileInput = await fixture<USAFileInputElement>(html`
+    const fileInput = fixtureSync<USAFileInputElement>(html`
       <usa-file-input> Input accepts all files </usa-file-input>
     `);
 
@@ -204,7 +204,7 @@ describe('usa-file-input', () => {
     const initialData = new DataTransfer();
     initialData.items.add(new File([], 'existing.txt'));
 
-    const fileInput = await fixture<USAFileInputElement>(html`
+    const fileInput = fixtureSync<USAFileInputElement>(html`
       <usa-file-input .files=${initialData.files}> Input accepts files </usa-file-input>
     `);
 
@@ -214,7 +214,7 @@ describe('usa-file-input', () => {
 
     // Verify initial files are set
     assert.equal(fileInput.files?.length, 1);
-    assert.equal(fileInput.files?.[0].name, 'existing.txt');
+    assert.equal(fileInput.files?.[0]!.name, 'existing.txt');
 
     // Trigger input event with 0 files
     nativeInput.files = new DataTransfer().files;
@@ -231,7 +231,7 @@ describe('usa-file-input', () => {
 
     // Verify that existing files were not cleared
     assert.equal(fileInput.files?.length, 1);
-    assert.equal(fileInput.files?.[0].name, 'existing.txt');
+    assert.equal(fileInput.files?.[0]!.name, 'existing.txt');
   });
 
   it('should load file from url and set files', async () => {
@@ -257,7 +257,7 @@ describe('usa-file-input', () => {
 
     root.attach(document.body);
 
-    const fileInput = await fixture<USAFileInputElement>(html`<usa-file-input></usa-file-input>`);
+    const fileInput = fixtureSync<USAFileInputElement>(html`<usa-file-input></usa-file-input>`);
 
     fileInput.url = 'https://example.com/path/to/test-file.txt';
 
@@ -266,8 +266,8 @@ describe('usa-file-input', () => {
         'input',
         () => {
           assert.equal(fileInput.files?.length, 1);
-          assert.equal(fileInput.files?.[0].name, 'test-file.txt');
-          assert.equal(fileInput.files?.[0].type, 'text/plain');
+          assert.equal(fileInput.files?.[0]!.name, 'test-file.txt');
+          assert.equal(fileInput.files?.[0]!.type, 'text/plain');
 
           root.detach();
 

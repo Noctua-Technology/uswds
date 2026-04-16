@@ -2,19 +2,19 @@ import './search.element.js';
 import '../input/input.element.js';
 import '../button/button.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 
 import type { USASearchElement } from './search.element.js';
 
 describe('usa-search', () => {
   it('should be accessible', async () => {
-    const search = await fixture<USASearchElement>(html` <usa-search name="search">Hello World</usa-search> `);
+    const search = fixtureSync<USASearchElement>(html` <usa-search name="search">Hello World</usa-search> `);
 
     return assert.isAccessible(search);
   });
 
   it('should have default attribute values', async () => {
-    const search = await fixture<USASearchElement>(html` <usa-search></usa-search> `);
+    const search = fixtureSync<USASearchElement>(html` <usa-search></usa-search> `);
 
     assert.equal(search.name, 'search');
     assert.equal(search.placeholder, 'Search');
@@ -25,7 +25,7 @@ describe('usa-search', () => {
   });
 
   it('should update attributes when changed', async () => {
-    const search = await fixture<USASearchElement>(html` <usa-search></usa-search> `);
+    const search = fixtureSync<USASearchElement>(html` <usa-search></usa-search> `);
 
     search.name = 'custom-name';
     search.placeholder = 'Custom Placeholder';
@@ -43,7 +43,7 @@ describe('usa-search', () => {
   });
 
   it('should handle form submission', async () => {
-    const search = await fixture<USASearchElement>(html` <usa-search></usa-search> `);
+    const search = fixtureSync<USASearchElement>(html` <usa-search></usa-search> `);
 
     let submitted = false;
 
@@ -60,7 +60,7 @@ describe('usa-search', () => {
   });
 
   it('should update value on input change', async () => {
-    const search = await fixture<USASearchElement>(html` <usa-search></usa-search> `);
+    const search = fixtureSync<USASearchElement>(html` <usa-search></usa-search> `);
 
     const input = search.shadowRoot?.querySelector('usa-input');
     input?.dispatchEvent(new Event('input', { bubbles: true }));

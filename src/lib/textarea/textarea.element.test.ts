@@ -1,11 +1,11 @@
 import './textarea.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 import { userEvent } from '@testing-library/user-event';
 
 describe('usa-textarea', () => {
   it('should be accessible', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <usa-textarea name="fname" value="Foo">Hello World</usa-textarea>
     `);
 
@@ -13,7 +13,7 @@ describe('usa-textarea', () => {
   });
 
   it('should submit form with default values', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-textarea name="fname" value="Foo">Hello World</usa-textarea>
 
@@ -27,7 +27,7 @@ describe('usa-textarea', () => {
   });
 
   it('should update form value as input value changed', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-textarea name="fname">Hello World</usa-textarea>
 
@@ -48,13 +48,15 @@ describe('usa-textarea', () => {
   });
 
   it('should not submit when not valid', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-textarea name="fname" required>Hello World</usa-textarea>
 
         <button>Submit</button>
       </form>
     `);
+
+    await Promise.resolve();
 
     assert.equal(form.checkValidity(), false);
   });

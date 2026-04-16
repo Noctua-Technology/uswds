@@ -1,7 +1,7 @@
 import './input-mask.element.js';
 import '../input/input.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 
 import { format } from './format.js';
 import type { USAInputMaskElement } from './input-mask.element.js';
@@ -45,7 +45,7 @@ describe('format', () => {
 
 describe('usa-input-mask', () => {
   it('should format default value', async () => {
-    const el = await fixture<USAInputMaskElement>(html`
+    const el = fixtureSync<USAInputMaskElement>(html`
       <usa-input-mask mask="(999) 999-9999">
         <input name="phone" value="1234567890" mask />
       </usa-input-mask>
@@ -57,7 +57,7 @@ describe('usa-input-mask', () => {
   });
 
   it('should update value when on input event', async () => {
-    const el = await fixture<USAInputMaskElement>(html`
+    const el = fixtureSync<USAInputMaskElement>(html`
       <usa-input-mask>
         <input name="phone" mask="(999) 999-9999" />
       </usa-input-mask>
@@ -75,7 +75,7 @@ describe('usa-input-mask', () => {
 
 describe('usa-input-mask with usa-input', () => {
   it('should format default value', async () => {
-    const el = await fixture<USAInputMaskElement>(html`
+    const el = fixtureSync<USAInputMaskElement>(html`
       <usa-input-mask mask="(999) 999-9999">
         <usa-input name="phone" value="1234567890" id="TEST" mask></usa-input>
       </usa-input-mask>
@@ -87,7 +87,7 @@ describe('usa-input-mask with usa-input', () => {
   });
 
   it('should update value when on input event', async () => {
-    const el = await fixture<USAInputMaskElement>(html`
+    const el = fixtureSync<USAInputMaskElement>(html`
       <usa-input-mask>
         <usa-input name="phone" value="1234567890" mask="(999) 999-9999"></usa-input>
       </usa-input-mask>

@@ -5,13 +5,13 @@ import './card-group/card-group.element.js';
 import './card-header/card-header.element.js';
 import './card-media/card-media.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 
 import type { USACardElement } from './card.element.js';
 
 describe('usa-card', () => {
   it('should be accessible', async () => {
-    const card = await fixture<USACardElement>(html`
+    const card = fixtureSync<USACardElement>(html`
       <usa-card-group>
         <usa-card>
           <usa-card-media>

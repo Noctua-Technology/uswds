@@ -23,13 +23,13 @@ export function filenameFromResponse(response: Response): string {
 
   if (filenameStarMatch) {
     try {
-      let value = filenameStarMatch[1].trim().replace(/^"|"$/g, '');
+      let value = filenameStarMatch[1]!.trim().replace(/^"|"$/g, '');
 
       // Strip optional charset'lang' prefix (e.g., UTF-8''file.jpg)
       const starParts = value.split("''");
 
       if (starParts.length === 2) {
-        value = starParts[1];
+        value = starParts[1]!;
       }
 
       return decodeURIComponent(value);
@@ -43,7 +43,7 @@ export function filenameFromResponse(response: Response): string {
     contentDisposition.match(/filename\s*=\s*"([^"]+)"/i) || contentDisposition.match(/filename\s*=\s*([^;]+)/i);
 
   if (filenameMatch) {
-    return decodeURIComponent(filenameMatch[1].trim().replace(/^"|"$/g, ''));
+    return decodeURIComponent(filenameMatch[1]!.trim().replace(/^"|"$/g, ''));
   }
 
   return fallback;

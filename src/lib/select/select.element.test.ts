@@ -1,14 +1,14 @@
 import './select-option/select-option.element.js';
 import './select.element.js';
 
-import { assert, fixture, html } from '@open-wc/testing';
+import { assert, fixtureSync, html } from '@open-wc/testing';
 import { userEvent } from '@testing-library/user-event';
 
 import { USASelectElement } from './select.element.js';
 
 describe('usa-select', () => {
   it('should be accessible', async () => {
-    const el = await fixture<HTMLFormElement>(html`
+    const el = fixtureSync<HTMLFormElement>(html`
       <usa-select name="example">
         Hello World
 
@@ -22,7 +22,7 @@ describe('usa-select', () => {
   });
 
   it('should create local select options', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-select name="example">
           Hello World
@@ -43,7 +43,7 @@ describe('usa-select', () => {
   });
 
   it('should remove select options when options are removed', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-select name="example">
           Hello World
@@ -57,7 +57,7 @@ describe('usa-select', () => {
 
     const options = form.querySelectorAll('usa-select-option');
 
-    options[1].remove();
+    options[1]!.remove();
 
     const nativeInputs = form.querySelector('usa-select')?.shadowRoot?.querySelectorAll('option');
 
@@ -68,7 +68,7 @@ describe('usa-select', () => {
   });
 
   it('should submit form with default values', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-select name="example" value="second">
           Hello World
@@ -86,7 +86,7 @@ describe('usa-select', () => {
   });
 
   it('should update form value as select value changed', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-select name="example" value="second">
           Hello World
@@ -111,7 +111,7 @@ describe('usa-select', () => {
   });
 
   it('should not submit when not valid', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+    const form = fixtureSync<HTMLFormElement>(html`
       <form>
         <usa-select id="TEST" name="example" required>
           Hello World
@@ -124,11 +124,13 @@ describe('usa-select', () => {
       </form>
     `);
 
+    await new Promise((resolve) => setTimeout(resolve));
+
     assert.equal(form.checkValidity(), false);
   });
 
   it('should be disabled when disabled attribute is set', async () => {
-    const select = await fixture<USASelectElement>(html`
+    const select = fixtureSync<USASelectElement>(html`
       <usa-select name="example" value="second" disabled>
         Hello World
 
