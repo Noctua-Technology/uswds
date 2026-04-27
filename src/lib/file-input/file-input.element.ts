@@ -123,7 +123,7 @@ declare global {
           <template>
             <usa-bind props="files">
               <usa-file-input-preview part="preview" exportparts="heading, item">
-                Selected file <span class="link">Change file</span>
+                Selected file <span class="link" part="change-file-btn">Change file</span>
               </usa-file-input-preview>
             </usa-bind>
           </template>
