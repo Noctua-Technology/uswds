@@ -44,6 +44,10 @@ export class USAIconElement extends HTMLElement {
     this.#updateIcon();
   }
 
+  attributeChangedCallback() {
+    this.#updateIcon();
+  }
+
   async #updateIcon() {
     if (!this.icon) {
       return;
