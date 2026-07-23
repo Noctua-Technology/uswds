@@ -1,4 +1,4 @@
-import { inject, injectable } from '@joist/di';
+import { inject, injectable, injected } from '@joist/di';
 import { attr, css, element } from '@joist/element';
 
 import { IconService } from '../services/icon.service.js';
@@ -39,6 +39,12 @@ export class USAIconElement extends HTMLElement {
   ariaHidden: string | null = 'true';
 
   #icon = inject(IconService);
+  #injected = false;
+
+  @injected()
+  onInjected() {
+    this.#injected = true;
+  }
 
   connectedCallback() {
     this.#updateIcon();
@@ -49,7 +55,7 @@ export class USAIconElement extends HTMLElement {
   }
 
   async #updateIcon() {
-    if (!this.icon) {
+    if (!this.icon || !this.#injected) {
       return;
     }
 
