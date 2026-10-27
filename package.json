@@ -1,6 +1,6 @@
 {
   "name": "@noctuatech/uswds",
-  "version": "1.5.6",
+  "version": "1.6.0-rc.0",
   "type": "module",
   "workspaces": [
     "packages/**"
