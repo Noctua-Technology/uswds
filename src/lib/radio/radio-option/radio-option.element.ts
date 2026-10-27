@@ -1,19 +1,16 @@
-import { inject, injectable, injected } from "@joist/di";
-import { attr, css, element, html, query } from "@joist/element";
+import { inject, injected } from '@joist/di';
+import { attr, css, element, html, query } from '@joist/element';
 
-import { RADIO_CTX } from "../context.js";
+import { RADIO_CTX } from '../context.js';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-radio-option": USARadioOptionElement;
+    'usa-radio-option': USARadioOptionElement;
   }
 }
 
-@injectable({
-  name: "usa-radio-option-ctx",
-})
 @element({
-  tagName: "usa-radio-option",
+  tagName: 'usa-radio-option',
   shadowDom: [
     css`
       :host {
@@ -35,14 +32,14 @@ declare global {
 })
 export class USARadioOptionElement extends HTMLElement {
   @attr()
-  accessor value = "";
+  accessor value = '';
 
   @attr()
   accessor disabled = false;
 
-  #label = query("label");
-  #input = query("input");
-  #slot = query("slot");
+  #label = query('label');
+  #input = query('input');
+  #slot = query('slot');
   #radioCtx = inject(RADIO_CTX);
 
   #observer = new MutationObserver(() => {
@@ -65,7 +62,7 @@ export class USARadioOptionElement extends HTMLElement {
     this.#sync();
 
     this.#observer.observe(radioCtx, {
-      attributeFilter: ["value", "name", "required"],
+      attributeFilter: ['value', 'name', 'required'],
     });
   }
 

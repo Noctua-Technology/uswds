@@ -1,6 +1,5 @@
 import '../templating.js';
 
-import { injectable } from '@joist/di';
 import { attr, css, element, html, listen, query } from '@joist/element';
 import { bind } from '@joist/templating';
 import { effect } from '@joist/observable';
@@ -13,12 +12,9 @@ declare global {
   }
 }
 
-@injectable({
-  name: 'usa-select-ctx',
-  provideSelfAs: [SELECT_CONTEXT],
-})
 @element({
   tagName: 'usa-select',
+  provideSelfAs: [SELECT_CONTEXT],
   shadowDom: [
     css`
       :host {

@@ -1,6 +1,6 @@
 import '../templating.js';
 
-import { inject, injectable } from '@joist/di';
+import { inject } from '@joist/di';
 import { attr, css, element, html, listen, query } from '@joist/element';
 import { type Changes, effect } from '@joist/observable';
 import { bind } from '@joist/templating';
@@ -14,9 +14,6 @@ declare global {
   }
 }
 
-@injectable({
-  name: 'USAFileInputElementCtx',
-})
 @element({
   tagName: 'usa-file-input',
   shadowDom: [

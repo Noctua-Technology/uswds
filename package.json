@@ -28,7 +28,7 @@
   },
   "wireit": {
     "prepare": {
-      "command": "husky",
+      "command": "command -v husky >/dev/null 2>&1 && husky || true",
       "dependencies": [
         "copy_icons"
       ]
@@ -104,10 +104,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@joist/di": "^4.2.4",
-    "@joist/element": "^4.2.4",
-    "@joist/observable": "^4.2.4",
-    "@joist/templating": "^4.2.4",
+    "@joist/di": "^5.0.0-rc.6",
+    "@joist/element": "^5.0.0-rc.6",
+    "@joist/observable": "^5.0.0-rc.6",
+    "@joist/templating": "^5.0.0-rc.6",
     "tslib": "2.8.1"
   },
   "devDependencies": {
@@ -146,7 +146,7 @@
     "storybook": "$storybook"
   },
   "allowScripts": {
-    "fsevents@2.3.3": true,
-    "esbuild@0.28.1": true
+    "fsevents": true,
+    "esbuild": true
   }
 }

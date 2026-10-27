@@ -1,4 +1,4 @@
-import { inject, injectable, injected } from '@joist/di';
+import { inject, injected } from '@joist/di';
 import { attr, css, element, html, listen } from '@joist/element';
 
 import { SELECT_CONTEXT } from '../context.js';
@@ -20,9 +20,6 @@ declare global {
     `,
     html`<slot></slot>`,
   ],
-})
-@injectable({
-  name: 'usa-select-option-ctx',
 })
 export class USASelecOptionElement extends HTMLElement {
   @attr()

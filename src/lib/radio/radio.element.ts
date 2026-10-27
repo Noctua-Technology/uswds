@@ -1,20 +1,16 @@
-import { injectable } from "@joist/di";
-import { attr, css, element, html, listen } from "@joist/element";
+import { attr, css, element, html, listen } from '@joist/element';
 
-import { RADIO_CTX, type RadioContainer } from "./context.js";
+import { RADIO_CTX, type RadioContainer } from './context.js';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-radio": USARadioElement;
+    'usa-radio': USARadioElement;
   }
 }
 
-@injectable({
-  name: "usa-radio-ctx",
-  provideSelfAs: [RADIO_CTX],
-})
 @element({
-  tagName: "usa-radio",
+  tagName: 'usa-radio',
+  provideSelfAs: [RADIO_CTX],
   shadowDom: [
     css`
       :host {
@@ -50,7 +46,7 @@ declare global {
       }
 
       label::before {
-        content: " ";
+        content: ' ';
         display: block;
         left: 0;
         height: 1.25rem;
@@ -86,7 +82,7 @@ declare global {
         background-color: var(--usa-input-disabled-bg-color);
         box-shadow: 0 0 0 2px var(--usa-input-disabled-border-color);
       }
-      
+
       label:has(input:focus)::before {
         outline: 0.25rem solid var(--usa-radio-focus-color);
         outline-offset: 0.25rem;
@@ -168,10 +164,10 @@ export class USARadioElement extends HTMLElement implements RadioContainer {
   static formAssociated = true;
 
   @attr()
-  accessor value = "";
+  accessor value = '';
 
   @attr()
-  accessor name = "";
+  accessor name = '';
 
   @attr()
   accessor required = false;
@@ -188,13 +184,13 @@ export class USARadioElement extends HTMLElement implements RadioContainer {
     this.shadowRoot?.append(el);
 
     if (this.#firstInput === null) {
-      this.#firstInput = el.querySelector("input");
+      this.#firstInput = el.querySelector('input');
     }
 
     this.#syncFormState();
   }
 
-  @listen("change")
+  @listen('change')
   onChange(e: Event) {
     if (e.target instanceof HTMLInputElement) {
       if (e.target.checked) {
@@ -210,11 +206,7 @@ export class USARadioElement extends HTMLElement implements RadioContainer {
     this.#internals.setValidity({});
 
     if (this.#firstInput?.validationMessage) {
-      this.#internals.setValidity(
-        { customError: true },
-        this.#firstInput.validationMessage,
-        this.#firstInput,
-      );
+      this.#internals.setValidity({ customError: true }, this.#firstInput.validationMessage, this.#firstInput);
     }
   }
 }

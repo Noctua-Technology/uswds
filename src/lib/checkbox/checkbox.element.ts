@@ -159,6 +159,10 @@ export class USACheckboxElement extends HTMLElement {
   #checkbox = query('input');
   #internals = this.attachInternals();
 
+  connectedCallback() {
+    this.#syncFormState();
+  }
+
   @effect()
   onChange() {
     this.#syncFormState();

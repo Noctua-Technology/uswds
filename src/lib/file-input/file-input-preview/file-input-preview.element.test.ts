@@ -11,7 +11,7 @@ describe('usa-file-input-preview', () => {
       <usa-file-input-preview> Selected file <usa-link>Change file</usa-link> </usa-file-input-preview>
     `);
 
-    return assert.isAccessible(fileInputPreview);
+    return assert.isAccessible(fileInputPreview, { preload: false });
   });
 
   it('should be accessible with files', async () => {

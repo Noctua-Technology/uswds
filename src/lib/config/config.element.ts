@@ -1,16 +1,12 @@
-import { injectable } from "@joist/di";
-import { attr, css, element, html } from "@joist/element";
+import { attr, css, element, html } from '@joist/element';
 
 export class USAConfig {
-  iconPath = "";
+  iconPath = '';
 }
 
-@injectable({
-  name: "usa-config-ctx",
-  provideSelfAs: [USAConfig],
-})
 @element({
-  tagName: "usa-config",
+  tagName: 'usa-config',
+  provideSelfAs: [USAConfig],
   shadowDom: [
     css`
       :host {
@@ -22,7 +18,7 @@ export class USAConfig {
 })
 export class USAConfigElement extends HTMLElement {
   @attr({
-    name: "icon-path",
+    name: 'icon-path',
   })
-  accessor iconPath = "/assets/usa-icons/";
+  accessor iconPath = '/assets/usa-icons/';
 }

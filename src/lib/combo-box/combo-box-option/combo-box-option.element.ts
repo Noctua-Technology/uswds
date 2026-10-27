@@ -1,4 +1,4 @@
-import { inject, injectable } from '@joist/di';
+import { inject } from '@joist/di';
 import { attr, css, element, html, query } from '@joist/element';
 
 import { COMBO_BOX_CTX } from '../context.js';
@@ -15,9 +15,6 @@ const listTemplate = html`
   </li>
 `;
 
-@injectable({
-  name: 'usa-combo-box-option-ctx',
-})
 @element({
   tagName: 'usa-combo-box-option',
   dependsOn: ['usa-combo-box'],

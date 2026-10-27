@@ -1,5 +1,5 @@
-import { inject, injectable, injected } from '@joist/di';
-import { attr, css, element } from '@joist/element';
+import { inject } from '@joist/di';
+import { attr, attrChanged, css, element } from '@joist/element';
 
 import { IconService } from '../services/icon.service.js';
 import type { USAIcon } from './icon-types.js';
@@ -29,9 +29,6 @@ declare global {
     `,
   ],
 })
-@injectable({
-  name: 'usa-icon-ctx',
-})
 export class USAIconElement extends HTMLElement {
   @attr()
   accessor icon: USAIcon | '' = '';
@@ -39,23 +36,14 @@ export class USAIconElement extends HTMLElement {
   ariaHidden: string | null = 'true';
 
   #icon = inject(IconService);
-  #injected = false;
 
-  @injected()
-  onInjected() {
-    this.#injected = true;
-  }
-
-  connectedCallback() {
-    this.#updateIcon();
-  }
-
-  attributeChangedCallback() {
+  @attrChanged('icon')
+  onIconChanged() {
     this.#updateIcon();
   }
 
   async #updateIcon() {
-    if (!this.icon || !this.#injected) {
+    if (!this.icon) {
       return;
     }
 

@@ -1,41 +1,29 @@
-import { injectable } from "@joist/di";
-import {
-  attr,
-  attrChanged,
-  css,
-  element,
-  html,
-  listen,
-  query,
-} from "@joist/element";
+import { attr, attrChanged, css, element, html, listen, query } from '@joist/element';
 
-import { COMBO_BOX_CTX, type ComboBoxContainer } from "./context.js";
+import { COMBO_BOX_CTX, type ComboBoxContainer } from './context.js';
 
 declare global {
   interface HTMLElementTagNameMap {
-    "usa-combo-box": USAComboBoxElement;
+    'usa-combo-box': USAComboBoxElement;
   }
 }
 
-@injectable({
-  name: "usa-combo-box-ctx",
-  provideSelfAs: [COMBO_BOX_CTX],
-})
 @element({
-  tagName: "usa-combo-box",
+  tagName: 'usa-combo-box',
+  provideSelfAs: [COMBO_BOX_CTX],
   shadowDom: [
     css`
       * {
-        box-sizing: border-box
+        box-sizing: border-box;
       }
-      
+
       :host {
         display: block;
         max-width: 30rem;
         position: relative;
         margin-bottom: 1.5rem;
       }
-      
+
       input {
         border-width: 1px;
         border-color: #5c5c5c;
@@ -119,12 +107,12 @@ declare global {
       <label>
         <slot name="label"></slot>
 
-        <input 
+        <input
           part="input"
-          tabindex="0" 
-          role="combobox" 
-          autocomplete="off" 
-          aria-controls="combo-box-list" 
+          tabindex="0"
+          role="combobox"
+          autocomplete="off"
+          aria-controls="combo-box-list"
           aria-expanded="false"
         />
 
@@ -139,29 +127,26 @@ declare global {
     `,
   ],
 })
-export class USAComboBoxElement
-  extends HTMLElement
-  implements ComboBoxContainer
-{
+export class USAComboBoxElement extends HTMLElement implements ComboBoxContainer {
   static formAssociated = true;
 
   @attr()
-  accessor name = "";
+  accessor name = '';
 
   @attr()
   accessor required = false;
 
   @attr()
-  accessor value = "";
+  accessor value = '';
 
   @attr()
-  accessor placeholder = "";
+  accessor placeholder = '';
 
   @attr()
   accessor disabled = false;
 
-  list = query("ul");
-  input = query("input");
+  list = query('ul');
+  input = query('input');
   currentItemEl: Element | null = null;
 
   #allListItems = new Set<HTMLLIElement>();
@@ -176,7 +161,7 @@ export class USAComboBoxElement
     });
   }
 
-  @attrChanged("value", "required")
+  @attrChanged('value', 'required')
   onValueChanged() {
     this.#syncFormState();
   }
@@ -186,7 +171,7 @@ export class USAComboBoxElement
   }
 
   listItems() {
-    return this.list().querySelectorAll("li");
+    return this.list().querySelectorAll('li');
   }
 
   addOption(el: HTMLLIElement) {
@@ -197,7 +182,7 @@ export class USAComboBoxElement
     this.#allListItems.delete(el);
   }
 
-  @listen("focus", (host) => host.input())
+  @listen('focus', (host) => host.input())
   onFocusIn() {
     if (this.disabled) {
       return;
@@ -207,7 +192,7 @@ export class USAComboBoxElement
 
     const list = this.list();
 
-    this.input({ ariaExpanded: "true" });
+    this.input({ ariaExpanded: 'true' });
 
     const fragment = document.createDocumentFragment();
 
@@ -226,7 +211,7 @@ export class USAComboBoxElement
     this.input().blur();
   }
 
-  @listen("input")
+  @listen('input')
   async onInput() {
     if (this.disabled) {
       return;
@@ -240,9 +225,7 @@ export class USAComboBoxElement
     const fragment = document.createDocumentFragment();
 
     for (const item of this.#allListItems) {
-      if (
-        item.dataset.value?.toLowerCase().startsWith(input.value.toLowerCase())
-      ) {
+      if (item.dataset.value?.toLowerCase().startsWith(input.value.toLowerCase())) {
         fragment.append(item);
       }
     }
@@ -250,23 +233,23 @@ export class USAComboBoxElement
     list.replaceChildren(fragment);
   }
 
-  @listen("focusout")
+  @listen('focusout')
   onFocusOut() {
     setTimeout(() => {
       // This needs to be in a timeout so that it runs as part of the next loop.
       // the active element will not be set until after all of the focus and blur events are done
       if (!this.contains(document.activeElement)) {
-        this.list({ innerHTML: "" });
+        this.list({ innerHTML: '' });
         this.currentItemEl = null;
 
-        this.input({ ariaExpanded: "false" });
+        this.input({ ariaExpanded: 'false' });
       }
     }, 0);
   }
 
-  @listen("keydown")
+  @listen('keydown')
   onArrowDown(e: KeyboardEvent): void {
-    if (e.key.toUpperCase() !== "ARROWDOWN") {
+    if (e.key.toUpperCase() !== 'ARROWDOWN') {
       return;
     }
 
@@ -287,9 +270,9 @@ export class USAComboBoxElement
     }
   }
 
-  @listen("keydown")
+  @listen('keydown')
   onArrowUp(e: KeyboardEvent): void {
-    if (e.key.toUpperCase() !== "ARROWUP") {
+    if (e.key.toUpperCase() !== 'ARROWUP') {
       return;
     }
 
@@ -307,9 +290,9 @@ export class USAComboBoxElement
     }
   }
 
-  @listen("keydown")
+  @listen('keydown')
   onEnter(e: KeyboardEvent): void {
-    if (e.key.toUpperCase() !== "ENTER") {
+    if (e.key.toUpperCase() !== 'ENTER') {
       return;
     }
 
@@ -319,24 +302,24 @@ export class USAComboBoxElement
 
     this.currentItemEl = null;
 
-    const value = target.dataset.value || "";
+    const value = target.dataset.value || '';
 
     this.input().focus();
 
-    this.list({ innerHTML: "" });
+    this.list({ innerHTML: '' });
 
     this.value = value;
   }
 
-  @listen("click")
+  @listen('click')
   onClick(e: MouseEvent) {
     if (e.target instanceof HTMLElement) {
-      const value = e.target.getAttribute("value");
+      const value = e.target.getAttribute('value');
 
       if (value) {
         this.input().focus();
 
-        this.list({ innerHTML: "" });
+        this.list({ innerHTML: '' });
 
         this.currentItemEl = null;
 
@@ -352,11 +335,7 @@ export class USAComboBoxElement
     this.#internals.setFormValue(this.value);
 
     if (input.validationMessage) {
-      this.#internals.setValidity(
-        { customError: true },
-        input.validationMessage,
-        input,
-      );
+      this.#internals.setValidity({ customError: true }, input.validationMessage, input);
     }
   }
 }
