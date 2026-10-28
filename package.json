@@ -1,6 +1,6 @@
 {
   "name": "@noctuatech/uswds",
-  "version": "1.6.0-rc.0",
+  "version": "1.6.0-rc.1",
   "type": "module",
   "workspaces": [
     "packages/**"
@@ -104,10 +104,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@joist/di": "^5.0.0-rc.6",
-    "@joist/element": "^5.0.0-rc.6",
-    "@joist/observable": "^5.0.0-rc.6",
-    "@joist/templating": "^5.0.0-rc.6",
+    "@joist/di": "^5.0.0-rc.8",
+    "@joist/element": "^5.0.0-rc.8",
+    "@joist/observable": "^5.0.0-rc.8",
+    "@joist/templating": "^5.0.0-rc.8",
     "tslib": "2.8.1"
   },
   "devDependencies": {
